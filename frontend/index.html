@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vognis - The Serendipity Workspace</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>VOGNIS</h1>
+    <p class="subtitle">The Serendipity Workspace</p>
+    <div id="session-bar" class="hidden">
+      <span id="session-id-display"></span>
+      <span id="node-indicator"></span>
+    </div>
+  </header>
+
+  <main>
+    <!-- NODE 1: Initialization -->
+    <section id="node1" class="node-section active">
+      <div class="node-header">
+        <span class="node-badge node1-color">Node 1</span>
+        <h2>Initialization &amp; Vector Priming</h2>
+      </div>
+      <div class="node-content">
+        <div class="field">
+          <label for="problem">Describe your problem or idea</label>
+          <textarea id="problem" rows="5" placeholder="I want to design a revolutionary urban transportation system that reduces commute times by 50%..."></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="expertise">Expertise Level</label>
+            <select id="expertise">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate" selected>Intermediate</option>
+              <option value="expert">Expert</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="intent-hint">Initial Intent</label>
+            <select id="intent-hint">
+              <option value="creativity">More Creativity</option>
+              <option value="balance" selected>Balance</option>
+              <option value="functionality">More Functionality</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="themes">Interest Themes <span class="hint">(comma separated)</span></label>
+          <input type="text" id="themes" placeholder="sustainability, urban planning, technology">
+        </div>
+        <button id="btn-node1" class="btn-primary" onclick="submitNode1()">Launch Session</button>
+      </div>
+    </section>
+
+    <!-- NODE 2: Reaffirmation -->
+    <section id="node2" class="node-section">
+      <div class="node-header">
+        <span class="node-badge node2-color">Node 2</span>
+        <h2>Reaffirmation &amp; Intent Bridge</h2>
+      </div>
+      <div class="node-content">
+        <div id="node2-summary" class="summary-box"></div>
+        <div id="node2-keywords" class="keywords-box"></div>
+        <div class="field">
+          <label for="detailed-desc">Consolidate your idea - describe it in more detail</label>
+          <textarea id="detailed-desc" rows="5" placeholder="Expand on the problem, the purpose, and what you truly want to achieve..."></textarea>
+        </div>
+        <div class="field">
+          <label>Choose your creative intent</label>
+          <div class="intent-buttons">
+            <button class="btn-intent active" data-intent="creativity" onclick="selectIntent(this)">
+              <span class="intent-icon">&#10024;</span>
+              More Creativity
+              <span class="intent-desc">Bias towards Serendipity (PS)</span>
+            </button>
+            <button class="btn-intent" data-intent="balance" onclick="selectIntent(this)">
+              <span class="intent-icon">&#9878;</span>
+              Balance
+              <span class="intent-desc">Standard Innovation Value (VI)</span>
+            </button>
+            <button class="btn-intent" data-intent="functionality" onclick="selectIntent(this)">
+              <span class="intent-icon">&#9881;</span>
+              More Functionality
+              <span class="intent-desc">Bias towards Quality (CI)</span>
+            </button>
+          </div>
+        </div>
+        <button id="btn-node2" class="btn-primary" onclick="submitNode2()">Confirm &amp; Continue</button>
+      </div>
+    </section>
+
+    <!-- NODE 3: Strategic Intersection -->
+    <section id="node3" class="node-section">
+      <div class="node-header">
+        <span class="node-badge node3-color">Node 3</span>
+        <h2>Strategic Intersection</h2>
+      </div>
+      <div class="node-content">
+        <!-- Step 3a: Critical Attribute -->
+        <div id="node3a">
+          <div class="field">
+            <label for="critical-attr">Define the Critical Attribute to solve</label>
+            <input type="text" id="critical-attr" placeholder="e.g., commute time reduction">
+          </div>
+          <button class="btn-primary" onclick="submitConceptBank()">Generate Concept Bank</button>
+        </div>
+        <!-- Step 3b: Concept Bank Selection -->
+        <div id="node3b" class="hidden">
+          <p class="instruction">Select 1-5 alien entities that intrigue you most:</p>
+          <div id="concept-bank" class="concept-grid"></div>
+          <div class="field-row" style="margin-top:1rem">
+            <div class="field">
+              <label>Action</label>
+              <select id="branch-action">
+                <option value="branch">Branch (new exploration path)</option>
+                <option value="edit">Edit (replace current)</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="submitSelection()">Score &amp; Branch</button>
+        </div>
+        <!-- Scoring results -->
+        <div id="node3-results" class="hidden">
+          <h3>Entity Scores</h3>
+          <div id="scores-container"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NODE 4: Development Engine -->
+    <section id="node4" class="node-section">
+      <div class="node-header">
+        <span class="node-badge node4-color">Node 4</span>
+        <h2>Development Engine</h2>
+      </div>
+      <div class="node-content">
+        <div class="controls-bar">
+          <div class="control-group">
+            <label>Modality</label>
+            <div class="modality-buttons">
+              <button class="btn-mod active" data-mod="learning" onclick="selectModality(this)">Learning</button>
+              <button class="btn-mod" data-mod="development" onclick="selectModality(this)">Development</button>
+              <button class="btn-mod" data-mod="feedback" onclick="selectModality(this)">Feedback</button>
+            </div>
+          </div>
+          <div class="control-group">
+            <label>Confidence: <span id="conf-val">3</span></label>
+            <input type="range" id="confidence" min="1" max="5" value="3" oninput="document.getElementById('conf-val').textContent=this.value">
+            <div class="conf-labels"><span>Safe Guide</span><span>Radical Critic</span></div>
+          </div>
+        </div>
+        <div id="chat-messages" class="chat-area"></div>
+        <div class="chat-input-area">
+          <textarea id="chat-input" rows="2" placeholder="Ask about the connections, explore ideas..."></textarea>
+          <button class="btn-send" onclick="submitChat()">&#9654;</button>
+        </div>
+        <div id="live-scores" class="hidden">
+          <h4>Live Scores</h4>
+          <div id="live-scores-content"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Graph Visualization -->
+    <aside id="graph-panel" class="hidden">
+      <div class="graph-header">
+        <h3>Idea Graph</h3>
+        <button class="btn-small" onclick="toggleGraph()">Close</button>
+      </div>
+      <canvas id="graph-canvas" width="500" height="400"></canvas>
+    </aside>
+    <button id="graph-toggle" class="btn-floating hidden" onclick="toggleGraph()">Graph</button>
+  </main>
+
+  <!-- Loading overlay -->
+  <div id="loading" class="hidden">
+    <div class="spinner"></div>
+    <p id="loading-text">Processing...</p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

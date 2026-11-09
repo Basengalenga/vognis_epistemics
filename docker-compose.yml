@@ -1,0 +1,18 @@
+services:
+  vognis-api:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./app:/app/app
+    restart: unless-stopped
+
+  vognis-frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - vognis-api
+    restart: unless-stopped
