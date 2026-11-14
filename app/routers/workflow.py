@@ -9,11 +9,13 @@ from app.agents.core_agent import (
     extract_keywords,
     generate_concept_bank,
     node4_respond,
+    summarize_session,
     synthesize_summary,
 )
 from app.agents.sub_agents import score_concept_entity
 from app.engine.scoring import compute_scores
 from app.models.schemas import (
+    ConceptCard,
     EdgeType,
     GraphEdge,
     GraphNode,
@@ -43,9 +45,12 @@ def _get_session(session_id: str) -> Session:
 @router.post("/node1", response_model=SessionResponse)
 async def node1_initialize(req: Node1Request):
     """Create a new session. Extract keywords and prime the vector space."""
-    keywords = await extract_keywords(req.problem, req.expertise_level, req.interest_themes)
+    keywords = await extract_keywords(
+        req.problem, req.expertise_level, req.interest_themes, req.lang
+    )
 
     session = Session(
+        lang=req.lang,
         problem=req.problem,
         keywords=keywords,
         intent=req.intent_hint,
@@ -86,7 +91,7 @@ async def node2_reaffirm(req: Node2Request):
     if session.current_node != 2:
         raise HTTPException(400, f"Session is at node {session.current_node}, expected 2")
 
-    summary = await synthesize_summary(req.detailed_description, session.keywords)
+    summary = await synthesize_summary(req.detailed_description, session.keywords, session.lang)
     session.summary = summary
     session.intent = req.intent
     session.problem = req.detailed_description  # Update with richer description
@@ -107,22 +112,37 @@ async def node2_reaffirm(req: Node2Request):
 # --- Node 3: Strategic Intersection (Branching) ---
 
 @router.post("/node3/concept-bank", response_model=SessionResponse)
-async def node3_concept_bank(session_id: str, critical_attribute: str):
-    """Generate the concept bank of 20 alien entities."""
+async def node3_concept_bank(session_id: str, critical_attribute: str, mode: str = "new"):
+    """Generate 12 epistemic cards. mode is 'new' or 'rotate'."""
     session = _get_session(session_id)
     if session.current_node != 3:
         raise HTTPException(400, f"Session is at node {session.current_node}, expected 3")
+    if mode not in ("new", "rotate"):
+        raise HTTPException(400, "mode must be new or rotate")
 
     session.critical_attribute = critical_attribute
-    concepts = await generate_concept_bank(
-        session.problem, session.keywords, critical_attribute
+    previous = [name for spread in session.concept_bank_history for name in spread]
+    raw_cards = await generate_concept_bank(
+        session.problem,
+        session.keywords,
+        critical_attribute,
+        lang=session.lang,
+        mode=mode,
+        previous=previous,
     )
+    cards = [ConceptCard(**card) for card in raw_cards]
+    session.concept_cards = cards
+    session.concept_bank_history.append([card.name for card in cards])
 
     return SessionResponse(
         session_id=session.id,
         current_node=3,
-        message=f"Here are 20 alien concepts. Select 1-5 that intrigue you most.",
-        data={"concept_bank": concepts, "critical_attribute": critical_attribute},
+        message="Here are 12 cards. Choose 1 to 5.",
+        data={
+            "concept_bank": [card.model_dump() for card in cards],
+            "critical_attribute": critical_attribute,
+            "mode": mode,
+        },
     )
 
 
@@ -143,6 +163,7 @@ async def node3_select(req: Node3Request):
             concept=session.problem,
             entity=entity,
             context=f"Keywords: {', '.join(session.keywords)}. Critical: {req.critical_attribute}",
+            lang=session.lang,
         )
         score_result = compute_scores(agent_scores)
         all_scores.append({"entity": entity, "scores": score_result.model_dump()})
@@ -215,8 +236,11 @@ async def node4_develop(req: Node4Request):
         if c in session.keywords:
             session.keywords.remove(c)
 
-    # Get AI response
-    ai_response = await node4_respond(
+    if req.board is not None:
+        session.boards[req.modality.value] = req.board
+    board_payload = req.board.model_dump(by_alias=True) if req.board is not None else None
+
+    reply = await node4_respond(
         problem=session.problem,
         summary=session.summary,
         keywords=session.keywords,
@@ -225,19 +249,26 @@ async def node4_develop(req: Node4Request):
         confidence=req.confidence,
         conversation=session.conversation,
         user_message=req.user_message,
+        lang=session.lang,
+        board=board_payload,
     )
+    intro = reply.get("intro") or ""
+    cards = reply.get("cards") or []
+    plain = intro
+    if cards:
+        plain = intro + "\n" + "\n".join(f"- {card['title']}: {card['body']}" for card in cards)
 
-    # Update conversation history
     session.conversation.append({"role": "user", "content": req.user_message})
-    session.conversation.append({"role": "assistant", "content": ai_response})
+    session.conversation.append({"role": "assistant", "content": plain})
+    session.reply_cards.setdefault(req.modality.value, []).extend(cards)
 
-    # Re-score if in development or feedback mode
     scores = None
     if req.modality.value in ("development", "feedback") and session.selected_entities:
         agent_scores = await score_concept_entity(
             concept=session.problem,
             entity=session.selected_entities[0],
-            context=f"Latest discussion: {ai_response[:200]}",
+            context=f"Latest discussion: {plain[:200]}",
+            lang=session.lang,
         )
         scores = compute_scores(agent_scores)
         session.scores_history.append(scores)
@@ -245,19 +276,33 @@ async def node4_develop(req: Node4Request):
     return SessionResponse(
         session_id=session.id,
         current_node=4,
-        message=ai_response,
+        message=plain,
         data={
             "modality": req.modality.value,
             "confidence": req.confidence,
             "keywords": session.keywords,
             "entities": session.selected_entities,
             "conversation_length": len(session.conversation),
+            "intro": intro,
+            "cards": cards,
         },
         scores=scores,
     )
 
 
 # --- Utility endpoints ---
+
+@router.post("/session/{session_id}/finish")
+async def finish_session(session_id: str):
+    """Narrative summary plus the full session, for a local download."""
+    session = _get_session(session_id)
+    summary, bridges = await summarize_session(session)
+    return {
+        "summary": summary,
+        "bridges": bridges,
+        "session": session.model_dump(by_alias=True),
+    }
+
 
 @router.get("/session/{session_id}")
 async def get_session(session_id: str):

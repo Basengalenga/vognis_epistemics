@@ -1,185 +1,317 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vognis - The Serendipity Workspace</title>
+  <title>VOGNIS | The Serendipity Workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <canvas id="constellation" aria-hidden="true"></canvas>
+
   <header>
-    <h1>VOGNIS</h1>
-    <p class="subtitle">The Serendipity Workspace</p>
-    <div id="session-bar" class="hidden">
-      <span id="session-id-display"></span>
-      <span id="node-indicator"></span>
+    <div class="brand">
+      <span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <h1>VOGNIS</h1>
+    </div>
+    <div class="header-tools">
+      <div id="session-bar" class="hidden">
+        <span id="session-id-display"></span>
+        <span id="node-indicator"></span>
+        <button id="btn-finish" class="btn-void hidden" type="button" data-i18n="end" onclick="finishSession()"></button>
+      </div>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
     </div>
   </header>
 
-  <main>
-    <!-- NODE 1: Initialization -->
-    <section id="node1" class="node-section active">
-      <div class="node-header">
-        <span class="node-badge node1-color">Node 1</span>
-        <h2>Initialization &amp; Vector Priming</h2>
+  <section id="home">
+    <div class="hero">
+      <h2 data-i18n="hero"></h2>
+      <p class="hero-sub" data-i18n="heroSub"></p>
+      <p class="hero-line" data-i18n="heroLine"></p>
+      <p class="today" data-i18n="today"></p>
+      <div class="orbs">
+        <button type="button" class="orb" id="orb-create" onclick="startCreate()">
+          <span class="orb-art" aria-hidden="true"></span>
+          <span data-i18n="create"></span>
+        </button>
+        <button type="button" class="orb orb-soon" id="orb-decide" disabled data-i18n-title="soonTip">
+          <span class="soon-tag" data-i18n="soon"></span>
+          <span data-i18n="decide"></span>
+        </button>
       </div>
-      <div class="node-content">
-        <div class="field">
-          <label for="problem">Describe your problem or idea</label>
-          <textarea id="problem" rows="5" placeholder="I want to design a revolutionary urban transportation system that reduces commute times by 50%..."></textarea>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="expertise">Expertise Level</label>
-            <select id="expertise">
-              <option value="beginner">Beginner</option>
-              <option value="intermediate" selected>Intermediate</option>
-              <option value="expert">Expert</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="intent-hint">Initial Intent</label>
-            <select id="intent-hint">
-              <option value="creativity">More Creativity</option>
-              <option value="balance" selected>Balance</option>
-              <option value="functionality">More Functionality</option>
-            </select>
-          </div>
-        </div>
-        <div class="field">
-          <label for="themes">Interest Themes <span class="hint">(comma separated)</span></label>
-          <input type="text" id="themes" placeholder="sustainability, urban planning, technology">
-        </div>
-        <button id="btn-node1" class="btn-primary" onclick="submitNode1()">Launch Session</button>
-      </div>
-    </section>
+      <p class="scroll-cue" aria-hidden="true">&#8595;</p>
+    </div>
+    <div class="steps">
+      <article class="step-card">
+        <p class="step-k" data-i18n="step1k"></p>
+        <h3 data-i18n="step1t"></h3>
+        <p data-i18n="step1d"></p>
+      </article>
+      <article class="step-card">
+        <p class="step-k" data-i18n="step2k"></p>
+        <h3 data-i18n="step2t"></h3>
+        <p data-i18n="step2d"></p>
+      </article>
+      <article class="step-card">
+        <p class="step-k" data-i18n="step3k"></p>
+        <h3 data-i18n="step3t"></h3>
+        <p data-i18n="step3d"></p>
+      </article>
+    </div>
+  </section>
 
-    <!-- NODE 2: Reaffirmation -->
-    <section id="node2" class="node-section">
-      <div class="node-header">
-        <span class="node-badge node2-color">Node 2</span>
-        <h2>Reaffirmation &amp; Intent Bridge</h2>
-      </div>
-      <div class="node-content">
-        <div id="node2-summary" class="summary-box"></div>
-        <div id="node2-keywords" class="keywords-box"></div>
-        <div class="field">
-          <label for="detailed-desc">Consolidate your idea - describe it in more detail</label>
-          <textarea id="detailed-desc" rows="5" placeholder="Expand on the problem, the purpose, and what you truly want to achieve..."></textarea>
-        </div>
-        <div class="field">
-          <label>Choose your creative intent</label>
-          <div class="intent-buttons">
-            <button class="btn-intent active" data-intent="creativity" onclick="selectIntent(this)">
-              <span class="intent-icon">&#10024;</span>
-              More Creativity
-              <span class="intent-desc">Bias towards Serendipity (PS)</span>
-            </button>
-            <button class="btn-intent" data-intent="balance" onclick="selectIntent(this)">
-              <span class="intent-icon">&#9878;</span>
-              Balance
-              <span class="intent-desc">Standard Innovation Value (VI)</span>
-            </button>
-            <button class="btn-intent" data-intent="functionality" onclick="selectIntent(this)">
-              <span class="intent-icon">&#9881;</span>
-              More Functionality
-              <span class="intent-desc">Bias towards Quality (CI)</span>
-            </button>
-          </div>
-        </div>
-        <button id="btn-node2" class="btn-primary" onclick="submitNode2()">Confirm &amp; Continue</button>
-      </div>
-    </section>
+  <aside class="legend" aria-label="Map key">
+    <p><i class="gem user"></i><span data-i18n="user"></span></p>
+    <p><i class="gem model"></i><span data-i18n="model"></span></p>
+    <p class="legend-force"><i class="force"></i><span data-i18n="force"></span></p>
+  </aside>
 
-    <!-- NODE 3: Strategic Intersection -->
-    <section id="node3" class="node-section">
-      <div class="node-header">
-        <span class="node-badge node3-color">Node 3</span>
-        <h2>Strategic Intersection</h2>
-      </div>
+  <main class="map hidden" id="workspace">
+    <section id="node1" class="node-section cluster revealed active">
       <div class="node-content">
-        <!-- Step 3a: Critical Attribute -->
-        <div id="node3a">
+        <div class="claim-map"></div>
+        <div class="composer">
+          <p class="who user" data-i18n="user"></p>
           <div class="field">
-            <label for="critical-attr">Define the Critical Attribute to solve</label>
-            <input type="text" id="critical-attr" placeholder="e.g., commute time reduction">
+            <div class="label-row">
+              <label for="problem" data-i18n="problemLabel"></label>
+              <button type="button" class="help-q" data-help="problemHelp">?</button>
+            </div>
+            <textarea id="problem" rows="3" data-i18n-ph="problemPh"></textarea>
           </div>
-          <button class="btn-primary" onclick="submitConceptBank()">Generate Concept Bank</button>
-        </div>
-        <!-- Step 3b: Concept Bank Selection -->
-        <div id="node3b" class="hidden">
-          <p class="instruction">Select 1-5 alien entities that intrigue you most:</p>
-          <div id="concept-bank" class="concept-grid"></div>
-          <div class="field-row" style="margin-top:1rem">
+          <div class="field-row">
             <div class="field">
-              <label>Action</label>
-              <select id="branch-action">
-                <option value="branch">Branch (new exploration path)</option>
-                <option value="edit">Edit (replace current)</option>
+              <div class="label-row">
+                <label for="expertise" data-i18n="expertise"></label>
+                <button type="button" class="help-q" data-help="expertiseHelp">?</button>
+              </div>
+              <select id="expertise">
+                <option value="beginner" data-i18n="beginner"></option>
+                <option value="intermediate" selected data-i18n="intermediate"></option>
+                <option value="expert" data-i18n="expert"></option>
+              </select>
+            </div>
+            <div class="field">
+              <div class="label-row">
+                <label for="intent-hint" data-i18n="lean"></label>
+                <button type="button" class="help-q" data-help="leanHelp">?</button>
+              </div>
+              <select id="intent-hint">
+                <option value="creativity" data-i18n="creativity"></option>
+                <option value="balance" selected data-i18n="balance"></option>
+                <option value="functionality" data-i18n="functionality"></option>
               </select>
             </div>
           </div>
-          <button class="btn-primary" onclick="submitSelection()">Score &amp; Branch</button>
-        </div>
-        <!-- Scoring results -->
-        <div id="node3-results" class="hidden">
-          <h3>Entity Scores</h3>
-          <div id="scores-container"></div>
+          <div class="field">
+            <div class="label-row">
+              <label for="themes"><span data-i18n="themes"></span> <span class="hint" data-i18n="themesHint"></span></label>
+              <button type="button" class="help-q" data-help="themesHelp">?</button>
+            </div>
+            <input type="text" id="themes" data-i18n-ph="themesPh">
+          </div>
+          <button id="btn-node1" class="btn-primary" onclick="submitNode1()" data-i18n="place"></button>
         </div>
       </div>
     </section>
 
-    <!-- NODE 4: Development Engine -->
-    <section id="node4" class="node-section">
-      <div class="node-header">
-        <span class="node-badge node4-color">Node 4</span>
-        <h2>Development Engine</h2>
-      </div>
+    <section id="node2" class="node-section cluster">
       <div class="node-content">
-        <div class="controls-bar">
-          <div class="control-group">
-            <label>Modality</label>
-            <div class="modality-buttons">
-              <button class="btn-mod active" data-mod="learning" onclick="selectModality(this)">Learning</button>
-              <button class="btn-mod" data-mod="development" onclick="selectModality(this)">Development</button>
-              <button class="btn-mod" data-mod="feedback" onclick="selectModality(this)">Feedback</button>
+        <div class="claim-map"></div>
+        <div class="composer">
+          <p class="who model" data-i18n="model"></p>
+          <p class="keywords-lead" data-i18n="keywordsFound"></p>
+          <div id="node2-summary" class="summary-box"></div>
+          <div id="node2-keywords" class="keywords-box"></div>
+          <p class="who user" data-i18n="user"></p>
+          <div class="field">
+            <div class="label-row">
+              <label for="detailed-desc" data-i18n="restate"></label>
+              <button type="button" class="help-q" data-help="restateHelp">?</button>
+            </div>
+            <textarea id="detailed-desc" rows="3" data-i18n-ph="restatePh"></textarea>
+          </div>
+          <div class="field">
+            <div class="label-row">
+              <label data-i18n="pull"></label>
+              <button type="button" class="help-q" data-help="pullHelp">?</button>
+            </div>
+            <div class="intent-buttons">
+              <button class="btn-intent active" data-intent="creativity" onclick="selectIntent(this)">
+                <span class="intent-icon">&#10024;</span>
+                <span data-i18n="creativity"></span>
+                <span class="intent-desc" data-i18n="serendipity"></span>
+              </button>
+              <button class="btn-intent" data-intent="balance" onclick="selectIntent(this)">
+                <span class="intent-icon">&#9671;</span>
+                <span data-i18n="balance"></span>
+                <span class="intent-desc" data-i18n="innovation"></span>
+              </button>
+              <button class="btn-intent" data-intent="functionality" onclick="selectIntent(this)">
+                <span class="intent-icon">&#9670;</span>
+                <span data-i18n="functionality"></span>
+                <span class="intent-desc" data-i18n="anchoring"></span>
+              </button>
             </div>
           </div>
-          <div class="control-group">
-            <label>Confidence: <span id="conf-val">3</span></label>
-            <input type="range" id="confidence" min="1" max="5" value="3" oninput="document.getElementById('conf-val').textContent=this.value">
-            <div class="conf-labels"><span>Safe Guide</span><span>Radical Critic</span></div>
-          </div>
-        </div>
-        <div id="chat-messages" class="chat-area"></div>
-        <div class="chat-input-area">
-          <textarea id="chat-input" rows="2" placeholder="Ask about the connections, explore ideas..."></textarea>
-          <button class="btn-send" onclick="submitChat()">&#9654;</button>
-        </div>
-        <div id="live-scores" class="hidden">
-          <h4>Live Scores</h4>
-          <div id="live-scores-content"></div>
+          <button id="btn-node2" class="btn-primary" onclick="submitNode2()" data-i18n="nextClaim"></button>
         </div>
       </div>
     </section>
 
-    <!-- Graph Visualization -->
+    <section id="node3" class="node-section cluster wide">
+      <div class="node-content">
+        <div class="claim-map"></div>
+        <div class="composer">
+          <div id="node3a">
+            <p class="who user" data-i18n="user"></p>
+            <div class="field">
+              <div class="label-row">
+                <label for="critical-attr" data-i18n="attribute"></label>
+                <button type="button" class="help-q" data-help="attributeHelp">?</button>
+              </div>
+              <input type="text" id="critical-attr" data-i18n-ph="attributePh">
+            </div>
+            <button class="btn-primary" onclick="submitConceptBank()" data-i18n="askDistant"></button>
+          </div>
+          <div id="node3b" class="hidden">
+            <p class="who model" data-i18n="model"></p>
+            <div class="label-row center">
+              <p class="instruction" data-i18n="pick"></p>
+              <button type="button" class="help-q" data-help="pickHelp">?</button>
+            </div>
+            <div id="concept-bank" class="concept-grid"></div>
+            <div class="spread-actions">
+              <button type="button" class="btn-ghost" id="btn-rotate" onclick="refreshSpread('rotate')">
+                <span class="spin-icon" aria-hidden="true">&#8635;</span>
+                <span data-i18n="rotate"></span>
+              </button>
+              <p class="spread-hint" data-i18n="sameIngredients"></p>
+              <button type="button" class="btn-ghost" id="btn-reshuffle" onclick="refreshSpread('new')">
+                <span aria-hidden="true">&#9776;</span>
+                <span data-i18n="reshuffle"></span>
+              </button>
+              <p id="refresh-count"></p>
+              <div id="cooldown-bar" class="hidden"><i></i></div>
+            </div>
+            <div id="refresh-nudge" class="nudge hidden">
+              <p data-i18n="nudge"></p>
+              <button type="button" class="btn-ghost" onclick="backToAttribute()" data-i18n="backToAttribute"></button>
+            </div>
+            <div class="field">
+              <label for="branch-action" data-i18n="attachHow"></label>
+              <select id="branch-action">
+                <option value="branch" data-i18n="branch"></option>
+                <option value="edit" data-i18n="edit"></option>
+              </select>
+            </div>
+            <button class="btn-primary" onclick="submitSelection()" data-i18n="attach"></button>
+          </div>
+          <div id="node3-results" class="hidden">
+            <h3 data-i18n="scoreTitle"></h3>
+            <div id="scores-container"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="node4" class="node-section cluster wide">
+      <div class="node-content">
+        <div class="claim-map"></div>
+        <div class="composer">
+          <div class="controls-bar">
+            <div class="control-group">
+              <div class="label-row">
+                <label data-i18n="modalityHelp" class="visually-hidden"></label>
+                <button type="button" class="help-q" data-help="modalityHelp">?</button>
+              </div>
+              <div class="modality-buttons">
+                <button class="btn-mod active" data-mod="learning" onclick="selectModality(this)" data-i18n="learning"></button>
+                <button class="btn-mod" data-mod="development" onclick="selectModality(this)" data-i18n="development"></button>
+                <button class="btn-mod" data-mod="feedback" onclick="selectModality(this)" data-i18n="feedback"></button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label><span data-i18n="confidence"></span>: <span id="conf-val">3</span></label>
+              <input type="range" id="confidence" min="1" max="5" value="3" oninput="document.getElementById('conf-val').textContent=this.value">
+              <div class="conf-labels"><span data-i18n="safe"></span><span data-i18n="radical"></span></div>
+            </div>
+          </div>
+          <p id="board-intro" class="board-intro"></p>
+          <div class="board-tools">
+            <button type="button" class="btn-ghost" id="btn-link-mode" onclick="toggleLinkMode()" data-i18n="linkMode"></button>
+            <button type="button" class="help-q" data-help="boardHelp">?</button>
+            <button type="button" class="btn-ghost" onclick="addBoardNote()" data-i18n="addNote"></button>
+            <button type="button" class="btn-ghost" id="btn-talk" onclick="toggleTalk()" data-i18n="seeTalk"></button>
+          </div>
+          <p id="link-hint" class="spread-hint hidden" data-i18n="linkHint"></p>
+          <div id="board" class="board">
+            <svg id="board-lines"></svg>
+            <div id="board-items"></div>
+          </div>
+          <div id="chat-messages" class="chat-area hidden"></div>
+          <div class="chat-input-area">
+            <textarea id="chat-input" rows="2" data-i18n-ph="askPh"></textarea>
+            <button class="btn-send" onclick="submitChat()" aria-label="Send">&#8595;</button>
+          </div>
+          <div id="live-scores" class="hidden">
+            <h4 data-i18n="force"></h4>
+            <div id="live-scores-content"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <aside id="graph-panel" class="hidden">
       <div class="graph-header">
-        <h3>Idea Graph</h3>
-        <button class="btn-small" onclick="toggleGraph()">Close</button>
+        <h3 data-i18n="graph"></h3>
+        <button class="btn-small" onclick="toggleGraph()" data-i18n="close"></button>
       </div>
       <canvas id="graph-canvas" width="500" height="400"></canvas>
     </aside>
-    <button id="graph-toggle" class="btn-floating hidden" onclick="toggleGraph()">Graph</button>
+    <button id="graph-toggle" class="btn-floating hidden" onclick="toggleGraph()" data-i18n="graph"></button>
   </main>
 
-  <!-- Loading overlay -->
-  <div id="loading" class="hidden">
-    <div class="spinner"></div>
-    <p id="loading-text">Processing...</p>
+  <section id="closing" class="hidden">
+    <h2 data-i18n="closingLead"></h2>
+    <p id="closing-summary"></p>
+    <h3 data-i18n="bridges"></h3>
+    <ul id="closing-bridges"></ul>
+    <p class="spread-hint" data-i18n="downloaded"></p>
+    <button type="button" class="btn-void" onclick="backHome()" data-i18n="backHome"></button>
+  </section>
+
+  <div id="card-panel" class="card-panel hidden" role="dialog">
+    <button type="button" class="btn-small panel-close" onclick="closeCardPanel()" data-i18n="close"></button>
+    <h3 id="panel-title"></h3>
+    <p id="panel-desc"></p>
+    <img id="panel-img" alt="" class="hidden">
+    <a id="panel-more" target="_blank" rel="noopener" data-i18n="readMore"></a>
   </div>
 
+  <div id="spiral" class="hidden" aria-live="polite">
+    <svg id="spiral-svg" viewBox="0 0 400 400"></svg>
+    <p id="spiral-label"></p>
+  </div>
+
+  <div id="help-pop" class="help-pop hidden" role="tooltip"></div>
+
+  <div id="loading" class="hidden">
+    <div class="spinner"></div>
+    <p id="loading-text">…</p>
+  </div>
+
+  <script src="i18n.js"></script>
+  <script src="constellation.js"></script>
+  <script src="cards.js"></script>
+  <script src="board.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

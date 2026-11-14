@@ -4,7 +4,9 @@ load_dotenv()
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
+from app.agents.bedrock_client import BedrockError
 from app.routers.workflow import router as workflow_router
 
 app = FastAPI(
@@ -21,6 +23,11 @@ app.add_middleware(
 )
 
 app.include_router(workflow_router)
+
+
+@app.exception_handler(BedrockError)
+async def bedrock_error(_request, exc: BedrockError):
+    return JSONResponse(status_code=502, content={"detail": str(exc)})
 
 
 @app.get("/health")

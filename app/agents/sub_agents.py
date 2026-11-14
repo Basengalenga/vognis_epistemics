@@ -10,9 +10,10 @@ import json
 from functools import partial
 
 from app.agents.bedrock_client import invoke_model
+from app.agents.core_agent import lang_line
 from app.models.schemas import AgentScores
 
-MODEL = "us.anthropic.claude-sonnet-4-20250514-v1:0"
+MODEL = "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
 
 
 AGENT_PROMPTS: dict[str, str] = {
@@ -55,9 +56,11 @@ async def _score_single(
     concept: str,
     entity: str,
     context: str,
+    lang: str = "es",
 ) -> tuple[str, float]:
     """Ask one sub-agent to score a concept-entity pair."""
     prompt = (
+        f"{lang_line(lang)}\n"
         f"{AGENT_PROMPTS[agent_key]}\n\n"
         f"Base Concept: {concept}\n"
         f"Proposed Entity: {entity}\n"
@@ -91,10 +94,11 @@ async def score_concept_entity(
     concept: str,
     entity: str,
     context: str = "",
+    lang: str = "es",
 ) -> AgentScores:
     """Run all 6 sub-agents in parallel and return aggregated scores."""
     tasks = [
-        _score_single(key, concept, entity, context)
+        _score_single(key, concept, entity, context, lang)
         for key in AGENT_PROMPTS
     ]
     results = await asyncio.gather(*tasks)

@@ -5,8 +5,13 @@ Includes retry with exponential backoff for rate limits (429).
 
 import os
 import time
+from urllib.parse import quote
 
 import httpx
+
+
+class BedrockError(RuntimeError):
+    """Bedrock rejected the call. Raised so the API can return a real response."""
 
 _token: str = ""
 _region: str = ""
@@ -35,7 +40,7 @@ def invoke_model(
 
     url = (
         f"https://bedrock-runtime.{region}.amazonaws.com"
-        f"/model/{model}/invoke"
+        f"/model/{quote(model, safe='')}/invoke"
     )
 
     body: dict = {
@@ -57,8 +62,8 @@ def invoke_model(
             delay = BASE_DELAY * (2 ** attempt)
             time.sleep(delay)
             continue
-        response.raise_for_status()
+        if response.status_code >= 400:
+            raise BedrockError(f"Bedrock {response.status_code}: {response.text[:500]}")
         return response.json()
 
-    response.raise_for_status()
-    return response.json()
+    raise BedrockError(f"Bedrock 429: rate limited after {MAX_RETRIES} attempts")
