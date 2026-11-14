@@ -59,7 +59,7 @@ const I18N = {
     askDistant: "Pedir ideas lejanas",
     needAttribute: "Dinos esa cualidad antes de pedir ideas.",
     pick: "Elige de una a cinco. Las que elijas se quedan en el mapa.",
-    pickHelp: "No tienes que entenderlas todas. Quédate con las que te den curiosidad. Puedes voltear una carta para ver de dónde salió, o abrirla para leer qué significa.",
+    pickHelp: "No tienes que entenderlas todas. Quédate con las que te den curiosidad. Toca una carta para verla de cerca y, desde ahí, voltéala para leer qué significa.",
     attachHow: "Cómo se unen al mapa",
     branch: "Una línea nueva hacia abajo",
     edit: "Reemplazar la línea actual",
@@ -95,7 +95,7 @@ const I18N = {
     confidence: "Qué tan exigente",
     safe: "Guía amable",
     radical: "Crítica radical",
-    modalityHelp: "Explorar es curiosidad, sin juzgar si sirve. Construir pide algo que se pueda hacer. Cuestionar busca los puntos débiles. Cada modo tiene su propio tablero: lo que enlaces aquí no se borra al cambiar.",
+    modalityHelp: "Explorar es curiosidad, sin juzgar si sirve. Construir pide algo que se pueda hacer. Cuestionar busca los puntos débiles. La respuesta queda en esta misma idea.",
     askPh: "Pregúntale algo a Vognis…",
     ask: "Enviar",
     addNote: "+ Nota",
@@ -129,6 +129,56 @@ const I18N = {
     kindQuestion: "Pregunta",
     kindRisk: "Riesgo",
     kindStep: "Paso",
+    offline: "Se perdió la conexión con Vognis. Tu mapa sigue aquí; intenta de nuevo.",
+    deepen: "Profundizar",
+    develop: "Desarrollar",
+    problemCrumb: "Problema",
+    remove: "Quitar",
+    appearedBecause: "Apareció porque…",
+    surprise: "Sorpresa",
+    solidity: "Solidez",
+    distance: "Distancia",
+    rarity: "Rareza",
+    originality: "Originalidad",
+    analogy: "Analogía viable",
+    impact: "Impacto",
+    contact: "Puntos de contacto",
+    valueName: "Valor de innovación",
+    bandLow: "Baja",
+    bandMid: "Media",
+    bandHigh: "Alta",
+    penaltyNote: "Se le resta valor por alejarse demasiado sin puntos de contacto",
+    formulaHelp: "Valor = Sorpresa × Solidez, dividido entre la penalización",
+    verdictSolid: "Sólida pero poco sorprendente: un paso seguro",
+    verdictBoth: "Sorprendente y con los pies en la tierra",
+    verdictWild: "Sorprendente, todavía frágil",
+    verdictFirm: "Sólida, y todavía tiene algo de sorpresa",
+    verdictMiddle: "Hay material: ni obvia ni cerrada",
+    verdictStart: "Un punto de partida",
+    fbYesterday: "Ayer creaste esta idea: «{idea}». ¿Cómo te fue?",
+    fbDays: "Hace {n} días creaste esta idea: «{idea}». ¿Cómo te fue?",
+    fbHelped: "Me sirvió",
+    fbMixed: "Más o menos",
+    fbUnused: "No la usé",
+    fbNote: "Una línea, si quieres",
+    fbLater: "Ahora no",
+    fbThanks: "Gracias. Queda guardado en este navegador.",
+    oracleTitle: "¿Necesitas ayuda?",
+    oracleAnother: "Otra pregunta",
+    oracleInvoke: "Una pregunta",
+    devHelp: "Explorar abre caminos. Construir pide algo que se pueda hacer. Cuestionar busca lo que no se sostiene. La exigencia cambia el tono.",
+    koans: [
+      "Si le quitas el nombre al problema, ¿qué queda en la mano?",
+      "¿En qué oficio ya existe esto, aunque nadie lo llame así?",
+      "¿Qué estás cuidando al pedir una idea útil?",
+      "Cuando dos ideas se contradicen, ¿cuál de las dos eres tú?",
+      "¿Qué vería alguien que no quiere resolverlo?",
+      "Si el obstáculo fuera un material, ¿de qué estaría hecho?",
+      "¿Qué pregunta haría el problema más grande, en vez de más pequeño?",
+      "¿Dónde ya funciona, justo en el lugar donde no estás mirando?",
+      "Si tuvieras que equivocarte con elegancia, ¿hacia dónde irías?",
+      "¿Qué parte de la idea solo aparece cuando dejas de empujarla?",
+    ],
   },
   en: {
     langName: "EN",
@@ -190,7 +240,7 @@ const I18N = {
     askDistant: "Ask for distant ideas",
     needAttribute: "Name that quality before asking for ideas.",
     pick: "Choose one to five. The ones you keep join the map.",
-    pickHelp: "You don’t have to understand all of them. Keep the ones that make you curious. Flip a card to see where it came from, or open it to read what it means.",
+    pickHelp: "You don’t have to understand all of them. Keep the ones that make you curious. Tap a card to bring it close, then flip it to read what it means.",
     attachHow: "How they join the map",
     branch: "A new line downward",
     edit: "Replace the current line",
@@ -226,7 +276,7 @@ const I18N = {
     confidence: "How demanding",
     safe: "Kind guide",
     radical: "Radical critic",
-    modalityHelp: "Explore is curiosity, without judging whether it works. Build asks for something you could actually make. Question looks for the weak spots. Each mode has its own board: links stay when you switch.",
+    modalityHelp: "Explore is curiosity, without judging whether it works. Build asks for something you could actually make. Question looks for the weak spots. The reply stays on this same idea.",
     askPh: "Ask Vognis something…",
     ask: "Send",
     addNote: "+ Note",
@@ -260,6 +310,56 @@ const I18N = {
     kindQuestion: "Question",
     kindRisk: "Risk",
     kindStep: "Step",
+    offline: "The connection to Vognis dropped. Your map is still here; try again.",
+    deepen: "Go deeper",
+    develop: "Develop",
+    problemCrumb: "Problem",
+    remove: "Remove",
+    appearedBecause: "It appeared because…",
+    surprise: "Surprise",
+    solidity: "Solidity",
+    distance: "Distance",
+    rarity: "Rarity",
+    originality: "Originality",
+    analogy: "Workable analogy",
+    impact: "Impact",
+    contact: "Points of contact",
+    valueName: "Innovation value",
+    bandLow: "Low",
+    bandMid: "Medium",
+    bandHigh: "High",
+    penaltyNote: "Value is reduced because it jumped far without points of contact",
+    formulaHelp: "Value = Surprise × Solidity, divided by the penalty",
+    verdictSolid: "Solid but not very surprising: a safe step",
+    verdictBoth: "Surprising, and it still stands up",
+    verdictWild: "Surprising, and still fragile",
+    verdictFirm: "Solid, with some surprise left in it",
+    verdictMiddle: "There is material here: neither obvious nor closed",
+    verdictStart: "A place to start",
+    fbYesterday: "Yesterday you created this idea: “{idea}”. How did it go?",
+    fbDays: "{n} days ago you created this idea: “{idea}”. How did it go?",
+    fbHelped: "It helped",
+    fbMixed: "Somewhat",
+    fbUnused: "I didn’t use it",
+    fbNote: "One line, if you want",
+    fbLater: "Not now",
+    fbThanks: "Thank you. It stays in this browser.",
+    oracleTitle: "Need a hand?",
+    oracleAnother: "Another question",
+    oracleInvoke: "A question",
+    devHelp: "Explore opens paths. Build asks for something you could make. Question looks for what does not hold. Demanding changes the tone.",
+    koans: [
+      "If you take the name off the problem, what is left in your hand?",
+      "In which trade does this already exist, under another name?",
+      "What are you protecting by asking for a useful idea?",
+      "When two ideas contradict, which one is you?",
+      "What would someone see who does not want this solved?",
+      "If the obstacle were a material, what would it be made of?",
+      "Which question would make the problem larger, not smaller?",
+      "Where does this already work, in the place you are not looking?",
+      "If you had to be wrong with elegance, which way would you go?",
+      "Which part of the idea appears only when you stop pushing?",
+    ],
   },
 };
 
@@ -267,7 +367,33 @@ let lang = localStorage.getItem("vognis-lang") === "en" ? "en" : "es";
 const i18nListeners = [];
 
 function t(key) {
-  return (I18N[lang] && I18N[lang][key]) || I18N.es[key] || key;
+  const value = (I18N[lang] && I18N[lang][key]) || I18N.es[key] || key;
+  return value;
+}
+
+function bandKey(value) {
+  const n = Number(value);
+  if (n < 0.4) return "bandLow";
+  if (n < 0.7) return "bandMid";
+  return "bandHigh";
+}
+
+function viBandKey(value) {
+  const n = Number(value);
+  if (n < 0.2) return "bandLow";
+  if (n < 0.4) return "bandMid";
+  return "bandHigh";
+}
+
+function verdictKey(ps, ci) {
+  const surprise = bandKey(ps);
+  const solid = bandKey(ci);
+  if (solid === "bandHigh" && surprise === "bandLow") return "verdictSolid";
+  if (surprise === "bandHigh" && solid === "bandHigh") return "verdictBoth";
+  if (surprise === "bandHigh") return "verdictWild";
+  if (solid === "bandHigh") return "verdictFirm";
+  if (surprise === "bandMid" && solid === "bandMid") return "verdictMiddle";
+  return "verdictStart";
 }
 
 function onLang(fn) { i18nListeners.push(fn); }

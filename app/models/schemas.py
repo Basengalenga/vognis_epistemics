@@ -4,7 +4,7 @@ import uuid
 from enum import Enum
 from typing import Any, Literal
 
-from pydantic import AliasChoices, BaseModel, ConfigDict, Field
+from pydantic import BaseModel, Field
 
 
 # --- Enums ---
@@ -65,24 +65,6 @@ class ConceptCard(BaseModel):
     radar: Radar = Field(default_factory=Radar)
 
 
-class BoardLink(BaseModel):
-    model_config = ConfigDict(populate_by_name=True)
-    source: str = Field(validation_alias=AliasChoices("source", "from"), serialization_alias="from")
-    target: str = Field(validation_alias=AliasChoices("target", "to"), serialization_alias="to")
-    label: str = ""
-
-
-class BoardNote(BaseModel):
-    id: str = ""
-    text: str = ""
-    attached_to: str | None = None
-
-
-class BoardState(BaseModel):
-    links: list[BoardLink] = []
-    notes: list[BoardNote] = []
-
-
 class ScoreResult(BaseModel):
     ps: float = Field(description="Serendipity Points")
     ci: float = Field(description="Idea Quality")
@@ -108,6 +90,16 @@ class GraphEdge(BaseModel):
     weight: float = 1.0
 
 
+class IdeaNode(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4())[:8])
+    parent_id: str | None = None
+    depth: int = 0
+    card: ConceptCard
+    attribute: str = ""
+    scores: ScoreResult | None = None
+    developments: list[dict[str, Any]] = Field(default_factory=list)
+
+
 # --- Session / Workflow ---
 
 class Session(BaseModel):
@@ -128,7 +120,7 @@ class Session(BaseModel):
     graph_edges: list[GraphEdge] = []
     branches: dict[str, list[GraphNode]] = {}
     conversation: list[dict[str, str]] = []
-    boards: dict[str, BoardState] = {}
+    ideas: dict[str, IdeaNode] = Field(default_factory=dict)
     reply_cards: dict[str, list[dict[str, Any]]] = {}
     scores_history: list[ScoreResult] = []
 
@@ -154,6 +146,7 @@ class Node3Request(BaseModel):
     critical_attribute: str
     selected_entities: list[str] = Field(min_length=1, max_length=5)
     action: str = Field("branch", description="branch or edit")
+    parent_id: str | None = None
 
 
 class Node4Request(BaseModel):
@@ -163,7 +156,12 @@ class Node4Request(BaseModel):
     user_message: str = ""
     add_concepts: list[str] = []
     remove_concepts: list[str] = []
-    board: BoardState | None = None
+    focus_id: str
+
+
+class KoanRequest(BaseModel):
+    step: str = ""
+    idea_id: str | None = None
 
 
 class SessionResponse(BaseModel):

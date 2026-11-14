@@ -1,13 +1,17 @@
-/* Epistemic cards: spread, Fibonacci wait, flip, Wikipedia. */
+/* Epistemic cards: a spread can live in any container. One refresh budget per session. */
 
-let currentSpread = [];
-const chosenNames = new Set();
+const spreads = [];
 let refreshTokens = 2;
 let idleRefreshes = 0;
 let interacted = false;
 let cooldownTimer = null;
+let artSeq = 0;
+let zoomCard = null;
+let zoomSpread = null;
 
 const PALETTE = ["#1A3A8F", "#C5A059", "#8F1A1A", "#3D5CB5", "#8D7040", "#6E1212", "#0E245C", "#B54545"];
+const RADAR_KEYS = ["abstraction", "connectivity", "novelty", "applicability", "epistemic_confidence", "conceptual_distance"];
+const RADAR_LABELS = ["radarAbs", "radarCon", "radarNov", "radarApp", "radarEpi", "radarDis"];
 
 function domainColor(domain) {
   const text = domain || "vognis";
@@ -18,30 +22,28 @@ function domainColor(domain) {
 
 function artSVG(name, color, id) {
   let h = 0;
-  for (const ch of name) h = (h * 33 + ch.charCodeAt(0)) >>> 0;
+  for (const ch of name || "") h = (h * 33 + ch.charCodeAt(0)) >>> 0;
   const marks = [];
   for (let i = 0; i < 4; i++) {
-    const r = 16 + ((h >> (i * 4)) % 36);
-    const cx = 28 + ((h >> i) % 150);
-    const cy = 18 + ((h >> (i + 3)) % 86);
+    const r = 18 + ((h >> (i * 4)) % 40);
+    const cx = 30 + ((h >> i) % 140);
+    const cy = 24 + ((h >> (i + 3)) % 150);
     marks.push(`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${color}" stroke-opacity=".6" stroke-width="1.2"/>`);
   }
-  const ax = 20 + (h % 80);
-  const ay = 90 - (h % 40);
-  marks.push(`<path d="M10 ${ay} Q ${ax} 10 190 ${ay - 20}" fill="none" stroke="${color}" stroke-opacity=".45"/>`);
-  return `<svg viewBox="0 0 200 120" aria-hidden="true">
+  const ax = 30 + (h % 90);
+  const ay = 250 - (h % 70);
+  marks.push(`<path d="M16 ${ay} Q ${ax} 20 184 ${ay - 30}" fill="none" stroke="${color}" stroke-opacity=".45"/>`);
+  return `<svg viewBox="0 0 200 280" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <defs><linearGradient id="cg${id}" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="${color}" stop-opacity=".4"/>
       <stop offset="1" stop-color="#fafafa" stop-opacity=".05"/>
     </linearGradient></defs>
-    <rect width="200" height="120" fill="url(#cg${id})"/>
+    <rect width="200" height="280" fill="url(#cg${id})"/>
     ${marks.join("")}
   </svg>`;
 }
 
 function radarSVG(radar) {
-  const keys = ["abstraction", "connectivity", "novelty", "applicability", "epistemic_confidence", "conceptual_distance"];
-  const labels = ["radarAbs", "radarCon", "radarNov", "radarApp", "radarEpi", "radarDis"];
   const cx = 100;
   const cy = 78;
   const R = 48;
@@ -51,22 +53,20 @@ function radarSVG(radar) {
   };
   let rings = "";
   for (const scale of [0.35, 0.7, 1]) {
-    const ring = keys.map((_, i) => pt(i, scale).map(n => n.toFixed(1)).join(",")).join(" ");
+    const ring = RADAR_KEYS.map((_, i) => pt(i, scale).map(n => n.toFixed(1)).join(",")).join(" ");
     rings += `<polygon points="${ring}" fill="none" stroke="rgba(26,58,143,.25)"/>`;
   }
-  const value = keys.map((key, i) => pt(i, Number(radar[key]) || 0).map(n => n.toFixed(1)).join(",")).join(" ");
-  const names = labels.map((key, i) => {
-    const [x, y] = pt(i, 1.28);
-    return `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" font-size="8" fill="#5c584f">${t(key)}</text>`;
-  }).join("");
-  return `<svg class="radar-svg" viewBox="0 0 200 160">${rings}<polygon points="${value}" fill="rgba(26,58,143,.25)" stroke="#1A3A8F"/></svg>${names ? `<svg class="radar-svg" viewBox="0 0 200 160" style="position:absolute;inset:0">${names}</svg>` : ""}`;
+  const value = RADAR_KEYS.map((key, i) => pt(i, Number((radar || {})[key]) || 0).map(n => n.toFixed(1)).join(",")).join(" ");
+  return `<svg class="radar-svg" viewBox="0 0 200 160">${rings}<polygon points="${value}" fill="rgba(26,58,143,.25)" stroke="#1A3A8F"/></svg>`;
 }
 
 function renderRefreshCount() {
-  const el = document.getElementById("refresh-count");
-  if (el) el.textContent = refreshTokens + " " + t("refreshes");
-  const reshuffle = document.getElementById("btn-reshuffle");
-  if (reshuffle) reshuffle.disabled = refreshTokens <= 0 || cooldownTimer;
+  document.querySelectorAll(".refresh-count").forEach(el => {
+    el.textContent = refreshTokens + " " + t("refreshes");
+  });
+  document.querySelectorAll(".btn-reshuffle").forEach(btn => {
+    btn.disabled = refreshTokens <= 0 || !!cooldownTimer;
+  });
 }
 
 function noteCardInteraction() {
@@ -76,110 +76,295 @@ function noteCardInteraction() {
     renderRefreshCount();
   }
   idleRefreshes = 0;
-  document.getElementById("refresh-nudge").classList.add("hidden");
+  document.querySelectorAll(".spread .nudge").forEach(el => el.classList.add("hidden"));
 }
 
-function renderSpread(cards) {
-  currentSpread = cards;
-  const keep = new Set([...chosenNames].filter(name => cards.some(card => card.name === name)));
-  chosenNames.clear();
-  keep.forEach(name => chosenNames.add(name));
-  const grid = document.getElementById("concept-bank");
-  grid.innerHTML = "";
-  cards.forEach((card, index) => {
-    const color = domainColor(card.domain);
-    const wrap = document.createElement("article");
-    wrap.className = "ep-card" + (chosenNames.has(card.name) ? " chosen" : "");
-    wrap.style.animationDelay = (index * 0.06) + "s";
-    const when = new Date(card.received_at || Date.now()).toLocaleString(lang === "en" ? "en" : "es");
-    wrap.innerHTML = `
-      <div class="ep-inner">
-        <div class="ep-face">
-          <div class="ep-art">${artSVG(card.name, color, index)}</div>
-          <h3 class="ep-name"></h3>
-          <p class="ep-seed"></p>
-          <p class="ep-domain"></p>
-          <div class="ep-actions">
-            <button type="button" class="btn-ghost flip-btn"></button>
-            <button type="button" class="btn-ghost pick-btn"></button>
-          </div>
-        </div>
-        <div class="ep-face ep-back">
-          <div style="position:relative">${radarSVG(card.radar || {})}</div>
-          <p class="ep-meta"></p>
-          <p class="ep-reason"></p>
-          <button type="button" class="btn-ghost flip-btn"></button>
-        </div>
-      </div>`;
-    wrap.querySelector(".ep-name").textContent = card.name;
-    wrap.querySelector(".ep-seed").textContent = card.seed;
-    wrap.querySelector(".ep-domain").textContent = card.domain;
-    wrap.querySelector(".ep-meta").textContent = when + " · " + t("origin") + " " + (card.origin_keyword || "");
-    wrap.querySelector(".ep-reason").textContent = card.reasoning;
-    wrap.querySelectorAll(".flip-btn").forEach(btn => {
-      btn.textContent = t("flip");
-      btn.onclick = (event) => {
-        event.stopPropagation();
-        noteCardInteraction();
-        wrap.classList.toggle("flipped");
-      };
-    });
-    const pick = wrap.querySelector(".pick-btn");
-    const paintPick = () => {
-      pick.textContent = chosenNames.has(card.name) ? t("chosen") : t("choose");
-    };
-    paintPick();
-    pick.onclick = (event) => {
-      event.stopPropagation();
-      if (chosenNames.has(card.name)) chosenNames.delete(card.name);
-      else if (chosenNames.size >= 5) return alert(t("needSelection"));
-      else chosenNames.add(card.name);
-      wrap.classList.toggle("chosen", chosenNames.has(card.name));
-      paintPick();
-      noteCardInteraction();
-    };
-    wrap.querySelector(".ep-face").onclick = () => openCardPanel(card);
-    grid.appendChild(wrap);
+function startCooldown(spreadRoot) {
+  document.querySelectorAll(".cooldown-bar").forEach(bar => bar.classList.add("hidden"));
+  const bar = spreadRoot.querySelector(".cooldown-bar");
+  const fill = bar.querySelector("i");
+  bar.classList.remove("hidden");
+  fill.style.transition = "none";
+  fill.style.width = "100%";
+  requestAnimationFrame(() => {
+    fill.style.transition = "width 12s linear";
+    fill.style.width = "0%";
   });
+  clearTimeout(cooldownTimer);
+  cooldownTimer = setTimeout(() => {
+    cooldownTimer = null;
+    bar.classList.add("hidden");
+    renderRefreshCount();
+  }, 12000);
   renderRefreshCount();
 }
 
-function getSelectedNames() { return [...chosenNames]; }
+function createSpread(container, options) {
+  const opts = options || {};
+  const parentId = opts.parentId || null;
+  const chosen = new Set();
+  let cards = [];
 
-function getSelectedCards() {
-  return currentSpread.filter(card => chosenNames.has(card.name));
+  const root = document.createElement("div");
+  root.className = "spread";
+  root.innerHTML = `
+    <div class="label-row center">
+      <p class="instruction pick-line"></p>
+      <button type="button" class="help-q" data-help="pickHelp">?</button>
+    </div>
+    <div class="concept-grid"></div>
+    <div class="spread-actions">
+      <button type="button" class="btn-ghost btn-rotate"><span class="spin-icon" aria-hidden="true">&#8635;</span> <span class="rotate-label"></span></button>
+      <p class="spread-hint hint-line"></p>
+      <button type="button" class="btn-ghost btn-reshuffle"><span aria-hidden="true">&#9776;</span> <span class="reshuffle-label"></span></button>
+      <p class="refresh-count"></p>
+      <div class="cooldown-bar hidden"><i></i></div>
+    </div>
+    <div class="nudge hidden">
+      <p class="nudge-line"></p>
+      <button type="button" class="btn-ghost nudge-back"></button>
+    </div>`;
+  container.appendChild(root);
+
+  const grid = root.querySelector(".concept-grid");
+
+  function relabel() {
+    root.querySelector(".pick-line").textContent = t("pick");
+    root.querySelector(".rotate-label").textContent = t("rotate");
+    root.querySelector(".hint-line").textContent = t("sameIngredients");
+    root.querySelector(".reshuffle-label").textContent = t("reshuffle");
+    root.querySelector(".nudge-line").textContent = t("nudge");
+    root.querySelector(".nudge-back").textContent = t("backToAttribute");
+    renderRefreshCount();
+    render();
+  }
+
+  function render() {
+    if (!root.isConnected) return;
+    grid.innerHTML = "";
+    cards.forEach((card, index) => {
+      const color = domainColor(card.domain);
+      const wrap = document.createElement("article");
+      wrap.className = "ep-card" + (chosen.has(card.name) ? " chosen" : "");
+      wrap.dataset.name = card.name;
+      wrap.style.animationDelay = (index * 0.06) + "s";
+      wrap.innerHTML = `
+        <button type="button" class="pick-dot"></button>
+        <div class="ep-face">
+          <div class="ep-art">${artSVG(card.name, color, artSeq++)}</div>
+          <h3 class="ep-name"></h3>
+          <p class="ep-seed"></p>
+          <p class="ep-domain"></p>
+        </div>`;
+      wrap.querySelector(".ep-name").textContent = card.name;
+      wrap.querySelector(".ep-seed").textContent = card.seed || "";
+      wrap.querySelector(".ep-domain").textContent = card.domain || "";
+      const dot = wrap.querySelector(".pick-dot");
+      dot.setAttribute("aria-label", chosen.has(card.name) ? t("remove") : t("choose"));
+      dot.onclick = (event) => {
+        event.stopPropagation();
+        toggle(card.name);
+      };
+      wrap.onclick = () => openCardZoom(card, wrap, handle);
+      grid.appendChild(wrap);
+    });
+  }
+
+  function persist() {
+    if (opts.onCards) opts.onCards(cards.slice(), [...chosen]);
+  }
+
+  function toggle(name) {
+    if (chosen.has(name)) chosen.delete(name);
+    else if (chosen.size >= 5) return alert(t("needSelection"));
+    else chosen.add(name);
+    noteCardInteraction();
+    render();
+    persist();
+    paintZoomPick();
+  }
+
+  async function load(mode) {
+    const attr = opts.getAttribute ? opts.getAttribute() : "";
+    if (!attr) {
+      alert(t("needAttribute"));
+      return false;
+    }
+    showSpiral();
+    const started = Date.now();
+    try {
+      let path = `/node3/concept-bank?session_id=${sessionId}&critical_attribute=${encodeURIComponent(attr)}&mode=${mode || "new"}`;
+      if (parentId) path += `&parent_id=${encodeURIComponent(parentId)}`;
+      const data = await api("POST", path);
+      const wait = Math.max(0, 2400 - (Date.now() - started));
+      await new Promise(resolve => setTimeout(resolve, wait));
+      cards = (data.data.concept_bank || []).map(card => Object.assign({ received_at: Date.now() }, card));
+      const keep = new Set([...chosen].filter(name => cards.some(card => card.name === name)));
+      chosen.clear();
+      keep.forEach(name => chosen.add(name));
+      render();
+      persist();
+      return true;
+    } catch (e) {
+      if (!e.offline) alert(t("error") + ": " + e.message);
+      return false;
+    } finally {
+      hideSpiral();
+    }
+  }
+
+  function restore(nextCards, chosenList) {
+    cards = nextCards || [];
+    chosen.clear();
+    (chosenList || []).forEach(name => {
+      if (cards.some(card => card.name === name)) chosen.add(name);
+    });
+    render();
+  }
+
+  function refresh(mode) {
+    if (mode === "new") {
+      if (refreshTokens <= 0 || cooldownTimer) return;
+      refreshTokens -= 1;
+      startCooldown(root);
+    }
+    if (interacted) idleRefreshes = 1;
+    else idleRefreshes += 1;
+    interacted = false;
+    root.querySelector(".nudge").classList.toggle("hidden", idleRefreshes < 3);
+    renderRefreshCount();
+    load(mode);
+  }
+
+  root.querySelector(".btn-rotate").onclick = () => refresh("rotate");
+  root.querySelector(".btn-reshuffle").onclick = () => refresh("new");
+  root.querySelector(".nudge-back").onclick = () => {
+    root.querySelector(".nudge").classList.add("hidden");
+    if (opts.onBack) opts.onBack();
+  };
+
+  const handle = {
+    element: root,
+    parentId,
+    load,
+    restore,
+    relabel,
+    isChosen: (name) => chosen.has(name),
+    toggle,
+    getSelectedNames: () => [...chosen],
+    getSelectedCards: () => cards.filter(card => chosen.has(card.name)),
+  };
+  spreads.push(handle);
+  relabel();
+  return handle;
 }
 
-async function openCardPanel(card) {
-  noteCardInteraction();
-  const panel = document.getElementById("card-panel");
-  panel.classList.remove("hidden");
-  document.getElementById("panel-title").textContent = card.name;
-  document.getElementById("panel-desc").textContent = card.description || card.seed;
-  const img = document.getElementById("panel-img");
-  const more = document.getElementById("panel-more");
+function paintZoomPick() {
+  const btn = document.getElementById("zoom-pick");
+  if (!btn || !zoomCard || !zoomSpread) return;
+  const on = zoomSpread.isChosen(zoomCard.name);
+  btn.textContent = on ? t("remove") : t("choose");
+}
+
+function paintZoom(card) {
+  const color = domainColor(card.domain);
+  const face = document.querySelector("#card-zoom .zoom-face");
+  face.querySelector(".zoom-art").innerHTML = artSVG(card.name, color, "zoom");
+  face.querySelector(".zoom-name").textContent = card.name;
+  face.querySelector(".zoom-seed").textContent = card.seed || "";
+  face.querySelector(".zoom-domain").textContent = card.domain || "";
+  const back = document.querySelector("#card-zoom .zoom-back");
+  back.querySelector(".zoom-desc").textContent = card.description || card.seed || "";
+  back.querySelector(".zoom-because").textContent = t("appearedBecause");
+  back.querySelector(".zoom-reason").textContent = card.reasoning || "";
+  document.querySelector("#card-zoom .zoom-stats").innerHTML = radarSVG(card.radar || {}) + RADAR_KEYS.map((key, i) => {
+    const val = Number((card.radar || {})[key]) || 0;
+    return `<p class="stat-row"><span>${t(RADAR_LABELS[i])}</span><b>${t(bandKey(val))}</b><span class="score-value">${val.toFixed(2)}</span></p>`;
+  }).join("");
+  document.getElementById("zoom-flip").textContent = t("flip");
+  document.getElementById("zoom-close").textContent = t("close");
+  paintZoomPick();
+}
+
+async function fillWiki(card) {
+  const img = document.querySelector("#card-zoom .zoom-img");
+  const more = document.querySelector("#card-zoom .zoom-more");
+  const desc = document.querySelector("#card-zoom .zoom-desc");
   img.classList.add("hidden");
-  const title = (card.wiki_title || card.name).replace(/ /g, "_");
-  const search = `https://${lang}.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(card.wiki_title || card.name)}`;
+  const title = (card.wiki_title || card.name || "").replace(/ /g, "_");
+  const search = `https://${lang}.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(card.wiki_title || card.name || "")}`;
   more.href = search;
   more.textContent = t("searchWiki");
   try {
     const res = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`);
-    if (!res.ok) return;
+    if (!res.ok || zoomCard !== card) return;
     const data = await res.json();
-    if (!data.extract) return;
-    document.getElementById("panel-desc").textContent = card.description || data.extract;
+    if (!card.description && data.extract) desc.textContent = data.extract;
     if (data.thumbnail && data.thumbnail.source) {
       img.src = data.thumbnail.source;
+      img.alt = card.name;
       img.classList.remove("hidden");
     }
     more.href = (data.content_urls && data.content_urls.desktop && data.content_urls.desktop.page) || search;
     more.textContent = t("readMore");
-  } catch (err) { /* search link stays */ }
+  } catch (err) { /* the search link stays */ }
 }
 
-function closeCardPanel() {
-  document.getElementById("card-panel").classList.add("hidden");
+function placeZoomStats() {
+  const fly = document.querySelector("#card-zoom .zoom-card");
+  const stats = document.querySelector("#card-zoom .zoom-stats");
+  if (!fly || !stats) return;
+  const rect = fly.getBoundingClientRect();
+  const statsWidth = Math.min(280, window.innerWidth * 0.3);
+  if (rect.right + 16 + statsWidth < window.innerWidth - 8) {
+    stats.style.left = (rect.right + 16) + "px";
+    stats.style.top = rect.top + "px";
+    stats.style.width = statsWidth + "px";
+    stats.style.bottom = "auto";
+  } else {
+    stats.style.left = Math.max(12, (window.innerWidth - Math.min(rect.width, window.innerWidth - 24)) / 2) + "px";
+    stats.style.top = "auto";
+    stats.style.bottom = "5.2rem";
+    stats.style.width = Math.min(rect.width, window.innerWidth - 24) + "px";
+  }
+}
+
+function openCardZoom(card, origin, spreadApi) {
+  noteCardInteraction();
+  zoomCard = card;
+  zoomSpread = spreadApi;
+  const layer = document.getElementById("card-zoom");
+  const fly = layer.querySelector(".zoom-card");
+  fly.classList.remove("flipped");
+  paintZoom(card);
+  layer.classList.remove("hidden");
+  const from = origin.getBoundingClientRect();
+  const w = Math.min(380, window.innerWidth * 0.8);
+  const h = w * 1.5;
+  fly.style.transition = "none";
+  fly.style.left = from.left + "px";
+  fly.style.top = from.top + "px";
+  fly.style.width = from.width + "px";
+  fly.style.height = from.height + "px";
+  requestAnimationFrame(() => {
+    fly.style.transition = "left .45s ease, top .45s ease, width .45s ease, height .45s ease";
+    fly.style.width = w + "px";
+    fly.style.height = h + "px";
+    fly.style.left = ((window.innerWidth - w) / 2) + "px";
+    fly.style.top = Math.max(16, (window.innerHeight - h) / 2 - 28) + "px";
+    fly.addEventListener("transitionend", placeZoomStats, { once: true });
+    setTimeout(placeZoomStats, 480);
+  });
+  fillWiki(card);
+}
+
+function closeCardZoom() {
+  const layer = document.getElementById("card-zoom");
+  if (!layer || layer.classList.contains("hidden")) return;
+  layer.classList.add("hidden");
+  layer.querySelector(".zoom-card").classList.remove("flipped");
+  zoomCard = null;
+  zoomSpread = null;
 }
 
 function spiralPath() {
@@ -227,38 +412,6 @@ function hideSpiral() {
   layer.classList.remove("pulse");
 }
 
-function refreshSpread(mode) {
-  if (mode === "new") {
-    if (refreshTokens <= 0 || cooldownTimer) return;
-    refreshTokens -= 1;
-    const bar = document.getElementById("cooldown-bar");
-    const fill = bar.querySelector("i");
-    bar.classList.remove("hidden");
-    fill.style.width = "100%";
-    fill.style.transition = "width 12s linear";
-    requestAnimationFrame(() => { fill.style.width = "0%"; });
-    cooldownTimer = setTimeout(() => {
-      cooldownTimer = null;
-      bar.classList.add("hidden");
-      fill.style.transition = "none";
-      renderRefreshCount();
-    }, 12000);
-  }
-  if (interacted) idleRefreshes = 1;
-  else idleRefreshes += 1;
-  interacted = false;
-  document.getElementById("refresh-nudge").classList.toggle("hidden", idleRefreshes < 3);
-  renderRefreshCount();
-  loadConceptBank(mode);
-}
-
-function backToAttribute() {
-  document.getElementById("refresh-nudge").classList.add("hidden");
-  hide("node3b");
-  show("node3a");
-  document.getElementById("critical-attr").focus();
-}
-
 setInterval(() => {
   if (refreshTokens < 2) {
     refreshTokens += 1;
@@ -266,7 +419,33 @@ setInterval(() => {
   }
 }, 60000);
 
+document.addEventListener("DOMContentLoaded", () => {
+  const layer = document.getElementById("card-zoom");
+  if (!layer) return;
+  layer.addEventListener("click", (event) => {
+    if (event.target === layer) closeCardZoom();
+  });
+  document.getElementById("zoom-close").onclick = closeCardZoom;
+  document.getElementById("zoom-flip").onclick = () => {
+    layer.querySelector(".zoom-card").classList.toggle("flipped");
+  };
+  document.getElementById("zoom-pick").onclick = () => {
+    if (zoomCard && zoomSpread) zoomSpread.toggle(zoomCard.name);
+  };
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  const layer = document.getElementById("card-zoom");
+  if (!layer || layer.classList.contains("hidden")) return;
+  closeCardZoom();
+  event.stopImmediatePropagation();
+});
+
 onLang(() => {
-  if (currentSpread.length) renderSpread(currentSpread);
+  spreads.forEach(spread => {
+    if (spread.element.isConnected) spread.relabel();
+  });
   renderRefreshCount();
+  if (zoomCard) paintZoom(zoomCard);
 });

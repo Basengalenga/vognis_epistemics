@@ -56,8 +56,16 @@ def invoke_model(
         "Authorization": f"Bearer {token}",
     }
 
+    transport_failures = 0
     for attempt in range(MAX_RETRIES):
-        response = httpx.post(url, json=body, headers=headers, timeout=60.0)
+        try:
+            response = httpx.post(url, json=body, headers=headers, timeout=60.0)
+        except httpx.TransportError as exc:
+            transport_failures += 1
+            if transport_failures >= 3:
+                raise BedrockError("No pudimos conectar con el modelo") from exc
+            time.sleep(BASE_DELAY * (2 ** (transport_failures - 1)))
+            continue
         if response.status_code == 429:
             delay = BASE_DELAY * (2 ** attempt)
             time.sleep(delay)

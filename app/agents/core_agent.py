@@ -84,7 +84,10 @@ async def extract_keywords(problem: str, expertise: str, themes: list[str], lang
         }],
         max_tokens=300,
     )
-    data = _parse_json(text)
+    try:
+        data = _parse_json(text)
+    except (ValueError, json.JSONDecodeError) as exc:
+        raise BedrockError("Keyword extraction was not readable") from exc
     if not isinstance(data, list):
         raise BedrockError("Keyword extraction did not return a list")
     return [str(item) for item in data if str(item).strip()]
@@ -149,9 +152,11 @@ async def generate_concept_bank(
     lang: str = "es",
     mode: str = "new",
     previous: list[str] | None = None,
+    origin: str = "",
 ) -> list[dict]:
     """Node 3: 12 epistemic cards, four per connection layer."""
     avoided = ", ".join(previous or []) or "none"
+    origin_block = origin.strip() or "Start from the problem itself."
     if mode == "rotate":
         angle = (
             "Keep the same base ingredients (the keywords and the critical attribute) "
@@ -173,6 +178,7 @@ async def generate_concept_bank(
                 f"Problem: {problem}\n"
                 f"Keywords: {', '.join(keywords)}\n"
                 f"Critical attribute: {critical_attribute}\n"
+                f"{origin_block}\n"
                 f"Names to avoid: {avoided}\n\n"
                 f"Four cards per layer:\n"
                 f"1 = directly related, 2 = second-order connection, 3 = a large conceptual jump.\n"
@@ -233,19 +239,16 @@ MODALITY_INSTRUCTIONS = {
 }
 
 
-def _board_text(board: dict | None) -> str:
-    if not board:
-        return "The user has not linked anything yet."
-    lines = []
-    for link in board.get("links") or []:
-        lines.append(
-            f"Link: {link.get('from') or link.get('source')} — {link.get('label') or 'related'} — "
-            f"{link.get('to') or link.get('target')}"
-        )
-    for note in board.get("notes") or []:
-        attached = note.get("attached_to") or "the board"
-        lines.append(f"Note on {attached}: {note.get('text')}")
-    return "\n".join(lines) if lines else "The user has not linked anything yet."
+def _focus_text(focus: dict | None) -> str:
+    if not focus:
+        return "No idea is in focus."
+    path = " › ".join(focus.get("path") or [])
+    return (
+        f"Idea in focus: {focus.get('name')}\n"
+        f"Seed: {focus.get('seed')}\n"
+        f"Quality the user asked for: {focus.get('attribute')}\n"
+        f"Path from the problem: {path or focus.get('name')}"
+    )
 
 
 def _cards_from_raw(raw) -> list[dict]:
@@ -282,9 +285,9 @@ async def node4_respond(
     conversation: list[dict[str, str]],
     user_message: str,
     lang: str = "es",
-    board: dict | None = None,
+    focus: dict | None = None,
 ) -> dict:
-    """Node 4: short intro plus cards tied to the concepts on the board."""
+    """Node 4: short intro plus cards about the idea in focus."""
     system = (
         f"{lang_line(lang)}\n"
         f"You are Vognis, a creative AI workspace assistant.\n\n"
@@ -294,7 +297,7 @@ async def node4_respond(
         f"Selected concepts: {', '.join(entities)}\n\n"
         f"{MODALITY_INSTRUCTIONS[modality]}\n"
         f"{CONFIDENCE_TONES[confidence]}\n\n"
-        f"What the user has on the board right now:\n{_board_text(board)}\n\n"
+        f"{_focus_text(focus)}\n\n"
         f"Reply ONLY with JSON of this shape: "
         f'{{"intro": "one sentence", "cards": [{{"kind": "recommendation|help|question|risk|step", '
         f'"title": "short title", "body": "at most 40 words", "concepts": ["concept name"]}}]}}. '
@@ -314,16 +317,92 @@ async def node4_respond(
     return {"intro": text, "cards": []}
 
 
+def _ancestor_path(ideas: dict, node) -> str:
+    chain = []
+    current = node
+    seen = set()
+    while current is not None and current.id not in seen:
+        seen.add(current.id)
+        chain.append(f"{current.card.name} ({current.attribute})" if current.attribute else current.card.name)
+        current = ideas.get(current.parent_id) if current.parent_id else None
+    return " › ".join(reversed(chain))
+
+
+def idea_path_names(ideas: dict, node) -> list[str]:
+    names = []
+    current = node
+    seen = set()
+    while current is not None and current.id not in seen:
+        seen.add(current.id)
+        names.append(current.card.name)
+        current = ideas.get(current.parent_id) if current.parent_id else None
+    return list(reversed(names))
+
+
+def branch_names(ideas: dict, parent_id: str | None) -> list[str]:
+    names: list[str] = []
+    current_id = parent_id
+    seen = set()
+    while current_id and current_id not in seen:
+        seen.add(current_id)
+        node = ideas.get(current_id)
+        if node is None:
+            break
+        names.append(node.card.name)
+        current_id = node.parent_id
+    if parent_id:
+        for idea in ideas.values():
+            if idea.parent_id == parent_id and idea.card.name not in names:
+                names.append(idea.card.name)
+    return names
+
+
+def _tree_lines(session) -> str:
+    ideas = session.ideas or {}
+    if not ideas:
+        return "none"
+    lines = []
+    for node in ideas.values():
+        lines.append(_ancestor_path(ideas, node))
+        for dev in node.developments or []:
+            intro = dev.get("intro") or ""
+            lines.append(f"  {dev.get('modality')}: {dev.get('user_message')} -> {intro}")
+    return "\n".join(lines)
+
+
+async def generate_koan(
+    lang: str,
+    step: str,
+    problem: str,
+    idea_name: str | None = None,
+    attribute: str = "",
+) -> str:
+    """One paradoxical question. No advice and no answer."""
+    focus = idea_name or "the problem the person just wrote"
+    text = await _ask(
+        [{
+            "role": "user",
+            "content": (
+                f"{lang_line(lang)}\n"
+                f"Write one short paradoxical question, in the spirit of a Zen koan. "
+                f"It should loosen a fixed way of seeing, without giving advice, a method, or an answer. "
+                f"One sentence only. No preamble.\n\n"
+                f"Step: {step or 'unspecified'}\n"
+                f"Problem: {problem}\n"
+                f"Idea in view: {focus}\n"
+                f"Quality they are holding: {attribute or 'none'}"
+            ),
+        }],
+        max_tokens=120,
+    )
+    line = text.strip().strip('"').split("\n", 1)[0].strip()
+    if not line:
+        raise BedrockError("Koan was empty")
+    return line[:280]
+
+
 async def summarize_session(session) -> tuple[str, list[str]]:
     """Narrative of how the ideas were connected, plus the key bridges."""
-    board_bits = []
-    for mode, board in (session.boards or {}).items():
-        links = board.links if hasattr(board, "links") else []
-        notes = board.notes if hasattr(board, "notes") else []
-        for link in links:
-            board_bits.append(f"{mode}: {link.source} — {link.label} — {link.target}")
-        for note in notes:
-            board_bits.append(f"{mode} note: {note.text}")
     text = await _ask(
         [{
             "role": "user",
@@ -334,8 +413,7 @@ async def summarize_session(session) -> tuple[str, list[str]]:
                 f"Problem: {session.problem}\n"
                 f"Summary: {session.summary}\n"
                 f"Keywords: {', '.join(session.keywords)}\n"
-                f"Chosen concepts: {', '.join(session.selected_entities)}\n"
-                f"Board links and notes:\n" + ("\n".join(board_bits) or "none") + "\n\n"
+                f"Idea tree (path, quality, developments):\n{_tree_lines(session)}\n\n"
                 f'Respond ONLY with JSON: {{"summary": "one paragraph", "bridges": ["bridge 1"]}}'
             ),
         }],
@@ -343,11 +421,12 @@ async def summarize_session(session) -> tuple[str, list[str]]:
     )
     try:
         data = _parse_json(text)
-        summary = str(data.get("summary") or "").strip()
-        bridges = [str(item) for item in data.get("bridges") or [] if str(item).strip()]
-        if summary:
-            return summary, bridges
-    except (ValueError, AttributeError, json.JSONDecodeError, TypeError):
-        pass
-    fallback = session.summary or session.problem
-    return fallback, list(session.selected_entities)
+    except (ValueError, json.JSONDecodeError) as exc:
+        raise BedrockError("El resumen no se pudo leer") from exc
+    if not isinstance(data, dict):
+        raise BedrockError("El resumen no se pudo leer")
+    summary = str(data.get("summary") or "").strip()
+    bridges = [str(item) for item in data.get("bridges") or [] if str(item).strip()]
+    if not summary:
+        raise BedrockError("El resumen no se pudo leer")
+    return summary, bridges

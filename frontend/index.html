@@ -29,6 +29,7 @@
       </div>
     </div>
   </header>
+  <nav id="trail" class="trail hidden" aria-label="path"></nav>
 
   <section id="home">
     <div class="hero">
@@ -36,6 +37,17 @@
       <p class="hero-sub" data-i18n="heroSub"></p>
       <p class="hero-line" data-i18n="heroLine"></p>
       <p class="today" data-i18n="today"></p>
+      <div id="yesterday" class="yesterday hidden">
+        <p id="yesterday-q"></p>
+        <div class="yesterday-choices">
+          <button type="button" data-fb="helped" data-i18n="fbHelped"></button>
+          <button type="button" data-fb="mixed" data-i18n="fbMixed"></button>
+          <button type="button" data-fb="unused" data-i18n="fbUnused"></button>
+        </div>
+        <input id="yesterday-note" type="text" data-i18n-ph="fbNote">
+        <button type="button" id="yesterday-skip" class="btn-ghost" data-i18n="fbLater"></button>
+        <p id="yesterday-thanks" class="hidden" data-i18n="fbThanks"></p>
+      </div>
       <div class="orbs">
         <button type="button" class="orb" id="orb-create" onclick="startCreate()">
           <span class="orb-art" aria-hidden="true"></span>
@@ -183,28 +195,7 @@
           </div>
           <div id="node3b" class="hidden">
             <p class="who model" data-i18n="model"></p>
-            <div class="label-row center">
-              <p class="instruction" data-i18n="pick"></p>
-              <button type="button" class="help-q" data-help="pickHelp">?</button>
-            </div>
-            <div id="concept-bank" class="concept-grid"></div>
-            <div class="spread-actions">
-              <button type="button" class="btn-ghost" id="btn-rotate" onclick="refreshSpread('rotate')">
-                <span class="spin-icon" aria-hidden="true">&#8635;</span>
-                <span data-i18n="rotate"></span>
-              </button>
-              <p class="spread-hint" data-i18n="sameIngredients"></p>
-              <button type="button" class="btn-ghost" id="btn-reshuffle" onclick="refreshSpread('new')">
-                <span aria-hidden="true">&#9776;</span>
-                <span data-i18n="reshuffle"></span>
-              </button>
-              <p id="refresh-count"></p>
-              <div id="cooldown-bar" class="hidden"><i></i></div>
-            </div>
-            <div id="refresh-nudge" class="nudge hidden">
-              <p data-i18n="nudge"></p>
-              <button type="button" class="btn-ghost" onclick="backToAttribute()" data-i18n="backToAttribute"></button>
-            </div>
+            <div id="root-spread"></div>
             <div class="field">
               <label for="branch-action" data-i18n="attachHow"></label>
               <select id="branch-action">
@@ -214,60 +205,10 @@
             </div>
             <button class="btn-primary" onclick="submitSelection()" data-i18n="attach"></button>
           </div>
-          <div id="node3-results" class="hidden">
-            <h3 data-i18n="scoreTitle"></h3>
-            <div id="scores-container"></div>
-          </div>
         </div>
       </div>
     </section>
-
-    <section id="node4" class="node-section cluster wide">
-      <div class="node-content">
-        <div class="claim-map"></div>
-        <div class="composer">
-          <div class="controls-bar">
-            <div class="control-group">
-              <div class="label-row">
-                <label data-i18n="modalityHelp" class="visually-hidden"></label>
-                <button type="button" class="help-q" data-help="modalityHelp">?</button>
-              </div>
-              <div class="modality-buttons">
-                <button class="btn-mod active" data-mod="learning" onclick="selectModality(this)" data-i18n="learning"></button>
-                <button class="btn-mod" data-mod="development" onclick="selectModality(this)" data-i18n="development"></button>
-                <button class="btn-mod" data-mod="feedback" onclick="selectModality(this)" data-i18n="feedback"></button>
-              </div>
-            </div>
-            <div class="control-group">
-              <label><span data-i18n="confidence"></span>: <span id="conf-val">3</span></label>
-              <input type="range" id="confidence" min="1" max="5" value="3" oninput="document.getElementById('conf-val').textContent=this.value">
-              <div class="conf-labels"><span data-i18n="safe"></span><span data-i18n="radical"></span></div>
-            </div>
-          </div>
-          <p id="board-intro" class="board-intro"></p>
-          <div class="board-tools">
-            <button type="button" class="btn-ghost" id="btn-link-mode" onclick="toggleLinkMode()" data-i18n="linkMode"></button>
-            <button type="button" class="help-q" data-help="boardHelp">?</button>
-            <button type="button" class="btn-ghost" onclick="addBoardNote()" data-i18n="addNote"></button>
-            <button type="button" class="btn-ghost" id="btn-talk" onclick="toggleTalk()" data-i18n="seeTalk"></button>
-          </div>
-          <p id="link-hint" class="spread-hint hidden" data-i18n="linkHint"></p>
-          <div id="board" class="board">
-            <svg id="board-lines"></svg>
-            <div id="board-items"></div>
-          </div>
-          <div id="chat-messages" class="chat-area hidden"></div>
-          <div class="chat-input-area">
-            <textarea id="chat-input" rows="2" data-i18n-ph="askPh"></textarea>
-            <button class="btn-send" onclick="submitChat()" aria-label="Send">&#8595;</button>
-          </div>
-          <div id="live-scores" class="hidden">
-            <h4 data-i18n="force"></h4>
-            <div id="live-scores-content"></div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div id="idea-tree"></div>
 
     <aside id="graph-panel" class="hidden">
       <div class="graph-header">
@@ -288,13 +229,43 @@
     <button type="button" class="btn-void" onclick="backHome()" data-i18n="backHome"></button>
   </section>
 
-  <div id="card-panel" class="card-panel hidden" role="dialog">
-    <button type="button" class="btn-small panel-close" onclick="closeCardPanel()" data-i18n="close"></button>
-    <h3 id="panel-title"></h3>
-    <p id="panel-desc"></p>
-    <img id="panel-img" alt="" class="hidden">
-    <a id="panel-more" target="_blank" rel="noopener" data-i18n="readMore"></a>
+  <div id="card-zoom" class="card-zoom hidden" role="dialog" aria-modal="true">
+    <article class="zoom-card">
+      <div class="zoom-inner">
+        <div class="zoom-face">
+          <div class="zoom-art"></div>
+          <h3 class="zoom-name"></h3>
+          <p class="zoom-seed"></p>
+          <p class="zoom-domain"></p>
+        </div>
+        <div class="zoom-back">
+          <p class="zoom-desc"></p>
+          <img class="zoom-img hidden" alt="">
+          <p class="zoom-because"></p>
+          <p class="zoom-reason"></p>
+          <a class="zoom-more" target="_blank" rel="noopener"></a>
+        </div>
+      </div>
+    </article>
+    <aside class="zoom-stats"></aside>
+    <div class="zoom-actions">
+      <button type="button" id="zoom-flip" class="btn-ghost"></button>
+      <button type="button" id="zoom-pick" class="btn-ghost"></button>
+      <button type="button" id="zoom-close" class="btn-void"></button>
+    </div>
   </div>
+
+  <button type="button" id="oracle-invoke" class="oracle-invoke hidden" aria-label="Una pregunta">···</button>
+  <div id="oracle" class="oracle hidden" role="dialog">
+    <p class="oracle-glyph" aria-hidden="true">·<br>·<br>·</p>
+    <p class="oracle-title" data-i18n="oracleTitle"></p>
+    <p id="oracle-q" class="oracle-q"></p>
+    <div class="oracle-actions">
+      <button type="button" id="oracle-another" class="btn-ghost" data-i18n="oracleAnother"></button>
+      <button type="button" id="oracle-close" class="btn-ghost" data-i18n="close"></button>
+    </div>
+  </div>
+  <div id="net-notice" class="net-notice hidden" role="status"></div>
 
   <div id="spiral" class="hidden" aria-live="polite">
     <svg id="spiral-svg" viewBox="0 0 400 400"></svg>
@@ -311,7 +282,8 @@
   <script src="i18n.js"></script>
   <script src="constellation.js"></script>
   <script src="cards.js"></script>
-  <script src="board.js"></script>
+  <script src="tree.js"></script>
+  <script src="oracle.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
