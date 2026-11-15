@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=full">
+  <link rel="stylesheet" href="decide/decide.css?v=decide1">
 </head>
 <body>
   <canvas id="constellation" aria-hidden="true"></canvas>
@@ -54,8 +55,8 @@
           <span class="orb-art" aria-hidden="true"></span>
           <span data-i18n="create"></span>
         </button>
-        <button type="button" class="orb orb-soon" id="orb-decide" disabled data-i18n-title="soonTip">
-          <span class="soon-tag" data-i18n="soon"></span>
+        <button type="button" class="orb" id="orb-decide" onclick="startDecide()">
+          <span class="orb-art" aria-hidden="true"></span>
           <span data-i18n="decide"></span>
         </button>
       </div>
@@ -79,6 +80,8 @@
       </article>
     </div>
   </section>
+
+  <main id="decide-root" class="hidden"></main>
 
   <aside class="legend" aria-label="Map key">
     <p><i class="gem user"></i><span data-i18n="user"></span></p>
@@ -286,5 +289,6 @@
   <script src="tree.js?v=full"></script>
   <script src="oracle.js?v=full"></script>
   <script src="app.js?v=full3"></script>
+  <script src="decide/decide.js?v=decide1"></script>
 </body>
 </html>

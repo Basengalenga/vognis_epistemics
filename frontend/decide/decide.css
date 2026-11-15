@@ -1,0 +1,235 @@
+/* Decision door. Scoped so the create map keeps its own rules. */
+
+#decide-root {
+  position: relative;
+  z-index: 1;
+  width: min(960px, calc(100% - 2rem));
+  margin: 1.2rem auto 4rem;
+}
+
+.d-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.d-kicker {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.d-lock {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  border: 1px solid rgba(26, 58, 143, 0.35);
+  border-radius: 99px;
+  padding: 0.25rem 0.7rem;
+}
+
+.d-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) 1fr;
+  gap: 1.4rem;
+  align-items: start;
+}
+
+.d-layout.solo { grid-template-columns: 1fr; }
+
+.d-tree {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(26, 58, 143, 0.18);
+  border-radius: 18px;
+  padding: 0.9rem;
+}
+
+.d-tree h2,
+.d-panel h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.45rem;
+}
+
+.d-decision {
+  font-family: var(--idea);
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: var(--idea-ink);
+  margin-bottom: 0.8rem;
+}
+
+.d-trunks, .d-branches { display: flex; flex-direction: column; gap: 0.45rem; }
+
+.d-trunk, .d-branch, .d-side-card {
+  border: 1px solid rgba(26, 58, 143, 0.28);
+  background: var(--idea-fill);
+  color: var(--idea-ink);
+  border-radius: 14px;
+  padding: 0.5rem 0.65rem;
+}
+
+.d-trunk.is-stance { border-color: var(--blue); box-shadow: inset 3px 0 0 var(--blue); }
+.d-branch.is-open { border-color: var(--blue); }
+.d-branch.is-crux { box-shadow: inset 3px 0 0 var(--crimson); }
+.d-side-card {
+  border-style: dashed;
+  border-color: var(--crimson);
+  background: transparent;
+  margin-top: 0.7rem;
+}
+
+.d-meta {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 0.15rem;
+}
+
+.d-panel {
+  background: rgba(255, 255, 255, 0.78);
+  border-radius: 18px;
+  padding: 1rem 1rem 1.1rem;
+}
+
+.d-lead { color: var(--ink-dim); margin-bottom: 0.9rem; }
+
+.d-disclaimer {
+  font-size: 0.82rem;
+  color: var(--ink-dim);
+  border-left: 2px solid var(--gold);
+  padding-left: 0.7rem;
+  margin: 0.3rem 0 1rem;
+}
+
+.d-choices, .d-scale, .d-depth {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.d-depth { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+
+.d-choice, .d-scale button, .d-card, .d-depth button {
+  background: transparent;
+  border: 1px solid rgba(17, 17, 17, 0.14);
+  border-radius: 16px;
+  padding: 0.55rem 0.7rem;
+  font: inherit;
+  color: var(--void);
+  cursor: pointer;
+  text-align: left;
+}
+
+.d-choice.active, .d-scale button.active, .d-card.active, .d-depth button.active {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.d-depth button strong {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.25rem;
+}
+
+.d-depth button span { display: block; color: var(--ink-dim); font-size: 0.88rem; }
+.d-depth button.active span { color: var(--blue); }
+
+.d-option {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.55rem;
+  align-items: center;
+  margin-bottom: 0.45rem;
+}
+
+.d-option input[type="text"] { margin: 0; }
+
+.d-arg {
+  border-top: 1px solid rgba(26, 58, 143, 0.12);
+  padding-top: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+.d-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.35rem 0 0.7rem;
+}
+
+.d-note {
+  font-size: 0.82rem;
+  color: var(--crimson);
+  margin-top: 0.35rem;
+}
+
+.d-hint {
+  background: rgba(143, 26, 26, 0.06);
+  border-radius: 12px;
+  padding: 0.7rem 0.8rem;
+  margin: 0.7rem 0;
+}
+
+.d-cards { display: flex; flex-direction: column; gap: 0.45rem; }
+
+.d-card p { font-family: var(--idea); font-size: 1.15rem; line-height: 1.25; }
+
+.d-error {
+  color: var(--crimson);
+  min-height: 1.2rem;
+  margin: 0.4rem 0;
+}
+
+.d-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.d-mirror {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+  margin: 0.8rem 0;
+}
+
+.d-mirror article {
+  border-radius: 14px;
+  padding: 0.7rem;
+  background: var(--idea-fill);
+  color: var(--idea-ink);
+}
+
+.d-mirror p, .d-list li { font-family: var(--idea); font-size: 1.15rem; line-height: 1.3; }
+
+.d-list { margin: 0.4rem 0 0.8rem 1rem; }
+.d-list li { margin: 0.25rem 0; }
+
+.d-lens-text {
+  font-family: var(--idea);
+  font-size: 1.45rem;
+  line-height: 1.25;
+  color: var(--idea-ink);
+  margin: 0.4rem 0 0.8rem;
+}
+
+@media (max-width: 800px) {
+  .d-layout, .d-depth, .d-mirror { grid-template-columns: 1fr; }
+  .d-option { grid-template-columns: auto 1fr; }
+  .d-option .d-remove { grid-column: 2; justify-self: start; }
+}
