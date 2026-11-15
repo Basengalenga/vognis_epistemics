@@ -18,6 +18,20 @@ from app.agents.core_agent import (
     synthesize_summary,
 )
 from app.agents.sub_agents import score_concept_entity
+from app.engine.record import (
+    cards_text,
+    label,
+    note,
+    record_document,
+    reply_text,
+    score_text,
+    stamp,
+    _ACTION,
+    _EXPERTISE,
+    _INTENT,
+    _MODALITY,
+    _SPREAD,
+)
 from app.engine.scoring import compute_scores
 from app.models.schemas import (
     ConceptCard,
@@ -87,19 +101,38 @@ async def node1_initialize(req: Node1Request):
         if req.confidence < 1:
             raise HTTPException(400, "Mark your confidence")
 
+    asked = stamp()
     keywords = await extract_keywords(
         req.problem, req.expertise_level, req.interest_themes, req.lang
     )
+    answered = stamp()
 
     session = Session(
         lang=req.lang,
         flow=req.flow,
+        started_at=asked,
         problem=req.problem,
         keywords=keywords,
         options=options,
         stance=stance,
         confidence_start=req.confidence if req.flow == "decide" else 0,
         intent=req.intent_hint,
+    )
+    note(session, "user", "problem", req.problem, at=asked)
+    if req.flow == "decide":
+        note(session, "user", "options", "\n".join(f"- {item}" for item in options), at=asked, detail={"items": options})
+        note(session, "user", "stance", stance, at=asked)
+        note(session, "user", "confidence", str(req.confidence), at=asked)
+    else:
+        note(session, "user", "expertise", label(req.lang, _EXPERTISE, req.expertise_level), at=asked)
+        if req.interest_themes:
+            themes = [item.strip() for item in req.interest_themes if item and item.strip()]
+            if themes:
+                note(session, "user", "themes", ", ".join(themes), at=asked, detail={"items": themes})
+        note(session, "user", "intent", label(req.lang, _INTENT, req.intent_hint.value), at=asked)
+    note(
+        session, "model", "keywords", ", ".join(keywords), at=answered,
+        detail={"items": keywords},
     )
 
     # Create initial concept node
@@ -140,11 +173,17 @@ async def node2_reaffirm(req: Node2Request):
     if session.current_node != 2:
         raise HTTPException(400, f"Session is at node {session.current_node}, expected 2")
 
+    asked = stamp()
     summary = await synthesize_summary(req.detailed_description, session.keywords, session.lang)
+    answered = stamp()
     session.summary = summary
     session.intent = req.intent
     session.problem = req.detailed_description  # Update with richer description
     session.current_node = 3
+    note(session, "user", "description", req.detailed_description, at=asked)
+    if session.flow != "decide":
+        note(session, "user", "intent", label(session.lang, _INTENT, req.intent.value), at=asked)
+    note(session, "model", "summary", summary, at=answered)
 
     return SessionResponse(
         session_id=session.id,
@@ -191,6 +230,7 @@ async def node3_concept_bank(
             if name not in avoided:
                 avoided.append(name)
 
+    asked = stamp()
     session.critical_attribute = critical_attribute
     raw_cards = await generate_concept_bank(
         session.problem,
@@ -204,9 +244,25 @@ async def node3_concept_bank(
         options=session.options,
         stance=session.stance,
     )
+    answered = stamp()
     cards = [ConceptCard(**card) for card in raw_cards]
     session.concept_cards = cards
     session.concept_bank_history.append([card.name for card in cards])
+    aim_kind = "crux" if session.flow == "decide" else "gamechanger"
+    aim_text = label(session.lang, _SPREAD, mode) + "\n" + critical_attribute.strip()
+    if parent_id and origin:
+        parent_name = session.ideas[parent_id].card.name
+        where = "From: " if session.lang == "en" else "Desde: "
+        aim_text = f"{where}{parent_name}\n{aim_text}"
+    note(
+        session, "user", aim_kind, aim_text, at=asked,
+        detail={"mode": mode, "spread": label(session.lang, _SPREAD, mode), "parent_id": parent_id},
+    )
+    dumped = [card.model_dump() for card in cards]
+    note(
+        session, "model", "cards", cards_text(session.lang, dumped), at=answered,
+        detail={"cards": dumped, "mode": mode},
+    )
 
     return SessionResponse(
         session_id=session.id,
@@ -249,6 +305,24 @@ async def node3_select(req: Node3Request):
 
     ideas_out = []
     all_scores = []
+    asked = stamp()
+    choice_lines = [label(session.lang, _ACTION, req.action)]
+    if parent is not None:
+        choice_lines.append(("From: " if session.lang == "en" else "Desde: ") + parent.card.name)
+    aim_name = "Crux" if session.flow == "decide" else "Gamechanger"
+    if session.lang != "en" and session.flow == "decide":
+        aim_name = "Supuesto"
+    choice_lines.append(f"{aim_name}: {req.critical_attribute.strip()}")
+    choice_lines.append("\n".join(f"- {name}" for name in req.selected_entities))
+    note(
+        session, "user", "choice", "\n".join(choice_lines), at=asked,
+        detail={
+            "action": req.action,
+            "ideas": list(req.selected_entities),
+            "attribute": req.critical_attribute,
+            "parent_id": req.parent_id,
+        },
+    )
     for entity in req.selected_entities:
         if entity not in session.selected_entities:
             session.selected_entities.append(entity)
@@ -306,6 +380,10 @@ async def node3_select(req: Node3Request):
             weight=score_result.vi,
         ))
         session.scores_history.append(score_result)
+        note(
+            session, "model", "scores", score_text(session.lang, card.name, score_result),
+            detail={"idea": card.name, "scores": score_result.model_dump()},
+        )
 
     if req.action == "branch":
         branch_id = f"branch_{len(session.branches) + 1}"
@@ -344,6 +422,7 @@ async def node4_develop(req: Node4Request):
     if not (focus.bridge or "").strip():
         raise HTTPException(409, "Primero escribe el puente")
 
+    asked = stamp()
     session.modality = req.modality
     session.confidence = req.confidence
 
@@ -389,6 +468,7 @@ async def node4_develop(req: Node4Request):
         },
         flow=session.flow,
     )
+    answered = stamp()
     intro = reply.get("intro") or ""
     cards = reply.get("cards") or []
     plain = intro
@@ -405,6 +485,24 @@ async def node4_develop(req: Node4Request):
     session.conversation.append({"role": "user", "content": req.user_message})
     session.conversation.append({"role": "assistant", "content": plain})
     session.reply_cards.setdefault(req.modality.value, []).extend(cards)
+    demand = "How demanding" if session.lang == "en" else "Qué tan exigente"
+    mode_name = label(session.lang, _MODALITY, req.modality.value)
+    note(
+        session, "user", "message",
+        f"{focus.card.name}\n{mode_name} · {demand}: {req.confidence}\n{req.user_message}",
+        at=asked,
+        detail={
+            "idea": focus.card.name,
+            "modality": req.modality.value,
+            "confidence": req.confidence,
+            "add_concepts": list(req.add_concepts),
+            "remove_concepts": list(req.remove_concepts),
+        },
+    )
+    note(
+        session, "model", "reply", reply_text(intro, cards), at=answered,
+        detail={"idea": focus.card.name, "modality": req.modality.value, "intro": intro, "cards": cards},
+    )
 
     scores = None
     if req.modality.value in ("development", "feedback"):
@@ -421,6 +519,10 @@ async def node4_develop(req: Node4Request):
         scores = compute_scores(agent_scores)
         focus.scores = scores
         session.scores_history.append(scores)
+        note(
+            session, "model", "scores", score_text(session.lang, focus.card.name, scores),
+            detail={"idea": focus.card.name, "scores": scores.model_dump()},
+        )
 
     return SessionResponse(
         session_id=session.id,
@@ -456,6 +558,10 @@ async def session_koan(session_id: str, req: KoanRequest):
         options=session.options,
         stance=session.stance,
     )
+    note(
+        session, "model", "question", question,
+        detail={"step": req.step, "idea": idea.card.name if idea else ""},
+    )
     return {"question": question}
 
 
@@ -467,6 +573,7 @@ async def set_bridge(session_id: str, idea_id: str, req: BridgeRequest):
     if idea is None:
         raise HTTPException(404, "Idea not found")
     idea.bridge = req.text.strip()
+    note(session, "user", "bridge", f"{idea.card.name}\n{idea.bridge}", detail={"idea": idea.card.name})
     return {"id": idea.id, "name": idea.card.name, "bridge": idea.bridge}
 
 
@@ -490,10 +597,35 @@ async def finish_session(session_id: str, req: FinishRequest | None = None):
         session.final_confidence = req.final_confidence
         session.abandonment = req.abandonment.strip()
         session.review_date = req.review_date.strip()
+    asked = stamp()
     summary, bridges = await summarize_session(session)
+    answered = stamp()
+    if session.flow == "decide":
+        if session.lang == "en":
+            close = (
+                f"Stance: {session.final_stance}\n"
+                f"Confidence: {session.final_confidence}\n"
+                f"What would make them let go: {session.abandonment}\n"
+                f"Look again: {session.review_date}"
+            )
+        else:
+            close = (
+                f"Postura: {session.final_stance}\n"
+                f"Confianza: {session.final_confidence}\n"
+                f"Para soltarla: {session.abandonment}\n"
+                f"Volver a mirarla: {session.review_date}"
+            )
+        note(session, "user", "close", close, at=asked, detail={
+            "final_stance": session.final_stance,
+            "final_confidence": session.final_confidence,
+            "abandonment": session.abandonment,
+            "review_date": session.review_date,
+        })
+    note(session, "model", "narrative", summary, at=answered, detail={"bridges": bridges})
     return {
         "summary": summary,
         "bridges": bridges,
+        "record": record_document(session, stamp()),
         "session": session.model_dump(by_alias=True),
     }
 

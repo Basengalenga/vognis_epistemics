@@ -755,6 +755,39 @@ input[type="range"] { width: 100%; accent-color: var(--gold); }
 .label-row.center { justify-content: center; }
 .label-row label, .label-row .instruction { margin-bottom: 0; }
 
+.voice-field {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.45rem;
+}
+.voice-field textarea,
+.voice-field input[type="text"] {
+  flex: 1;
+  width: auto;
+  min-width: 0;
+}
+.btn-mic {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 0.15rem;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 1px solid rgba(26, 58, 143, 0.35);
+  color: var(--blue);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.btn-mic svg { width: 14px; height: 14px; display: block; }
+.btn-mic svg path:first-child { fill: currentColor; }
+.btn-mic.listening {
+  background: var(--crimson);
+  border-color: var(--crimson);
+  color: #fafafa;
+}
+
 .help-q {
   width: 16px;
   height: 16px;

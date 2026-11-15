@@ -192,6 +192,7 @@ function renderDeepen(panel, node) {
   input.placeholder = t("attributePh");
   input.value = node.pendingAttribute || "";
   input.addEventListener("input", () => { node.pendingAttribute = input.value; });
+  if (typeof attachVoice === "function") attachVoice(input);
   panel.querySelector(".deep-ask").textContent = t("askDistant");
   panel.querySelector(".attach-label").textContent = t("attachHow");
   panel.querySelector('option[value="branch"]').textContent = t("branch");
@@ -265,6 +266,7 @@ function renderDevelop(panel, node) {
     panel.querySelector(".bridge-input").placeholder = t("bridgePh");
     panel.querySelector(".bridge-save").textContent = t("saveBridge");
     panel.querySelector(".bridge-save").onclick = () => saveBridge(node, panel);
+    if (typeof attachVoice === "function") attachVoice(panel.querySelector(".bridge-input"));
     return;
   }
   panel.innerHTML = `
@@ -287,6 +289,7 @@ function renderDevelop(panel, node) {
       </div>
     </div>`;
   const input = panel.querySelector(".dev-input");
+  if (typeof attachVoice === "function") attachVoice(input);
   const composer = panel.querySelector(".chat-composer");
   const modes = panel.querySelector(".modality-buttons");
   const paintMode = (mode) => {

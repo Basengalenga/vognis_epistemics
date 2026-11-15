@@ -513,6 +513,7 @@ function renderDecideOptions() {
     field.value = text;
     field.placeholder = t("optionPh");
     field.addEventListener("input", () => { decideOptions[index] = field.value; });
+    if (typeof attachVoice === "function") attachVoice(field);
     row.appendChild(radio);
     row.appendChild(field);
     if (decideOptions.length > 2) {
@@ -729,7 +730,7 @@ async function finishSession() {
     const data = await api("POST", "/session/" + sessionId + "/finish", body);
     const stamp = new Date().toISOString().slice(0, 10);
     rememberHistory(data.summary || "");
-    downloadFile("vognis-sesion-" + stamp + ".json", JSON.stringify(data.session, null, 2), "application/json");
+    downloadFile("vognis-sesion-" + stamp + ".json", JSON.stringify(data.record, null, 2), "application/json");
     downloadFile("vognis-resumen-" + stamp + ".md", sessionMarkdown(data), "text/markdown");
     downloadMap(stamp);
     document.getElementById("closing-summary").textContent = data.summary || "";

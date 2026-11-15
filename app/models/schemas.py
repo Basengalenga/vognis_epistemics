@@ -103,10 +103,21 @@ class IdeaNode(BaseModel):
 
 # --- Session / Workflow ---
 
+class SessionEntry(BaseModel):
+    """One thing somebody wrote. author is usuario/user or modelo/model."""
+    at: str
+    author: str
+    kind: str
+    text: str = ""
+    detail: dict[str, Any] = Field(default_factory=dict)
+
+
 class Session(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     lang: Literal["es", "en"] = "es"
     flow: Literal["create", "decide"] = "create"
+    started_at: str = ""
+    record: list[SessionEntry] = Field(default_factory=list)
     current_node: int = 1
     problem: str = ""
     summary: str = ""
