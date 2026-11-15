@@ -7,6 +7,7 @@ from fastapi import APIRouter, HTTPException
 
 from app.agents.core_agent import (
     branch_names,
+    crux_block,
     extract_keywords,
     gamechanger_block,
     generate_concept_bank,
@@ -25,6 +26,7 @@ from app.models.schemas import (
     GraphNode,
     IdeaNode,
     BridgeRequest,
+    FinishRequest,
     KoanRequest,
     NodeType,
     Node1Request,
@@ -60,19 +62,43 @@ def _drop_descendants(session: Session, parent_id: str | None) -> None:
         del session.ideas[idea_id]
 
 
+def _clean_options(options: list[str]) -> list[str]:
+    return [item.strip() for item in options if item and item.strip()]
+
+
+def _aim_context(session: Session, text: str) -> str:
+    if session.flow == "decide":
+        return crux_block(text, session.options, session.stance)
+    return gamechanger_block(text)
+
+
 # --- Node 1: Initialization & Vector Priming ---
 
 @router.post("/node1", response_model=SessionResponse)
 async def node1_initialize(req: Node1Request):
     """Create a new session. Extract keywords and prime the vector space."""
+    options = _clean_options(req.options)
+    stance = (req.stance or "").strip()
+    if req.flow == "decide":
+        if len(options) < 2 or len(options) > 4:
+            raise HTTPException(400, "A decision needs 2 to 4 options")
+        if stance not in options:
+            raise HTTPException(400, "Mark the option you lean toward")
+        if req.confidence < 1:
+            raise HTTPException(400, "Mark your confidence")
+
     keywords = await extract_keywords(
         req.problem, req.expertise_level, req.interest_themes, req.lang
     )
 
     session = Session(
         lang=req.lang,
+        flow=req.flow,
         problem=req.problem,
         keywords=keywords,
+        options=options,
+        stance=stance,
+        confidence_start=req.confidence if req.flow == "decide" else 0,
         intent=req.intent_hint,
     )
 
@@ -98,6 +124,9 @@ async def node1_initialize(req: Node1Request):
             "keywords": keywords,
             "expertise": req.expertise_level,
             "themes": req.interest_themes,
+            "flow": session.flow,
+            "options": session.options,
+            "stance": session.stance,
         },
     )
 
@@ -171,6 +200,9 @@ async def node3_concept_bank(
         mode=mode,
         previous=avoided,
         origin=origin,
+        flow=session.flow,
+        options=session.options,
+        stance=session.stance,
     )
     cards = [ConceptCard(**card) for card in raw_cards]
     session.concept_cards = cards
@@ -227,8 +259,9 @@ async def node3_select(req: Node3Request):
         agent_scores = await score_concept_entity(
             concept=concept,
             entity=entity_text,
-            context=f"Keywords: {', '.join(session.keywords)}.\n{gamechanger_block(req.critical_attribute)}",
+            context=f"Keywords: {', '.join(session.keywords)}.\n{_aim_context(session, req.critical_attribute)}",
             lang=session.lang,
+            flow=session.flow,
         )
         score_result = compute_scores(agent_scores)
         all_scores.append({"entity": entity, "scores": score_result.model_dump()})
@@ -351,7 +384,10 @@ async def node4_develop(req: Node4Request):
             "attribute": focus.attribute,
             "path": path,
             "bridge": focus.bridge,
+            "options": session.options,
+            "stance": session.stance,
         },
+        flow=session.flow,
     )
     intro = reply.get("intro") or ""
     cards = reply.get("cards") or []
@@ -375,8 +411,12 @@ async def node4_develop(req: Node4Request):
         agent_scores = await score_concept_entity(
             concept=session.problem,
             entity=f"{focus.card.name}: {focus.card.seed}",
-            context=f"Path: {' > '.join(path)}. Latest: {plain[:200]}",
+            context=(
+                f"Path: {' > '.join(path)}. Latest: {plain[:200]}\n"
+                f"{_aim_context(session, focus.attribute)}"
+            ),
             lang=session.lang,
+            flow=session.flow,
         )
         scores = compute_scores(agent_scores)
         focus.scores = scores
@@ -412,6 +452,9 @@ async def session_koan(session_id: str, req: KoanRequest):
         problem=session.problem,
         idea_name=idea.card.name if idea else None,
         attribute=idea.attribute if idea else session.critical_attribute,
+        flow=session.flow,
+        options=session.options,
+        stance=session.stance,
     )
     return {"question": question}
 
@@ -428,9 +471,25 @@ async def set_bridge(session_id: str, idea_id: str, req: BridgeRequest):
 
 
 @router.post("/session/{session_id}/finish")
-async def finish_session(session_id: str):
+async def finish_session(session_id: str, req: FinishRequest | None = None):
     """Narrative summary plus the full session, for a local download."""
     session = _get_session(session_id)
+    if session.flow == "decide" and req is None:
+        raise HTTPException(400, "A decision close needs the stance, the confidence, and a date")
+    if session.flow == "decide" and req is not None:
+        final = (req.final_stance or "").strip()
+        if final and final not in session.options:
+            raise HTTPException(400, "The final stance has to be one of the options")
+        if req.final_confidence < 1:
+            raise HTTPException(400, "Mark your confidence")
+        if len((req.abandonment or "").strip()) < 8:
+            raise HTTPException(400, "Write what you would have to see to let the stance go")
+        if not (req.review_date or "").strip():
+            raise HTTPException(400, "Choose a date to look again")
+        session.final_stance = final
+        session.final_confidence = req.final_confidence
+        session.abandonment = req.abandonment.strip()
+        session.review_date = req.review_date.strip()
     summary, bridges = await summarize_session(session)
     return {
         "summary": summary,

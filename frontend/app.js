@@ -2,6 +2,13 @@ const API = "http://localhost:8000/api/v1";
 const HISTORY_KEY = "vognis-history";
 let sessionId = null;
 let selectedIntent = "creativity";
+let flow = "create";
+let decideOptions = ["", ""];
+let decideStance = -1;
+let decideConfidence = 0;
+let decideFinalStance = -1;
+let decideFinalConfidence = 0;
+let decideClosing = false;
 let graphData = null;
 let rootSpread = null;
 let feedbackEntry = null;
@@ -61,6 +68,18 @@ function freezeCluster(n) {
 
   if (n === 1) {
     map.appendChild(claimNode(document.getElementById("problem").value, "user"));
+    if (flow === "decide") {
+      const row = document.createElement("div");
+      row.className = "diamond-row";
+      decideOptions.forEach((text, index) => {
+        const written = text.trim();
+        if (!written) return;
+        const claim = claimNode(written, "user");
+        if (index === decideStance) claim.classList.add("is-stance");
+        row.appendChild(claim);
+      });
+      if (row.childElementCount) map.appendChild(row);
+    }
   }
 
   if (n === 2) {
@@ -138,15 +157,29 @@ async function submitNode1() {
   const themes = document.getElementById("themes").value
     .split(",").map(item => item.trim()).filter(Boolean);
 
+  const payload = {
+    problem,
+    expertise_level: document.getElementById("expertise").value,
+    interest_themes: themes,
+    intent_hint: document.getElementById("intent-hint").value,
+    lang,
+    flow,
+  };
+  if (flow === "decide") {
+    readDecideOptions();
+    const written = decideOptions.map(item => item.trim()).filter(item => item.length >= 2);
+    if (written.length < 2) return alert(t("needOptions"));
+    if (decideStance < 0 || !decideOptions[decideStance] || decideOptions[decideStance].trim().length < 2) return alert(t("needStance"));
+    if (!decideConfidence) return alert(t("needConfidence"));
+    payload.options = decideOptions.map(item => item.trim()).filter(Boolean).slice(0, 4);
+    payload.stance = decideOptions[decideStance].trim();
+    payload.confidence = decideConfidence;
+    payload.interest_themes = [];
+  }
+
   showLoading(t("loadingKeywords"));
   try {
-    const data = await api("POST", "/node1", {
-      problem,
-      expertise_level: document.getElementById("expertise").value,
-      interest_themes: themes,
-      intent_hint: document.getElementById("intent-hint").value,
-      lang,
-    });
+    const data = await api("POST", "/node1", payload);
 
     sessionId = data.session_id;
     document.getElementById("session-id-display").textContent = t("session") + " " + sessionId.slice(0, 8);
@@ -415,6 +448,186 @@ function snoozeFeedback() {
   hide("yesterday");
 }
 
+function confidenceWords() {
+  return [t("c1"), t("c2"), t("c3"), t("c4"), t("c5")];
+}
+
+function paintScale(container, name, current, onPick) {
+  if (!container) return;
+  container.innerHTML = "";
+  confidenceWords().forEach((label, index) => {
+    const value = index + 1;
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = name;
+    input.id = name + "-" + value;
+    input.value = String(value);
+    input.checked = current === value;
+    const lab = document.createElement("label");
+    lab.htmlFor = input.id;
+    lab.textContent = label;
+    if (current === value) lab.classList.add("active");
+    input.addEventListener("change", () => onPick(value));
+    container.appendChild(input);
+    container.appendChild(lab);
+  });
+}
+
+function paintDecideConfidence() {
+  paintScale(document.getElementById("decide-confidence"), "decide-confidence", decideConfidence, value => {
+    decideConfidence = value;
+    paintDecideConfidence();
+  });
+}
+
+function readDecideOptions() {
+  const list = document.getElementById("decide-option-list");
+  if (!list) return;
+  const fields = [...list.querySelectorAll("input[type='text']")];
+  if (!fields.length) return;
+  decideOptions = fields.map(field => field.value);
+  const stance = list.querySelector("input[type='radio']:checked");
+  if (stance) decideStance = Number(stance.value);
+}
+
+function renderDecideOptions() {
+  const list = document.getElementById("decide-option-list");
+  if (!list) return;
+  list.innerHTML = "";
+  decideOptions.forEach((text, index) => {
+    const row = document.createElement("div");
+    row.className = "decide-option" + (index === decideStance ? " is-stance" : "");
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = "decide-stance";
+    radio.value = String(index);
+    radio.checked = index === decideStance;
+    radio.title = t("stance");
+    radio.addEventListener("change", () => {
+      readDecideOptions();
+      decideStance = index;
+      renderDecideOptions();
+    });
+    const field = document.createElement("input");
+    field.type = "text";
+    field.value = text;
+    field.placeholder = t("optionPh");
+    field.addEventListener("input", () => { decideOptions[index] = field.value; });
+    row.appendChild(radio);
+    row.appendChild(field);
+    if (decideOptions.length > 2) {
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "btn-ghost";
+      remove.textContent = t("remove");
+      remove.addEventListener("click", () => {
+        readDecideOptions();
+        decideOptions.splice(index, 1);
+        if (decideStance === index) decideStance = -1;
+        else if (decideStance > index) decideStance -= 1;
+        renderDecideOptions();
+      });
+      row.appendChild(remove);
+    }
+    list.appendChild(row);
+  });
+  const add = document.getElementById("decide-add-option");
+  if (add) add.classList.toggle("hidden", decideOptions.length >= 4);
+  paintDecideConfidence();
+}
+
+function startDecide() {
+  flow = "decide";
+  document.body.classList.add("flow-decide");
+  decideOptions = ["", ""];
+  decideStance = -1;
+  decideConfidence = 0;
+  decideFinalStance = -1;
+  decideFinalConfidence = 0;
+  decideClosing = false;
+  startCreate();
+  renderDecideOptions();
+  if (typeof applyI18n === "function") applyI18n();
+}
+
+function todayStamp() {
+  const now = new Date();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return now.getFullYear() + "-" + month + "-" + day;
+}
+
+function paintFinalStances() {
+  const box = document.getElementById("decide-final-stances");
+  if (!box) return;
+  box.innerHTML = "";
+  decideOptions.forEach((text, index) => {
+    const written = text.trim();
+    if (written.length < 2) return;
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = "decide-final-stance";
+    input.id = "decide-final-" + index;
+    input.value = String(index);
+    input.checked = decideFinalStance === index;
+    const lab = document.createElement("label");
+    lab.htmlFor = input.id;
+    lab.textContent = written;
+    if (decideFinalStance === index) lab.classList.add("active");
+    input.addEventListener("change", () => {
+      decideFinalStance = index;
+      paintFinalStances();
+      const after = document.getElementById("decide-after");
+      if (after) after.textContent = written + " · " + (decideFinalConfidence || "");
+    });
+    box.appendChild(input);
+    box.appendChild(lab);
+  });
+}
+
+function paintFinalConfidence() {
+  paintScale(document.getElementById("decide-final-confidence"), "decide-final-confidence", decideFinalConfidence, value => {
+    decideFinalConfidence = value;
+    paintFinalConfidence();
+    const after = document.getElementById("decide-after");
+    const stance = decideOptions[decideFinalStance];
+    if (after) after.textContent = ((stance || "").trim()) + " · " + value;
+  });
+}
+
+function showDecideClose() {
+  readDecideOptions();
+  const before = document.getElementById("decide-before");
+  if (before) before.textContent = ((decideOptions[decideStance] || "").trim()) + " · " + decideConfidence;
+  const after = document.getElementById("decide-after");
+  if (after) after.textContent = "";
+  paintFinalStances();
+  paintFinalConfidence();
+  hide("workspace");
+  document.getElementById("trail").classList.add("hidden");
+  show("closing");
+  decideClosing = true;
+}
+
+function decideCloseError() {
+  const abandon = document.getElementById("decide-abandon").value.trim();
+  const date = document.getElementById("decide-review").value;
+  if (decideFinalStance < 0 || !decideFinalConfidence) return t("needFinal");
+  if (!(decideOptions[decideFinalStance] || "").trim()) return t("needFinal");
+  if (abandon.length < 8) return t("needAbandon");
+  if (!date || date < todayStamp()) return t("needDate");
+  return "";
+}
+
+function decideCloseBody() {
+  return {
+    final_stance: decideOptions[decideFinalStance].trim(),
+    final_confidence: decideFinalConfidence,
+    abandonment: document.getElementById("decide-abandon").value.trim(),
+    review_date: document.getElementById("decide-review").value,
+  };
+}
+
 function startCreate() {
   document.getElementById("home").classList.add("hidden");
   document.body.classList.add("in-map");
@@ -474,7 +687,14 @@ function downloadMap(stamp) {
 }
 
 function sessionMarkdown(data) {
-  const lines = ["# Vognis", "", data.summary || "", "", "## " + t("bridges")];
+  const lines = ["# Vognis", "", data.summary || ""];
+  if (flow === "decide") {
+    lines.push("", "## " + t("before"), ((decideOptions[decideStance] || "").trim()) + " · " + decideConfidence);
+    lines.push("", "## " + t("after"), ((decideOptions[decideFinalStance] || "").trim()) + " · " + decideFinalConfidence);
+    const abandon = document.getElementById("decide-abandon");
+    if (abandon && abandon.value.trim()) lines.push("", "## " + t("abandon"), abandon.value.trim());
+  }
+  lines.push("", "## " + t("bridges"));
   (data.bridges || []).forEach(bridge => lines.push("- " + bridge));
   lines.push("", "## " + t("problemLabel"), (data.session && data.session.problem) || "");
   ideaSnapshot().forEach(node => {
@@ -492,10 +712,21 @@ function sessionMarkdown(data) {
 }
 
 async function finishSession() {
+  if (flow === "decide" && !decideClosing) {
+    if (!sessionId && !previewMode) return;
+    showDecideClose();
+    return;
+  }
   if (!sessionId) return;
+  let body = null;
+  if (flow === "decide") {
+    const error = decideCloseError();
+    if (error) return alert(error);
+    body = decideCloseBody();
+  }
   showLoading(t("ending"));
   try {
-    const data = await api("POST", "/session/" + sessionId + "/finish");
+    const data = await api("POST", "/session/" + sessionId + "/finish", body);
     const stamp = new Date().toISOString().slice(0, 10);
     rememberHistory(data.summary || "");
     downloadFile("vognis-sesion-" + stamp + ".json", JSON.stringify(data.session, null, 2), "application/json");
@@ -532,25 +763,69 @@ document.addEventListener("DOMContentLoaded", () => {
     constellationFocus(rect.left + rect.width / 2, rect.top + rect.height / 2);
   });
   create.addEventListener("mouseleave", () => constellationFocus(null, null));
-  if (new URLSearchParams(location.search).has("preview")) openPreview();
-  function openPreview() {
+  const previewParams = new URLSearchParams(location.search);
+  if (previewParams.has("preview")) openPreview(previewParams.get("flow") === "decide");
+  const decideOrb = document.getElementById("orb-decide");
+  if (decideOrb) {
+    decideOrb.addEventListener("mouseenter", () => {
+      const rect = decideOrb.getBoundingClientRect();
+      constellationFocus(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    });
+    decideOrb.addEventListener("mouseleave", () => constellationFocus(null, null));
+  }
+  const addOption = document.getElementById("decide-add-option");
+  if (addOption) addOption.addEventListener("click", () => {
+    readDecideOptions();
+    if (decideOptions.length >= 4) return;
+    decideOptions.push("");
+    renderDecideOptions();
+  });
+  const decideFinish = document.getElementById("btn-decide-finish");
+  if (decideFinish) decideFinish.addEventListener("click", () => finishSession());
+  if (typeof onLang === "function") {
+    onLang(() => {
+      if (flow !== "decide") return;
+      readDecideOptions();
+      renderDecideOptions();
+      if (decideClosing) {
+        paintFinalStances();
+        paintFinalConfidence();
+      }
+    });
+  }
+  function openPreview(deciding) {
     previewMode = true;
     document.body.classList.add("preview-mode");
-    startCreate();
+    if (deciding) startDecide();
+    else startCreate();
     const note = document.createElement("p");
     note.className = "preview-note";
     note.dataset.i18n = "previewNote";
     note.textContent = t("previewNote");
     document.getElementById("workspace").prepend(note);
 
-    document.getElementById("problem").value = "Los parques de la ciudad se vuelven inutilizables durante una ola de calor.";
-    document.getElementById("themes").value = "sombra, calor, refugio";
+    if (deciding) {
+      decideOptions = ["Lo dejo este año", "Espero a que cierre el proyecto"];
+      decideStance = 0;
+      decideConfidence = 3;
+      decideFinalStance = 0;
+      decideFinalConfidence = 4;
+      renderDecideOptions();
+    }
+    document.getElementById("problem").value = deciding
+      ? "Si dejo el trabajo este año o espero a que cierre el proyecto."
+      : "Los parques de la ciudad se vuelven inutilizables durante una ola de calor.";
+    document.getElementById("themes").value = deciding ? "" : "sombra, calor, refugio";
     document.getElementById("expertise").value = "intermediate";
     document.getElementById("intent-hint").value = "balance";
-    document.getElementById("detailed-desc").value = "Que el parque siga siendo un lugar para estar cuando el sol pega fuerte. La gente tiene que poder quedarse, no solo cruzarlo.";
-    document.getElementById("node2-summary").textContent = "El parque tiene que seguir siendo un lugar para estar cuando el sol pega fuerte.";
+    document.getElementById("detailed-desc").value = deciding
+      ? "Lo que está en juego es el sueldo de este año. Si no decido, el proyecto sigue y yo sigo en el mismo puesto."
+      : "Que el parque siga siendo un lugar para estar cuando el sol pega fuerte. La gente tiene que poder quedarse, no solo cruzarlo.";
+    document.getElementById("node2-summary").textContent = deciding
+      ? "La decisión es si el año se usa para irse o para cerrar el proyecto."
+      : "El parque tiene que seguir siendo un lugar para estar cuando el sol pega fuerte.";
     const keywords = document.getElementById("node2-keywords");
-    ["sombra", "calor", "refugio", "isla de calor"].forEach(word => {
+    (deciding ? ["sueldo", "proyecto", "tiempo", "salida"] : ["sombra", "calor", "refugio", "isla de calor"]).forEach(word => {
       const tag = document.createElement("span");
       tag.className = "keyword-tag";
       tag.textContent = word;
@@ -560,7 +835,9 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.classList.toggle("active", btn.dataset.intent === "balance");
     });
     selectedIntent = "balance";
-    document.getElementById("critical-attr").value = "Antes, una herida infectada terminaba en amputación; con los antibióticos, se podía tratar.";
+    document.getElementById("critical-attr").value = deciding
+      ? "Que el proyecto cierre en seis meses."
+      : "Antes, una herida infectada terminaba en amputación; con los antibióticos, se podía tratar.";
 
     ["node1", "node2", "node3"].forEach(id => {
       const section = document.getElementById(id);
@@ -571,23 +848,29 @@ document.addEventListener("DOMContentLoaded", () => {
     show("node3b");
     document.getElementById("btn-finish").classList.add("hidden");
 
-    const sampleCards = [
+    const sampleCards = (deciding ? [
+      ["Contratos de opción", "Un plazo fijo para decidir, con un costo si se deja pasar.", "Finanzas"],
+      ["Migración de aves", "La salida ocurre cuando la estación ya cambió, no cuando el ave lo desea.", "Etología"],
+      ["Relevo en el teatro", "El actor que entra no espera a que la obra termine.", "Artes escénicas"],
+      ["Mareas", "El momento de zarpar lo marca el agua, no el calendario del puerto.", "Navegación"],
+      ["Semillas de fuego", "Algunas plantas solo germinan después de que el incendio pasó.", "Ecología"],
+      ["Compases de espera", "En música, el silencio también es una decisión de tiempo.", "Música"],
+    ] : [
       ["Pérgolas bioclimáticas", "Lamas que se cierran cuando el sol ya lastima.", "Arquitectura adaptativa"],
       ["Bosques urbanos de crecimiento rápido", "Sombra que llega antes de que el árbol envejezca.", "Silvicultura"],
       ["Memoria de fase en ceras orgánicas", "Un material que guarda el calor del día y lo suelta de noche.", "Almacenamiento térmico"],
       ["Termorregulación de termitas", "Montículos que mantienen el interior fresco sin máquina.", "Biomimética"],
       ["Tejidos beduinos reflectantes", "Tela que bloquea el sol y deja pasar el aire.", "Tecnología textil"],
       ["Nebulizadores evaporativos", "Una nube fina que baja la temperatura del aire.", "Climatización"],
-    ].map(([name, seed, domain]) => ({ name, seed, domain, description: seed, layer: 2, radar: {} }));
+    ]).map(([name, seed, domain]) => ({ name, seed, domain, description: seed, layer: 2, radar: {} }));
     const spread = createSpread(document.getElementById("root-spread"), {
       parentId: null,
       getAttribute: () => document.getElementById("critical-attr").value,
     });
-    spread.restore(sampleCards, [
-      "Pérgolas bioclimáticas",
-      "Bosques urbanos de crecimiento rápido",
-      "Memoria de fase en ceras orgánicas",
-    ]);
+    const chosenNames = deciding
+      ? ["Contratos de opción", "Migración de aves", "Relevo en el teatro"]
+      : ["Pérgolas bioclimáticas", "Bosques urbanos de crecimiento rápido", "Memoria de fase en ceras orgánicas"];
+    spread.restore(sampleCards, chosenNames);
     document.querySelectorAll(".btn-rotate, .btn-reshuffle, #btn-node1, #btn-node2, #branch-action, [onclick='submitSelection()']").forEach(btn => {
       btn.disabled = true;
     });
@@ -606,28 +889,48 @@ document.addEventListener("DOMContentLoaded", () => {
       scores,
     }));
     mountIdeas(ideas, false);
-    const focus = ideaNodes["Pérgolas bioclimáticas"];
-    focus.bridge = "Las lamas se cierran justo cuando el sol ya lastima el parque.";
+    const focusName = chosenNames[0];
+    const focus = ideaNodes[focusName];
+    focus.bridge = deciding
+      ? "Un contrato de opción muestra que el plazo de seis meses es el supuesto, no la respuesta."
+      : "Las lamas se cierran justo cuando el sol ya lastima el parque.";
     focus.modality = "development";
     focus.developments = [{
-      modality: "learning",
-      user_message: "¿Qué conceptos debería entender para asentar mejor esto?",
-      intro: "Lo que escucho es que quieres entender la idea antes de construirla.",
+      modality: deciding ? "feedback" : "learning",
+      user_message: deciding
+        ? "¿Qué tan bien se sostiene mi razonamiento?"
+        : "¿Qué conceptos debería entender para asentar mejor esto?",
+      intro: deciding
+        ? "Lo que escucho es que quieres ver si el plazo de seis meses sostiene la decisión, no cuál opción ganar."
+        : "Lo que escucho es que quieres entender la idea antes de construirla.",
       cards: [{
         kind: "question",
         title: "Supuesto",
-        body: "¿Qué estás dando por hecho al decir que la sombra tiene que moverse?",
-        concepts: ["Pérgolas bioclimáticas"],
+        body: deciding
+          ? "¿Qué contarías como prueba de que el proyecto no cierra en seis meses?"
+          : "¿Qué estás dando por hecho al decir que la sombra tiene que moverse?",
+        concepts: [focusName],
       }],
     }];
-    openMode["Pérgolas bioclimáticas"] = "develop";
+    openMode[focusName] = "develop";
     renderTree();
 
-    document.getElementById("closing-summary").textContent = "La sombra dejó de ser un extra y pasó a ser la manera de que el parque siga habitable. El puente de las lamas conecta esa idea con el calor del mediodía.";
+    document.getElementById("closing-summary").textContent = deciding
+      ? "El supuesto de los seis meses quedó a la vista. La postura no se movió, y nadie eligió por la persona."
+      : "La sombra dejó de ser un extra y pasó a ser la manera de que el parque siga habitable. El puente de las lamas conecta esa idea con el calor del mediodía.";
     const bridges = document.getElementById("closing-bridges");
     bridges.innerHTML = "";
     const item = document.createElement("li");
-    item.textContent = "Las lamas se cierran justo cuando el sol ya lastima el parque.";
+    item.textContent = focus.bridge;
+    if (deciding) {
+      document.getElementById("decide-before").textContent = "Lo dejo este año · 3";
+      document.getElementById("decide-after").textContent = "Lo dejo este año · 4";
+      document.getElementById("decide-abandon").value = "Si en la revisión el proyecto ya tiene fecha de cierre dentro de seis meses.";
+      document.getElementById("decide-review").value = todayStamp();
+      paintFinalStances();
+      paintFinalConfidence();
+      document.getElementById("btn-decide-finish").disabled = true;
+    }
     bridges.appendChild(item);
     show("closing");
     setTimeout(() => window.scrollTo(0, 0), 120);

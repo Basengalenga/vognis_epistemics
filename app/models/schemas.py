@@ -106,9 +106,17 @@ class IdeaNode(BaseModel):
 class Session(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     lang: Literal["es", "en"] = "es"
+    flow: Literal["create", "decide"] = "create"
     current_node: int = 1
     problem: str = ""
     summary: str = ""
+    options: list[str] = []
+    stance: str = ""
+    confidence_start: int = Field(0, ge=0, le=5)
+    final_stance: str = ""
+    final_confidence: int = Field(0, ge=0, le=5)
+    abandonment: str = ""
+    review_date: str = ""
     intent: Intent | None = None
     keywords: list[str] = []
     concept_cards: list[ConceptCard] = []
@@ -134,6 +142,10 @@ class Node1Request(BaseModel):
     interest_themes: list[str] = Field(default_factory=list)
     intent_hint: Intent = Intent.BALANCE
     lang: Literal["es", "en"] = "es"
+    flow: Literal["create", "decide"] = "create"
+    options: list[str] = []
+    stance: str = ""
+    confidence: int = Field(0, ge=0, le=5)
 
 
 class Node2Request(BaseModel):
@@ -167,6 +179,13 @@ class Node4Request(BaseModel):
 class KoanRequest(BaseModel):
     step: str = ""
     idea_id: str | None = None
+
+
+class FinishRequest(BaseModel):
+    final_stance: str = ""
+    final_confidence: int = Field(0, ge=0, le=5)
+    abandonment: str = ""
+    review_date: str = ""
 
 
 class SessionResponse(BaseModel):

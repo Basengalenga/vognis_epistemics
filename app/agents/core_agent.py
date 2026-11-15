@@ -155,6 +155,26 @@ def gamechanger_block(text: str) -> str:
     )
 
 
+def crux_block(text: str, options: list[str] | None = None, stance: str = "") -> str:
+    """The decision's load-bearing assumption. The model must not pick an option."""
+    written = (text or "").strip() or "none"
+    listed = ", ".join(item for item in (options or []) if str(item).strip()) or "none"
+    lean = (stance or "").strip() or "none"
+    return (
+        f"Crux: {written}\n"
+        "The crux is the assumption that, if it fell, would bring the decision down.\n"
+        f"Options: {listed}\n"
+        f"The person currently leans toward: {lean}\n"
+        "Never say which option to choose."
+    )
+
+
+def _aim_block(flow: str, text: str, options: list[str] | None = None, stance: str = "") -> str:
+    if flow == "decide":
+        return crux_block(text, options, stance)
+    return gamechanger_block(text)
+
+
 async def generate_concept_bank(
     problem: str,
     keywords: list[str],
@@ -163,13 +183,18 @@ async def generate_concept_bank(
     mode: str = "new",
     previous: list[str] | None = None,
     origin: str = "",
+    flow: str = "create",
+    options: list[str] | None = None,
+    stance: str = "",
 ) -> list[dict]:
     """Node 3: 12 epistemic cards, four per connection layer."""
     avoided = ", ".join(previous or []) or "none"
     origin_block = origin.strip() or "Start from the problem itself."
+    deciding = flow == "decide"
+    aim_name = "crux" if deciding else "gamechanger"
     if mode == "rotate":
         angle = (
-            "Keep the same base ingredients (the keywords and the gamechanger) "
+            f"Keep the same base ingredients (the keywords and the {aim_name}) "
             "but change the angle of alienation. Same ingredients, a new recipe. "
             "Do not repeat any name from the previous spread."
         )
@@ -177,19 +202,39 @@ async def generate_concept_bank(
         angle = (
             "Generate a completely different spread. Do not repeat names from earlier spreads."
         )
+    if deciding:
+        role = (
+            "You are a creative serendipity engine. Generate exactly 12 concept cards "
+            "from distant domains. Each card is a perspective that tests the crux. "
+            "None of them recommends an option.\n"
+        )
+        aim = (
+            "Every card should put the crux under pressure from another field. "
+            "Cards in layer 3 may do that by changing how the decision is seen. "
+            "Do not name a winning option.\n"
+        )
+        because = "say how it tests the crux"
+    else:
+        role = (
+            "You are a creative serendipity engine. Generate exactly 12 concept cards "
+            "from distant domains that could connect with the problem.\n"
+        )
+        aim = (
+            "Every card should be a possible path toward the gamechanger. "
+            "Cards in layer 3 may get there by changing how the problem is seen.\n"
+        )
+        because = "say how it moves toward the gamechanger"
     text = await _ask(
         [{
             "role": "user",
             "content": (
                 f"{lang_line(lang)}\n"
-                f"You are a creative serendipity engine. Generate exactly 12 concept cards "
-                f"from distant domains that could connect with the problem.\n"
+                f"{role}"
                 f"{angle}\n\n"
                 f"Problem: {problem}\n"
                 f"Keywords: {', '.join(keywords)}\n"
-                f"{gamechanger_block(critical_attribute)}\n"
-                f"Every card should be a possible path toward the gamechanger. "
-                f"Cards in layer 3 may get there by changing how the problem is seen.\n"
+                f"{_aim_block(flow, critical_attribute, options, stance)}\n"
+                f"{aim}"
                 f"{origin_block}\n"
                 f"Names to avoid: {avoided}\n\n"
                 f"Four cards per layer:\n"
@@ -199,7 +244,7 @@ async def generate_concept_bank(
                 f"description (two short sentences), wiki_title (a real Wikipedia article title), "
                 f"origin_keyword (one of the keywords), reasoning "
                 f"(one sentence: this idea appeared because you connected X with Y; "
-                f"the shared pattern is Z; say how it moves toward the gamechanger), "
+                f"the shared pattern is Z; {because}), "
                 f"layer (1, 2, or 3), and radar with numbers from 0 to 1 for abstraction, "
                 f"connectivity, novelty, applicability, epistemic_confidence, conceptual_distance.\n"
                 f"Respond ONLY with a JSON array of 12 objects."
@@ -259,8 +304,34 @@ MODALITY_INSTRUCTIONS = {
     ),
 }
 
+MODALITY_INSTRUCTIONS_DECIDE = {
+    "learning": (
+        "The user is in LEARNING mode. You are a Socratic coach. "
+        "Do not propose which option to choose, and do not propose solutions. "
+        "Reflect back what the user said in one sentence, using their words. "
+        "Then ask 1 to 3 open questions about the assumption, anchored in the user's bridge and the crux. "
+        "Do not judge whether the decision is right."
+    ),
+    "development": (
+        "The user is in DEVELOPMENT mode. You are a Socratic coach. "
+        "Do not tell the user what to choose. "
+        "Reflect back what the user said in one sentence, using their words. "
+        "Then ask 1 to 3 questions about how they would check the assumption before deciding: "
+        "the smallest check, what must be true, and how they would know. "
+        "If they say they are stuck, give one hint, not an answer."
+    ),
+    "feedback": (
+        "The user is in FEEDBACK mode. "
+        "Give your honest view of how well the reasoning holds and what weakens the crux. "
+        "Do not say which option to choose. "
+        "No generic praise. Hold your point unless the user brings a new argument. "
+        "End with one question that asks the user to defend or revise."
+    ),
+}
 
-def _reply_shape(modality: str) -> str:
+
+def _reply_shape(modality: str, flow: str = "create") -> str:
+    hold = " Never say which option to choose." if flow == "decide" else ""
     if modality in ("learning", "development"):
         return (
             'Reply ONLY with JSON: {"intro": "one sentence reflecting the user\'s words, not a proposal", '
@@ -270,13 +341,16 @@ def _reply_shape(modality: str) -> str:
             "A help card is allowed only when the user says they are stuck, and its body is one hint, not an answer. "
             "Do not give a solution, a list of ideas, or a step. "
             "How demanding you are changes how hard the questions are, never whether you answer them."
+            + hold
         )
+    view = "your honest view of the reasoning in one sentence, not a recommended option" if flow == "decide" else "your honest view in one sentence"
     return (
-        'Reply ONLY with JSON: {"intro": "your honest view in one sentence", '
+        'Reply ONLY with JSON: {"intro": "' + view + '", '
         '"cards": [{"kind": "recommendation|help|question|risk|step", "title": "short title", '
         '"body": "at most 40 words", "concepts": ["concept name"]}]}. '
         "Return 2 to 5 cards. The last card must be a question that asks the user to defend or revise. "
         "No generic praise. How demanding you are changes how hard the critique is."
+        + hold
     )
 
 
@@ -284,11 +358,16 @@ def _focus_text(focus: dict | None) -> str:
     if not focus:
         return "No idea is in focus."
     path = " › ".join(focus.get("path") or [])
+    flow = focus.get("flow") or "create"
+    if flow == "decide":
+        reached = "This is the assumption the idea in focus is meant to test."
+    else:
+        reached = "This is the gamechanger the idea in focus is meant to reach."
     return (
         f"Idea in focus: {focus.get('name')}\n"
         f"Seed: {focus.get('seed')}\n"
-        f"{gamechanger_block(focus.get('attribute') or '')}\n"
-        f"This is the gamechanger the idea in focus is meant to reach.\n"
+        f"{_aim_block(flow, focus.get('attribute') or '', focus.get('options'), focus.get('stance') or '')}\n"
+        f"{reached}\n"
         f"Path from the problem: {path or focus.get('name')}\n"
         f"The user's own bridge, which you must develop and not replace: {focus.get('bridge') or 'none'}"
     )
@@ -342,8 +421,13 @@ async def node4_respond(
     user_message: str,
     lang: str = "es",
     focus: dict | None = None,
+    flow: str = "create",
 ) -> dict:
     """Node 4: short intro plus cards about the idea in focus."""
+    if focus is not None:
+        focus = {**focus, "flow": flow}
+    instructions = MODALITY_INSTRUCTIONS_DECIDE if flow == "decide" else MODALITY_INSTRUCTIONS
+    hold = "Never say which option to choose.\n" if flow == "decide" else ""
     system = (
         f"{lang_line(lang)}\n"
         f"You are Vognis, a creative AI workspace assistant.\n\n"
@@ -351,10 +435,11 @@ async def node4_respond(
         f"Summary: {summary}\n"
         f"Core keywords: {', '.join(keywords)}\n"
         f"Selected concepts: {', '.join(entities)}\n\n"
-        f"{MODALITY_INSTRUCTIONS[modality]}\n"
+        f"{instructions[modality]}\n"
+        f"{hold}"
         f"{CONFIDENCE_TONES[confidence]}\n\n"
         f"{_focus_text(focus)}\n\n"
-        f"{_reply_shape(modality)} "
+        f"{_reply_shape(modality, flow)} "
         f"Each card must name one or more of the selected concepts. "
         f"Do not write a long paragraph."
     )
@@ -371,14 +456,15 @@ async def node4_respond(
     return {"intro": text, "cards": []}
 
 
-def _ancestor_path(ideas: dict, node) -> str:
+def _ancestor_path(ideas: dict, node, flow: str = "create") -> str:
+    label = "crux" if flow == "decide" else "gamechanger"
     chain = []
     current = node
     seen = set()
     while current is not None and current.id not in seen:
         seen.add(current.id)
         if current.attribute:
-            chain.append(f"{current.card.name} (gamechanger: {current.attribute})")
+            chain.append(f"{current.card.name} ({label}: {current.attribute})")
         else:
             chain.append(current.card.name)
         current = ideas.get(current.parent_id) if current.parent_id else None
@@ -418,9 +504,10 @@ def _tree_lines(session) -> str:
     ideas = session.ideas or {}
     if not ideas:
         return "none"
+    flow = getattr(session, "flow", "create") or "create"
     lines = []
     for node in ideas.values():
-        line = _ancestor_path(ideas, node)
+        line = _ancestor_path(ideas, node, flow)
         if node.bridge:
             line += f" — puente: {node.bridge}"
         lines.append(line)
@@ -436,21 +523,26 @@ async def generate_koan(
     problem: str,
     idea_name: str | None = None,
     attribute: str = "",
+    flow: str = "create",
+    options: list[str] | None = None,
+    stance: str = "",
 ) -> str:
     """One paradoxical question. No advice and no answer."""
     focus = idea_name or "the problem the person just wrote"
+    hold = " Do not say which option to choose." if flow == "decide" else ""
     text = await _ask(
         [{
             "role": "user",
             "content": (
                 f"{lang_line(lang)}\n"
                 f"Write one short paradoxical question, in the spirit of a Zen koan. "
-                f"It should loosen a fixed way of seeing, without giving advice, a method, or an answer. "
+                f"It should loosen a fixed way of seeing, without giving advice, a method, or an answer."
+                f"{hold} "
                 f"One sentence only. No preamble.\n\n"
                 f"Step: {step or 'unspecified'}\n"
                 f"Problem: {problem}\n"
                 f"Idea in view: {focus}\n"
-                f"{gamechanger_block(attribute)}"
+                f"{_aim_block(flow, attribute, options, stance)}"
             ),
         }],
         max_tokens=120,
@@ -463,19 +555,40 @@ async def generate_koan(
 
 async def summarize_session(session) -> tuple[str, list[str]]:
     """Narrative of how the ideas were connected, plus the key bridges."""
+    flow = getattr(session, "flow", "create") or "create"
+    if flow == "decide":
+        task = (
+            "Write a short narrative of which assumption was tested and what moved "
+            "in the person's stance. Do not say which option they should choose. "
+            "Then list the key bridges.\n\n"
+            f"Decision: {session.problem}\n"
+            f"Options: {', '.join(session.options)}\n"
+            f"Leaned toward at the start: {session.stance or 'none'} "
+            f"(confidence {session.confidence_start})\n"
+            f"At the close: {session.final_stance or 'none'} "
+            f"(confidence {session.final_confidence})\n"
+            f"What would make them let go: {session.abandonment or 'none'}\n"
+            f"Review date: {session.review_date or 'none'}\n"
+        )
+        tree_label = "crux"
+    else:
+        task = (
+            "Write a short narrative of how this person connected their ideas, "
+            "and whether those branches approached the gamechanger, "
+            "then list the key bridges.\n\n"
+            f"Problem: {session.problem}\n"
+        )
+        tree_label = "gamechanger"
     text = await _ask(
         [{
             "role": "user",
             "content": (
                 f"{lang_line(session.lang)}\n"
-                f"Write a short narrative of how this person connected their ideas, "
-                f"and whether those branches approached the gamechanger, "
-                f"then list the key bridges.\n\n"
-                f"Problem: {session.problem}\n"
+                f"{task}"
                 f"Summary: {session.summary}\n"
                 f"Keywords: {', '.join(session.keywords)}\n"
-                f"{gamechanger_block(session.critical_attribute)}\n"
-                f"Idea tree (path, gamechanger, developments):\n{_tree_lines(session)}\n\n"
+                f"{_aim_block(flow, session.critical_attribute, getattr(session, 'options', None), getattr(session, 'stance', '') or '')}\n"
+                f"Idea tree (path, {tree_label}, developments):\n{_tree_lines(session)}\n\n"
                 f'Respond ONLY with JSON: {{"summary": "one paragraph", "bridges": ["bridge 1"]}}'
             ),
         }],

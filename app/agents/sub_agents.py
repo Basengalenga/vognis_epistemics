@@ -50,6 +50,27 @@ AGENT_PROMPTS: dict[str, str] = {
     ),
 }
 
+DECIDE_PROMPTS = {
+    "vs": (
+        "You are the Functional Analogy Agent. Score whether a real precedent exists "
+        "of testing an assumption like this crux in another field. "
+        "0 = no such precedent, 1 = a clear proven test of the same kind exists. "
+        "Do not say which option to choose."
+    ),
+    "mp": (
+        "You are the Impact Projection Agent. Score how far this perspective would move "
+        "the decision if the crux fell. "
+        "0 = it barely touches the assumption, 1 = if this holds, the decision would have to be reconsidered. "
+        "Do not say which option to choose."
+    ),
+}
+
+
+def _agent_prompt(agent_key: str, flow: str) -> str:
+    if flow == "decide" and agent_key in DECIDE_PROMPTS:
+        return DECIDE_PROMPTS[agent_key]
+    return AGENT_PROMPTS[agent_key]
+
 
 async def _score_single(
     agent_key: str,
@@ -57,11 +78,12 @@ async def _score_single(
     entity: str,
     context: str,
     lang: str = "es",
+    flow: str = "create",
 ) -> tuple[str, float]:
     """Ask one sub-agent to score a concept-entity pair."""
     prompt = (
         f"{lang_line(lang)}\n"
-        f"{AGENT_PROMPTS[agent_key]}\n\n"
+        f"{_agent_prompt(agent_key, flow)}\n\n"
         f"Base Concept: {concept}\n"
         f"Proposed Entity: {entity}\n"
         f"Context: {context}\n\n"
@@ -95,10 +117,11 @@ async def score_concept_entity(
     entity: str,
     context: str = "",
     lang: str = "es",
+    flow: str = "create",
 ) -> AgentScores:
     """Run all 6 sub-agents in parallel and return aggregated scores."""
     tasks = [
-        _score_single(key, concept, entity, context, lang)
+        _score_single(key, concept, entity, context, lang, flow)
         for key in AGENT_PROMPTS
     ]
     results = await asyncio.gather(*tasks)
