@@ -543,7 +543,9 @@ function applyI18n() {
 }
 
 function setLang(next) {
+  const before = lang;
   lang = next === "en" ? "en" : "es";
+  if (typeof track === "function" && before !== lang) track("lang_change", { from: before, to: lang });
   localStorage.setItem("vognis-lang", lang);
   applyI18n();
 }

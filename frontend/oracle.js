@@ -52,7 +52,7 @@ async function fetchKoan() {
   return localKoan();
 }
 
-async function openOracle() {
+async function openOracle(trigger) {
   const box = document.getElementById("oracle");
   const invoke = document.getElementById("oracle-invoke");
   if (!box) return;
@@ -60,11 +60,20 @@ async function openOracle() {
   if (invoke) invoke.classList.add("hidden");
   const question = document.getElementById("oracle-q");
   question.textContent = "…";
-  question.textContent = await fetchKoan();
+  const text = await fetchKoan();
+  question.textContent = text;
+  if (typeof track === "function") track("koan_shown", {
+    text,
+    source: oracleSource,
+    step: currentStepKey(),
+    idea_id: typeof activeIdeaId === "function" ? activeIdeaId() : null,
+    trigger: trigger || "invoked",
+  }, { author: trigger === "idle" ? "client" : "user" });
 }
 
 function closeOracle() {
   const box = document.getElementById("oracle");
+  if (box && !box.classList.contains("hidden")) if (typeof track === "function") track("koan_close", { text: (document.getElementById("oracle-q") || {}).textContent || "" });
   if (box) box.classList.add("hidden");
   const invoke = document.getElementById("oracle-invoke");
   if (invoke && document.body.classList.contains("in-map")) invoke.classList.remove("hidden");
@@ -86,7 +95,7 @@ function onIdle() {
   const step = currentStepKey();
   if (!step || seenSteps.has(step)) return;
   seenSteps.add(step);
-  openOracle();
+  openOracle("idle");
 }
 
 function oracleEnter() {
@@ -112,13 +121,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const another = document.getElementById("oracle-another");
   const close = document.getElementById("oracle-close");
   const invoke = document.getElementById("oracle-invoke");
-  if (another) another.onclick = () => openOracle();
+  if (another) another.onclick = () => openOracle("another");
   if (close) close.onclick = closeOracle;
   if (invoke) {
     invoke.onclick = () => {
       const step = currentStepKey();
       if (step) seenSteps.add(step);
-      openOracle();
+      openOracle("invoked");
     };
   }
   armIdle();
@@ -129,6 +138,8 @@ onLang(() => {
   const invoke = document.getElementById("oracle-invoke");
   if (invoke) invoke.setAttribute("aria-label", t("oracleInvoke"));
   if (box && !box.classList.contains("hidden") && oracleSource === "local") {
-    document.getElementById("oracle-q").textContent = localKoan();
+    const text = localKoan();
+    document.getElementById("oracle-q").textContent = text;
+    if (typeof track === "function") track("koan_shown", { text, source: "local", step: currentStepKey(), trigger: "lang" }, { author: "client" });
   }
 });

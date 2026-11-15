@@ -91,6 +91,7 @@ function startCooldown(spreadRoot) {
     fill.style.width = "0%";
   });
   clearTimeout(cooldownTimer);
+  if (typeof track === "function") track("cooldown_start", { seconds: 12 }, { author: "client" });
   cooldownTimer = setTimeout(() => {
     cooldownTimer = null;
     bar.classList.add("hidden");
@@ -176,8 +177,12 @@ function createSpread(container, options) {
 
   function toggle(name) {
     if (chosen.has(name)) chosen.delete(name);
-    else if (chosen.size >= 5) return alert(t("needSelection"));
+    else if (chosen.size >= 5) {
+      if (typeof track === "function") track("card_toggle_refused", { name, parent_id: parentId, chosen: [...chosen] });
+      return alert(t("needSelection"));
+    }
     else chosen.add(name);
+    if (typeof track === "function") track("card_toggle", { name, picked: chosen.has(name), parent_id: parentId, chosen: [...chosen] });
     noteCardInteraction();
     render();
     persist();
@@ -195,6 +200,8 @@ function createSpread(container, options) {
     try {
       let path = `/node3/concept-bank?session_id=${sessionId}&critical_attribute=${encodeURIComponent(attr)}&mode=${mode || "new"}`;
       if (parentId) path += `&parent_id=${encodeURIComponent(parentId)}`;
+      const source = opts.attributeField && typeof sourceOf === "function" ? sourceOf(opts.attributeField()) : "";
+      if (source) path += `&input_source=${encodeURIComponent(source)}`;
       const data = await api("POST", path);
       const wait = Math.max(0, 2400 - (Date.now() - started));
       await new Promise(resolve => setTimeout(resolve, wait));
@@ -204,6 +211,7 @@ function createSpread(container, options) {
       keep.forEach(name => chosen.add(name));
       render();
       persist();
+      if (typeof track === "function") track("spread_shown", { mode: mode || "new", parent_id: parentId, names: cards.map(card => card.name), kept: [...chosen] }, { author: "client" });
       return true;
     } catch (e) {
       if (!e.offline) alert(t("error") + ": " + e.message);
@@ -232,6 +240,7 @@ function createSpread(container, options) {
     else idleRefreshes += 1;
     interacted = false;
     root.querySelector(".nudge").classList.toggle("hidden", idleRefreshes < 3);
+    if (typeof track === "function") track("spread_refresh", { mode, parent_id: parentId, tokens_left: refreshTokens, idle_refreshes: idleRefreshes, nudge_shown: idleRefreshes >= 3 });
     renderRefreshCount();
     load(mode);
   }
@@ -239,6 +248,7 @@ function createSpread(container, options) {
   root.querySelector(".btn-rotate").onclick = () => refresh("rotate");
   root.querySelector(".btn-reshuffle").onclick = () => refresh("new");
   root.querySelector(".nudge-back").onclick = () => {
+    if (typeof track === "function") track("nudge_back", { parent_id: parentId });
     root.querySelector(".nudge").classList.add("hidden");
     if (opts.onBack) opts.onBack();
   };
@@ -297,7 +307,10 @@ async function fillWiki(card) {
   more.textContent = t("searchWiki");
   try {
     const res = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`);
-    if (!res.ok || zoomCard !== card) return;
+    if (!res.ok || zoomCard !== card) {
+      if (!res.ok) if (typeof track === "function") track("wiki_missing", { name: card.name, title, status: res.status }, { author: "client" });
+      return;
+    }
     const data = await res.json();
     if (!card.description && data.extract) desc.textContent = data.extract;
     if (data.thumbnail && data.thumbnail.source) {
@@ -307,6 +320,14 @@ async function fillWiki(card) {
     }
     more.href = (data.content_urls && data.content_urls.desktop && data.content_urls.desktop.page) || search;
     more.textContent = t("readMore");
+    if (typeof track === "function") track("wiki_shown", {
+      name: card.name,
+      title: data.title || title,
+      extract: data.extract || "",
+      extract_shown: !card.description && !!data.extract,
+      image: (data.thumbnail && data.thumbnail.source) || "",
+      url: more.href,
+    }, { author: "client" });
   } catch (err) { /* the search link stays */ }
 }
 
@@ -331,6 +352,7 @@ function placeZoomStats() {
 
 function openCardZoom(card, origin, spreadApi) {
   noteCardInteraction();
+  if (typeof track === "function") track("card_zoom_open", { name: card.name, parent_id: spreadApi ? spreadApi.parentId : null });
   zoomCard = card;
   zoomSpread = spreadApi;
   const layer = document.getElementById("card-zoom");
@@ -361,6 +383,7 @@ function openCardZoom(card, origin, spreadApi) {
 function closeCardZoom() {
   const layer = document.getElementById("card-zoom");
   if (!layer || layer.classList.contains("hidden")) return;
+  if (typeof track === "function") track("card_zoom_close", { name: zoomCard ? zoomCard.name : "" });
   layer.classList.add("hidden");
   layer.querySelector(".zoom-card").classList.remove("flipped");
   zoomCard = null;
@@ -427,7 +450,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   document.getElementById("zoom-close").onclick = closeCardZoom;
   document.getElementById("zoom-flip").onclick = () => {
-    layer.querySelector(".zoom-card").classList.toggle("flipped");
+    const flipped = layer.querySelector(".zoom-card").classList.toggle("flipped");
+    if (typeof track === "function") track("card_flip", { name: zoomCard ? zoomCard.name : "", back: flipped });
   };
   document.getElementById("zoom-pick").onclick = () => {
     if (zoomCard && zoomSpread) zoomSpread.toggle(zoomCard.name);

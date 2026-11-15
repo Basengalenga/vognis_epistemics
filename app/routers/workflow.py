@@ -17,9 +17,15 @@ from app.agents.core_agent import (
     summarize_session,
     synthesize_summary,
 )
+import uuid
+
+from app.agents.core_agent import MODEL
 from app.agents.sub_agents import score_concept_entity
+from app.engine import trace
 from app.engine.record import (
+    append_line,
     cards_text,
+    has_log,
     label,
     note,
     record_document,
@@ -40,6 +46,7 @@ from app.models.schemas import (
     GraphNode,
     IdeaNode,
     BridgeRequest,
+    EventsRequest,
     FinishRequest,
     KoanRequest,
     NodeType,
@@ -60,10 +67,17 @@ _sessions: dict[str, Session] = {}
 def _get_session(session_id: str) -> Session:
     if session_id not in _sessions:
         raise HTTPException(404, f"Session {session_id} not found")
-    return _sessions[session_id]
+    session = _sessions[session_id]
+    trace.bind(session)
+    return session
 
 
-def _drop_descendants(session: Session, parent_id: str | None) -> None:
+def _source(input_source: dict[str, str], key: str) -> dict:
+    value = (input_source or {}).get(key)
+    return {"input_source": value} if value else {}
+
+
+def _drop_descendants(session: Session, parent_id: str | None) -> list[dict]:
     doomed = {idea_id for idea_id, idea in session.ideas.items() if idea.parent_id == parent_id}
     growing = True
     while growing:
@@ -72,8 +86,12 @@ def _drop_descendants(session: Session, parent_id: str | None) -> None:
             if idea_id not in doomed and idea.parent_id in doomed:
                 doomed.add(idea_id)
                 growing = True
+    dropped = []
     for idea_id in doomed:
+        idea = session.ideas[idea_id]
+        dropped.append({"idea_id": idea_id, "name": idea.card.name, "parent_id": idea.parent_id})
         del session.ideas[idea_id]
+    return dropped
 
 
 def _clean_options(options: list[str]) -> list[str]:
@@ -102,34 +120,34 @@ async def node1_initialize(req: Node1Request):
             raise HTTPException(400, "Mark your confidence")
 
     asked = stamp()
-    keywords = await extract_keywords(
-        req.problem, req.expertise_level, req.interest_themes, req.lang
-    )
-    answered = stamp()
-
     session = Session(
         lang=req.lang,
         flow=req.flow,
         started_at=asked,
         problem=req.problem,
-        keywords=keywords,
         options=options,
         stance=stance,
         confidence_start=req.confidence if req.flow == "decide" else 0,
         intent=req.intent_hint,
     )
-    note(session, "user", "problem", req.problem, at=asked)
+    trace.bind(session)
+    note(session, "user", "problem", req.problem, at=asked, detail={"raw": req.problem, **_source(req.input_source, "problem")})
     if req.flow == "decide":
         note(session, "user", "options", "\n".join(f"- {item}" for item in options), at=asked, detail={"items": options})
         note(session, "user", "stance", stance, at=asked)
         note(session, "user", "confidence", str(req.confidence), at=asked)
     else:
-        note(session, "user", "expertise", label(req.lang, _EXPERTISE, req.expertise_level), at=asked)
+        note(session, "user", "expertise", label(req.lang, _EXPERTISE, req.expertise_level), at=asked, detail={"value": req.expertise_level})
         if req.interest_themes:
             themes = [item.strip() for item in req.interest_themes if item and item.strip()]
             if themes:
-                note(session, "user", "themes", ", ".join(themes), at=asked, detail={"items": themes})
-        note(session, "user", "intent", label(req.lang, _INTENT, req.intent_hint.value), at=asked)
+                note(session, "user", "themes", ", ".join(themes), at=asked, detail={"items": themes, **_source(req.input_source, "themes")})
+        note(session, "user", "intent", label(req.lang, _INTENT, req.intent_hint.value), at=asked, detail={"value": req.intent_hint.value})
+    keywords = await extract_keywords(
+        req.problem, req.expertise_level, req.interest_themes, req.lang
+    )
+    answered = stamp()
+    session.keywords = keywords
     note(
         session, "model", "keywords", ", ".join(keywords), at=answered,
         detail={"items": keywords},
@@ -174,15 +192,15 @@ async def node2_reaffirm(req: Node2Request):
         raise HTTPException(400, f"Session is at node {session.current_node}, expected 2")
 
     asked = stamp()
+    note(session, "user", "description", req.detailed_description, at=asked, detail={"raw": req.detailed_description, **_source(req.input_source, "description")})
+    if session.flow != "decide":
+        note(session, "user", "intent", label(session.lang, _INTENT, req.intent.value), at=asked, detail={"value": req.intent.value})
     summary = await synthesize_summary(req.detailed_description, session.keywords, session.lang)
     answered = stamp()
     session.summary = summary
     session.intent = req.intent
     session.problem = req.detailed_description  # Update with richer description
     session.current_node = 3
-    note(session, "user", "description", req.detailed_description, at=asked)
-    if session.flow != "decide":
-        note(session, "user", "intent", label(session.lang, _INTENT, req.intent.value), at=asked)
     note(session, "model", "summary", summary, at=answered)
 
     return SessionResponse(
@@ -205,6 +223,7 @@ async def node3_concept_bank(
     critical_attribute: str,
     mode: str = "new",
     parent_id: str | None = None,
+    input_source: str = "",
 ):
     """Generate 12 epistemic cards. mode is 'new' or 'rotate'."""
     session = _get_session(session_id)
@@ -231,6 +250,26 @@ async def node3_concept_bank(
                 avoided.append(name)
 
     asked = stamp()
+    spread_id = uuid.uuid4().hex[:8]
+    aim_kind = "crux" if session.flow == "decide" else "gamechanger"
+    aim_text = label(session.lang, _SPREAD, mode) + "\n" + critical_attribute.strip()
+    if parent_id and origin:
+        parent_name = session.ideas[parent_id].card.name
+        where = "From: " if session.lang == "en" else "Desde: "
+        aim_text = f"{where}{parent_name}\n{aim_text}"
+    note(
+        session, "user", aim_kind, aim_text, at=asked,
+        detail={
+            "mode": mode,
+            "spread": label(session.lang, _SPREAD, mode),
+            "spread_id": spread_id,
+            "parent_id": parent_id,
+            "parent_name": session.ideas[parent_id].card.name if parent_id and parent_id in session.ideas else None,
+            "raw": critical_attribute,
+            "avoided": list(avoided),
+            **({"input_source": input_source} if input_source else {}),
+        },
+    )
     session.critical_attribute = critical_attribute
     raw_cards = await generate_concept_bank(
         session.problem,
@@ -248,20 +287,11 @@ async def node3_concept_bank(
     cards = [ConceptCard(**card) for card in raw_cards]
     session.concept_cards = cards
     session.concept_bank_history.append([card.name for card in cards])
-    aim_kind = "crux" if session.flow == "decide" else "gamechanger"
-    aim_text = label(session.lang, _SPREAD, mode) + "\n" + critical_attribute.strip()
-    if parent_id and origin:
-        parent_name = session.ideas[parent_id].card.name
-        where = "From: " if session.lang == "en" else "Desde: "
-        aim_text = f"{where}{parent_name}\n{aim_text}"
-    note(
-        session, "user", aim_kind, aim_text, at=asked,
-        detail={"mode": mode, "spread": label(session.lang, _SPREAD, mode), "parent_id": parent_id},
-    )
     dumped = [card.model_dump() for card in cards]
+    logged = [{"card_id": f"{spread_id}-{index + 1}", **card} for index, card in enumerate(dumped)]
     note(
         session, "model", "cards", cards_text(session.lang, dumped), at=answered,
-        detail={"cards": dumped, "mode": mode},
+        detail={"cards": logged, "mode": mode, "spread_id": spread_id, "parent_id": parent_id},
     )
 
     return SessionResponse(
@@ -288,8 +318,9 @@ async def node3_select(req: Node3Request):
         parent = session.ideas.get(req.parent_id)
         if parent is None:
             raise HTTPException(404, "Parent idea not found")
+    dropped = []
     if req.action == "edit":
-        _drop_descendants(session, req.parent_id)
+        dropped = _drop_descendants(session, req.parent_id)
 
     session.critical_attribute = req.critical_attribute
     depth = (parent.depth + 1) if parent else 0
@@ -320,9 +351,16 @@ async def node3_select(req: Node3Request):
             "action": req.action,
             "ideas": list(req.selected_entities),
             "attribute": req.critical_attribute,
+            "raw": req.critical_attribute,
             "parent_id": req.parent_id,
+            "parent_name": parent.card.name if parent else None,
+            "depth": depth,
+            **_source(req.input_source, "attribute"),
         },
     )
+    if dropped:
+        names = "\n".join(f"- {item['name']}" for item in dropped)
+        note(session, "system", "dropped", names, at=asked, detail={"parent_id": req.parent_id, "ideas": dropped})
     for entity in req.selected_entities:
         if entity not in session.selected_entities:
             session.selected_entities.append(entity)
@@ -337,6 +375,7 @@ async def node3_select(req: Node3Request):
             lang=session.lang,
             flow=session.flow,
         )
+        agents = trace.take_agents()
         score_result = compute_scores(agent_scores)
         all_scores.append({"entity": entity, "scores": score_result.model_dump()})
 
@@ -382,7 +421,16 @@ async def node3_select(req: Node3Request):
         session.scores_history.append(score_result)
         note(
             session, "model", "scores", score_text(session.lang, card.name, score_result),
-            detail={"idea": card.name, "scores": score_result.model_dump()},
+            detail={
+                "idea": card.name,
+                "idea_id": node.id,
+                "parent_id": node.parent_id,
+                "depth": node.depth,
+                "card": card.model_dump(),
+                "edge": {"source": anchor_id, "target": entity_node.id, "type": edge_type.value},
+                "scores": score_result.model_dump(),
+                "agents": agents,
+            },
         )
 
     if req.action == "branch":
@@ -447,6 +495,26 @@ async def node4_develop(req: Node4Request):
         if prior:
             history.append({"role": "assistant", "content": prior})
 
+    demand = "How demanding" if session.lang == "en" else "Qué tan exigente"
+    mode_name = label(session.lang, _MODALITY, req.modality.value)
+    note(
+        session, "user", "message",
+        f"{focus.card.name}\n{mode_name} · {demand}: {req.confidence}\n{req.user_message}",
+        at=asked,
+        detail={
+            "raw": req.user_message,
+            "idea_id": focus.id,
+            "parent_id": focus.parent_id,
+            "path": path,
+            "turn": len(focus.developments),
+            **_source(req.input_source, "message"),
+            "idea": focus.card.name,
+            "modality": req.modality.value,
+            "confidence": req.confidence,
+            "add_concepts": list(req.add_concepts),
+            "remove_concepts": list(req.remove_concepts),
+        },
+    )
     reply = await node4_respond(
         problem=session.problem,
         summary=session.summary,
@@ -485,23 +553,17 @@ async def node4_develop(req: Node4Request):
     session.conversation.append({"role": "user", "content": req.user_message})
     session.conversation.append({"role": "assistant", "content": plain})
     session.reply_cards.setdefault(req.modality.value, []).extend(cards)
-    demand = "How demanding" if session.lang == "en" else "Qué tan exigente"
-    mode_name = label(session.lang, _MODALITY, req.modality.value)
-    note(
-        session, "user", "message",
-        f"{focus.card.name}\n{mode_name} · {demand}: {req.confidence}\n{req.user_message}",
-        at=asked,
-        detail={
-            "idea": focus.card.name,
-            "modality": req.modality.value,
-            "confidence": req.confidence,
-            "add_concepts": list(req.add_concepts),
-            "remove_concepts": list(req.remove_concepts),
-        },
-    )
     note(
         session, "model", "reply", reply_text(intro, cards), at=answered,
-        detail={"idea": focus.card.name, "modality": req.modality.value, "intro": intro, "cards": cards},
+        detail={
+            "idea": focus.card.name,
+            "idea_id": focus.id,
+            "turn": len(focus.developments) - 1,
+            "modality": req.modality.value,
+            "intro": intro,
+            "cards": cards,
+            "parsed": reply.get("parsed", True),
+        },
     )
 
     scores = None
@@ -516,12 +578,20 @@ async def node4_develop(req: Node4Request):
             lang=session.lang,
             flow=session.flow,
         )
+        agents = trace.take_agents()
         scores = compute_scores(agent_scores)
         focus.scores = scores
         session.scores_history.append(scores)
         note(
             session, "model", "scores", score_text(session.lang, focus.card.name, scores),
-            detail={"idea": focus.card.name, "scores": scores.model_dump()},
+            detail={
+                "idea": focus.card.name,
+                "idea_id": focus.id,
+                "parent_id": focus.parent_id,
+                "turn": len(focus.developments) - 1,
+                "scores": scores.model_dump(),
+                "agents": agents,
+            },
         )
 
     return SessionResponse(
@@ -560,7 +630,7 @@ async def session_koan(session_id: str, req: KoanRequest):
     )
     note(
         session, "model", "question", question,
-        detail={"step": req.step, "idea": idea.card.name if idea else ""},
+        detail={"step": req.step, "idea": idea.card.name if idea else "", "idea_id": idea.id if idea else None, "source": "api"},
     )
     return {"question": question}
 
@@ -573,8 +643,45 @@ async def set_bridge(session_id: str, idea_id: str, req: BridgeRequest):
     if idea is None:
         raise HTTPException(404, "Idea not found")
     idea.bridge = req.text.strip()
-    note(session, "user", "bridge", f"{idea.card.name}\n{idea.bridge}", detail={"idea": idea.card.name})
+    note(session, "user", "bridge", f"{idea.card.name}\n{idea.bridge}", detail={
+        "idea": idea.card.name,
+        "idea_id": idea.id,
+        "parent_id": idea.parent_id,
+        "raw": idea.bridge,
+        **_source(req.input_source, "bridge"),
+    })
     return {"id": idea.id, "name": idea.card.name, "bridge": idea.bridge}
+
+
+@router.post("/session/{session_id}/events")
+async def session_events(session_id: str, req: EventsRequest):
+    """What happened only in the browser. Logged as it is, it changes nothing."""
+    session = _sessions.get(session_id)
+    count = 0
+    for event in req.events[:500]:
+        try:
+            if session is not None:
+                note(
+                    session, event.author, event.kind, event.text,
+                    detail=event.detail, client_at=event.client_at,
+                )
+            elif has_log(session_id):
+                append_line(session_id, {
+                    "seq": None,
+                    "at": stamp(),
+                    "client_at": event.client_at,
+                    "author_key": event.author,
+                    "kind_key": event.kind,
+                    "text": event.text,
+                    "detail": event.detail,
+                    "late": True,
+                })
+            else:
+                continue
+            count += 1
+        except Exception:
+            pass
+    return {"logged": count}
 
 
 @router.post("/session/{session_id}/finish")
@@ -625,7 +732,7 @@ async def finish_session(session_id: str, req: FinishRequest | None = None):
     return {
         "summary": summary,
         "bridges": bridges,
-        "record": record_document(session, stamp()),
+        "record": record_document(session, stamp(), MODEL),
         "session": session.model_dump(by_alias=True),
     }
 

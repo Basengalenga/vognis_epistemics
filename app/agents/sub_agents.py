@@ -7,13 +7,15 @@ Viability Group:   Analogy(VS), Impact(MP), Anchoring(PCF)
 
 import asyncio
 import json
-from functools import partial
+from contextvars import ContextVar
 
-from app.agents.bedrock_client import invoke_model
+from app.engine import trace
 from app.agents.core_agent import lang_line
 from app.models.schemas import AgentScores
 
 MODEL = "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
+
+_details: ContextVar[dict | None] = ContextVar("vognis_agent_details", default=None)
 
 
 AGENT_PROMPTS: dict[str, str] = {
@@ -90,15 +92,11 @@ async def _score_single(
         "Respond ONLY with a JSON object: {\"score\": <float 0-1>, \"reasoning\": \"<one sentence>\"}"
     )
     try:
-        loop = asyncio.get_event_loop()
-        result = await loop.run_in_executor(
-            None,
-            partial(
-                invoke_model,
-                model=MODEL,
-                max_tokens=150,
-                messages=[{"role": "user", "content": prompt}],
-            ),
+        result = await trace.call(
+            f"score:{agent_key}",
+            model=MODEL,
+            max_tokens=150,
+            messages=[{"role": "user", "content": prompt}],
         )
         text = result["content"][0]["text"].strip()
         if "```" in text:
@@ -107,9 +105,20 @@ async def _score_single(
                 text = text[4:]
         data = json.loads(text)
         score = max(0.0, min(1.0, float(data["score"])))
+        _remember(agent_key, {"score": score, "reasoning": str(data.get("reasoning") or ""), "fallback": False})
         return agent_key, score
-    except Exception:
+    except Exception as exc:
+        _remember(agent_key, {"score": 0.5, "reasoning": "", "fallback": True, "error": f"{type(exc).__name__}: {exc}"[:300]})
         return agent_key, 0.5
+
+
+def _remember(agent_key: str, info: dict) -> None:
+    try:
+        details = _details.get()
+        if details is not None:
+            details[agent_key] = info
+    except Exception:
+        pass
 
 
 async def score_concept_entity(
@@ -120,10 +129,13 @@ async def score_concept_entity(
     flow: str = "create",
 ) -> AgentScores:
     """Run all 6 sub-agents in parallel and return aggregated scores."""
+    details: dict = {}
+    _details.set(details)
     tasks = [
         _score_single(key, concept, entity, context, lang, flow)
         for key in AGENT_PROMPTS
     ]
     results = await asyncio.gather(*tasks)
+    trace.set_agents({key: details.get(key) for key in AGENT_PROMPTS})
     scores_dict = dict(results)
     return AgentScores(**scores_dict)

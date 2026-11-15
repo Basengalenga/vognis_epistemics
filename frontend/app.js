@@ -111,6 +111,7 @@ function goToNode(n) {
   current.classList.add("revealed", "active");
   current.classList.remove("settled");
   document.getElementById("node-indicator").textContent = t("node") + " " + n;
+  if (typeof track === "function") track("node_view", { node: n }, { author: "client" });
   document.getElementById("btn-finish").classList.toggle("hidden", n < 2);
   setTimeout(() => current.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
 }
@@ -134,6 +135,7 @@ async function api(method, path, body) {
     if (err instanceof TypeError) {
       const error = new Error(t("offline"));
       error.offline = true;
+      if (typeof track === "function") track("api_error", { method, path, offline: true }, { author: "client" });
       showNotice(t("offline"));
       throw error;
     }
@@ -145,6 +147,7 @@ async function api(method, path, body) {
       const parsed = JSON.parse(detail);
       if (typeof parsed.detail === "string") detail = parsed.detail;
     } catch (e) { /* keep the raw body */ }
+    if (typeof track === "function") track("api_error", { method, path, status: res.status, detail: String(detail).slice(0, 500) }, { author: "client" });
     throw new Error(detail);
   }
   return res.json();
@@ -164,6 +167,10 @@ async function submitNode1() {
     intent_hint: document.getElementById("intent-hint").value,
     lang,
     flow,
+    input_source: typeof sourceById === "function" ? {
+      problem: sourceById("problem"),
+      themes: sourceById("themes"),
+    } : {},
   };
   if (flow === "decide") {
     readDecideOptions();
@@ -208,6 +215,7 @@ function selectIntent(btn) {
   document.querySelectorAll(".btn-intent").forEach(b => b.classList.remove("active"));
   btn.classList.add("active");
   selectedIntent = btn.dataset.intent;
+  if (typeof track === "function") track("intent_pick", { intent: selectedIntent });
 }
 
 async function submitNode2() {
@@ -220,6 +228,7 @@ async function submitNode2() {
       session_id: sessionId,
       detailed_description: desc,
       intent: selectedIntent,
+      input_source: typeof sourceById === "function" ? { description: sourceById("detailed-desc") } : {},
     });
 
     document.getElementById("node2-summary").textContent = data.message;
@@ -236,6 +245,7 @@ function ensureRootSpread() {
   rootSpread = createSpread(document.getElementById("root-spread"), {
     parentId: null,
     getAttribute: () => document.getElementById("critical-attr").value.trim(),
+    attributeField: () => document.getElementById("critical-attr"),
     onBack: () => {
       hide("node3b");
       show("node3a");
@@ -268,6 +278,7 @@ async function submitSelection() {
       selected_entities: selected.map(card => card.name),
       action,
       parent_id: null,
+      input_source: typeof sourceById === "function" ? { attribute: sourceById("critical-attr") } : {},
     });
 
     const section = document.getElementById("node3");
@@ -437,6 +448,7 @@ function saveFeedback(rating) {
     at: new Date().toISOString(),
   };
   writeHistory(all);
+  if (typeof sendLate === "function") sendLate(entry.id, "next_day_feedback", entry.feedback);
   document.getElementById("yesterday-note").value = "";
   document.getElementById("yesterday-thanks").classList.remove("hidden");
   feedbackEntry = null;
@@ -727,6 +739,10 @@ async function finishSession() {
   }
   showLoading(t("ending"));
   try {
+    if (typeof track === "function") {
+      track("finish", { flow });
+      await flushLogNow();
+    }
     const data = await api("POST", "/session/" + sessionId + "/finish", body);
     const stamp = new Date().toISOString().slice(0, 10);
     rememberHistory(data.summary || "");

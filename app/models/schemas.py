@@ -104,10 +104,14 @@ class IdeaNode(BaseModel):
 # --- Session / Workflow ---
 
 class SessionEntry(BaseModel):
-    """One thing somebody wrote. author is usuario/user or modelo/model."""
+    """One thing somebody wrote or did. author_key is user, model, system or client."""
+    seq: int = 0
     at: str
+    client_at: str = ""
     author: str
+    author_key: str = ""
     kind: str
+    kind_key: str = ""
     text: str = ""
     detail: dict[str, Any] = Field(default_factory=dict)
 
@@ -157,12 +161,14 @@ class Node1Request(BaseModel):
     options: list[str] = []
     stance: str = ""
     confidence: int = Field(0, ge=0, le=5)
+    input_source: dict[str, str] = Field(default_factory=dict)
 
 
 class Node2Request(BaseModel):
     session_id: str
     detailed_description: str = Field(min_length=10)
     intent: Intent
+    input_source: dict[str, str] = Field(default_factory=dict)
 
 
 class Node3Request(BaseModel):
@@ -171,10 +177,12 @@ class Node3Request(BaseModel):
     selected_entities: list[str] = Field(min_length=1, max_length=5)
     action: str = Field("branch", description="branch or edit")
     parent_id: str | None = None
+    input_source: dict[str, str] = Field(default_factory=dict)
 
 
 class BridgeRequest(BaseModel):
     text: str = Field(min_length=8)
+    input_source: dict[str, str] = Field(default_factory=dict)
 
 
 class Node4Request(BaseModel):
@@ -185,6 +193,19 @@ class Node4Request(BaseModel):
     add_concepts: list[str] = []
     remove_concepts: list[str] = []
     focus_id: str
+    input_source: dict[str, str] = Field(default_factory=dict)
+
+
+class ClientEvent(BaseModel):
+    client_at: str = ""
+    kind: str
+    author: Literal["user", "client"] = "user"
+    text: str = ""
+    detail: dict[str, Any] = Field(default_factory=dict)
+
+
+class EventsRequest(BaseModel):
+    events: list[ClientEvent] = Field(default_factory=list)
 
 
 class KoanRequest(BaseModel):

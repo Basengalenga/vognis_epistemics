@@ -3,11 +3,10 @@ Core conversational agent that drives the node workflow.
 Uses Bedrock API for NLP extraction, synthesis, and concept generation.
 """
 
-import asyncio
 import json
-from functools import partial
 
-from app.agents.bedrock_client import BedrockError, invoke_model
+from app.agents.bedrock_client import BedrockError
+from app.engine import trace
 
 MODEL = "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
 
@@ -53,17 +52,13 @@ def _clamp(value, default=0.5) -> float:
         return default
 
 
-async def _ask(messages: list[dict], max_tokens: int, system: str | None = None) -> str:
-    loop = asyncio.get_event_loop()
-    result = await loop.run_in_executor(
-        None,
-        partial(
-            invoke_model,
-            model=MODEL,
-            max_tokens=max_tokens,
-            system=system,
-            messages=messages,
-        ),
+async def _ask(messages: list[dict], max_tokens: int, system: str | None = None, purpose: str = "") -> str:
+    result = await trace.call(
+        purpose or "ask",
+        model=MODEL,
+        max_tokens=max_tokens,
+        system=system,
+        messages=messages,
     )
     return result["content"][0]["text"].strip()
 
@@ -83,6 +78,7 @@ async def extract_keywords(problem: str, expertise: str, themes: list[str], lang
             ),
         }],
         max_tokens=300,
+        purpose="keywords",
     )
     try:
         data = _parse_json(text)
@@ -108,6 +104,7 @@ async def synthesize_summary(problem: str, keywords: list[str], lang: str = "es"
             ),
         }],
         max_tokens=300,
+        purpose="summary",
     )
 
 
@@ -251,6 +248,7 @@ async def generate_concept_bank(
             ),
         }],
         max_tokens=4500,
+        purpose="concept_bank",
     )
     try:
         data = _parse_json(text)
@@ -444,16 +442,16 @@ async def node4_respond(
         f"Do not write a long paragraph."
     )
     messages = conversation + [{"role": "user", "content": user_message}]
-    text = await _ask(messages, max_tokens=800, system=system)
+    text = await _ask(messages, max_tokens=800, system=system, purpose="node4")
     try:
         data = _parse_json(text)
         intro = str(data.get("intro") or "").strip()
         cards = _shape_cards(modality, _cards_from_raw(data.get("cards")))
         if intro or cards:
-            return {"intro": intro, "cards": cards}
+            return {"intro": intro, "cards": cards, "parsed": True}
     except (ValueError, AttributeError, json.JSONDecodeError, TypeError):
         pass
-    return {"intro": text, "cards": []}
+    return {"intro": text, "cards": [], "parsed": False}
 
 
 def _ancestor_path(ideas: dict, node, flow: str = "create") -> str:
@@ -546,6 +544,7 @@ async def generate_koan(
             ),
         }],
         max_tokens=120,
+        purpose="koan",
     )
     line = text.strip().strip('"').split("\n", 1)[0].strip()
     if not line:
@@ -593,6 +592,7 @@ async def summarize_session(session) -> tuple[str, list[str]]:
             ),
         }],
         max_tokens=700,
+        purpose="narrative",
     )
     try:
         data = _parse_json(text)

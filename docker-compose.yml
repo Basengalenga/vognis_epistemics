@@ -7,6 +7,7 @@ services:
       - .env
     volumes:
       - ./app:/app/app
+      - ./sessions:/app/sessions
     restart: unless-stopped
 
   vognis-frontend:

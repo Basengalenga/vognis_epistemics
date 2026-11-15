@@ -96,6 +96,11 @@ function mountIdeas(ideas, replace) {
     };
   });
   const depth = ideas[0].depth || 0;
+  if (typeof track === "function") track("ideas_mounted", {
+    parent_id: parentId,
+    replace: !!replace,
+    ideas: ideas.map(idea => ({ idea_id: idea.id, name: idea.name || (idea.card || {}).name || "" })),
+  }, { author: "client" });
   activeAt[depth] = ideas[0].id;
   Object.keys(activeAt).forEach(key => {
     if (Number(key) > depth) delete activeAt[key];
@@ -107,6 +112,7 @@ function mountIdeas(ideas, replace) {
 }
 
 function selectTab(depth, id) {
+  if (typeof track === "function") track("tab_select", { idea_id: id, depth, name: ideaNodes[id] ? ideaNodes[id].name : "" });
   activeAt[depth] = id;
   Object.keys(activeAt).forEach(key => {
     if (Number(key) > depth) delete activeAt[key];
@@ -201,6 +207,7 @@ function renderDeepen(panel, node) {
   const spread = createSpread(panel.querySelector(".deep-spread"), {
     parentId: node.id,
     getAttribute: () => input.value.trim(),
+    attributeField: () => input,
     onBack: () => input.focus(),
     onCards: (nextCards, chosen) => {
       node.pendingCards = nextCards;
@@ -236,6 +243,7 @@ async function submitChild(node, spread, panel) {
       selected_entities: selected.map(card => card.name),
       action,
       parent_id: node.id,
+      input_source: typeof sourceOf === "function" ? { attribute: sourceOf(panel.querySelector(".deep-attr")) } : {},
     });
     openMode[node.id] = null;
     node.pendingCards = null;
@@ -306,7 +314,10 @@ function renderDevelop(panel, node) {
     btn.dataset.mode = mode;
     btn.className = "btn-mod mode-" + mode + (node.modality === mode ? " active" : "");
     btn.textContent = t(mode);
-    btn.onclick = () => paintMode(mode);
+    btn.onclick = () => {
+      if (typeof track === "function") track("modality_change", { idea_id: node.id, from: node.modality || "learning", to: mode });
+      paintMode(mode);
+    };
     modes.appendChild(btn);
   });
   paintMode(node.modality || "learning");
@@ -321,6 +332,9 @@ function renderDevelop(panel, node) {
     node.confidence = parseInt(range.value, 10);
     confVal.textContent = range.value;
   };
+  range.onchange = () => {
+    if (typeof track === "function") track("confidence_change", { idea_id: node.id, value: node.confidence });
+  };
   const thread = panel.querySelector(".dev-thread");
   (node.developments || []).forEach(dev => appendDevelopment(thread, dev));
   const send = () => sendDevelop(node, panel);
@@ -334,11 +348,16 @@ function renderDevelop(panel, node) {
 }
 
 async function saveBridge(node, panel) {
-  const text = panel.querySelector(".bridge-input").value.trim();
+  const field = panel.querySelector(".bridge-input");
+  const text = field.value.trim();
   if (text.length < 8) return alert(t("needBridge"));
+  const source = typeof sourceOf === "function" ? sourceOf(field) : "";
   showLoading(t("thinking"));
   try {
-    const data = await api("POST", "/session/" + sessionId + "/ideas/" + node.id + "/bridge", { text });
+    const data = await api("POST", "/session/" + sessionId + "/ideas/" + node.id + "/bridge", {
+      text,
+      input_source: source ? { bridge: source } : {},
+    });
     node.bridge = data.bridge || text;
     if (typeof rememberHistory === "function") rememberHistory();
     renderTree();
@@ -353,6 +372,7 @@ async function sendDevelop(node, panel) {
   const input = panel.querySelector(".dev-input");
   const msg = input.value.trim();
   if (!msg) return;
+  const source = typeof takeSource === "function" ? takeSource(input) : "";
   input.value = "";
   showLoading(t("thinking"));
   try {
@@ -362,6 +382,7 @@ async function sendDevelop(node, panel) {
       confidence: node.confidence || 3,
       user_message: msg,
       focus_id: node.id,
+      input_source: source ? { message: source } : {},
     });
     const dev = {
       modality: node.modality,
@@ -421,6 +442,7 @@ function renderCluster(node) {
   deepen.textContent = t("deepen");
   deepen.onclick = () => {
     openMode[node.id] = openMode[node.id] === "deepen" ? null : "deepen";
+    if (typeof track === "function") track("panel_toggle", { idea_id: node.id, panel: "deepen", open: openMode[node.id] === "deepen" });
     renderTree();
   };
   const develop = document.createElement("button");
@@ -429,6 +451,7 @@ function renderCluster(node) {
   develop.textContent = t("develop");
   develop.onclick = () => {
     openMode[node.id] = openMode[node.id] === "develop" ? null : "develop";
+    if (typeof track === "function") track("panel_toggle", { idea_id: node.id, panel: "develop", open: openMode[node.id] === "develop" });
     renderTree();
   };
   actions.append(deepen, develop);
