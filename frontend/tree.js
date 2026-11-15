@@ -114,6 +114,11 @@ function selectTab(depth, id) {
   renderTree();
 }
 
+function askPlaceholder(mode) {
+  const key = { learning: "askLearnPh", development: "askBuildPh", feedback: "askFeedbackPh" }[mode];
+  return t(key || "askPh");
+}
+
 function renderTabs(siblings, activeId, depth) {
   const row = document.createElement("div");
   row.className = "idea-tabs";
@@ -121,7 +126,11 @@ function renderTabs(siblings, activeId, depth) {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "idea-tab" + (node.id === activeId ? " active" : "");
-    btn.textContent = node.name;
+    btn.title = node.name;
+    const label = document.createElement("span");
+    label.className = "idea-tab-label";
+    label.textContent = node.name;
+    btn.appendChild(label);
     btn.onclick = () => selectTab(depth, node.id);
     row.appendChild(btn);
   });
@@ -261,37 +270,43 @@ function renderDevelop(panel, node) {
   panel.innerHTML = `
     <div class="controls-bar">
       <div class="control-group">
-        <div class="label-row">
-          <span class="visually-hidden dev-mod-label"></span>
-          <button type="button" class="help-q" data-help="devHelp">?</button>
-        </div>
-        <div class="modality-buttons"></div>
-      </div>
-      <div class="control-group">
         <label><span class="conf-label"></span>: <span class="conf-val"></span></label>
         <input type="range" min="1" max="5" class="conf-range">
         <div class="conf-labels"><span class="conf-safe"></span><span class="conf-radical"></span></div>
       </div>
     </div>
     <div class="dev-thread"></div>
-    <div class="chat-input-area">
-      <textarea class="dev-input" rows="2"></textarea>
-      <button type="button" class="btn-send" aria-label="Send">&#8595;</button>
+    <div class="chat-composer">
+      <div class="label-row">
+        <div class="modality-buttons"></div>
+        <button type="button" class="help-q" data-help="devHelp">?</button>
+      </div>
+      <div class="chat-input-area">
+        <textarea class="dev-input" rows="2"></textarea>
+        <button type="button" class="btn-send" aria-label="Send">&#8595;</button>
+      </div>
     </div>`;
-  panel.querySelector(".dev-mod-label").textContent = t("modalityHelp");
+  const input = panel.querySelector(".dev-input");
+  const composer = panel.querySelector(".chat-composer");
   const modes = panel.querySelector(".modality-buttons");
+  const paintMode = (mode) => {
+    node.modality = mode;
+    composer.className = "chat-composer mode-" + mode;
+    modes.querySelectorAll(".btn-mod").forEach(other => {
+      other.classList.toggle("active", other.dataset.mode === mode);
+    });
+    input.placeholder = askPlaceholder(mode);
+  };
   ["learning", "development", "feedback"].forEach(mode => {
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "btn-mod" + (node.modality === mode ? " active" : "");
+    btn.dataset.mode = mode;
+    btn.className = "btn-mod mode-" + mode + (node.modality === mode ? " active" : "");
     btn.textContent = t(mode);
-    btn.onclick = () => {
-      node.modality = mode;
-      modes.querySelectorAll(".btn-mod").forEach(other => other.classList.remove("active"));
-      btn.classList.add("active");
-    };
+    btn.onclick = () => paintMode(mode);
     modes.appendChild(btn);
   });
+  paintMode(node.modality || "learning");
   panel.querySelector(".conf-label").textContent = t("confidence");
   panel.querySelector(".conf-safe").textContent = t("safe");
   panel.querySelector(".conf-radical").textContent = t("radical");
@@ -305,8 +320,6 @@ function renderDevelop(panel, node) {
   };
   const thread = panel.querySelector(".dev-thread");
   (node.developments || []).forEach(dev => appendDevelopment(thread, dev));
-  const input = panel.querySelector(".dev-input");
-  input.placeholder = t("askPh");
   const send = () => sendDevelop(node, panel);
   panel.querySelector(".btn-send").onclick = send;
   input.addEventListener("keydown", (event) => {

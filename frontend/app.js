@@ -96,7 +96,13 @@ function goToNode(n) {
   setTimeout(() => current.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
 }
 
+let previewMode = false;
+
 async function api(method, path, body) {
+  if (previewMode) {
+    showNotice(t("previewBlocked"));
+    throw new Error(t("previewBlocked"));
+  }
   const opts = {
     method,
     headers: { "Content-Type": "application/json" },
@@ -526,7 +532,108 @@ document.addEventListener("DOMContentLoaded", () => {
     constellationFocus(rect.left + rect.width / 2, rect.top + rect.height / 2);
   });
   create.addEventListener("mouseleave", () => constellationFocus(null, null));
-  document.addEventListener("click", event => {
+  if (new URLSearchParams(location.search).has("preview")) openPreview();
+  function openPreview() {
+    previewMode = true;
+    document.body.classList.add("preview-mode");
+    startCreate();
+    const note = document.createElement("p");
+    note.className = "preview-note";
+    note.dataset.i18n = "previewNote";
+    note.textContent = t("previewNote");
+    document.getElementById("workspace").prepend(note);
+
+    document.getElementById("problem").value = "Los parques de la ciudad se vuelven inutilizables durante una ola de calor.";
+    document.getElementById("themes").value = "sombra, calor, refugio";
+    document.getElementById("expertise").value = "intermediate";
+    document.getElementById("intent-hint").value = "balance";
+    document.getElementById("detailed-desc").value = "Que el parque siga siendo un lugar para estar cuando el sol pega fuerte. La gente tiene que poder quedarse, no solo cruzarlo.";
+    document.getElementById("node2-summary").textContent = "El parque tiene que seguir siendo un lugar para estar cuando el sol pega fuerte.";
+    const keywords = document.getElementById("node2-keywords");
+    ["sombra", "calor", "refugio", "isla de calor"].forEach(word => {
+      const tag = document.createElement("span");
+      tag.className = "keyword-tag";
+      tag.textContent = word;
+      keywords.appendChild(tag);
+    });
+    document.querySelectorAll(".btn-intent").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.intent === "balance");
+    });
+    selectedIntent = "balance";
+    document.getElementById("critical-attr").value = "Antes, una herida infectada terminaba en amputación; con los antibióticos, se podía tratar.";
+
+    ["node1", "node2", "node3"].forEach(id => {
+      const section = document.getElementById(id);
+      section.classList.add("revealed");
+      section.classList.remove("settled", "active");
+    });
+    hide("node3a");
+    show("node3b");
+    document.getElementById("btn-finish").classList.add("hidden");
+
+    const sampleCards = [
+      ["Pérgolas bioclimáticas", "Lamas que se cierran cuando el sol ya lastima.", "Arquitectura adaptativa"],
+      ["Bosques urbanos de crecimiento rápido", "Sombra que llega antes de que el árbol envejezca.", "Silvicultura"],
+      ["Memoria de fase en ceras orgánicas", "Un material que guarda el calor del día y lo suelta de noche.", "Almacenamiento térmico"],
+      ["Termorregulación de termitas", "Montículos que mantienen el interior fresco sin máquina.", "Biomimética"],
+      ["Tejidos beduinos reflectantes", "Tela que bloquea el sol y deja pasar el aire.", "Tecnología textil"],
+      ["Nebulizadores evaporativos", "Una nube fina que baja la temperatura del aire.", "Climatización"],
+    ].map(([name, seed, domain]) => ({ name, seed, domain, description: seed, layer: 2, radar: {} }));
+    const spread = createSpread(document.getElementById("root-spread"), {
+      parentId: null,
+      getAttribute: () => document.getElementById("critical-attr").value,
+    });
+    spread.restore(sampleCards, [
+      "Pérgolas bioclimáticas",
+      "Bosques urbanos de crecimiento rápido",
+      "Memoria de fase en ceras orgánicas",
+    ]);
+    document.querySelectorAll(".btn-rotate, .btn-reshuffle, #btn-node1, #btn-node2, #branch-action, [onclick='submitSelection()']").forEach(btn => {
+      btn.disabled = true;
+    });
+
+    const scores = {
+      ps: 0.62, ci: 0.74, vi: 0.81, penalty: 1,
+      agent_scores: { dc: 0.55, nc: 0.48, t: 0.7, vs: 0.66, mp: 0.8, pcf: 0.61 },
+    };
+    const ideas = sampleCards.slice(0, 3).map(card => ({
+      id: card.name,
+      name: card.name,
+      seed: card.seed,
+      parent_id: null,
+      depth: 0,
+      attribute: document.getElementById("critical-attr").value,
+      scores,
+    }));
+    mountIdeas(ideas, false);
+    const focus = ideaNodes["Pérgolas bioclimáticas"];
+    focus.bridge = "Las lamas se cierran justo cuando el sol ya lastima el parque.";
+    focus.modality = "development";
+    focus.developments = [{
+      modality: "learning",
+      user_message: "¿Qué conceptos debería entender para asentar mejor esto?",
+      intro: "Lo que escucho es que quieres entender la idea antes de construirla.",
+      cards: [{
+        kind: "question",
+        title: "Supuesto",
+        body: "¿Qué estás dando por hecho al decir que la sombra tiene que moverse?",
+        concepts: ["Pérgolas bioclimáticas"],
+      }],
+    }];
+    openMode["Pérgolas bioclimáticas"] = "develop";
+    renderTree();
+
+    document.getElementById("closing-summary").textContent = "La sombra dejó de ser un extra y pasó a ser la manera de que el parque siga habitable. El puente de las lamas conecta esa idea con el calor del mediodía.";
+    const bridges = document.getElementById("closing-bridges");
+    bridges.innerHTML = "";
+    const item = document.createElement("li");
+    item.textContent = "Las lamas se cierran justo cuando el sol ya lastima el parque.";
+    bridges.appendChild(item);
+    show("closing");
+    setTimeout(() => window.scrollTo(0, 0), 120);
+  }
+
+document.addEventListener("click", event => {
     const button = event.target.closest(".help-q");
     const pop = document.getElementById("help-pop");
     if (!button) {
