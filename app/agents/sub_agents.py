@@ -34,14 +34,14 @@ AGENT_PROMPTS: dict[str, str] = {
         "0 = trivial/obvious, 1 = paradigm-shifting."
     ),
     "vs": (
-        "You are the Functional Analogy Agent. Score how easy it is to find "
-        "proven analogous processes in other domains that satisfy the key attribute. "
-        "0 = no analogical bridge found, 1 = clear proven analogues exist."
+        "You are the Functional Analogy Agent. Score whether real precedents "
+        "of a similar jump exist in another field: a change that resembles the gamechanger. "
+        "0 = no such precedent, 1 = a clear proven jump of the same kind exists."
     ),
     "mp": (
-        "You are the Impact Projection Agent. Score the potential of the new concept "
-        "to generate significant improvement in efficiency, cost, scale, or impact. "
-        "0 = no practical improvement potential, 1 = massive improvement potential."
+        "You are the Impact Projection Agent. Score the size of the before-and-after "
+        "the gamechanger describes, if this concept helped reach it. "
+        "0 = a small improvement, 1 = it changes the game."
     ),
     "pcf": (
         "You are the Anchoring Agent. Score how many functional contact points "

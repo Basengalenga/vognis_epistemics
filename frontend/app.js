@@ -339,6 +339,9 @@ function rememberHistory(summary) {
   if (typeof ideaSnapshot === "function") {
     const names = ideaSnapshot().map(node => node.name).filter(Boolean);
     if (names.length) entry.ideas = names;
+    entry.bridges = ideaSnapshot()
+      .filter(node => node.bridge)
+      .map(node => ({ name: node.name, bridge: node.bridge }));
   }
   if (summary) entry.summary = summary;
   writeHistory(all);
@@ -452,7 +455,7 @@ function downloadMap(stamp) {
   ctx.font = "28px Cinzel, serif";
   ctx.fillText("VOGNIS", 48, 56);
   let y = 110;
-  document.querySelectorAll(".claim-map .claim p, .idea-box h3, .idea-seed").forEach(node => {
+  document.querySelectorAll(".claim-map .claim p, .idea-box h3, .idea-seed, .idea-bridge").forEach(node => {
     ctx.fillStyle = "#0e245c";
     ctx.font = "22px Georgia, serif";
     y = wrapCanvasText(ctx, node.textContent, 48, y, 900, 28);
@@ -472,6 +475,7 @@ function sessionMarkdown(data) {
     lines.push("", "## " + node.path);
     if (node.attribute) lines.push(node.attribute);
     if (node.seed) lines.push(node.seed);
+    if (node.bridge) lines.push(t("bridgePrefix") + node.bridge);
     (node.developments || []).forEach(dev => {
       lines.push("", "- " + (dev.modality || "") + ": " + (dev.user_message || ""));
       if (dev.intro) lines.push("  " + dev.intro);

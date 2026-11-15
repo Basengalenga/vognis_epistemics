@@ -8,6 +8,7 @@ from fastapi import APIRouter, HTTPException
 from app.agents.core_agent import (
     branch_names,
     extract_keywords,
+    gamechanger_block,
     generate_concept_bank,
     generate_koan,
     idea_path_names,
@@ -23,6 +24,7 @@ from app.models.schemas import (
     GraphEdge,
     GraphNode,
     IdeaNode,
+    BridgeRequest,
     KoanRequest,
     NodeType,
     Node1Request,
@@ -225,7 +227,7 @@ async def node3_select(req: Node3Request):
         agent_scores = await score_concept_entity(
             concept=concept,
             entity=entity_text,
-            context=f"Keywords: {', '.join(session.keywords)}. Critical: {req.critical_attribute}",
+            context=f"Keywords: {', '.join(session.keywords)}.\n{gamechanger_block(req.critical_attribute)}",
             lang=session.lang,
         )
         score_result = compute_scores(agent_scores)
@@ -248,6 +250,7 @@ async def node3_select(req: Node3Request):
             "attribute": req.critical_attribute,
             "parent_id": req.parent_id,
             "depth": depth,
+            "bridge": node.bridge,
         })
 
         entity_node = GraphNode(
@@ -305,6 +308,8 @@ async def node4_develop(req: Node4Request):
     focus = session.ideas.get(req.focus_id)
     if focus is None:
         raise HTTPException(404, "Idea not found")
+    if not (focus.bridge or "").strip():
+        raise HTTPException(409, "Primero escribe el puente")
 
     session.modality = req.modality
     session.confidence = req.confidence
@@ -345,6 +350,7 @@ async def node4_develop(req: Node4Request):
             "seed": focus.card.seed,
             "attribute": focus.attribute,
             "path": path,
+            "bridge": focus.bridge,
         },
     )
     intro = reply.get("intro") or ""
@@ -408,6 +414,17 @@ async def session_koan(session_id: str, req: KoanRequest):
         attribute=idea.attribute if idea else session.critical_attribute,
     )
     return {"question": question}
+
+
+@router.post("/session/{session_id}/ideas/{idea_id}/bridge")
+async def set_bridge(session_id: str, idea_id: str, req: BridgeRequest):
+    """The user's own link between an idea and the problem. Required before developing it."""
+    session = _get_session(session_id)
+    idea = session.ideas.get(idea_id)
+    if idea is None:
+        raise HTTPException(404, "Idea not found")
+    idea.bridge = req.text.strip()
+    return {"id": idea.id, "name": idea.card.name, "bridge": idea.bridge}
 
 
 @router.post("/session/{session_id}/finish")

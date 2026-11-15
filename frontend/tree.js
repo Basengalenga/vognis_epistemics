@@ -47,6 +47,7 @@ function ideaSnapshot() {
     path: pathOf(node),
     attribute: node.attribute,
     seed: node.seed,
+    bridge: node.bridge || "",
     developments: node.developments || [],
   }));
 }
@@ -85,6 +86,7 @@ function mountIdeas(ideas, replace) {
       scores: idea.scores || null,
       attribute: idea.attribute || "",
       depth: idea.depth || 0,
+      bridge: idea.bridge || (ideaNodes[idea.id] && ideaNodes[idea.id].bridge) || "",
       developments: ideaNodes[idea.id] ? ideaNodes[idea.id].developments : [],
       modality: "learning",
       confidence: 3,
@@ -240,6 +242,22 @@ async function submitChild(node, spread, panel) {
 function renderDevelop(panel, node) {
   panel.dataset.step = node.id + ":develop";
   panel.classList.add("open");
+  if (!node.bridge) {
+    panel.innerHTML = `
+      <div class="bridge-ask">
+        <div class="label-row">
+          <p class="bridge-q"></p>
+          <button type="button" class="help-q" data-help="bridgeHelp">?</button>
+        </div>
+        <textarea class="bridge-input" rows="2"></textarea>
+        <button type="button" class="btn-primary bridge-save"></button>
+      </div>`;
+    panel.querySelector(".bridge-q").textContent = t("bridgeAsk").replace("{idea}", node.name);
+    panel.querySelector(".bridge-input").placeholder = t("bridgePh");
+    panel.querySelector(".bridge-save").textContent = t("saveBridge");
+    panel.querySelector(".bridge-save").onclick = () => saveBridge(node, panel);
+    return;
+  }
   panel.innerHTML = `
     <div class="controls-bar">
       <div class="control-group">
@@ -299,6 +317,22 @@ function renderDevelop(panel, node) {
   });
 }
 
+async function saveBridge(node, panel) {
+  const text = panel.querySelector(".bridge-input").value.trim();
+  if (text.length < 8) return alert(t("needBridge"));
+  showLoading(t("thinking"));
+  try {
+    const data = await api("POST", "/session/" + sessionId + "/ideas/" + node.id + "/bridge", { text });
+    node.bridge = data.bridge || text;
+    if (typeof rememberHistory === "function") rememberHistory();
+    renderTree();
+  } catch (e) {
+    reportError(e);
+  } finally {
+    hideLoading();
+  }
+}
+
 async function sendDevelop(node, panel) {
   const input = panel.querySelector(".dev-input");
   const msg = input.value.trim();
@@ -354,6 +388,12 @@ function renderCluster(node) {
   seed.className = "idea-seed";
   seed.textContent = node.seed || "";
   box.append(title, seed);
+  if (node.bridge) {
+    const bridge = document.createElement("p");
+    bridge.className = "idea-bridge";
+    bridge.textContent = node.bridge;
+    box.appendChild(bridge);
+  }
   const force = document.createElement("p");
   force.className = "idea-force";
   if (node.scores) force.textContent = t(verdictKey(node.scores.ps, node.scores.ci));

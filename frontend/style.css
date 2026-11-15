@@ -1053,6 +1053,12 @@ input[type="range"] { width: 100%; accent-color: var(--gold); }
 }
 .idea-box h3 { font-family: var(--idea); font-weight: 500; font-size: 2rem; line-height: 1.05; }
 .idea-seed { font-family: var(--idea); font-style: italic; color: #4a4742; }
+.idea-bridge {
+  margin-top: 0.45rem;
+  color: var(--blue);
+  font-family: var(--idea);
+  font-style: italic;
+}
 .idea-force { text-align: center; color: var(--idea-ink); margin: 0.45rem 0; }
 .idea-actions { display: flex; justify-content: center; gap: 0.6rem; margin-bottom: 0.5rem; }
 .idea-scores { max-width: 640px; margin: 0.4rem auto 0.8rem; }

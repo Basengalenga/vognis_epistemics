@@ -96,6 +96,7 @@ class IdeaNode(BaseModel):
     depth: int = 0
     card: ConceptCard
     attribute: str = ""
+    bridge: str = ""
     scores: ScoreResult | None = None
     developments: list[dict[str, Any]] = Field(default_factory=list)
 
@@ -147,6 +148,10 @@ class Node3Request(BaseModel):
     selected_entities: list[str] = Field(min_length=1, max_length=5)
     action: str = Field("branch", description="branch or edit")
     parent_id: str | None = None
+
+
+class BridgeRequest(BaseModel):
+    text: str = Field(min_length=8)
 
 
 class Node4Request(BaseModel):

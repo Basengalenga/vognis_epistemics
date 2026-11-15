@@ -145,6 +145,16 @@ def _card_from_raw(raw: dict, fallback_layer: int) -> dict | None:
     }
 
 
+def gamechanger_block(text: str) -> str:
+    """One definition for every prompt that receives the user's attribute."""
+    written = (text or "").strip() or "none"
+    return (
+        f"Gamechanger: {written}\n"
+        "The gamechanger is the attribute that, once solved, changes the game: "
+        "a clear before and after, not a small improvement."
+    )
+
+
 async def generate_concept_bank(
     problem: str,
     keywords: list[str],
@@ -159,7 +169,7 @@ async def generate_concept_bank(
     origin_block = origin.strip() or "Start from the problem itself."
     if mode == "rotate":
         angle = (
-            "Keep the same base ingredients (the keywords and the critical attribute) "
+            "Keep the same base ingredients (the keywords and the gamechanger) "
             "but change the angle of alienation. Same ingredients, a new recipe. "
             "Do not repeat any name from the previous spread."
         )
@@ -177,7 +187,9 @@ async def generate_concept_bank(
                 f"{angle}\n\n"
                 f"Problem: {problem}\n"
                 f"Keywords: {', '.join(keywords)}\n"
-                f"Critical attribute: {critical_attribute}\n"
+                f"{gamechanger_block(critical_attribute)}\n"
+                f"Every card should be a possible path toward the gamechanger. "
+                f"Cards in layer 3 may get there by changing how the problem is seen.\n"
                 f"{origin_block}\n"
                 f"Names to avoid: {avoided}\n\n"
                 f"Four cards per layer:\n"
@@ -186,7 +198,8 @@ async def generate_concept_bank(
                 f"Each card is an object with: name, domain, seed (one short sentence), "
                 f"description (two short sentences), wiki_title (a real Wikipedia article title), "
                 f"origin_keyword (one of the keywords), reasoning "
-                f"(one sentence: this idea appeared because you connected X with Y; the shared pattern is Z), "
+                f"(one sentence: this idea appeared because you connected X with Y; "
+                f"the shared pattern is Z; say how it moves toward the gamechanger), "
                 f"layer (1, 2, or 3), and radar with numbers from 0 to 1 for abstraction, "
                 f"connectivity, novelty, applicability, epistemic_confidence, conceptual_distance.\n"
                 f"Respond ONLY with a JSON array of 12 objects."
@@ -222,21 +235,49 @@ CONFIDENCE_TONES = {
 
 MODALITY_INSTRUCTIONS = {
     "learning": (
-        "The user is in LEARNING mode: pure exploration. "
-        "Help them understand the connections between concepts freely. "
-        "Do NOT judge viability. Encourage curiosity and wandering."
+        "The user is in LEARNING mode. You are a Socratic coach. "
+        "Do not propose solutions or lists of ideas. "
+        "Reflect back what the user said in one sentence, using their words. "
+        "Then ask 1 to 3 open questions about meaning, assumptions, or patterns elsewhere, "
+        "anchored in the user's bridge and the gamechanger. "
+        "Do not judge whether it works."
     ),
     "development": (
-        "The user is in DEVELOPMENT mode: functional construction. "
-        "Help them build concrete, viable applications of the concepts. "
-        "Push for practical implementation and real-world anchoring."
+        "The user is in DEVELOPMENT mode. You are a Socratic coach. "
+        "Do not tell the user what to build. "
+        "Reflect back what the user said in one sentence, using their words. "
+        "Then ask 1 to 3 questions that move them from the before to the after of the gamechanger: "
+        "the smallest test, what must be true, and how they would know it worked. "
+        "If they say they are stuck, give one hint, not an answer."
     ),
     "feedback": (
-        "The user is in FEEDBACK mode: critical analysis. "
-        "Provide a thorough, honest critique of the current branch. "
-        "Identify weaknesses, blind spots, and improvement opportunities."
+        "The user is in FEEDBACK mode. "
+        "Give your honest view: does this change the game or only improve something, "
+        "and what blocks the gamechanger. "
+        "No generic praise. Hold your point unless the user brings a new argument. "
+        "End with one question that asks the user to defend or revise."
     ),
 }
+
+
+def _reply_shape(modality: str) -> str:
+    if modality in ("learning", "development"):
+        return (
+            'Reply ONLY with JSON: {"intro": "one sentence reflecting the user\'s words, not a proposal", '
+            '"cards": [{"kind": "question", "title": "short title", "body": "one open question", '
+            '"concepts": ["concept name"]}]}. '
+            "Return 1 to 3 cards, and every card is a question. "
+            "A help card is allowed only when the user says they are stuck, and its body is one hint, not an answer. "
+            "Do not give a solution, a list of ideas, or a step. "
+            "How demanding you are changes how hard the questions are, never whether you answer them."
+        )
+    return (
+        'Reply ONLY with JSON: {"intro": "your honest view in one sentence", '
+        '"cards": [{"kind": "recommendation|help|question|risk|step", "title": "short title", '
+        '"body": "at most 40 words", "concepts": ["concept name"]}]}. '
+        "Return 2 to 5 cards. The last card must be a question that asks the user to defend or revise. "
+        "No generic praise. How demanding you are changes how hard the critique is."
+    )
 
 
 def _focus_text(focus: dict | None) -> str:
@@ -246,8 +287,10 @@ def _focus_text(focus: dict | None) -> str:
     return (
         f"Idea in focus: {focus.get('name')}\n"
         f"Seed: {focus.get('seed')}\n"
-        f"Quality the user asked for: {focus.get('attribute')}\n"
-        f"Path from the problem: {path or focus.get('name')}"
+        f"{gamechanger_block(focus.get('attribute') or '')}\n"
+        f"This is the gamechanger the idea in focus is meant to reach.\n"
+        f"Path from the problem: {path or focus.get('name')}\n"
+        f"The user's own bridge, which you must develop and not replace: {focus.get('bridge') or 'none'}"
     )
 
 
@@ -275,6 +318,19 @@ def _cards_from_raw(raw) -> list[dict]:
     return cards[:5]
 
 
+def _shape_cards(modality: str, cards: list[dict]) -> list[dict]:
+    """Keep the coach shape even if the model slips back into giving answers."""
+    if modality not in ("learning", "development"):
+        questions = [card for card in cards if card["kind"] == "question"]
+        others = [card for card in cards if card["kind"] != "question"]
+        return (others + questions)[:5]
+    questions = [card for card in cards if card["kind"] == "question"][:3]
+    hints = [card for card in cards if card["kind"] == "help"][:1]
+    if questions:
+        return (questions + hints)[:3]
+    return hints[:1]
+
+
 async def node4_respond(
     problem: str,
     summary: str,
@@ -298,10 +354,8 @@ async def node4_respond(
         f"{MODALITY_INSTRUCTIONS[modality]}\n"
         f"{CONFIDENCE_TONES[confidence]}\n\n"
         f"{_focus_text(focus)}\n\n"
-        f"Reply ONLY with JSON of this shape: "
-        f'{{"intro": "one sentence", "cards": [{{"kind": "recommendation|help|question|risk|step", '
-        f'"title": "short title", "body": "at most 40 words", "concepts": ["concept name"]}}]}}. '
-        f"Return 2 to 5 cards. Each card must name one or more of the selected concepts. "
+        f"{_reply_shape(modality)} "
+        f"Each card must name one or more of the selected concepts. "
         f"Do not write a long paragraph."
     )
     messages = conversation + [{"role": "user", "content": user_message}]
@@ -309,7 +363,7 @@ async def node4_respond(
     try:
         data = _parse_json(text)
         intro = str(data.get("intro") or "").strip()
-        cards = _cards_from_raw(data.get("cards"))
+        cards = _shape_cards(modality, _cards_from_raw(data.get("cards")))
         if intro or cards:
             return {"intro": intro, "cards": cards}
     except (ValueError, AttributeError, json.JSONDecodeError, TypeError):
@@ -323,7 +377,10 @@ def _ancestor_path(ideas: dict, node) -> str:
     seen = set()
     while current is not None and current.id not in seen:
         seen.add(current.id)
-        chain.append(f"{current.card.name} ({current.attribute})" if current.attribute else current.card.name)
+        if current.attribute:
+            chain.append(f"{current.card.name} (gamechanger: {current.attribute})")
+        else:
+            chain.append(current.card.name)
         current = ideas.get(current.parent_id) if current.parent_id else None
     return " › ".join(reversed(chain))
 
@@ -363,7 +420,10 @@ def _tree_lines(session) -> str:
         return "none"
     lines = []
     for node in ideas.values():
-        lines.append(_ancestor_path(ideas, node))
+        line = _ancestor_path(ideas, node)
+        if node.bridge:
+            line += f" — puente: {node.bridge}"
+        lines.append(line)
         for dev in node.developments or []:
             intro = dev.get("intro") or ""
             lines.append(f"  {dev.get('modality')}: {dev.get('user_message')} -> {intro}")
@@ -390,7 +450,7 @@ async def generate_koan(
                 f"Step: {step or 'unspecified'}\n"
                 f"Problem: {problem}\n"
                 f"Idea in view: {focus}\n"
-                f"Quality they are holding: {attribute or 'none'}"
+                f"{gamechanger_block(attribute)}"
             ),
         }],
         max_tokens=120,
@@ -409,11 +469,13 @@ async def summarize_session(session) -> tuple[str, list[str]]:
             "content": (
                 f"{lang_line(session.lang)}\n"
                 f"Write a short narrative of how this person connected their ideas, "
+                f"and whether those branches approached the gamechanger, "
                 f"then list the key bridges.\n\n"
                 f"Problem: {session.problem}\n"
                 f"Summary: {session.summary}\n"
                 f"Keywords: {', '.join(session.keywords)}\n"
-                f"Idea tree (path, quality, developments):\n{_tree_lines(session)}\n\n"
+                f"{gamechanger_block(session.critical_attribute)}\n"
+                f"Idea tree (path, gamechanger, developments):\n{_tree_lines(session)}\n\n"
                 f'Respond ONLY with JSON: {{"summary": "one paragraph", "bridges": ["bridge 1"]}}'
             ),
         }],
