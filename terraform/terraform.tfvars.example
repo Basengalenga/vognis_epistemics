@@ -1,0 +1,6 @@
+aws_region    = "us-east-1"
+instance_type = "t3.small"
+bedrock_token = "paste-the-bedrock-api-key"
+
+# The machine clones main. If the GitHub repo is private, paste a read token.
+git_token = ""

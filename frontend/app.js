@@ -1,4 +1,4 @@
-const API = "http://localhost:8000/api/v1";
+const API = location.protocol + "//" + location.hostname + ":8000/api/v1";
 const HISTORY_KEY = "vognis-history";
 let sessionId = null;
 let selectedIntent = "creativity";

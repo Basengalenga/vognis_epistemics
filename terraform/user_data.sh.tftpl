@@ -1,0 +1,36 @@
+#!/bin/bash
+set -euxo pipefail
+exec > >(tee /var/log/vognis-boot.log) 2>&1
+
+dnf install -y docker git python3
+systemctl enable --now docker
+
+mkdir -p /usr/local/lib/docker/cli-plugins
+curl -fsSL "https://github.com/docker/compose/releases/download/v2.32.4/docker-compose-linux-x86_64" \
+  -o /usr/local/lib/docker/cli-plugins/docker-compose
+chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+
+if ! swapon --show | grep -q /swapfile; then
+  fallocate -l 2G /swapfile || dd if=/dev/zero of=/swapfile bs=1M count=2048
+  chmod 600 /swapfile
+  mkswap /swapfile
+  swapon /swapfile
+fi
+
+rm -rf /opt/vognis
+set +x
+git clone --depth 1 --branch "${git_ref}" "${git_clone_url}" /opt/vognis
+set -x
+cd /opt/vognis
+
+umask 077
+python3 -c 'from pathlib import Path; Path("/opt/vognis/.env").write_text(${jsonencode(env_file)})'
+
+cat > /opt/vognis/docker-compose.override.yml << 'YAML'
+services:
+  vognis-frontend:
+    ports:
+      - "80:80"
+YAML
+
+docker compose up -d --build

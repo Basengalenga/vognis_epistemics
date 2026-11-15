@@ -28,9 +28,9 @@ function vlogBlocked() {
 
 function vlogApi() {
   try {
-    return typeof API !== "undefined" ? API : "http://localhost:8000/api/v1";
+    return typeof API !== "undefined" ? API : location.protocol + "//" + location.hostname + ":8000/api/v1";
   } catch (e) {
-    return "http://localhost:8000/api/v1";
+    return location.protocol + "//" + location.hostname + ":8000/api/v1";
   }
 }
 
