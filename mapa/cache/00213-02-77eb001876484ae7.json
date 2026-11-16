@@ -1,0 +1,48 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Cada dos semanas todos los jóvenes cambian de rol: mentor se vuelve aprendiz de otro"
+    },
+    {
+      "ref": "n2",
+      "text": "La rotación forzada de roles evita que jóvenes permanezcan en un solo rol de experto o aprendiz"
+    },
+    {
+      "ref": "n3",
+      "text": "Los jóvenes experimentan ser expertos e ignorantes en ciclos cortos mediante rotación de mentorías"
+    },
+    {
+      "ref": "n4",
+      "text": "La rotación de mentorías genera empatía entre jóvenes al experimentar ambos roles"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s34",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

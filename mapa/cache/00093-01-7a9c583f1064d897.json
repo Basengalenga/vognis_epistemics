@@ -1,0 +1,25 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Preguntar a 2-3 jóvenes conocidos qué les gustaría aprender de sus compañeros"
+    },
+    {
+      "ref": "n2",
+      "text": "El bibliotecario pone las primeras 2-3 tarjetas con lo que los jóvenes dijeron"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s79",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s80",
+      "target": "n2",
+      "type": "con"
+    }
+  ]
+}

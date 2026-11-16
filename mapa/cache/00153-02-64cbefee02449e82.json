@@ -1,0 +1,44 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "El facilitador debe intervenir sin ser buscado cuando una tarjeta rompe los tres límites establecidos"
+    },
+    {
+      "ref": "n2",
+      "text": "El facilitador debe intervenir sin ser buscado cuando una tarjeta lleva X días sin respuesta"
+    },
+    {
+      "ref": "n3",
+      "text": "El facilitador debe intervenir sin ser buscado solo cuando un conflicto real escala entre jóvenes"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s140",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s140",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s140",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s114",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s115",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

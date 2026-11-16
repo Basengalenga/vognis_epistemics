@@ -1,0 +1,35 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Es difícil documentar intercambios de habilidades sin que parezca una tarea obligatoria para jóvenes"
+    },
+    {
+      "ref": "n2",
+      "text": "Conectar discretamente a jóvenes con quienes necesitan sus habilidades requiere conocer el resultado del intercambio"
+    }
+  ],
+  "repeats": [
+    "s88",
+    "s96",
+    "s98",
+    "s99"
+  ],
+  "edges": [
+    {
+      "source": "s88",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s98",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "con"
+    }
+  ]
+}

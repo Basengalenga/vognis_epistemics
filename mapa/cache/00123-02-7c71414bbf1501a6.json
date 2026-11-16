@@ -1,0 +1,54 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Los jóvenes deben querer actualizar el tablero de trueque porque les permite presumir sus intercambios"
+    },
+    {
+      "ref": "n2",
+      "text": "Un sistema de reputación en el tablero de trueque motiva a jóvenes a documentar y compartir sus intercambios"
+    },
+    {
+      "ref": "n3",
+      "text": "La reputación acumulada en el tablero de trueque debe beneficiar a jóvenes en futuros intercambios"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s98",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s103",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s79",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s86",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s34",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

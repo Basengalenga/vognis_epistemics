@@ -1,0 +1,53 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "La biblioteca tiene 15 jóvenes regulares como base"
+    },
+    {
+      "ref": "n2",
+      "text": "Convertir el espacio en un lugar que los jóvenes elijan por sí mismos"
+    },
+    {
+      "ref": "n3",
+      "text": "Implementar co-creación de contenido digital con los jóvenes"
+    },
+    {
+      "ref": "n4",
+      "text": "Los jóvenes pueden traer a sus amigos naturalmente si el espacio es atractivo"
+    }
+  ],
+  "repeats": [
+    "s3",
+    "s6",
+    "s14",
+    "s15"
+  ],
+  "edges": [
+    {
+      "source": "s12",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s6",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s13",
+      "target": "n4",
+      "type": "con"
+    }
+  ]
+}

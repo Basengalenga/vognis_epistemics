@@ -1,0 +1,54 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Cada proyecto debe incluir obligatoriamente algo que no puedes hacer solo"
+    },
+    {
+      "ref": "n2",
+      "text": "Los talleres y actividades se diseñan intencionalmente incompletos para forzar intercambio de ayuda"
+    }
+  ],
+  "repeats": [
+    "s237",
+    "s238",
+    "s239",
+    "s240",
+    "s241",
+    "s220",
+    "s221",
+    "s223"
+  ],
+  "edges": [
+    {
+      "source": "s237",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s238",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s240",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s220",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s221",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

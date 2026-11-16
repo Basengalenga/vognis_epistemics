@@ -1,0 +1,57 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Cada objeto creado en la biblioteca pertenece a quien lo usa siguiente, no a su creador original"
+    },
+    {
+      "ref": "n2",
+      "text": "Los objetos creativos deben transformarse antes de pasar a la siguiente persona en la cadena de custodia"
+    },
+    {
+      "ref": "n3",
+      "text": "La biblioteca rastrea las genealogías de transformación de objetos en un mapa visible"
+    },
+    {
+      "ref": "n4",
+      "text": "Las cadenas de custodia creativa generan interdependencia continua entre jóvenes usuarios"
+    }
+  ],
+  "repeats": [
+    "s216",
+    "s217",
+    "s219"
+  ],
+  "edges": [
+    {
+      "source": "s216",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s217",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s219",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "La biblioteca solo ofrece experiencias que requieren algo que ella no tiene"
+    },
+    {
+      "ref": "n2",
+      "text": "Cada actividad necesita un elemento externo que solo los jóvenes pueden traer"
+    },
+    {
+      "ref": "n3",
+      "text": "Los elementos externos pueden ser un lugar, un contacto o un objeto"
+    },
+    {
+      "ref": "n4",
+      "text": "La institución se vuelve intencionalmente dependiente de los jóvenes"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s195",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Usar un hashtag como #truequesbiblio permite que jóvenes documenten voluntariamente sus intercambios en redes sociales"
+    },
+    {
+      "ref": "n2",
+      "text": "El hashtag de trueques es opcional para jóvenes, no obligatorio, para evitar que parezca tarea"
+    },
+    {
+      "ref": "n3",
+      "text": "Jóvenes ya suben historias a Instagram de sus actividades, lo que puede aprovecharse para documentar trueques"
+    },
+    {
+      "ref": "n4",
+      "text": "Es necesario establecer límites claros sobre qué tipo de ofertas son aceptables en el tablero de trueque"
+    },
+    {
+      "ref": "n5",
+      "text": "La biblioteca debe tener un protocolo para intervenir si surge un conflicto entre jóvenes en un intercambio"
+    },
+    {
+      "ref": "n6",
+      "text": "Explicar a directivos que la supervisión mínima en trueques es diferente a dejar que jóvenes hagan lo que quieran sin límites"
+    }
+  ],
+  "repeats": [
+    "s109",
+    "s106"
+  ],
+  "edges": [
+    {
+      "source": "s106",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s103",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s79",
+      "target": "n4",
+      "type": "con"
+    },
+    {
+      "source": "s80",
+      "target": "n4",
+      "type": "con"
+    },
+    {
+      "source": "n4",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s90",
+      "target": "n6",
+      "type": "con"
+    }
+  ]
+}

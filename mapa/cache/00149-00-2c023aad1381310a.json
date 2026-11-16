@@ -1,0 +1,95 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "No permitir ofertas de venta de objetos o servicios por dinero en el tablero de trueque"
+    },
+    {
+      "ref": "n2",
+      "text": "No permitir que jóvenes hagan tareas escolares de otros en el tablero de trueque"
+    },
+    {
+      "ref": "n3",
+      "text": "No permitir intercambios que requieran salir de la biblioteca sin avisar al facilitador"
+    },
+    {
+      "ref": "n4",
+      "text": "Presentar límites del tablero como sección 'cómo funciona esto' sin lenguaje denso"
+    },
+    {
+      "ref": "n5",
+      "text": "Mostrar fotos del tablero con tarjetas como evidencia de impacto para directivos"
+    },
+    {
+      "ref": "n6",
+      "text": "Usar videos de jóvenes explicando qué aprendieron para demostrar impacto a directivos"
+    },
+    {
+      "ref": "n7",
+      "text": "El facilitador debe definir claramente cuándo intervenir en el tablero y cuándo no"
+    }
+  ],
+  "repeats": [
+    "s120",
+    "s121",
+    "s122",
+    "s123",
+    "s124",
+    "s128",
+    "s130",
+    "s131",
+    "s133"
+  ],
+  "edges": [
+    {
+      "source": "s114",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s114",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s114",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s128",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s128",
+      "target": "n6",
+      "type": "pro"
+    },
+    {
+      "source": "s131",
+      "target": "n7",
+      "type": "pro"
+    },
+    {
+      "source": "s132",
+      "target": "n7",
+      "type": "pro"
+    }
+  ]
+}

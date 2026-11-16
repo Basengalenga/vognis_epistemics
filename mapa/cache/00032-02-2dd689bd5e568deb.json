@@ -1,0 +1,53 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Jóvenes forman gremios de 4-6 personas con nombre y emblema"
+    },
+    {
+      "ref": "n2",
+      "text": "Los gremios completan desafíos como leer libros o traer amigos nuevos"
+    },
+    {
+      "ref": "n3",
+      "text": "Completar desafíos desbloquea privilegios como acceso prioritario a computadoras"
+    },
+    {
+      "ref": "n4",
+      "text": "Los gremios pueden elegir la próxima compra de cómics como recompensa"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s3",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s22",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s21",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

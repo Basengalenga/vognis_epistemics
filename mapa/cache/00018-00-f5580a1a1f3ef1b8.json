@@ -1,0 +1,56 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Los talleres de lectura y club de cómic actuales atraen solo a 15 jóvenes regulares"
+    },
+    {
+      "ref": "n2",
+      "text": "La mayoría de asistentes actuales van por obligación escolar o tareas, no por interés genuino"
+    },
+    {
+      "ref": "n3",
+      "text": "Se necesitan actividades realizables con presupuesto muy limitado y recursos existentes"
+    },
+    {
+      "ref": "n4",
+      "text": "Convertir la biblioteca en un espacio social donde jóvenes quieran traer a sus amigos"
+    },
+    {
+      "ref": "n5",
+      "text": "La gamificación y espacios maker pueden no ser viables con recursos actuales limitados"
+    }
+  ],
+  "repeats": [
+    "s2",
+    "s3",
+    "s10"
+  ],
+  "edges": [
+    {
+      "source": "s1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "con"
+    },
+    {
+      "source": "s2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s4",
+      "target": "n5",
+      "type": "con"
+    },
+    {
+      "source": "s9",
+      "target": "n5",
+      "type": "con"
+    }
+  ]
+}

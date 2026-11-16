@@ -1,0 +1,53 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Un tablero de necesidades abiertas permite que jóvenes publiquen problemas reales sin resolver"
+    },
+    {
+      "ref": "n2",
+      "text": "Otros jóvenes pueden responder, crear equipos o proponer soluciones colectivas en el tablero de necesidades"
+    },
+    {
+      "ref": "n3",
+      "text": "El tablero de necesidades abiertas debe ser visible y accesible para que jóvenes lo usen espontáneamente"
+    },
+    {
+      "ref": "n4",
+      "text": "Las necesidades publicadas en el tablero generan oportunidades para que jóvenes colaboren sin intermediarios adultos"
+    }
+  ],
+  "repeats": [
+    "s35",
+    "s36",
+    "s37",
+    "s69"
+  ],
+  "edges": [
+    {
+      "source": "s35",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s36",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s69",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

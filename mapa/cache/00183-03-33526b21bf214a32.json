@@ -1,0 +1,34 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Es necesario establecer un plazo máximo para observar la primera señal de adopción del tablero de trueque"
+    },
+    {
+      "ref": "n2",
+      "text": "La primera señal de adopción puede ser un joven preguntando qué es el tablero de trueque"
+    },
+    {
+      "ref": "n3",
+      "text": "Sin una primera señal de adopción en plazo razonable, el facilitador puede desanimarse o enfrentar cuestionamiento del directivo"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s152",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s179",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s171",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

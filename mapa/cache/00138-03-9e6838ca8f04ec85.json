@@ -1,0 +1,60 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "El facilitador debe poner el espacio y recursos disponibles para que jóvenes actúen"
+    },
+    {
+      "ref": "n2",
+      "text": "El facilitador debe revisar el tablero periódicamente sin intervenir constantemente"
+    },
+    {
+      "ref": "n3",
+      "text": "El facilitador actúa como mediador solo cuando jóvenes lo buscan explícitamente"
+    },
+    {
+      "ref": "n4",
+      "text": "El facilitador debe mantenerse presente sin microgestionar las actividades de jóvenes"
+    },
+    {
+      "ref": "n5",
+      "text": "Es necesario comunicar claramente al directivo cuál es el rol del facilitador en el tablero de trueque"
+    }
+  ],
+  "repeats": [
+    "s66",
+    "s36"
+  ],
+  "edges": [
+    {
+      "source": "s66",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s36",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n4",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

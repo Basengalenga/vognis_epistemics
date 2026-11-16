@@ -1,0 +1,49 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Un joven debe creer que alguien responderá a su oferta en el tablero de trueque"
+    },
+    {
+      "ref": "n2",
+      "text": "Un joven debe confiar en que no será burlado por lo que ofrece en el tablero"
+    },
+    {
+      "ref": "n3",
+      "text": "Un joven debe percibir una ganancia concreta al poner su primera tarjeta en el tablero de trueque"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s76",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s77",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s20",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s10",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s68",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

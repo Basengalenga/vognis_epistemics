@@ -1,0 +1,48 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Cada persona nueva en la biblioteca comienza con tres favores pendientes que debe resolver en el primer mes"
+    },
+    {
+      "ref": "n2",
+      "text": "Invertir la lógica de deuda social: empezar pidiendo favores para luego devolverlos en lugar de acumular antes de pedir"
+    },
+    {
+      "ref": "n3",
+      "text": "Comenzar con cuenta de deuda positiva en lugar de cuenta en cero genera obligación inmediata de participar en intercambios"
+    }
+  ],
+  "repeats": [
+    "s204",
+    "s205",
+    "s206"
+  ],
+  "edges": [
+    {
+      "source": "s204",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s205",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s206",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s204",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

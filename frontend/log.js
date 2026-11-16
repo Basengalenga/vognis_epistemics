@@ -173,10 +173,20 @@ function saveDraft(field, why) {
   } catch (e) { /* ignore */ }
 }
 
+/* Elements marked data-vlog-skip (the audit) are not part of the session, so they are not logged. */
+function vlogSkip(el) {
+  try {
+    return !!(el && el.closest && el.closest("[data-vlog-skip]"));
+  } catch (e) {
+    return false;
+  }
+}
+
 /* Voice fills a field with a synthetic input event, so isTrusted tells typing from dictation. */
 document.addEventListener("input", event => {
   try {
     const field = event.target;
+    if (vlogSkip(field)) return;
     if (!isTextField(field)) return;
     markSource(field, event.isTrusted ? "typed" : "voice");
     clearTimeout(vlogDraftTimers.get(field));
@@ -187,6 +197,7 @@ document.addEventListener("input", event => {
 document.addEventListener("focusout", event => {
   try {
     const field = event.target;
+    if (vlogSkip(field)) return;
     if (!isTextField(field)) return;
     clearTimeout(vlogDraftTimers.get(field));
     saveDraft(field, "blur");
@@ -195,6 +206,7 @@ document.addEventListener("focusout", event => {
 
 document.addEventListener("click", event => {
   try {
+    if (vlogSkip(event.target)) return;
     const target = event.target.closest("button, a, [role=button], .ep-card, .orb, input[type=radio], input[type=checkbox]") || event.target;
     track("click", vlogDescribe(target));
   } catch (e) { /* ignore */ }
@@ -203,6 +215,7 @@ document.addEventListener("click", event => {
 document.addEventListener("change", event => {
   try {
     const el = event.target;
+    if (vlogSkip(el)) return;
     if (isTextField(el)) return;
     const info = vlogDescribe(el);
     info.value = el.type === "checkbox" ? el.checked : el.value;
@@ -212,6 +225,7 @@ document.addEventListener("change", event => {
 
 document.addEventListener("keydown", event => {
   try {
+    if (vlogSkip(event.target)) return;
     if (event.key === "Escape" || (event.key === "Enter" && !event.shiftKey && isTextField(event.target))) {
       track("key", { key: event.key, field: isTextField(event.target) ? fieldKey(event.target) : "" });
     }

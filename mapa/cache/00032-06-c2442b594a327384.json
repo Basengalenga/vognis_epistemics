@@ -1,0 +1,49 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Replicar dinámicas de servidores de Discord en el espacio físico de la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Crear canales físicos con áreas temáticas nombradas por los jóvenes"
+    },
+    {
+      "ref": "n3",
+      "text": "Roles de moderadores rotan semanalmente con permisos específicos"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s19",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s22",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s24",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Pedir ayuda debe ser tan fácil y accesible como ofrecerla en la biblioteca"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s34",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s36",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s207",
+      "target": "n1",
+      "type": "pro"
+    }
+  ]
+}

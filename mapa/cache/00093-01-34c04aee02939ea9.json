@@ -1,0 +1,47 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Preguntar a 2-3 jóvenes conocidos qué les gustaría aprender de sus compañeros para iniciar el tablero"
+    },
+    {
+      "ref": "n2",
+      "text": "Colocar las primeras 2-3 tarjetas en el tablero con respuestas de jóvenes consultados genera momentum inicial"
+    },
+    {
+      "ref": "n3",
+      "text": "Iniciar el tablero de trueque con tarjetas pre-pobladas evita que quede vacío y desaliente participación"
+    }
+  ],
+  "repeats": [
+    "s72",
+    "s74"
+  ],
+  "edges": [
+    {
+      "source": "s71",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s71",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s71",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

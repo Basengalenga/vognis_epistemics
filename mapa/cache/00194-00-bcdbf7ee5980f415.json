@@ -1,0 +1,93 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Preguntar a cada joven si quiere su nombre en la tarjeta es una idea que no se había considerado antes"
+    },
+    {
+      "ref": "n2",
+      "text": "El bibliotecario se aguanta hasta el viernes sin intervenir si nadie pregunta por el tablero el miércoles"
+    },
+    {
+      "ref": "n3",
+      "text": "Si nadie pregunta hasta el viernes, el bibliotecario menciona casualmente el tablero a alguien"
+    },
+    {
+      "ref": "n4",
+      "text": "El plan completo es: lunes hablar con tres jóvenes y preguntar si van con nombre, martes armar todo, miércoles dejarlo listo"
+    },
+    {
+      "ref": "n5",
+      "text": "Una semana es el plazo máximo para ver la primera señal del trueque"
+    },
+    {
+      "ref": "n6",
+      "text": "Si en una semana nadie pela el tablero, el bibliotecario cambia a otra estrategia"
+    },
+    {
+      "ref": "n7",
+      "text": "Se necesita identificar qué puede tronar el trueque en los primeros días que no se haya previsto"
+    }
+  ],
+  "repeats": [
+    "s145",
+    "s146",
+    "s147",
+    "s148",
+    "s149",
+    "s161",
+    "s162",
+    "s163",
+    "s166",
+    "s167",
+    "s168",
+    "s169"
+  ],
+  "edges": [
+    {
+      "source": "s166",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s167",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s167",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s161",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s162",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s163",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s168",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s170",
+      "target": "n6",
+      "type": "pro"
+    },
+    {
+      "source": "s145",
+      "target": "n7",
+      "type": "pro"
+    }
+  ]
+}

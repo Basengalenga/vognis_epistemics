@@ -1,0 +1,35 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Decidir cuándo contarle a la jefa sobre el trueque: antes, durante o después del primer éxito"
+    },
+    {
+      "ref": "n2",
+      "text": "La jefa debe ver el trueque como algo que vale la pena y no como riesgo"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s113",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s120",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s121",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s122",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

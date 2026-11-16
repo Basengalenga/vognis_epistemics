@@ -1,0 +1,52 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Si el primer trueque falla porque Fer no puede o no quiere cumplir, intervenir para salvarlo podría ser contraproducente"
+    },
+    {
+      "ref": "n2",
+      "text": "Permitir que el primer trueque falle genera aprendizaje natural sobre responsabilidad y confianza entre jóvenes"
+    },
+    {
+      "ref": "n3",
+      "text": "Un primer trueque fallido puede desalentar la participación futura en el tablero de trueque"
+    },
+    {
+      "ref": "n4",
+      "text": "La intervención adulta para salvar un trueque fallido puede socavar la autonomía y responsabilidad de jóvenes"
+    },
+    {
+      "ref": "n5",
+      "text": "Es necesario establecer criterios claros sobre cuándo intervenir en un trueque fallido y cuándo permitir que fracase"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s79",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s80",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s71",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s129",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s140",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

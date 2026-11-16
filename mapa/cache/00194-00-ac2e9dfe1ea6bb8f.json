@@ -1,0 +1,55 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Si el viernes nadie pregunta sobre el tablero, mencionar casualmente a alguien para generar adopción orgánica"
+    },
+    {
+      "ref": "n2",
+      "text": "Establecer una semana como plazo para observar la primera señal de adopción del tablero de trueque"
+    },
+    {
+      "ref": "n3",
+      "text": "Si en una semana no hay señal de adopción, considerar cambiar de estrategia o actividad"
+    },
+    {
+      "ref": "n4",
+      "text": "Preguntar directamente a jóvenes si prefieren poner nombre o permanecer anónimos en las tarjetas del tablero"
+    }
+  ],
+  "repeats": [
+    "s174",
+    "s175",
+    "s176",
+    "s177",
+    "s180",
+    "s182"
+  ],
+  "edges": [
+    {
+      "source": "s179",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s181",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s182",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s177",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

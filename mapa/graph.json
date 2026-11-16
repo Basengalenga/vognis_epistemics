@@ -1,0 +1,3791 @@
+{
+  "nodes": [
+    {
+      "id": "s1",
+      "text": "Los jóvenes solo vienen a la biblioteca por tareas escolares",
+      "author": "User",
+      "timestamp": "2026-11-15T20:08:38.291+00:00"
+    },
+    {
+      "id": "s2",
+      "text": "Se necesita que los jóvenes se enganchen con actividades que los hagan volver por gusto",
+      "author": "User",
+      "timestamp": "2026-11-15T20:08:38.291+00:00"
+    },
+    {
+      "id": "s3",
+      "text": "Implementar gamificación para aumentar el engagement juvenil",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:08:41.197+00:00"
+    },
+    {
+      "id": "s4",
+      "text": "Ofrecer talleres musicales para atraer jóvenes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:08:41.197+00:00"
+    },
+    {
+      "id": "s5",
+      "text": "Crear un club de videojuegos en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:08:41.197+00:00"
+    },
+    {
+      "id": "s6",
+      "text": "Desarrollar contenido digital para jóvenes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:08:41.197+00:00"
+    },
+    {
+      "id": "s7",
+      "text": "Usar redes sociales para promocionar la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:08:41.197+00:00"
+    },
+    {
+      "id": "s8",
+      "text": "Crear espacios maker para la comunidad joven",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:08:41.197+00:00"
+    },
+    {
+      "id": "s9",
+      "text": "La biblioteca tiene talleres de lectura mensuales",
+      "author": "User",
+      "timestamp": "2026-11-15T20:08:59.954+00:00"
+    },
+    {
+      "id": "s10",
+      "text": "La biblioteca tiene un club de cómic",
+      "author": "User",
+      "timestamp": "2026-11-15T20:08:59.954+00:00"
+    },
+    {
+      "id": "s11",
+      "text": "La biblioteca organiza eventos con autores locales",
+      "author": "User",
+      "timestamp": "2026-11-15T20:08:59.954+00:00"
+    },
+    {
+      "id": "s12",
+      "text": "Solo vienen 15 jóvenes máximo a las actividades",
+      "author": "User",
+      "timestamp": "2026-11-15T20:08:59.954+00:00"
+    },
+    {
+      "id": "s13",
+      "text": "Los jóvenes no traen a sus amigos a la biblioteca",
+      "author": "User",
+      "timestamp": "2026-11-15T20:08:59.954+00:00"
+    },
+    {
+      "id": "s14",
+      "text": "La biblioteca tiene tres computadoras viejas",
+      "author": "User",
+      "timestamp": "2026-11-15T20:08:59.954+00:00"
+    },
+    {
+      "id": "s15",
+      "text": "La biblioteca tiene una sala con sillones en mal estado",
+      "author": "User",
+      "timestamp": "2026-11-15T20:08:59.954+00:00"
+    },
+    {
+      "id": "s16",
+      "text": "La biblioteca tiene presupuesto casi cero",
+      "author": "User",
+      "timestamp": "2026-11-15T20:08:59.954+00:00"
+    },
+    {
+      "id": "s17",
+      "text": "Se necesitan ideas implementables inmediatamente con recursos actuales",
+      "author": "User",
+      "timestamp": "2026-11-15T20:08:59.954+00:00"
+    },
+    {
+      "id": "s18",
+      "text": "La biblioteca tiene 15 jóvenes regulares como base",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:09:05.569+00:00"
+    },
+    {
+      "id": "s19",
+      "text": "Convertir el espacio en un lugar que los jóvenes elijan por sí mismos",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:09:05.569+00:00"
+    },
+    {
+      "id": "s20",
+      "text": "Implementar co-creación de contenido digital con los jóvenes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:09:05.569+00:00"
+    },
+    {
+      "id": "s21",
+      "text": "Los jóvenes pueden traer a sus amigos naturalmente si el espacio es atractivo",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:09:05.569+00:00"
+    },
+    {
+      "id": "s22",
+      "text": "Los jóvenes deben sentir que la biblioteca les pertenece",
+      "author": "User",
+      "timestamp": "2026-11-15T20:09:11.071+00:00"
+    },
+    {
+      "id": "s23",
+      "text": "Los jóvenes deben poder decidir qué actividades ocurren en la biblioteca",
+      "author": "User",
+      "timestamp": "2026-11-15T20:09:11.071+00:00"
+    },
+    {
+      "id": "s24",
+      "text": "Crear un Consejo Juvenil Rotativo en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s25",
+      "text": "Jóvenes electos mensualmente diseñan la programación de la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s26",
+      "text": "Cada mes se elige un comité de 3-5 jóvenes para decidir actividades",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s27",
+      "text": "El consejo juvenil tiene presupuesto simbólico",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s28",
+      "text": "El consejo juvenil tiene poder de veto sobre actividades adultas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s29",
+      "text": "Organizar torneo de fanfiction sobre el barrio o personajes locales",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s30",
+      "text": "Los jóvenes escriben historias inspiradas en autores locales",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s31",
+      "text": "Publicar las historias en redes sociales de la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s32",
+      "text": "Los jóvenes votan entre ellos las mejores historias",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s33",
+      "text": "Jóvenes forman gremios de 4-6 personas con nombre y emblema",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s34",
+      "text": "Los gremios completan desafíos como leer libros o traer amigos nuevos",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s35",
+      "text": "Completar desafíos desbloquea privilegios como acceso prioritario a computadoras",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s36",
+      "text": "Los gremios pueden elegir la próxima compra de cómics como recompensa",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s37",
+      "text": "Crear sistema de trueque de habilidades entre jóvenes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s38",
+      "text": "Jóvenes enseñan lo que saben a cambio de aprender de otros",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s39",
+      "text": "Tablero donde jóvenes publican qué ofrecen y qué buscan aprender",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s40",
+      "text": "Jóvenes pueden enseñar dibujo digital, Excel o slang en inglés",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s41",
+      "text": "La biblioteca solo facilita el espacio, los jóvenes organizan los intercambios",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s42",
+      "text": "Un joven diferente cada semana es curador y transforma la sala",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s43",
+      "text": "El curador tiene control total de decoración y música de fondo",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s44",
+      "text": "El curador debe organizar una mini-actividad",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s45",
+      "text": "Regla: no romper nada en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s46",
+      "text": "El curador debe invitar mínimo 3 personas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s47",
+      "text": "Jóvenes arman playlists de libros y cómics con temáticas específicas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s48",
+      "text": "Las playlists incluyen temas como 'Para cuando truenas con alguien' o 'Vibra cyberpunk'",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s49",
+      "text": "Jóvenes diseñan portadas para sus playlists de libros",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s50",
+      "text": "Las playlists con portadas se publican en redes sociales de la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s51",
+      "text": "Replicar dinámicas de servidores de Discord en el espacio físico de la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s52",
+      "text": "Crear canales físicos con áreas temáticas nombradas por los jóvenes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s53",
+      "text": "Roles de moderadores rotan semanalmente con permisos específicos",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s54",
+      "text": "Crear archivo de historias orales del barrio",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s55",
+      "text": "Jóvenes documentan historias de vecinos con equipos de biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s56",
+      "text": "Jóvenes usan celulares y computadoras para grabar y editar historias",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s57",
+      "text": "Jóvenes deciden qué preguntar y a quién entrevistar",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s58",
+      "text": "Jóvenes deciden cómo presentar las historias documentadas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s59",
+      "text": "Las decisiones se toman al nivel más joven posible, no al más alto",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s60",
+      "text": "Si algo afecta principalmente a menores de 20 años, adultos solo asesoran",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s61",
+      "text": "Los jóvenes aprueban horarios, compras y alianzas de la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s62",
+      "text": "Implementar Teatro del Oprimido Silencioso en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s63",
+      "text": "Jóvenes actúan escenas problemáticas reales de la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s64",
+      "text": "La audiencia interviene cambiando el resultado de las escenas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s65",
+      "text": "Representar situaciones incómodas como ser ignorados o reglas absurdas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s66",
+      "text": "Otros jóvenes proponen soluciones actuándolas en escena",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s67",
+      "text": "Las soluciones que funcionan en el teatro se implementan en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s68",
+      "text": "Jóvenes pueden bifurcar cualquier programa existente y crear versión paralela",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s69",
+      "text": "Si no les gusta el club de cómic oficial, pueden hacer versión alternativa con reglas distintas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s70",
+      "text": "Ambas versiones de un programa coexisten simultáneamente",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s71",
+      "text": "La biblioteca provee recursos a ambas versiones de un programa bifurcado",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s72",
+      "text": "La biblioteca funciona como especie keystone que permite emergencia de actividades",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s73",
+      "text": "La biblioteca solo provee infraestructura mínima: wifi, mesas y materiales",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s74",
+      "text": "La biblioteca provee capacidad de convocar como recurso básico",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s75",
+      "text": "Los jóvenes diseñan todo según necesidades que emergen",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:12:07.105+00:00"
+    },
+    {
+      "id": "s76",
+      "text": "Cuando los jóvenes enseñan entre ellos, vienen porque crearon algo propio que les sirve",
+      "author": "User",
+      "timestamp": "2026-11-15T20:14:02.353+00:00"
+    },
+    {
+      "id": "s77",
+      "text": "Los jóvenes traen amigos que también tienen habilidades para compartir",
+      "author": "User",
+      "timestamp": "2026-11-15T20:14:02.353+00:00"
+    },
+    {
+      "id": "s78",
+      "text": "Usar pizarrón de corcho dividido en ofrezco/busco para el trueque de habilidades",
+      "author": "User",
+      "timestamp": "2026-11-15T20:14:14.526+00:00"
+    },
+    {
+      "id": "s79",
+      "text": "Presentar el tablero de trueque sin que suene a tarea o forzado",
+      "author": "User",
+      "timestamp": "2026-11-15T20:14:14.526+00:00"
+    },
+    {
+      "id": "s80",
+      "text": "Al principio el pizarrón vacío puede verse triste y desanimar participación",
+      "author": "User",
+      "timestamp": "2026-11-15T20:14:14.526+00:00"
+    },
+    {
+      "id": "s81",
+      "text": "Preguntar a 2-3 jóvenes conocidos qué les gustaría aprender de sus compañeros",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:14:24.555+00:00"
+    },
+    {
+      "id": "s82",
+      "text": "El bibliotecario pone las primeras 2-3 tarjetas con lo que los jóvenes dijeron",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:14:24.555+00:00"
+    },
+    {
+      "id": "s83",
+      "text": "Para que un joven ponga su primera tarjeta debe creer que alguien va a responder",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:14:24.555+00:00"
+    },
+    {
+      "id": "s84",
+      "text": "Para que un joven ponga su primera tarjeta debe creer que nadie se va a burlar",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:14:24.555+00:00"
+    },
+    {
+      "id": "s85",
+      "text": "Para que un joven ponga su primera tarjeta debe creer que hay algo concreto que puede ganar",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:14:24.555+00:00"
+    },
+    {
+      "id": "s86",
+      "text": "Agregar sección de 'matches' o 'ya se hizo' en el tablero de trueque",
+      "author": "User",
+      "timestamp": "2026-11-15T20:14:45.421+00:00"
+    },
+    {
+      "id": "s87",
+      "text": "Mostrar intercambios completados para demostrar que el sistema funciona",
+      "author": "User",
+      "timestamp": "2026-11-15T20:14:45.421+00:00"
+    },
+    {
+      "id": "s88",
+      "text": "Ver que alguien respondió a una oferta motiva a participar",
+      "author": "User",
+      "timestamp": "2026-11-15T20:14:45.421+00:00"
+    },
+    {
+      "id": "s89",
+      "text": "El sistema funciona cuando jóvenes coordinan intercambios sin intervención del bibliotecario",
+      "author": "User",
+      "timestamp": "2026-11-15T20:14:45.421+00:00"
+    },
+    {
+      "id": "s90",
+      "text": "Lograr un primer match visible en menos de una semana en el tablero de trueque",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:14:55.121+00:00"
+    },
+    {
+      "id": "s91",
+      "text": "El bibliotecario puede ayudar a conectar jóvenes sin que se note que lo armó",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:14:55.121+00:00"
+    },
+    {
+      "id": "s92",
+      "text": "Nombrar la sección de matches con lenguaje que los jóvenes usan naturalmente",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:14:55.121+00:00"
+    },
+    {
+      "id": "s93",
+      "text": "Incluir fotos o evidencia visual del primer intercambio exitoso",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:14:55.121+00:00"
+    },
+    {
+      "id": "s94",
+      "text": "Mostrar aunque sea un solo intercambio exitoso al principio",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:14:55.121+00:00"
+    },
+    {
+      "id": "s95",
+      "text": "El bibliotecario puede sugerir conexiones específicas entre jóvenes sin revelar que lo planeó",
+      "author": "User",
+      "timestamp": "2026-11-15T20:15:17.236+00:00"
+    },
+    {
+      "id": "s96",
+      "text": "Nombrar la sección de matches como 'truques que rolaron' puede sonar forzado",
+      "author": "User",
+      "timestamp": "2026-11-15T20:15:17.236+00:00"
+    },
+    {
+      "id": "s97",
+      "text": "Pedir a los jóvenes que reporten cada trueque convierte el sistema en tarea",
+      "author": "User",
+      "timestamp": "2026-11-15T20:15:17.236+00:00"
+    },
+    {
+      "id": "s98",
+      "text": "El bibliotecario necesita saber qué truques ocurren sin que se sienta como control",
+      "author": "User",
+      "timestamp": "2026-11-15T20:15:17.236+00:00"
+    },
+    {
+      "id": "s99",
+      "text": "El bibliotecario quiere conectar a Fer con quien necesita lo que sabe sin que se note",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:15:27.269+00:00"
+    },
+    {
+      "id": "s100",
+      "text": "No se sabe cómo detectar que ocurrió un trueque sin pedir reportes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:15:27.269+00:00"
+    },
+    {
+      "id": "s101",
+      "text": "Dos jóvenes que hacen un trueque dejan rastros naturales sin que se les pida",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:15:27.269+00:00"
+    },
+    {
+      "id": "s102",
+      "text": "Los jóvenes pueden tomar fotos del trueque por iniciativa propia",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:15:27.269+00:00"
+    },
+    {
+      "id": "s103",
+      "text": "Los jóvenes pueden producir algo juntos durante el trueque",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:15:27.269+00:00"
+    },
+    {
+      "id": "s104",
+      "text": "Otros jóvenes ven el trueque ocurrir y preguntan qué está pasando",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:15:27.269+00:00"
+    },
+    {
+      "id": "s105",
+      "text": "Actualizar el tablero de truques completados debe ser algo que los jóvenes quieran hacer",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:15:27.269+00:00"
+    },
+    {
+      "id": "s106",
+      "text": "Presumir los truques completados puede motivar a actualizar el tablero",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:15:27.269+00:00"
+    },
+    {
+      "id": "s107",
+      "text": "Subir reputación para el siguiente trueque puede motivar a actualizar el tablero",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:15:27.269+00:00"
+    },
+    {
+      "id": "s108",
+      "text": "Para la primera prueba no se necesita registro formal de truques",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:15:27.269+00:00"
+    },
+    {
+      "id": "s109",
+      "text": "Ver que dos jóvenes se buscaron y juntaron una vez indica que el sistema funciona suficiente para iterar",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:15:27.269+00:00"
+    },
+    {
+      "id": "s110",
+      "text": "Usar hashtag como #truequesbiblio para que jóvenes suban truques a redes si quieren",
+      "author": "User",
+      "timestamp": "2026-11-15T20:16:05.950+00:00"
+    },
+    {
+      "id": "s111",
+      "text": "El hashtag no es obligatorio desde el inicio del sistema de trueque",
+      "author": "User",
+      "timestamp": "2026-11-15T20:16:05.950+00:00"
+    },
+    {
+      "id": "s112",
+      "text": "Primero verificar que ocurra al menos un trueque antes de implementar hashtag",
+      "author": "User",
+      "timestamp": "2026-11-15T20:16:05.950+00:00"
+    },
+    {
+      "id": "s113",
+      "text": "Explicar el sistema de trueque a la jefa sin que parezca falta de supervisión",
+      "author": "User",
+      "timestamp": "2026-11-15T20:16:05.950+00:00"
+    },
+    {
+      "id": "s114",
+      "text": "La jefa puede preguntar qué pasa si alguien ofrece algo inapropiado en el trueque",
+      "author": "User",
+      "timestamp": "2026-11-15T20:16:05.950+00:00"
+    },
+    {
+      "id": "s115",
+      "text": "La jefa puede preguntar qué pasa si los jóvenes tienen conflictos entre ellos durante truques",
+      "author": "User",
+      "timestamp": "2026-11-15T20:16:05.950+00:00"
+    },
+    {
+      "id": "s116",
+      "text": "El bibliotecario va a empezar con prueba pequeña del trueque sin pedir reportes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:16:15.963+00:00"
+    },
+    {
+      "id": "s117",
+      "text": "El hashtag opcional se implementará después de la prueba inicial",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:16:15.963+00:00"
+    },
+    {
+      "id": "s118",
+      "text": "Se necesita explicar a la jefa cómo manejar situaciones sketchy en el trueque",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:16:15.963+00:00"
+    },
+    {
+      "id": "s119",
+      "text": "Se necesita explicar a la jefa cómo manejar conflictos entre jóvenes durante truques",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:16:15.963+00:00"
+    },
+    {
+      "id": "s120",
+      "text": "Mostrar testimonios de jóvenes después del primer trueque exitoso como evidencia de valor",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:16:15.963+00:00"
+    },
+    {
+      "id": "s121",
+      "text": "Mostrar nuevos jóvenes que llegaron después del primer trueque exitoso como evidencia de valor",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:16:15.963+00:00"
+    },
+    {
+      "id": "s122",
+      "text": "Mostrar algo que los jóvenes produjeron durante el trueque como evidencia de valor",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:16:15.963+00:00"
+    },
+    {
+      "id": "s123",
+      "text": "El rol del bibliotecario es facilitador que pone el espacio para el trueque",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:16:15.963+00:00"
+    },
+    {
+      "id": "s124",
+      "text": "El rol del bibliotecario es curador que revisa el tablero cada ciertos días",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:16:15.963+00:00"
+    },
+    {
+      "id": "s125",
+      "text": "El rol del bibliotecario es mediador solo si los jóvenes lo buscan",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:16:15.963+00:00"
+    },
+    {
+      "id": "s126",
+      "text": "El rol del bibliotecario debe mantenerlo presente sin microgestionar el trueque",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:16:15.963+00:00"
+    },
+    {
+      "id": "s127",
+      "text": "No permitir intercambios por dinero en el trueque de habilidades",
+      "author": "User",
+      "timestamp": "2026-11-15T20:16:53.865+00:00"
+    },
+    {
+      "id": "s128",
+      "text": "No permitir hacer tareas ajenas en el trueque de habilidades",
+      "author": "User",
+      "timestamp": "2026-11-15T20:16:53.865+00:00"
+    },
+    {
+      "id": "s129",
+      "text": "No permitir truques que requieran salir de la biblioteca sin avisar",
+      "author": "User",
+      "timestamp": "2026-11-15T20:16:53.865+00:00"
+    },
+    {
+      "id": "s130",
+      "text": "Poner reglas del trueque en el tablero como 'cómo funciona esto'",
+      "author": "User",
+      "timestamp": "2026-11-15T20:16:53.865+00:00"
+    },
+    {
+      "id": "s131",
+      "text": "Mostrar a la jefa fotos del tablero con tarjetas como evidencia",
+      "author": "User",
+      "timestamp": "2026-11-15T20:16:53.865+00:00"
+    },
+    {
+      "id": "s132",
+      "text": "Mostrar a la jefa video corto de joven explicando qué aprendió",
+      "author": "User",
+      "timestamp": "2026-11-15T20:16:53.865+00:00"
+    },
+    {
+      "id": "s133",
+      "text": "A la jefa le gusta mostrar impacto de las actividades",
+      "author": "User",
+      "timestamp": "2026-11-15T20:16:53.865+00:00"
+    },
+    {
+      "id": "s134",
+      "text": "Revisar el tablero periódicamente puede sentirse como vigilancia",
+      "author": "User",
+      "timestamp": "2026-11-15T20:16:53.865+00:00"
+    },
+    {
+      "id": "s135",
+      "text": "No está claro cuándo el bibliotecario debe intervenir y cuándo no",
+      "author": "User",
+      "timestamp": "2026-11-15T20:16:53.865+00:00"
+    },
+    {
+      "id": "s136",
+      "text": "Saber si se logró el balance correcto entre presencia y autonomía en un mes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:17:05.258+00:00"
+    },
+    {
+      "id": "s137",
+      "text": "Los jóvenes expresan verbalmente que el balance es correcto",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:17:05.258+00:00"
+    },
+    {
+      "id": "s138",
+      "text": "La cantidad de truques que ocurren sin intervención del bibliotecario indica balance correcto",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:17:05.258+00:00"
+    },
+    {
+      "id": "s139",
+      "text": "Alguien nuevo entiende cómo funciona el sistema sin que se lo expliquen indica balance correcto",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:17:05.258+00:00"
+    },
+    {
+      "id": "s140",
+      "text": "El bibliotecario pasaría tres veces la primera semana: lunes, miércoles y viernes",
+      "author": "User",
+      "timestamp": "2026-11-15T20:17:38.530+00:00"
+    },
+    {
+      "id": "s141",
+      "text": "El bibliotecario solo observa si hay movimiento sin hablar a nadie a menos que le pregunten",
+      "author": "User",
+      "timestamp": "2026-11-15T20:17:38.530+00:00"
+    },
+    {
+      "id": "s142",
+      "text": "El bibliotecario interviene solo si ve algo que rompe los límites establecidos",
+      "author": "User",
+      "timestamp": "2026-11-15T20:17:38.530+00:00"
+    },
+    {
+      "id": "s143",
+      "text": "Tarjetas sin respuesta no requieren intervención inmediata porque nadie las busca todavía",
+      "author": "User",
+      "timestamp": "2026-11-15T20:17:38.530+00:00"
+    },
+    {
+      "id": "s144",
+      "text": "Cuando un joven nuevo llega y otro le explica el sistema sin que el bibliotecario esté, eso indica balance correcto",
+      "author": "User",
+      "timestamp": "2026-11-15T20:17:38.530+00:00"
+    },
+    {
+      "id": "s145",
+      "text": "Se necesita plan día por día para lanzar el trueque esta semana",
+      "author": "User",
+      "timestamp": "2026-11-15T20:17:38.530+00:00"
+    },
+    {
+      "id": "s146",
+      "text": "Se necesita definir con quiénes hablar el lunes para lanzar el trueque",
+      "author": "User",
+      "timestamp": "2026-11-15T20:17:38.530+00:00"
+    },
+    {
+      "id": "s147",
+      "text": "Se necesita definir qué armar el martes para lanzar el trueque",
+      "author": "User",
+      "timestamp": "2026-11-15T20:17:38.530+00:00"
+    },
+    {
+      "id": "s148",
+      "text": "Se necesita definir cuándo presentar el sistema de trueque",
+      "author": "User",
+      "timestamp": "2026-11-15T20:17:38.530+00:00"
+    },
+    {
+      "id": "s149",
+      "text": "Lanzar el trueque en tres días: lunes preparar, martes sembrar, miércoles abrir",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:17:49.353+00:00"
+    },
+    {
+      "id": "s150",
+      "text": "Antes del primer joven viendo el tablero debe estar listo lo indispensable",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:17:49.353+00:00"
+    },
+    {
+      "id": "s151",
+      "text": "Tener las tres reglas escritas antes de que el primer joven vea el tablero",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:17:49.353+00:00"
+    },
+    {
+      "id": "s152",
+      "text": "Tener las tarjetas sembradas antes de que el primer joven vea el tablero",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:17:49.353+00:00"
+    },
+    {
+      "id": "s153",
+      "text": "Haber hablado con Fer y los otros dos antes de que el primer joven vea el tablero",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:17:49.353+00:00"
+    },
+    {
+      "id": "s154",
+      "text": "Infiltrar el tablero sin presentación formal se siente menos como tarea obligatoria",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:17:49.353+00:00"
+    },
+    {
+      "id": "s155",
+      "text": "Poner el tablero y esperar a que alguien pregunte para explicar uno por uno",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:17:49.353+00:00"
+    },
+    {
+      "id": "s156",
+      "text": "Presentar el tablero formalmente tipo 'vengan les explico esto nuevo'",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:17:49.353+00:00"
+    },
+    {
+      "id": "s157",
+      "text": "Decidir cuándo contarle a la jefa sobre el trueque: antes, durante o después del primer éxito",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:17:49.353+00:00"
+    },
+    {
+      "id": "s158",
+      "text": "La jefa debe ver el trueque como algo que vale la pena y no como riesgo",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:17:49.353+00:00"
+    },
+    {
+      "id": "s159",
+      "text": "Poner las reglas del trueque en una hoja simple sin diseño elaborado",
+      "author": "User",
+      "timestamp": "2026-11-15T20:19:16.920+00:00"
+    },
+    {
+      "id": "s160",
+      "text": "Contarle a la jefa después del primer trueque exitoso evita que frene el proyecto con preguntas y permisos",
+      "author": "User",
+      "timestamp": "2026-11-15T20:19:16.920+00:00"
+    },
+    {
+      "id": "s161",
+      "text": "Lunes hablar con Fer y dos jóvenes más para preguntarles qué quieren aprender",
+      "author": "User",
+      "timestamp": "2026-11-15T20:19:16.920+00:00"
+    },
+    {
+      "id": "s162",
+      "text": "Martes armar el tablero y poner las tarjetas con lo que dijeron sin nombres todavía",
+      "author": "User",
+      "timestamp": "2026-11-15T20:19:16.920+00:00"
+    },
+    {
+      "id": "s163",
+      "text": "Miércoles dejar el tablero listo y esperar a que alguien pregunte",
+      "author": "User",
+      "timestamp": "2026-11-15T20:19:16.920+00:00"
+    },
+    {
+      "id": "s164",
+      "text": "Poner nombres reales en las primeras tarjetas puede asustar a los jóvenes porque los expone",
+      "author": "User",
+      "timestamp": "2026-11-15T20:19:16.920+00:00"
+    },
+    {
+      "id": "s165",
+      "text": "Poner tarjetas anónimas como 'alguien busca aprender X' sin decir quién",
+      "author": "User",
+      "timestamp": "2026-11-15T20:19:16.920+00:00"
+    },
+    {
+      "id": "s166",
+      "text": "Preguntar a cada joven si quiere su nombre en la tarjeta o prefiere anonimato",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:19:27.575+00:00"
+    },
+    {
+      "id": "s167",
+      "text": "Si nadie pregunta por el tablero el primer día, el bibliotecario debe decidir entre esperar orgánicamente o mencionarlo casualmente",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:19:27.575+00:00"
+    },
+    {
+      "id": "s168",
+      "text": "El bibliotecario necesita ver la primera señal de que el trueque prendió en un plazo máximo de días",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:19:27.575+00:00"
+    },
+    {
+      "id": "s169",
+      "text": "Una señal válida de que el trueque prendió es que alguien pregunte qué onda con el tablero",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:19:27.575+00:00"
+    },
+    {
+      "id": "s170",
+      "text": "Si no hay señales en el plazo máximo, el bibliotecario puede desanimarse",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:19:27.575+00:00"
+    },
+    {
+      "id": "s171",
+      "text": "Si no hay señales en el plazo máximo, la jefa puede preguntar qué está haciendo con el pizarrón",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:19:27.575+00:00"
+    },
+    {
+      "id": "s172",
+      "text": "Preguntar a cada joven si quiere su nombre en la tarjeta es una idea que no se había considerado antes",
+      "author": "User",
+      "timestamp": "2026-11-15T20:19:49.636+00:00"
+    },
+    {
+      "id": "s173",
+      "text": "El bibliotecario se aguanta hasta el viernes sin intervenir si nadie pregunta por el tablero el miércoles",
+      "author": "User",
+      "timestamp": "2026-11-15T20:19:49.636+00:00"
+    },
+    {
+      "id": "s174",
+      "text": "Si nadie pregunta hasta el viernes, el bibliotecario menciona casualmente el tablero a alguien",
+      "author": "User",
+      "timestamp": "2026-11-15T20:19:49.636+00:00"
+    },
+    {
+      "id": "s175",
+      "text": "El plan completo es: lunes hablar con tres jóvenes y preguntar si van con nombre, martes armar todo, miércoles dejarlo listo",
+      "author": "User",
+      "timestamp": "2026-11-15T20:19:49.636+00:00"
+    },
+    {
+      "id": "s176",
+      "text": "Una semana es el plazo máximo para ver la primera señal del trueque",
+      "author": "User",
+      "timestamp": "2026-11-15T20:19:49.636+00:00"
+    },
+    {
+      "id": "s177",
+      "text": "Si en una semana nadie pela el tablero, el bibliotecario cambia a otra estrategia",
+      "author": "User",
+      "timestamp": "2026-11-15T20:19:49.636+00:00"
+    },
+    {
+      "id": "s178",
+      "text": "Se necesita identificar qué puede tronar el trueque en los primeros días que no se haya previsto",
+      "author": "User",
+      "timestamp": "2026-11-15T20:19:49.636+00:00"
+    },
+    {
+      "id": "s179",
+      "text": "Puede tronar si los tres jóvenes iniciales no están el miércoles cuando se lanza el tablero",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:20:00.630+00:00"
+    },
+    {
+      "id": "s180",
+      "text": "Puede tronar si las tarjetas sembradas no reflejan cosas que otros jóvenes realmente quieren aprender",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:20:00.630+00:00"
+    },
+    {
+      "id": "s181",
+      "text": "Puede tronar si el tablero está en un lugar donde los jóvenes no pasan naturalmente",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:20:00.630+00:00"
+    },
+    {
+      "id": "s182",
+      "text": "Puede tronar si las reglas escritas suenan muy formales o adultas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:20:00.630+00:00"
+    },
+    {
+      "id": "s183",
+      "text": "Puede tronar si otro adulto de la biblioteca pregunta en voz alta qué es el tablero frente a los jóvenes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:20:00.630+00:00"
+    },
+    {
+      "id": "s184",
+      "text": "Puede tronar si el primer joven que pregunta recibe una explicación muy larga o complicada",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:20:00.630+00:00"
+    },
+    {
+      "id": "s185",
+      "text": "Puede tronar si las habilidades sembradas son demasiado académicas o aburridas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:20:00.630+00:00"
+    },
+    {
+      "id": "s186",
+      "text": "Puede tronar si no hay suficiente variedad en las tarjetas iniciales",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:20:00.630+00:00"
+    },
+    {
+      "id": "s187",
+      "text": "Se necesita un espacio físico donde dos jóvenes puedan hacer truques sin sentir que todos los están viendo",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:20:00.630+00:00"
+    },
+    {
+      "id": "s188",
+      "text": "Puede ser necesario designar un rincón o mesa específica para truques antes del miércoles",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:20:00.630+00:00"
+    },
+    {
+      "id": "s189",
+      "text": "Fer puede no poder o no querer cumplir el primer trueque después de comprometerse",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:20:00.630+00:00"
+    },
+    {
+      "id": "s190",
+      "text": "El bibliotecario debe decidir si intervenir para salvar el primer trueque o dejarlo fallar",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:20:00.630+00:00"
+    },
+    {
+      "id": "s191",
+      "text": "Dejar que el primer trueque falle permite que los jóvenes aprendan de la experiencia",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:20:00.630+00:00"
+    },
+    {
+      "id": "s192",
+      "text": "Probar la idea del trueque con un solo joven antes de armar el tablero completo",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:20:00.630+00:00"
+    },
+    {
+      "id": "s193",
+      "text": "Preguntar a Fer si se lanzaría con el trueque antes de implementar el sistema",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:20:00.630+00:00"
+    },
+    {
+      "id": "s194",
+      "text": "Validar si la idea del trueque hace sentido a los jóvenes antes de construir infraestructura",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:20:00.630+00:00"
+    },
+    {
+      "id": "s195",
+      "text": "Los jóvenes deben necesitarse mutuamente para que vuelvan a la biblioteca",
+      "author": "User",
+      "timestamp": "2026-11-15T20:20:09.820+00:00"
+    },
+    {
+      "id": "s196",
+      "text": "Implementar red de favores encadenados en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s197",
+      "text": "Cada favor recibido genera obligación de ayudar a otra persona diferente",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s198",
+      "text": "Quien recibe ayuda no paga de vuelta al mismo joven sino a un tercero",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s199",
+      "text": "Los favores encadenados crean cadenas de interdependencia entre jóvenes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s200",
+      "text": "Los favores encadenados evitan transacciones bilaterales cerradas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s201",
+      "text": "Crear tablero de necesidades abiertas donde cualquiera publica lo que necesita aprender o resolver",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s202",
+      "text": "El tablero muestra problemas reales sin resolver que los jóvenes escriben",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s203",
+      "text": "Otros jóvenes pueden responder a las necesidades publicadas en el tablero",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s204",
+      "text": "Jóvenes pueden crear equipos para resolver necesidades publicadas en el tablero",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s205",
+      "text": "Jóvenes pueden proponer soluciones colectivas a necesidades del tablero",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s206",
+      "text": "Implementar sistema de mentorías rotativas en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s207",
+      "text": "Cada dos semanas todos cambian de rol en las mentorías",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s208",
+      "text": "El mentor se vuelve aprendiz de otro joven en cada rotación",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s209",
+      "text": "Nadie permanece en un solo rol de mentor o aprendiz",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s210",
+      "text": "Los jóvenes experimentan ser expertos e ignorantes en ciclos cortos",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s211",
+      "text": "Implementar proyectos incompletos heredados que se pasan entre jóvenes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s212",
+      "text": "Los proyectos cambian de manos cada semana entre jóvenes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s213",
+      "text": "Nadie es dueño individual de los proyectos heredados",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s214",
+      "text": "Todos los jóvenes contribuyen a los proyectos heredados",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s215",
+      "text": "Nadie puede finalizar un proyecto heredado solo",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s216",
+      "text": "Los proyectos pueden ser dibujos, historias o proyectos musicales",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s217",
+      "text": "Diseñar actividades que requieren exactamente 3 personas diferentes para completarlas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s218",
+      "text": "Cada proyecto tiene roles interdependientes irreductibles",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s219",
+      "text": "Los roles son: uno graba, otro edita, otro distribuye",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s220",
+      "text": "Nadie puede completar el proyecto solo",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s221",
+      "text": "Nadie puede completar el proyecto con cualquier persona",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s222",
+      "text": "Implementar economía de reputación localizada en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s223",
+      "text": "Los jóvenes ganan prestigio cuando otros testifican públicamente sobre su ayuda",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s224",
+      "text": "No usar puntos ni badges automáticos en el sistema de reputación",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s225",
+      "text": "El reconocimiento viene exclusivamente de testimonios de otros jóvenes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s226",
+      "text": "Usar mural físico para testimonios de jóvenes sobre ayuda recibida",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s227",
+      "text": "La biblioteca funciona como red mycelial donde los jóvenes son nodos",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s228",
+      "text": "Los jóvenes comparten recursos bajo tierra, no en exhibición pública",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s229",
+      "text": "Crear canales invisibles de intercambio en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s230",
+      "text": "Usar notas escondidas en libros como canal de intercambio",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s231",
+      "text": "Usar mensajes en lugares secretos como canal de intercambio",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s232",
+      "text": "La conexión entre jóvenes debe ser discreta y orgánica",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s233",
+      "text": "La conexión entre jóvenes no debe ser performativa",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s234",
+      "text": "Implementar Cadenas de Custodia Creativa en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s235",
+      "text": "Cada objeto creado pertenece a quien lo usa siguiente",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s236",
+      "text": "Los objetos creativos pasan de mano en mano entre jóvenes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s237",
+      "text": "Solo puedes usar un objeto si lo transformas y lo pasas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s238",
+      "text": "La biblioteca rastrea las genealogías de objetos en un mapa visible",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s239",
+      "text": "La biblioteca solo ofrece experiencias que requieren algo que ella no tiene",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s240",
+      "text": "Cada actividad necesita un elemento externo que solo los jóvenes pueden traer",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s241",
+      "text": "Los elementos externos pueden ser un lugar, un contacto o un objeto",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s242",
+      "text": "La institución se vuelve intencionalmente dependiente de los jóvenes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s243",
+      "text": "Prohibir trabajar con los mismos jóvenes dos veces seguidas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s244",
+      "text": "Cada nueva actividad requiere formar equipo con personas con quienes nunca has colaborado",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s245",
+      "text": "Forzar la expansión de la red social en lugar de su consolidación",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s246",
+      "text": "Crear problemas que requieren colaboración humana porque no tienen solución algorítmica",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s247",
+      "text": "Diseñar desafíos que las computadoras viejas no pueden resolver solas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s248",
+      "text": "Los desafíos incluyen juicios estéticos, dilemas morales e interpretaciones ambiguas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s249",
+      "text": "La tecnología amplifica pero no reemplaza la colaboración humana",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s250",
+      "text": "Implementar Ritual de Desprendimiento Cíclico mensual en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s251",
+      "text": "Cada mes un joven debe regalar públicamente su habilidad más valiosa sin esperar retorno",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s252",
+      "text": "Ceremonia donde alguien enseña su mejor secreto o técnica a todos",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s253",
+      "text": "El ritual destruye la ventaja comparativa del joven que comparte",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s254",
+      "text": "El ritual genera prestigio por generosidad, no por acumulación",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:21:02.309+00:00"
+    },
+    {
+      "id": "s255",
+      "text": "Pedir ayuda debe ser tan fácil como ofrecerla en el sistema de trueque",
+      "author": "User",
+      "timestamp": "2026-11-15T20:21:54.766+00:00"
+    },
+    {
+      "id": "s256",
+      "text": "Marcar cada ayuda recibida en una pared física para que otros vean qué se necesita y qué se ofrece",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s257",
+      "text": "Usar mural o pizarra con tarjetas de colores para necesidades y ofertas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s258",
+      "text": "Tarjetas rojas representan lo que necesito",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s259",
+      "text": "Tarjetas verdes representan lo que ofrezco",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s260",
+      "text": "Conectar tarjetas con hilos cuando alguien resuelve algo",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s261",
+      "text": "Crear mapa visual de intercambios con hilos entre tarjetas",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s262",
+      "text": "Implementar Banco de Tiempo Asíncrono en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s263",
+      "text": "Acumular créditos por enseñar algo que se gastan en aprender otra cosa sin coincidir en tiempo",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s264",
+      "text": "Jóvenes graban tutoriales cortos en las computadoras sobre lo que saben",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s265",
+      "text": "Cada video tutorial vale créditos canjeables",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s266",
+      "text": "Los créditos se canjean por acceso a otros videos o sesiones presenciales",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s267",
+      "text": "Implementar Protocolo de Micro-Encargos en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s268",
+      "text": "Micro-encargos son tareas de 10 minutos que cualquiera puede tomar sin compromiso largo",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s269",
+      "text": "Lista actualizada de mini-tareas incluye organizar repisa, probar juego o revisar enlace roto",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s270",
+      "text": "Jóvenes toman micro-encargos cuando tienen tiempo disponible",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s271",
+      "text": "Completar micro-encargos genera puntos canjeables para pedir ayuda",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s272",
+      "text": "Implementar Sistema de Cupones Heredables en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s273",
+      "text": "Cuando alguien te ayuda te da un cupón que solo funciona si ayudas a otra persona diferente",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s274",
+      "text": "Los cupones son físicos de papel y circulan entre jóvenes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s275",
+      "text": "Cada vez que usas un cupón para pedir ayuda debes dárselo a alguien más después de ayudarle",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s276",
+      "text": "El cupón lleva un registro de por quién ha pasado",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s277",
+      "text": "Implementar Protocolo de Incompetencia Declarada en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s278",
+      "text": "Todos escriben públicamente tres cosas que no saben hacer y necesitan aprender",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s279",
+      "text": "Usar cartelera donde todos publican sus lagunas de conocimiento",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s280",
+      "text": "El bibliotecario también publica sus lagunas de conocimiento en la cartelera",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s281",
+      "text": "Normalizar no saber convierte la vulnerabilidad en punto de conexión social",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s282",
+      "text": "Diseñar que todos comiencen debiendo favores en lugar de con cuenta en cero",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s283",
+      "text": "Cada persona nueva empieza con tres favores pendientes que debe resolver en el primer mes",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s284",
+      "text": "Invertir la lógica: empiezas pidiendo para luego devolver, no acumulando para pedir",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s285",
+      "text": "Cada proyecto debe incluir obligatoriamente algo que no puedes hacer solo",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s286",
+      "text": "Los talleres y actividades se diseñan intencionalmente incompletos",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s287",
+      "text": "Falta una habilidad que alguien más debe aportar en cada actividad",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s288",
+      "text": "El evento solo funciona si hay intercambio de ayuda",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s289",
+      "text": "Implementar Topología de Nodos Obligados en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s290",
+      "text": "Cada joven funciona como puente necesario entre dos grupos que no se conocen",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s291",
+      "text": "Mapear las habilidades de los jóvenes para identificar brechas de conexión",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s292",
+      "text": "Crear intencionalmente brechas donde solo una persona conecta dos grupos",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s293",
+      "text": "Si el joven puente no participa, ciertos intercambios no pueden ocurrir",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s294",
+      "text": "Dar a cada joven un rol único e insustituible en la red",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s295",
+      "text": "Implementar Principio de Asimetría Reversible en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s296",
+      "text": "Lo que das nunca equivale a lo que recibes en los intercambios",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s297",
+      "text": "La desigualdad en los intercambios es la norma, no la excepción",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s298",
+      "text": "Se elimina la idea de equivalencia en los truques",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s299",
+      "text": "Puedes enseñar origami 10 minutos y pedir que te expliquen programación una hora",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s300",
+      "text": "Implementar Protocolo de Traducción Imposible en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s301",
+      "text": "Solo puedes pedir ayuda si traduces tu necesidad al lenguaje de quien puede ayudarte",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s302",
+      "text": "Antes de pedir ayuda debes mostrar que entendiste el mundo del otro",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s303",
+      "text": "Si pides ayuda con matemáticas a alguien que dibuja, explicas tu problema usando conceptos visuales",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s304",
+      "text": "La traducción es el precio de pedir ayuda",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s305",
+      "text": "La biblioteca funciona como función de hash social que convierte habilidades diversas en formato común",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s306",
+      "text": "Todas las habilidades tienen igual peso algorítmico en la biblioteca",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s307",
+      "text": "Cambiar un foco equivale a explicar filosofía en el sistema de intercambio",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s308",
+      "text": "Ningún sistema de habilidades individuales puede ser completo sin apelar a elementos fuera de sí mismo",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s309",
+      "text": "La incompletitud individual no es defecto sino propiedad fundamental que hace necesaria la comunidad",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    },
+    {
+      "id": "s310",
+      "text": "Cada persona tiene brechas que solo pueden llenarse desde fuera de sí misma",
+      "author": "AI",
+      "timestamp": "2026-11-15T20:22:48.034+00:00"
+    }
+  ],
+  "edges": [
+    {
+      "source": "s1",
+      "target": "s2",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "s3",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "s4",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "s5",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "s6",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "s7",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "s8",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "s13",
+      "type": "con"
+    },
+    {
+      "source": "s12",
+      "target": "s13",
+      "type": "pro"
+    },
+    {
+      "source": "s16",
+      "target": "s17",
+      "type": "pro"
+    },
+    {
+      "source": "s3",
+      "target": "s17",
+      "type": "con"
+    },
+    {
+      "source": "s8",
+      "target": "s17",
+      "type": "con"
+    },
+    {
+      "source": "s12",
+      "target": "s18",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "s19",
+      "type": "pro"
+    },
+    {
+      "source": "s6",
+      "target": "s20",
+      "type": "pro"
+    },
+    {
+      "source": "s19",
+      "target": "s21",
+      "type": "pro"
+    },
+    {
+      "source": "s13",
+      "target": "s21",
+      "type": "con"
+    },
+    {
+      "source": "s19",
+      "target": "s22",
+      "type": "pro"
+    },
+    {
+      "source": "s22",
+      "target": "s23",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "s24",
+      "type": "pro"
+    },
+    {
+      "source": "s22",
+      "target": "s24",
+      "type": "pro"
+    },
+    {
+      "source": "s18",
+      "target": "s24",
+      "type": "pro"
+    },
+    {
+      "source": "s24",
+      "target": "s25",
+      "type": "pro"
+    },
+    {
+      "source": "s24",
+      "target": "s26",
+      "type": "pro"
+    },
+    {
+      "source": "s24",
+      "target": "s27",
+      "type": "pro"
+    },
+    {
+      "source": "s24",
+      "target": "s28",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "s25",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "s28",
+      "type": "pro"
+    },
+    {
+      "source": "s11",
+      "target": "s29",
+      "type": "pro"
+    },
+    {
+      "source": "s11",
+      "target": "s30",
+      "type": "pro"
+    },
+    {
+      "source": "s7",
+      "target": "s31",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "s32",
+      "type": "pro"
+    },
+    {
+      "source": "s3",
+      "target": "s33",
+      "type": "pro"
+    },
+    {
+      "source": "s22",
+      "target": "s33",
+      "type": "pro"
+    },
+    {
+      "source": "s33",
+      "target": "s34",
+      "type": "pro"
+    },
+    {
+      "source": "s34",
+      "target": "s35",
+      "type": "pro"
+    },
+    {
+      "source": "s34",
+      "target": "s36",
+      "type": "pro"
+    },
+    {
+      "source": "s21",
+      "target": "s34",
+      "type": "pro"
+    },
+    {
+      "source": "s22",
+      "target": "s37",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "s37",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "s38",
+      "type": "pro"
+    },
+    {
+      "source": "s38",
+      "target": "s39",
+      "type": "pro"
+    },
+    {
+      "source": "s39",
+      "target": "s40",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "s41",
+      "type": "pro"
+    },
+    {
+      "source": "s22",
+      "target": "s42",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "s42",
+      "type": "pro"
+    },
+    {
+      "source": "s42",
+      "target": "s43",
+      "type": "pro"
+    },
+    {
+      "source": "s42",
+      "target": "s44",
+      "type": "pro"
+    },
+    {
+      "source": "s43",
+      "target": "s45",
+      "type": "con"
+    },
+    {
+      "source": "s42",
+      "target": "s46",
+      "type": "pro"
+    },
+    {
+      "source": "s21",
+      "target": "s46",
+      "type": "pro"
+    },
+    {
+      "source": "s20",
+      "target": "s47",
+      "type": "pro"
+    },
+    {
+      "source": "s42",
+      "target": "s47",
+      "type": "pro"
+    },
+    {
+      "source": "s47",
+      "target": "s48",
+      "type": "pro"
+    },
+    {
+      "source": "s47",
+      "target": "s49",
+      "type": "pro"
+    },
+    {
+      "source": "s49",
+      "target": "s50",
+      "type": "pro"
+    },
+    {
+      "source": "s31",
+      "target": "s50",
+      "type": "pro"
+    },
+    {
+      "source": "s19",
+      "target": "s51",
+      "type": "pro"
+    },
+    {
+      "source": "s22",
+      "target": "s51",
+      "type": "pro"
+    },
+    {
+      "source": "s51",
+      "target": "s52",
+      "type": "pro"
+    },
+    {
+      "source": "s51",
+      "target": "s53",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "s52",
+      "type": "pro"
+    },
+    {
+      "source": "s24",
+      "target": "s53",
+      "type": "pro"
+    },
+    {
+      "source": "s20",
+      "target": "s54",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "s54",
+      "type": "pro"
+    },
+    {
+      "source": "s54",
+      "target": "s55",
+      "type": "pro"
+    },
+    {
+      "source": "s14",
+      "target": "s56",
+      "type": "pro"
+    },
+    {
+      "source": "s55",
+      "target": "s56",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "s57",
+      "type": "pro"
+    },
+    {
+      "source": "s55",
+      "target": "s57",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "s58",
+      "type": "pro"
+    },
+    {
+      "source": "s55",
+      "target": "s58",
+      "type": "pro"
+    },
+    {
+      "source": "s22",
+      "target": "s59",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "s59",
+      "type": "pro"
+    },
+    {
+      "source": "s59",
+      "target": "s60",
+      "type": "pro"
+    },
+    {
+      "source": "s60",
+      "target": "s61",
+      "type": "pro"
+    },
+    {
+      "source": "s24",
+      "target": "s61",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "s62",
+      "type": "pro"
+    },
+    {
+      "source": "s22",
+      "target": "s62",
+      "type": "pro"
+    },
+    {
+      "source": "s62",
+      "target": "s63",
+      "type": "pro"
+    },
+    {
+      "source": "s63",
+      "target": "s64",
+      "type": "pro"
+    },
+    {
+      "source": "s63",
+      "target": "s65",
+      "type": "pro"
+    },
+    {
+      "source": "s64",
+      "target": "s66",
+      "type": "pro"
+    },
+    {
+      "source": "s66",
+      "target": "s67",
+      "type": "pro"
+    },
+    {
+      "source": "s59",
+      "target": "s67",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "s68",
+      "type": "pro"
+    },
+    {
+      "source": "s22",
+      "target": "s68",
+      "type": "pro"
+    },
+    {
+      "source": "s68",
+      "target": "s69",
+      "type": "pro"
+    },
+    {
+      "source": "s10",
+      "target": "s69",
+      "type": "con"
+    },
+    {
+      "source": "s68",
+      "target": "s70",
+      "type": "pro"
+    },
+    {
+      "source": "s68",
+      "target": "s71",
+      "type": "pro"
+    },
+    {
+      "source": "s41",
+      "target": "s72",
+      "type": "pro"
+    },
+    {
+      "source": "s59",
+      "target": "s72",
+      "type": "pro"
+    },
+    {
+      "source": "s72",
+      "target": "s73",
+      "type": "pro"
+    },
+    {
+      "source": "s72",
+      "target": "s74",
+      "type": "pro"
+    },
+    {
+      "source": "s73",
+      "target": "s75",
+      "type": "pro"
+    },
+    {
+      "source": "s74",
+      "target": "s75",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "s75",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "s76",
+      "type": "pro"
+    },
+    {
+      "source": "s41",
+      "target": "s76",
+      "type": "pro"
+    },
+    {
+      "source": "s76",
+      "target": "s77",
+      "type": "pro"
+    },
+    {
+      "source": "s21",
+      "target": "s77",
+      "type": "pro"
+    },
+    {
+      "source": "s39",
+      "target": "s78",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "s78",
+      "type": "pro"
+    },
+    {
+      "source": "s78",
+      "target": "s79",
+      "type": "pro"
+    },
+    {
+      "source": "s78",
+      "target": "s80",
+      "type": "con"
+    },
+    {
+      "source": "s79",
+      "target": "s81",
+      "type": "pro"
+    },
+    {
+      "source": "s80",
+      "target": "s82",
+      "type": "con"
+    },
+    {
+      "source": "s78",
+      "target": "s83",
+      "type": "pro"
+    },
+    {
+      "source": "s78",
+      "target": "s84",
+      "type": "pro"
+    },
+    {
+      "source": "s78",
+      "target": "s85",
+      "type": "pro"
+    },
+    {
+      "source": "s78",
+      "target": "s86",
+      "type": "pro"
+    },
+    {
+      "source": "s83",
+      "target": "s88",
+      "type": "pro"
+    },
+    {
+      "source": "s86",
+      "target": "s87",
+      "type": "pro"
+    },
+    {
+      "source": "s41",
+      "target": "s89",
+      "type": "pro"
+    },
+    {
+      "source": "s81",
+      "target": "s90",
+      "type": "pro"
+    },
+    {
+      "source": "s86",
+      "target": "s90",
+      "type": "pro"
+    },
+    {
+      "source": "s90",
+      "target": "s91",
+      "type": "pro"
+    },
+    {
+      "source": "s86",
+      "target": "s92",
+      "type": "con"
+    },
+    {
+      "source": "s87",
+      "target": "s93",
+      "type": "pro"
+    },
+    {
+      "source": "s90",
+      "target": "s94",
+      "type": "pro"
+    },
+    {
+      "source": "s91",
+      "target": "s95",
+      "type": "pro"
+    },
+    {
+      "source": "s92",
+      "target": "s96",
+      "type": "con"
+    },
+    {
+      "source": "s97",
+      "target": "s98",
+      "type": "pro"
+    },
+    {
+      "source": "s95",
+      "target": "s99",
+      "type": "pro"
+    },
+    {
+      "source": "s97",
+      "target": "s100",
+      "type": "pro"
+    },
+    {
+      "source": "s98",
+      "target": "s100",
+      "type": "pro"
+    },
+    {
+      "source": "s100",
+      "target": "s101",
+      "type": "pro"
+    },
+    {
+      "source": "s101",
+      "target": "s102",
+      "type": "pro"
+    },
+    {
+      "source": "s101",
+      "target": "s103",
+      "type": "pro"
+    },
+    {
+      "source": "s101",
+      "target": "s104",
+      "type": "pro"
+    },
+    {
+      "source": "s98",
+      "target": "s105",
+      "type": "pro"
+    },
+    {
+      "source": "s105",
+      "target": "s106",
+      "type": "pro"
+    },
+    {
+      "source": "s105",
+      "target": "s107",
+      "type": "pro"
+    },
+    {
+      "source": "s100",
+      "target": "s108",
+      "type": "con"
+    },
+    {
+      "source": "s97",
+      "target": "s108",
+      "type": "pro"
+    },
+    {
+      "source": "s108",
+      "target": "s109",
+      "type": "pro"
+    },
+    {
+      "source": "s106",
+      "target": "s110",
+      "type": "pro"
+    },
+    {
+      "source": "s110",
+      "target": "s111",
+      "type": "con"
+    },
+    {
+      "source": "s108",
+      "target": "s112",
+      "type": "pro"
+    },
+    {
+      "source": "s89",
+      "target": "s113",
+      "type": "con"
+    },
+    {
+      "source": "s113",
+      "target": "s114",
+      "type": "pro"
+    },
+    {
+      "source": "s113",
+      "target": "s115",
+      "type": "pro"
+    },
+    {
+      "source": "s108",
+      "target": "s116",
+      "type": "pro"
+    },
+    {
+      "source": "s110",
+      "target": "s117",
+      "type": "pro"
+    },
+    {
+      "source": "s112",
+      "target": "s117",
+      "type": "pro"
+    },
+    {
+      "source": "s113",
+      "target": "s118",
+      "type": "pro"
+    },
+    {
+      "source": "s114",
+      "target": "s118",
+      "type": "pro"
+    },
+    {
+      "source": "s115",
+      "target": "s119",
+      "type": "pro"
+    },
+    {
+      "source": "s116",
+      "target": "s120",
+      "type": "pro"
+    },
+    {
+      "source": "s116",
+      "target": "s121",
+      "type": "pro"
+    },
+    {
+      "source": "s116",
+      "target": "s122",
+      "type": "pro"
+    },
+    {
+      "source": "s113",
+      "target": "s120",
+      "type": "pro"
+    },
+    {
+      "source": "s113",
+      "target": "s121",
+      "type": "pro"
+    },
+    {
+      "source": "s113",
+      "target": "s122",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "s123",
+      "type": "pro"
+    },
+    {
+      "source": "s41",
+      "target": "s123",
+      "type": "pro"
+    },
+    {
+      "source": "s78",
+      "target": "s124",
+      "type": "pro"
+    },
+    {
+      "source": "s91",
+      "target": "s124",
+      "type": "pro"
+    },
+    {
+      "source": "s115",
+      "target": "s125",
+      "type": "pro"
+    },
+    {
+      "source": "s89",
+      "target": "s126",
+      "type": "pro"
+    },
+    {
+      "source": "s98",
+      "target": "s126",
+      "type": "pro"
+    },
+    {
+      "source": "s118",
+      "target": "s127",
+      "type": "pro"
+    },
+    {
+      "source": "s118",
+      "target": "s128",
+      "type": "pro"
+    },
+    {
+      "source": "s118",
+      "target": "s129",
+      "type": "pro"
+    },
+    {
+      "source": "s127",
+      "target": "s130",
+      "type": "pro"
+    },
+    {
+      "source": "s128",
+      "target": "s130",
+      "type": "pro"
+    },
+    {
+      "source": "s129",
+      "target": "s130",
+      "type": "pro"
+    },
+    {
+      "source": "s113",
+      "target": "s131",
+      "type": "pro"
+    },
+    {
+      "source": "s120",
+      "target": "s132",
+      "type": "pro"
+    },
+    {
+      "source": "s113",
+      "target": "s132",
+      "type": "pro"
+    },
+    {
+      "source": "s124",
+      "target": "s134",
+      "type": "con"
+    },
+    {
+      "source": "s124",
+      "target": "s135",
+      "type": "pro"
+    },
+    {
+      "source": "s125",
+      "target": "s135",
+      "type": "pro"
+    },
+    {
+      "source": "s126",
+      "target": "s136",
+      "type": "pro"
+    },
+    {
+      "source": "s136",
+      "target": "s137",
+      "type": "pro"
+    },
+    {
+      "source": "s136",
+      "target": "s138",
+      "type": "pro"
+    },
+    {
+      "source": "s136",
+      "target": "s139",
+      "type": "pro"
+    },
+    {
+      "source": "s124",
+      "target": "s140",
+      "type": "pro"
+    },
+    {
+      "source": "s126",
+      "target": "s141",
+      "type": "pro"
+    },
+    {
+      "source": "s125",
+      "target": "s142",
+      "type": "pro"
+    },
+    {
+      "source": "s130",
+      "target": "s142",
+      "type": "pro"
+    },
+    {
+      "source": "s141",
+      "target": "s143",
+      "type": "pro"
+    },
+    {
+      "source": "s139",
+      "target": "s144",
+      "type": "pro"
+    },
+    {
+      "source": "s136",
+      "target": "s144",
+      "type": "pro"
+    },
+    {
+      "source": "s116",
+      "target": "s145",
+      "type": "pro"
+    },
+    {
+      "source": "s145",
+      "target": "s146",
+      "type": "pro"
+    },
+    {
+      "source": "s145",
+      "target": "s147",
+      "type": "pro"
+    },
+    {
+      "source": "s145",
+      "target": "s148",
+      "type": "pro"
+    },
+    {
+      "source": "s145",
+      "target": "s149",
+      "type": "pro"
+    },
+    {
+      "source": "s146",
+      "target": "s149",
+      "type": "pro"
+    },
+    {
+      "source": "s147",
+      "target": "s149",
+      "type": "pro"
+    },
+    {
+      "source": "s148",
+      "target": "s149",
+      "type": "pro"
+    },
+    {
+      "source": "s149",
+      "target": "s150",
+      "type": "pro"
+    },
+    {
+      "source": "s130",
+      "target": "s151",
+      "type": "pro"
+    },
+    {
+      "source": "s82",
+      "target": "s152",
+      "type": "pro"
+    },
+    {
+      "source": "s81",
+      "target": "s153",
+      "type": "pro"
+    },
+    {
+      "source": "s149",
+      "target": "s154",
+      "type": "pro"
+    },
+    {
+      "source": "s149",
+      "target": "s155",
+      "type": "pro"
+    },
+    {
+      "source": "s149",
+      "target": "s156",
+      "type": "con"
+    },
+    {
+      "source": "s113",
+      "target": "s157",
+      "type": "pro"
+    },
+    {
+      "source": "s120",
+      "target": "s158",
+      "type": "pro"
+    },
+    {
+      "source": "s121",
+      "target": "s158",
+      "type": "pro"
+    },
+    {
+      "source": "s122",
+      "target": "s158",
+      "type": "pro"
+    },
+    {
+      "source": "s151",
+      "target": "s159",
+      "type": "pro"
+    },
+    {
+      "source": "s157",
+      "target": "s160",
+      "type": "pro"
+    },
+    {
+      "source": "s149",
+      "target": "s161",
+      "type": "pro"
+    },
+    {
+      "source": "s153",
+      "target": "s161",
+      "type": "pro"
+    },
+    {
+      "source": "s149",
+      "target": "s162",
+      "type": "pro"
+    },
+    {
+      "source": "s152",
+      "target": "s162",
+      "type": "pro"
+    },
+    {
+      "source": "s149",
+      "target": "s163",
+      "type": "pro"
+    },
+    {
+      "source": "s155",
+      "target": "s163",
+      "type": "pro"
+    },
+    {
+      "source": "s152",
+      "target": "s164",
+      "type": "con"
+    },
+    {
+      "source": "s164",
+      "target": "s165",
+      "type": "pro"
+    },
+    {
+      "source": "s164",
+      "target": "s166",
+      "type": "con"
+    },
+    {
+      "source": "s155",
+      "target": "s167",
+      "type": "con"
+    },
+    {
+      "source": "s145",
+      "target": "s168",
+      "type": "pro"
+    },
+    {
+      "source": "s157",
+      "target": "s168",
+      "type": "pro"
+    },
+    {
+      "source": "s155",
+      "target": "s169",
+      "type": "pro"
+    },
+    {
+      "source": "s168",
+      "target": "s170",
+      "type": "pro"
+    },
+    {
+      "source": "s168",
+      "target": "s171",
+      "type": "pro"
+    },
+    {
+      "source": "s157",
+      "target": "s171",
+      "type": "pro"
+    },
+    {
+      "source": "s166",
+      "target": "s172",
+      "type": "pro"
+    },
+    {
+      "source": "s167",
+      "target": "s173",
+      "type": "pro"
+    },
+    {
+      "source": "s167",
+      "target": "s174",
+      "type": "pro"
+    },
+    {
+      "source": "s161",
+      "target": "s175",
+      "type": "pro"
+    },
+    {
+      "source": "s162",
+      "target": "s175",
+      "type": "pro"
+    },
+    {
+      "source": "s163",
+      "target": "s175",
+      "type": "pro"
+    },
+    {
+      "source": "s168",
+      "target": "s176",
+      "type": "pro"
+    },
+    {
+      "source": "s170",
+      "target": "s177",
+      "type": "pro"
+    },
+    {
+      "source": "s145",
+      "target": "s178",
+      "type": "pro"
+    },
+    {
+      "source": "s175",
+      "target": "s179",
+      "type": "con"
+    },
+    {
+      "source": "s152",
+      "target": "s180",
+      "type": "con"
+    },
+    {
+      "source": "s155",
+      "target": "s181",
+      "type": "con"
+    },
+    {
+      "source": "s159",
+      "target": "s182",
+      "type": "con"
+    },
+    {
+      "source": "s155",
+      "target": "s183",
+      "type": "con"
+    },
+    {
+      "source": "s155",
+      "target": "s184",
+      "type": "con"
+    },
+    {
+      "source": "s152",
+      "target": "s185",
+      "type": "con"
+    },
+    {
+      "source": "s152",
+      "target": "s186",
+      "type": "con"
+    },
+    {
+      "source": "s37",
+      "target": "s187",
+      "type": "pro"
+    },
+    {
+      "source": "s187",
+      "target": "s188",
+      "type": "pro"
+    },
+    {
+      "source": "s161",
+      "target": "s189",
+      "type": "pro"
+    },
+    {
+      "source": "s189",
+      "target": "s190",
+      "type": "pro"
+    },
+    {
+      "source": "s190",
+      "target": "s191",
+      "type": "pro"
+    },
+    {
+      "source": "s145",
+      "target": "s192",
+      "type": "con"
+    },
+    {
+      "source": "s175",
+      "target": "s192",
+      "type": "con"
+    },
+    {
+      "source": "s161",
+      "target": "s193",
+      "type": "pro"
+    },
+    {
+      "source": "s192",
+      "target": "s194",
+      "type": "pro"
+    },
+    {
+      "source": "s76",
+      "target": "s195",
+      "type": "pro"
+    },
+    {
+      "source": "s77",
+      "target": "s195",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "s196",
+      "type": "pro"
+    },
+    {
+      "source": "s38",
+      "target": "s197",
+      "type": "pro"
+    },
+    {
+      "source": "s38",
+      "target": "s198",
+      "type": "con"
+    },
+    {
+      "source": "s197",
+      "target": "s199",
+      "type": "pro"
+    },
+    {
+      "source": "s198",
+      "target": "s200",
+      "type": "pro"
+    },
+    {
+      "source": "s39",
+      "target": "s201",
+      "type": "pro"
+    },
+    {
+      "source": "s201",
+      "target": "s202",
+      "type": "pro"
+    },
+    {
+      "source": "s202",
+      "target": "s203",
+      "type": "pro"
+    },
+    {
+      "source": "s202",
+      "target": "s204",
+      "type": "pro"
+    },
+    {
+      "source": "s202",
+      "target": "s205",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "s206",
+      "type": "pro"
+    },
+    {
+      "source": "s197",
+      "target": "s206",
+      "type": "pro"
+    },
+    {
+      "source": "s206",
+      "target": "s207",
+      "type": "pro"
+    },
+    {
+      "source": "s207",
+      "target": "s208",
+      "type": "pro"
+    },
+    {
+      "source": "s206",
+      "target": "s209",
+      "type": "pro"
+    },
+    {
+      "source": "s209",
+      "target": "s210",
+      "type": "pro"
+    },
+    {
+      "source": "s195",
+      "target": "s211",
+      "type": "pro"
+    },
+    {
+      "source": "s196",
+      "target": "s211",
+      "type": "pro"
+    },
+    {
+      "source": "s211",
+      "target": "s212",
+      "type": "pro"
+    },
+    {
+      "source": "s211",
+      "target": "s213",
+      "type": "pro"
+    },
+    {
+      "source": "s211",
+      "target": "s214",
+      "type": "pro"
+    },
+    {
+      "source": "s211",
+      "target": "s215",
+      "type": "pro"
+    },
+    {
+      "source": "s211",
+      "target": "s216",
+      "type": "pro"
+    },
+    {
+      "source": "s199",
+      "target": "s212",
+      "type": "pro"
+    },
+    {
+      "source": "s200",
+      "target": "s213",
+      "type": "pro"
+    },
+    {
+      "source": "s195",
+      "target": "s217",
+      "type": "pro"
+    },
+    {
+      "source": "s195",
+      "target": "s218",
+      "type": "pro"
+    },
+    {
+      "source": "s217",
+      "target": "s219",
+      "type": "pro"
+    },
+    {
+      "source": "s218",
+      "target": "s220",
+      "type": "pro"
+    },
+    {
+      "source": "s218",
+      "target": "s221",
+      "type": "pro"
+    },
+    {
+      "source": "s196",
+      "target": "s222",
+      "type": "pro"
+    },
+    {
+      "source": "s197",
+      "target": "s223",
+      "type": "pro"
+    },
+    {
+      "source": "s223",
+      "target": "s224",
+      "type": "pro"
+    },
+    {
+      "source": "s223",
+      "target": "s225",
+      "type": "pro"
+    },
+    {
+      "source": "s225",
+      "target": "s226",
+      "type": "pro"
+    },
+    {
+      "source": "s72",
+      "target": "s227",
+      "type": "pro"
+    },
+    {
+      "source": "s73",
+      "target": "s228",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "s229",
+      "type": "pro"
+    },
+    {
+      "source": "s229",
+      "target": "s230",
+      "type": "pro"
+    },
+    {
+      "source": "s229",
+      "target": "s231",
+      "type": "pro"
+    },
+    {
+      "source": "s228",
+      "target": "s232",
+      "type": "pro"
+    },
+    {
+      "source": "s228",
+      "target": "s233",
+      "type": "pro"
+    },
+    {
+      "source": "s211",
+      "target": "s234",
+      "type": "pro"
+    },
+    {
+      "source": "s211",
+      "target": "s235",
+      "type": "pro"
+    },
+    {
+      "source": "s212",
+      "target": "s236",
+      "type": "pro"
+    },
+    {
+      "source": "s213",
+      "target": "s235",
+      "type": "pro"
+    },
+    {
+      "source": "s214",
+      "target": "s236",
+      "type": "pro"
+    },
+    {
+      "source": "s215",
+      "target": "s237",
+      "type": "pro"
+    },
+    {
+      "source": "s234",
+      "target": "s237",
+      "type": "pro"
+    },
+    {
+      "source": "s234",
+      "target": "s238",
+      "type": "pro"
+    },
+    {
+      "source": "s195",
+      "target": "s239",
+      "type": "pro"
+    },
+    {
+      "source": "s239",
+      "target": "s240",
+      "type": "pro"
+    },
+    {
+      "source": "s240",
+      "target": "s241",
+      "type": "pro"
+    },
+    {
+      "source": "s240",
+      "target": "s242",
+      "type": "pro"
+    },
+    {
+      "source": "s195",
+      "target": "s243",
+      "type": "pro"
+    },
+    {
+      "source": "s195",
+      "target": "s244",
+      "type": "pro"
+    },
+    {
+      "source": "s244",
+      "target": "s245",
+      "type": "pro"
+    },
+    {
+      "source": "s14",
+      "target": "s247",
+      "type": "pro"
+    },
+    {
+      "source": "s246",
+      "target": "s247",
+      "type": "pro"
+    },
+    {
+      "source": "s247",
+      "target": "s248",
+      "type": "pro"
+    },
+    {
+      "source": "s246",
+      "target": "s249",
+      "type": "pro"
+    },
+    {
+      "source": "s223",
+      "target": "s254",
+      "type": "pro"
+    },
+    {
+      "source": "s225",
+      "target": "s252",
+      "type": "pro"
+    },
+    {
+      "source": "s197",
+      "target": "s251",
+      "type": "pro"
+    },
+    {
+      "source": "s38",
+      "target": "s252",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "s255",
+      "type": "pro"
+    },
+    {
+      "source": "s201",
+      "target": "s256",
+      "type": "pro"
+    },
+    {
+      "source": "s78",
+      "target": "s257",
+      "type": "pro"
+    },
+    {
+      "source": "s257",
+      "target": "s258",
+      "type": "pro"
+    },
+    {
+      "source": "s257",
+      "target": "s259",
+      "type": "pro"
+    },
+    {
+      "source": "s256",
+      "target": "s260",
+      "type": "pro"
+    },
+    {
+      "source": "s260",
+      "target": "s261",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "s262",
+      "type": "pro"
+    },
+    {
+      "source": "s14",
+      "target": "s264",
+      "type": "pro"
+    },
+    {
+      "source": "s264",
+      "target": "s265",
+      "type": "pro"
+    },
+    {
+      "source": "s265",
+      "target": "s266",
+      "type": "pro"
+    },
+    {
+      "source": "s263",
+      "target": "s264",
+      "type": "pro"
+    },
+    {
+      "source": "s195",
+      "target": "s267",
+      "type": "pro"
+    },
+    {
+      "source": "s262",
+      "target": "s267",
+      "type": "pro"
+    },
+    {
+      "source": "s267",
+      "target": "s268",
+      "type": "pro"
+    },
+    {
+      "source": "s267",
+      "target": "s269",
+      "type": "pro"
+    },
+    {
+      "source": "s268",
+      "target": "s270",
+      "type": "pro"
+    },
+    {
+      "source": "s268",
+      "target": "s271",
+      "type": "pro"
+    },
+    {
+      "source": "s196",
+      "target": "s272",
+      "type": "pro"
+    },
+    {
+      "source": "s197",
+      "target": "s273",
+      "type": "pro"
+    },
+    {
+      "source": "s272",
+      "target": "s274",
+      "type": "pro"
+    },
+    {
+      "source": "s273",
+      "target": "s275",
+      "type": "pro"
+    },
+    {
+      "source": "s274",
+      "target": "s276",
+      "type": "pro"
+    },
+    {
+      "source": "s201",
+      "target": "s277",
+      "type": "pro"
+    },
+    {
+      "source": "s255",
+      "target": "s277",
+      "type": "pro"
+    },
+    {
+      "source": "s277",
+      "target": "s278",
+      "type": "pro"
+    },
+    {
+      "source": "s278",
+      "target": "s279",
+      "type": "pro"
+    },
+    {
+      "source": "s278",
+      "target": "s280",
+      "type": "pro"
+    },
+    {
+      "source": "s279",
+      "target": "s281",
+      "type": "pro"
+    },
+    {
+      "source": "s280",
+      "target": "s281",
+      "type": "pro"
+    },
+    {
+      "source": "s196",
+      "target": "s282",
+      "type": "pro"
+    },
+    {
+      "source": "s197",
+      "target": "s282",
+      "type": "pro"
+    },
+    {
+      "source": "s272",
+      "target": "s282",
+      "type": "pro"
+    },
+    {
+      "source": "s282",
+      "target": "s283",
+      "type": "pro"
+    },
+    {
+      "source": "s282",
+      "target": "s284",
+      "type": "pro"
+    },
+    {
+      "source": "s246",
+      "target": "s285",
+      "type": "pro"
+    },
+    {
+      "source": "s242",
+      "target": "s285",
+      "type": "pro"
+    },
+    {
+      "source": "s285",
+      "target": "s286",
+      "type": "pro"
+    },
+    {
+      "source": "s286",
+      "target": "s287",
+      "type": "pro"
+    },
+    {
+      "source": "s287",
+      "target": "s288",
+      "type": "pro"
+    },
+    {
+      "source": "s195",
+      "target": "s289",
+      "type": "pro"
+    },
+    {
+      "source": "s227",
+      "target": "s289",
+      "type": "pro"
+    },
+    {
+      "source": "s289",
+      "target": "s290",
+      "type": "pro"
+    },
+    {
+      "source": "s290",
+      "target": "s291",
+      "type": "pro"
+    },
+    {
+      "source": "s291",
+      "target": "s292",
+      "type": "pro"
+    },
+    {
+      "source": "s292",
+      "target": "s293",
+      "type": "pro"
+    },
+    {
+      "source": "s293",
+      "target": "s294",
+      "type": "pro"
+    },
+    {
+      "source": "s242",
+      "target": "s294",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "s295",
+      "type": "pro"
+    },
+    {
+      "source": "s197",
+      "target": "s295",
+      "type": "pro"
+    },
+    {
+      "source": "s295",
+      "target": "s296",
+      "type": "pro"
+    },
+    {
+      "source": "s296",
+      "target": "s297",
+      "type": "pro"
+    },
+    {
+      "source": "s295",
+      "target": "s298",
+      "type": "pro"
+    },
+    {
+      "source": "s298",
+      "target": "s299",
+      "type": "pro"
+    },
+    {
+      "source": "s255",
+      "target": "s300",
+      "type": "pro"
+    },
+    {
+      "source": "s195",
+      "target": "s300",
+      "type": "pro"
+    },
+    {
+      "source": "s300",
+      "target": "s301",
+      "type": "pro"
+    },
+    {
+      "source": "s301",
+      "target": "s302",
+      "type": "pro"
+    },
+    {
+      "source": "s302",
+      "target": "s303",
+      "type": "pro"
+    },
+    {
+      "source": "s301",
+      "target": "s304",
+      "type": "pro"
+    },
+    {
+      "source": "s296",
+      "target": "s305",
+      "type": "pro"
+    },
+    {
+      "source": "s297",
+      "target": "s305",
+      "type": "pro"
+    },
+    {
+      "source": "s298",
+      "target": "s306",
+      "type": "pro"
+    },
+    {
+      "source": "s299",
+      "target": "s307",
+      "type": "pro"
+    },
+    {
+      "source": "s305",
+      "target": "s306",
+      "type": "pro"
+    },
+    {
+      "source": "s306",
+      "target": "s307",
+      "type": "pro"
+    },
+    {
+      "source": "s278",
+      "target": "s308",
+      "type": "pro"
+    },
+    {
+      "source": "s281",
+      "target": "s309",
+      "type": "pro"
+    },
+    {
+      "source": "s285",
+      "target": "s308",
+      "type": "pro"
+    },
+    {
+      "source": "s308",
+      "target": "s310",
+      "type": "pro"
+    }
+  ]
+}

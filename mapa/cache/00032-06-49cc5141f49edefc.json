@@ -1,0 +1,61 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "La biblioteca puede replicar la estructura de servidores Discord con canales físicos temáticos"
+    },
+    {
+      "ref": "n2",
+      "text": "Los jóvenes pueden nombrar y diseñar los canales temáticos de la biblioteca"
+    },
+    {
+      "ref": "n3",
+      "text": "Roles de moderador rotativos semanales dan poder de decisión a jóvenes en la biblioteca"
+    },
+    {
+      "ref": "n4",
+      "text": "Los moderadores rotativos tienen permisos específicos para gestionar su canal temático"
+    }
+  ],
+  "repeats": [
+    "s21",
+    "s23"
+  ],
+  "edges": [
+    {
+      "source": "s16",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s20",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s33",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s10",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

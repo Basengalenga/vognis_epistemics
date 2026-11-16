@@ -1,0 +1,42 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Facilitar discretamente el primer match entre jóvenes sin que perciban intervención adulta"
+    },
+    {
+      "ref": "n2",
+      "text": "Lograr un primer intercambio visible en el tablero de trueque dentro de una semana"
+    },
+    {
+      "ref": "n3",
+      "text": "La intervención adulta debe ser invisible para que el match parezca emergencia natural de jóvenes"
+    }
+  ],
+  "repeats": [
+    "s76",
+    "s83"
+  ],
+  "edges": [
+    {
+      "source": "s76",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s83",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s79",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

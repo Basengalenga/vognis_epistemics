@@ -1,0 +1,48 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Testimonios de jóvenes participantes demuestran valor del tablero de trueque sin control formal"
+    },
+    {
+      "ref": "n2",
+      "text": "Llegada de nuevos jóvenes atraídos por el tablero de trueque evidencia su efectividad"
+    },
+    {
+      "ref": "n3",
+      "text": "Productos o artefactos creados conjuntamente en trueques son prueba tangible de valor para directivos"
+    },
+    {
+      "ref": "n4",
+      "text": "La evidencia de valor del tablero debe ser observable sin requerir reportes formales de jóvenes"
+    }
+  ],
+  "repeats": [
+    "s92",
+    "s102",
+    "s104",
+    "s105"
+  ],
+  "edges": [
+    {
+      "source": "s92",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s84",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s104",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s109",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "El bibliotecario pasaría tres veces la primera semana: lunes, miércoles y viernes"
+    },
+    {
+      "ref": "n2",
+      "text": "El bibliotecario solo observa si hay movimiento sin hablar a nadie a menos que le pregunten"
+    },
+    {
+      "ref": "n3",
+      "text": "El bibliotecario interviene solo si ve algo que rompe los límites establecidos"
+    },
+    {
+      "ref": "n4",
+      "text": "Tarjetas sin respuesta no requieren intervención inmediata porque nadie las busca todavía"
+    },
+    {
+      "ref": "n5",
+      "text": "Cuando un joven nuevo llega y otro le explica el sistema sin que el bibliotecario esté, eso indica balance correcto"
+    },
+    {
+      "ref": "n6",
+      "text": "Se necesita plan día por día para lanzar el trueque esta semana"
+    },
+    {
+      "ref": "n7",
+      "text": "Se necesita definir con quiénes hablar el lunes para lanzar el trueque"
+    },
+    {
+      "ref": "n8",
+      "text": "Se necesita definir qué armar el martes para lanzar el trueque"
+    },
+    {
+      "ref": "n9",
+      "text": "Se necesita definir cuándo presentar el sistema de trueque"
+    }
+  ],
+  "repeats": [
+    "s126",
+    "s139"
+  ],
+  "edges": [
+    {
+      "source": "s124",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s126",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s125",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s130",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s139",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s136",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s116",
+      "target": "n6",
+      "type": "pro"
+    },
+    {
+      "source": "n6",
+      "target": "n7",
+      "type": "pro"
+    },
+    {
+      "source": "n6",
+      "target": "n8",
+      "type": "pro"
+    },
+    {
+      "source": "n6",
+      "target": "n9",
+      "type": "pro"
+    }
+  ]
+}

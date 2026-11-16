@@ -1,0 +1,72 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Crear archivo de historias orales del barrio"
+    },
+    {
+      "ref": "n2",
+      "text": "Jóvenes documentan historias de vecinos con equipos de biblioteca"
+    },
+    {
+      "ref": "n3",
+      "text": "Jóvenes usan celulares y computadoras para grabar y editar historias"
+    },
+    {
+      "ref": "n4",
+      "text": "Jóvenes deciden qué preguntar y a quién entrevistar"
+    },
+    {
+      "ref": "n5",
+      "text": "Jóvenes deciden cómo presentar las historias documentadas"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s20",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s14",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

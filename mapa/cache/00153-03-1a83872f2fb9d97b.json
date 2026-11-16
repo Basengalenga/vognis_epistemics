@@ -1,0 +1,43 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Saber si se logró el balance correcto entre presencia y autonomía en un mes"
+    },
+    {
+      "ref": "n2",
+      "text": "Los jóvenes expresan verbalmente que el balance es correcto"
+    },
+    {
+      "ref": "n3",
+      "text": "La cantidad de truques que ocurren sin intervención del bibliotecario indica balance correcto"
+    },
+    {
+      "ref": "n4",
+      "text": "Alguien nuevo entiende cómo funciona el sistema sin que se lo expliquen indica balance correcto"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s126",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

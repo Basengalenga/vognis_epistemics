@@ -1,0 +1,34 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Para que un joven ponga su primera tarjeta debe creer que alguien va a responder"
+    },
+    {
+      "ref": "n2",
+      "text": "Para que un joven ponga su primera tarjeta debe creer que nadie se va a burlar"
+    },
+    {
+      "ref": "n3",
+      "text": "Para que un joven ponga su primera tarjeta debe creer que hay algo concreto que puede ganar"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s78",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s78",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s78",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

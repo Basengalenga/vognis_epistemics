@@ -1,0 +1,20 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Los jóvenes solo vienen a la biblioteca por tareas escolares"
+    },
+    {
+      "ref": "n2",
+      "text": "Se necesita que los jóvenes se enganchen con actividades que los hagan volver por gusto"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

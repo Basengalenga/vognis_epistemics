@@ -1,0 +1,62 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Implementar Protocolo de Incompetencia Declarada en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Todos escriben públicamente tres cosas que no saben hacer y necesitan aprender"
+    },
+    {
+      "ref": "n3",
+      "text": "Usar cartelera donde todos publican sus lagunas de conocimiento"
+    },
+    {
+      "ref": "n4",
+      "text": "El bibliotecario también publica sus lagunas de conocimiento en la cartelera"
+    },
+    {
+      "ref": "n5",
+      "text": "Normalizar no saber convierte la vulnerabilidad en punto de conexión social"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s201",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s255",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "n4",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

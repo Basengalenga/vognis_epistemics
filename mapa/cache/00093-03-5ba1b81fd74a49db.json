@@ -1,0 +1,44 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "El despegue del tablero de trueque se evidencia cuando hay X número de tarjetas puestas"
+    },
+    {
+      "ref": "n2",
+      "text": "El despegue del tablero de trueque se evidencia cuando ocurre un primer intercambio real sin organización adulta"
+    },
+    {
+      "ref": "n3",
+      "text": "El despegue del tablero de trueque se evidencia cuando jóvenes traen amigos invitándolos a aprender habilidades específicas"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s74",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s74",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s74",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s68",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s19",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

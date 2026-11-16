@@ -1,0 +1,41 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Las primeras tarjetas del tablero pueden no incluir nombres reales para evitar que jóvenes se sientan expuestos"
+    },
+    {
+      "ref": "n2",
+      "text": "Las tarjetas iniciales pueden usar formato anónimo 'alguien busca aprender X' sin identificar al joven"
+    }
+  ],
+  "repeats": [
+    "s161",
+    "s163",
+    "s165",
+    "s166",
+    "s169"
+  ],
+  "edges": [
+    {
+      "source": "s161",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s161",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s165",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s165",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

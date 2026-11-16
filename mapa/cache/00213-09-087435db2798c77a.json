@@ -1,0 +1,34 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Prohibir trabajar con los mismos jóvenes dos veces seguidas"
+    },
+    {
+      "ref": "n2",
+      "text": "Cada nueva actividad requiere formar equipo con personas con quienes nunca has colaborado"
+    },
+    {
+      "ref": "n3",
+      "text": "Forzar la expansión de la red social en lugar de su consolidación"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s195",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s195",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Es necesario un plan detallado día por día para lanzar el tablero de trueque esta semana"
+    },
+    {
+      "ref": "n2",
+      "text": "El plan debe especificar con quiénes hablar cada día para iniciar el tablero"
+    },
+    {
+      "ref": "n3",
+      "text": "El plan debe detallar qué materiales armar cada día para el tablero de trueque"
+    },
+    {
+      "ref": "n4",
+      "text": "El plan debe especificar cuándo presentar el tablero de trueque a los jóvenes"
+    }
+  ],
+  "repeats": [
+    "s156"
+  ],
+  "edges": [
+    {
+      "source": "s156",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

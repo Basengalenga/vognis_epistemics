@@ -1,0 +1,67 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Un torneo de fanfiction local puede motivar a jóvenes a escribir historias sobre su barrio"
+    },
+    {
+      "ref": "n2",
+      "text": "Usar autores locales como inspiración facilita que jóvenes creen sus propias versiones literarias"
+    },
+    {
+      "ref": "n3",
+      "text": "Publicar fanfiction en redes de la biblioteca amplifica el alcance y visibilidad del contenido joven"
+    },
+    {
+      "ref": "n4",
+      "text": "Permitir que jóvenes voten entre ellos genera participación y sentido de comunidad en la actividad"
+    }
+  ],
+  "repeats": [
+    "s17",
+    "s8",
+    "s10"
+  ],
+  "edges": [
+    {
+      "source": "s2",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s3",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s17",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s8",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s10",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

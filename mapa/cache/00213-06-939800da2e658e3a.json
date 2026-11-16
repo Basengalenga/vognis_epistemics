@@ -1,0 +1,70 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "La biblioteca funciona como red mycelial donde los jóvenes son nodos"
+    },
+    {
+      "ref": "n2",
+      "text": "Los jóvenes comparten recursos bajo tierra, no en exhibición pública"
+    },
+    {
+      "ref": "n3",
+      "text": "Crear canales invisibles de intercambio en la biblioteca"
+    },
+    {
+      "ref": "n4",
+      "text": "Usar notas escondidas en libros como canal de intercambio"
+    },
+    {
+      "ref": "n5",
+      "text": "Usar mensajes en lugares secretos como canal de intercambio"
+    },
+    {
+      "ref": "n6",
+      "text": "La conexión entre jóvenes debe ser discreta y orgánica"
+    },
+    {
+      "ref": "n7",
+      "text": "La conexión entre jóvenes no debe ser performativa"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s72",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s73",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n6",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n7",
+      "type": "pro"
+    }
+  ]
+}

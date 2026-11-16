@@ -1,0 +1,31 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "La biblioteca debe ser el lugar donde jóvenes se necesitan mutuamente y encuentran lo que buscan"
+    }
+  ],
+  "repeats": [
+    "s34",
+    "s36",
+    "s37",
+    "s68"
+  ],
+  "edges": [
+    {
+      "source": "s34",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s36",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s68",
+      "target": "n1",
+      "type": "pro"
+    }
+  ]
+}

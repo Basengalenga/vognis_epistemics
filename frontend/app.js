@@ -113,6 +113,7 @@ function goToNode(n) {
   document.getElementById("node-indicator").textContent = t("node") + " " + n;
   if (typeof track === "function") track("node_view", { node: n }, { author: "client" });
   document.getElementById("btn-finish").classList.toggle("hidden", n < 2);
+  if (typeof auditOnNode === "function") auditOnNode(n);
   setTimeout(() => current.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
 }
 

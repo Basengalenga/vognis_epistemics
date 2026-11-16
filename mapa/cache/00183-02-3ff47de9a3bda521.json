@@ -1,0 +1,44 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Si nadie pregunta sobre el tablero en toda la tarde del miércoles, el facilitador debe decidir entre esperar pacientemente o mencionar casualmente el tablero a alguien"
+    },
+    {
+      "ref": "n2",
+      "text": "Mencionar casualmente el tablero a un joven sin parecer promoción formal puede generar adopción orgánica"
+    },
+    {
+      "ref": "n3",
+      "text": "Esperar días sin intervención alguna puede ser demasiado pasivo si el tablero permanece completamente ignorado"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s165",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s166",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s145",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "con"
+    }
+  ]
+}

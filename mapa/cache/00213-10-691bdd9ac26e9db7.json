@@ -1,0 +1,43 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Crear problemas que requieren colaboración humana porque no tienen solución algorítmica"
+    },
+    {
+      "ref": "n2",
+      "text": "Diseñar desafíos que las computadoras viejas no pueden resolver solas"
+    },
+    {
+      "ref": "n3",
+      "text": "Los desafíos incluyen juicios estéticos, dilemas morales e interpretaciones ambiguas"
+    },
+    {
+      "ref": "n4",
+      "text": "La tecnología amplifica pero no reemplaza la colaboración humana"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s14",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

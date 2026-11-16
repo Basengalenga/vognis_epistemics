@@ -1,0 +1,48 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Solo se puede pedir ayuda si primero se traduce la necesidad al lenguaje de quien puede ayudar"
+    },
+    {
+      "ref": "n2",
+      "text": "Quien pide ayuda debe demostrar que entiende el mundo del otro antes de solicitar"
+    },
+    {
+      "ref": "n3",
+      "text": "La traducción de la necesidad al lenguaje del otro es el precio para pedir ayuda en la biblioteca"
+    },
+    {
+      "ref": "n4",
+      "text": "Explicar un problema usando conceptos visuales cuando pides ayuda a alguien que dibuja genera comprensión mutua"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s34",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s34",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s253",
+      "target": "n3",
+      "type": "con"
+    },
+    {
+      "source": "s274",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

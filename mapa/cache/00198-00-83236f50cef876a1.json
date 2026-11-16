@@ -1,0 +1,39 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Es necesario identificar riesgos o puntos ciegos que podrían sabotear el lanzamiento del tablero de trueque"
+    },
+    {
+      "ref": "n2",
+      "text": "Revisar críticamente el plan de tres días para detectar supuestos no validados o vulnerabilidades"
+    },
+    {
+      "ref": "n3",
+      "text": "Anticipar obstáculos obvios que podrían impedir que el tablero funcione desde el inicio"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s157",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s186",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s157",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

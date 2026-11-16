@@ -1,0 +1,39 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Usar pizarrón de corcho dividido en ofrezco/busco para el trueque de habilidades"
+    },
+    {
+      "ref": "n2",
+      "text": "Presentar el tablero de trueque sin que suene a tarea o forzado"
+    },
+    {
+      "ref": "n3",
+      "text": "Al principio el pizarrón vacío puede verse triste y desanimar participación"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s39",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "con"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Poner las reglas del trueque en una hoja simple sin diseño elaborado"
+    },
+    {
+      "ref": "n2",
+      "text": "Contarle a la jefa después del primer trueque exitoso evita que frene el proyecto con preguntas y permisos"
+    },
+    {
+      "ref": "n3",
+      "text": "Lunes hablar con Fer y dos jóvenes más para preguntarles qué quieren aprender"
+    },
+    {
+      "ref": "n4",
+      "text": "Martes armar el tablero y poner las tarjetas con lo que dijeron sin nombres todavía"
+    },
+    {
+      "ref": "n5",
+      "text": "Miércoles dejar el tablero listo y esperar a que alguien pregunte"
+    },
+    {
+      "ref": "n6",
+      "text": "Poner nombres reales en las primeras tarjetas puede asustar a los jóvenes porque los expone"
+    },
+    {
+      "ref": "n7",
+      "text": "Poner tarjetas anónimas como 'alguien busca aprender X' sin decir quién"
+    }
+  ],
+  "repeats": [
+    "s149",
+    "s150",
+    "s151",
+    "s152",
+    "s153",
+    "s154",
+    "s155",
+    "s156",
+    "s157"
+  ],
+  "edges": [
+    {
+      "source": "s151",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s157",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s149",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s153",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s149",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s152",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s149",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s155",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s152",
+      "target": "n6",
+      "type": "con"
+    },
+    {
+      "source": "n6",
+      "target": "n7",
+      "type": "pro"
+    }
+  ]
+}

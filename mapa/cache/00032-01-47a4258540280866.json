@@ -1,0 +1,43 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Organizar torneo de fanfiction sobre el barrio o personajes locales"
+    },
+    {
+      "ref": "n2",
+      "text": "Los jóvenes escriben historias inspiradas en autores locales"
+    },
+    {
+      "ref": "n3",
+      "text": "Publicar las historias en redes sociales de la biblioteca"
+    },
+    {
+      "ref": "n4",
+      "text": "Los jóvenes votan entre ellos las mejores historias"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s11",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s11",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s7",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

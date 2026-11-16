@@ -1,0 +1,43 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Micro-encargos de 10 minutos permiten que jóvenes contribuyan sin compromiso de tiempo largo"
+    },
+    {
+      "ref": "n2",
+      "text": "Una lista actualizada de mini-tareas (organizar repisa, probar juego, revisar enlace) facilita participación flexible"
+    },
+    {
+      "ref": "n3",
+      "text": "Jóvenes ganan puntos al completar micro-encargos que pueden canjear por solicitar ayuda"
+    },
+    {
+      "ref": "n4",
+      "text": "Los micro-encargos crean oportunidades de contribución de bajo umbral para jóvenes en la biblioteca"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s37",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s66",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s107",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s129",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

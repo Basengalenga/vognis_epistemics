@@ -1,0 +1,16 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Si nadie pregunta por el tablero el primer día, el bibliotecario debe decidir entre esperar orgánicamente o mencionarlo casualmente"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s155",
+      "target": "n1",
+      "type": "con"
+    }
+  ]
+}

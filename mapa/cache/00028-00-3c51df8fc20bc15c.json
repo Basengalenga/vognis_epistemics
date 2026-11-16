@@ -1,0 +1,25 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Los jóvenes deben sentir que la biblioteca les pertenece"
+    },
+    {
+      "ref": "n2",
+      "text": "Los jóvenes deben poder decidir qué actividades ocurren en la biblioteca"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s19",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

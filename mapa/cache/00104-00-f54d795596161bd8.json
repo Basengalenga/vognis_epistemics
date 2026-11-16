@@ -1,0 +1,48 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "El tablero de trueque debe mostrar matches o intercambios completados para evidenciar que funciona"
+    },
+    {
+      "ref": "n2",
+      "text": "Mostrar intercambios ya realizados en el tablero motiva a nuevos jóvenes a participar"
+    },
+    {
+      "ref": "n3",
+      "text": "Una sección de 'ya se hizo' en el tablero valida que los intercambios realmente ocurren"
+    }
+  ],
+  "repeats": [
+    "s76",
+    "s79",
+    "s83"
+  ],
+  "edges": [
+    {
+      "source": "s79",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s79",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s83",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s83",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

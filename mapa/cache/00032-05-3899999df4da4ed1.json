@@ -1,0 +1,50 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Jóvenes pueden crear playlists temáticas de libros y cómics inspiradas en géneros musicales"
+    },
+    {
+      "ref": "n2",
+      "text": "Las playlists literarias con nombres creativos como 'Para cuando truenas con alguien' generan engagement"
+    },
+    {
+      "ref": "n3",
+      "text": "Jóvenes diseñan portadas para las playlists literarias que publican en redes de la biblioteca"
+    },
+    {
+      "ref": "n4",
+      "text": "Publicar playlists literarias diseñadas por jóvenes en redes amplifica su visibilidad y participación"
+    }
+  ],
+  "repeats": [
+    "s27"
+  ],
+  "edges": [
+    {
+      "source": "s17",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s3",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s8",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Implementar gamificación para aumentar el engagement juvenil"
+    },
+    {
+      "ref": "n2",
+      "text": "Ofrecer talleres musicales para atraer jóvenes"
+    },
+    {
+      "ref": "n3",
+      "text": "Crear un club de videojuegos en la biblioteca"
+    },
+    {
+      "ref": "n4",
+      "text": "Desarrollar contenido digital para jóvenes"
+    },
+    {
+      "ref": "n5",
+      "text": "Usar redes sociales para promocionar la biblioteca"
+    },
+    {
+      "ref": "n6",
+      "text": "Crear espacios maker para la comunidad joven"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s2",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "n6",
+      "type": "pro"
+    }
+  ]
+}

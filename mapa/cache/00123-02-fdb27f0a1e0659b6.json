@@ -1,0 +1,34 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Actualizar el tablero de truques completados debe ser algo que los jóvenes quieran hacer"
+    },
+    {
+      "ref": "n2",
+      "text": "Presumir los truques completados puede motivar a actualizar el tablero"
+    },
+    {
+      "ref": "n3",
+      "text": "Subir reputación para el siguiente trueque puede motivar a actualizar el tablero"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s98",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

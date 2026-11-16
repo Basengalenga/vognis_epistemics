@@ -1,0 +1,39 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Probar la idea del tablero de trueque hablando informalmente con Fer antes de armar el tablero físico"
+    },
+    {
+      "ref": "n2",
+      "text": "Validar si la propuesta de intercambio de habilidades tiene sentido para jóvenes antes de implementar el plan completo"
+    },
+    {
+      "ref": "n3",
+      "text": "Una prueba mínima con un solo joven puede revelar si el concepto de trueque es viable antes de invertir en preparativos"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s174",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s174",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s109",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

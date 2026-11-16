@@ -1,0 +1,49 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "La biblioteca debe actuar como especie keystone que facilita emergencia de actividades sin programarlas"
+    },
+    {
+      "ref": "n2",
+      "text": "La biblioteca provee solo infraestructura mínima: wifi, mesas, materiales y capacidad de convocar"
+    },
+    {
+      "ref": "n3",
+      "text": "Los jóvenes diseñan actividades según necesidades que emergen, no según programación predefinida"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s36",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s16",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s21",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

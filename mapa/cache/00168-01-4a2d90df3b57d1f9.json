@@ -1,0 +1,47 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "En un lanzamiento de tres días, lo indispensable es tener las tarjetas sembradas antes de que jóvenes vean el tablero"
+    },
+    {
+      "ref": "n2",
+      "text": "Las tres reglas escritas pueden presentarse después del lanzamiento inicial del tablero"
+    },
+    {
+      "ref": "n3",
+      "text": "Haber hablado previamente con jóvenes clave es menos crítico que tener tarjetas sembradas para el lanzamiento"
+    }
+  ],
+  "repeats": [
+    "s156",
+    "s157",
+    "s158",
+    "s159",
+    "s160",
+    "s77",
+    "s78"
+  ],
+  "edges": [
+    {
+      "source": "s77",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s78",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s137",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s71",
+      "target": "n1",
+      "type": "con"
+    }
+  ]
+}

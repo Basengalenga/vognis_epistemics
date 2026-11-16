@@ -1,0 +1,38 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Nombrar la sección de matches con lenguaje que los jóvenes usan naturalmente"
+    },
+    {
+      "ref": "n2",
+      "text": "Incluir fotos o evidencia visual del primer intercambio exitoso"
+    },
+    {
+      "ref": "n3",
+      "text": "Mostrar aunque sea un solo intercambio exitoso al principio"
+    }
+  ],
+  "repeats": [
+    "s86",
+    "s87",
+    "s90"
+  ],
+  "edges": [
+    {
+      "source": "s86",
+      "target": "n1",
+      "type": "con"
+    },
+    {
+      "source": "s87",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s90",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

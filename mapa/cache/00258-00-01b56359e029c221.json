@@ -1,0 +1,70 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Un mural físico con tarjetas de colores conectadas por hilos visualiza los intercambios de ayuda entre jóvenes"
+    },
+    {
+      "ref": "n2",
+      "text": "Las tarjetas rojas representan necesidades y las verdes representan ofertas en el mural de intercambios"
+    },
+    {
+      "ref": "n3",
+      "text": "Conectar tarjetas con hilos cuando se resuelve un intercambio crea un mapa visual de la red de ayuda"
+    },
+    {
+      "ref": "n4",
+      "text": "La visibilidad de intercambios completados en el mural motiva a otros jóvenes a participar"
+    }
+  ],
+  "repeats": [
+    "s204",
+    "s205",
+    "s206",
+    "s225",
+    "s226",
+    "s235"
+  ],
+  "edges": [
+    {
+      "source": "s204",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s225",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s235",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s103",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s86",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

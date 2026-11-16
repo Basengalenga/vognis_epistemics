@@ -1,0 +1,39 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Los intercambios de habilidades no deben ser equivalentes en tiempo o valor"
+    },
+    {
+      "ref": "n2",
+      "text": "La asimetría en los trueques es deseable porque refleja necesidades reales, no transacciones justas"
+    },
+    {
+      "ref": "n3",
+      "text": "Un joven puede enseñar origami 10 minutos y pedir explicación de programación una hora sin deuda pendiente"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s34",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

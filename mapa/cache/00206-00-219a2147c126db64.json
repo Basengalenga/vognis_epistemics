@@ -1,0 +1,27 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Los jóvenes deben necesitarse mutuamente para que vuelvan a la biblioteca"
+    }
+  ],
+  "repeats": [
+    "s2",
+    "s19",
+    "s22",
+    "s76",
+    "s77"
+  ],
+  "edges": [
+    {
+      "source": "s76",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s77",
+      "target": "n1",
+      "type": "pro"
+    }
+  ]
+}

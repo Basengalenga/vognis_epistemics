@@ -1,0 +1,34 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "La biblioteca debe crear problemas que requieren colaboración humana porque no tienen solución algorítmica"
+    },
+    {
+      "ref": "n2",
+      "text": "Diseñar desafíos que las computadoras no pueden resolver solas: juicios estéticos, dilemas morales, interpretaciones ambiguas"
+    },
+    {
+      "ref": "n3",
+      "text": "La tecnología amplifica la colaboración humana pero no la reemplaza"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

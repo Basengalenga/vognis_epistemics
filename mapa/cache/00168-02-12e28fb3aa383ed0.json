@@ -1,0 +1,42 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Presentar formalmente el tablero a todos los jóvenes juntos puede parecer una tarea obligatoria"
+    },
+    {
+      "ref": "n2",
+      "text": "Dejar el tablero visible sin presentación formal y explicar solo cuando jóvenes pregunten se siente menos obligatorio"
+    },
+    {
+      "ref": "n3",
+      "text": "Un enfoque de infiltración gradual del tablero genera adopción más orgánica que un lanzamiento formal"
+    }
+  ],
+  "repeats": [
+    "s75",
+    "s70"
+  ],
+  "edges": [
+    {
+      "source": "s75",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s75",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "con"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

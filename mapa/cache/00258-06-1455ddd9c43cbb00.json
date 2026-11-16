@@ -1,0 +1,48 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Cada proyecto debe incluir obligatoriamente algo que no puedes hacer solo"
+    },
+    {
+      "ref": "n2",
+      "text": "Los talleres y actividades se diseñan intencionalmente incompletos"
+    },
+    {
+      "ref": "n3",
+      "text": "Falta una habilidad que alguien más debe aportar en cada actividad"
+    },
+    {
+      "ref": "n4",
+      "text": "El evento solo funciona si hay intercambio de ayuda"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s246",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s242",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

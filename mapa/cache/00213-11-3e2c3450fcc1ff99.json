@@ -1,0 +1,60 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Cada mes un joven debe regalar públicamente su habilidad más valiosa sin esperar retorno"
+    },
+    {
+      "ref": "n2",
+      "text": "Un joven enseña su mejor secreto o técnica a todos en ceremonia de desprendimiento"
+    },
+    {
+      "ref": "n3",
+      "text": "Regalar la habilidad más valiosa destruye la ventaja comparativa del joven que la comparte"
+    },
+    {
+      "ref": "n4",
+      "text": "El prestigio en la biblioteca proviene de la generosidad al compartir, no de acumular habilidades"
+    },
+    {
+      "ref": "n5",
+      "text": "El ritual cíclico de desprendimiento genera interdependencia al nivelar el conocimiento entre jóvenes"
+    }
+  ],
+  "repeats": [
+    "s224",
+    "s227"
+  ],
+  "edges": [
+    {
+      "source": "s224",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s227",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s205",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

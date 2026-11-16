@@ -1,0 +1,47 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Las decisiones se toman al nivel más joven posible, no al más alto"
+    },
+    {
+      "ref": "n2",
+      "text": "Si algo afecta principalmente a menores de 20 años, adultos solo asesoran"
+    },
+    {
+      "ref": "n3",
+      "text": "Los jóvenes aprueban horarios, compras y alianzas de la biblioteca"
+    }
+  ],
+  "repeats": [
+    "s23",
+    "s25"
+  ],
+  "edges": [
+    {
+      "source": "s22",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s24",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

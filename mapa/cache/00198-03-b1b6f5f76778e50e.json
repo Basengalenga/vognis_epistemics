@@ -1,0 +1,39 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Probar la idea del trueque con un solo joven antes de armar el tablero completo"
+    },
+    {
+      "ref": "n2",
+      "text": "Preguntar a Fer si se lanzaría con el trueque antes de implementar el sistema"
+    },
+    {
+      "ref": "n3",
+      "text": "Validar si la idea del trueque hace sentido a los jóvenes antes de construir infraestructura"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s145",
+      "target": "n1",
+      "type": "con"
+    },
+    {
+      "source": "s175",
+      "target": "n1",
+      "type": "con"
+    },
+    {
+      "source": "s161",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

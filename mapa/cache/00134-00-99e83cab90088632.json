@@ -1,0 +1,66 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Usar hashtag como #truequesbiblio para que jóvenes suban truques a redes si quieren"
+    },
+    {
+      "ref": "n2",
+      "text": "El hashtag no es obligatorio desde el inicio del sistema de trueque"
+    },
+    {
+      "ref": "n3",
+      "text": "Primero verificar que ocurra al menos un trueque antes de implementar hashtag"
+    },
+    {
+      "ref": "n4",
+      "text": "Explicar el sistema de trueque a la jefa sin que parezca falta de supervisión"
+    },
+    {
+      "ref": "n5",
+      "text": "La jefa puede preguntar qué pasa si alguien ofrece algo inapropiado en el trueque"
+    },
+    {
+      "ref": "n6",
+      "text": "La jefa puede preguntar qué pasa si los jóvenes tienen conflictos entre ellos durante truques"
+    }
+  ],
+  "repeats": [
+    "s102",
+    "s106",
+    "s108",
+    "s109"
+  ],
+  "edges": [
+    {
+      "source": "s106",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "con"
+    },
+    {
+      "source": "s108",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s89",
+      "target": "n4",
+      "type": "con"
+    },
+    {
+      "source": "n4",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "n4",
+      "target": "n6",
+      "type": "pro"
+    }
+  ]
+}

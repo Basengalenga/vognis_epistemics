@@ -1,0 +1,52 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Crear tablero de necesidades abiertas donde cualquiera publica lo que necesita aprender o resolver"
+    },
+    {
+      "ref": "n2",
+      "text": "El tablero muestra problemas reales sin resolver que los jóvenes escriben"
+    },
+    {
+      "ref": "n3",
+      "text": "Otros jóvenes pueden responder a las necesidades publicadas en el tablero"
+    },
+    {
+      "ref": "n4",
+      "text": "Jóvenes pueden crear equipos para resolver necesidades publicadas en el tablero"
+    },
+    {
+      "ref": "n5",
+      "text": "Jóvenes pueden proponer soluciones colectivas a necesidades del tablero"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s39",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

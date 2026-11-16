@@ -1,0 +1,64 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Jóvenes pueden grabar tutoriales cortos sobre sus habilidades en computadoras de la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Los tutoriales en video generan créditos que jóvenes pueden acumular"
+    },
+    {
+      "ref": "n3",
+      "text": "Los créditos acumulados pueden canjearse por acceso a otros tutoriales de jóvenes"
+    },
+    {
+      "ref": "n4",
+      "text": "Los créditos pueden canjearse por sesiones presenciales de aprendizaje con otros jóvenes"
+    },
+    {
+      "ref": "n5",
+      "text": "Un banco de tiempo asíncrono permite intercambios sin coincidir en horarios"
+    },
+    {
+      "ref": "n6",
+      "text": "Los tutoriales en video aprovechan computadoras existentes de la biblioteca como recurso"
+    }
+  ],
+  "repeats": [
+    "s34",
+    "s37"
+  ],
+  "edges": [
+    {
+      "source": "s16",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s16",
+      "target": "n6",
+      "type": "pro"
+    }
+  ]
+}

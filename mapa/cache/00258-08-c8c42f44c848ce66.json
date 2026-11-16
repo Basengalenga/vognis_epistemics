@@ -1,0 +1,57 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Implementar Principio de Asimetría Reversible en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Lo que das nunca equivale a lo que recibes en los intercambios"
+    },
+    {
+      "ref": "n3",
+      "text": "La desigualdad en los intercambios es la norma, no la excepción"
+    },
+    {
+      "ref": "n4",
+      "text": "Se elimina la idea de equivalencia en los truques"
+    },
+    {
+      "ref": "n5",
+      "text": "Puedes enseñar origami 10 minutos y pedir que te expliquen programación una hora"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s37",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s197",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n4",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

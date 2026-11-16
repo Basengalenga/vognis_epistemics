@@ -1,0 +1,52 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Un tablero de corcho dividido en ofrezco/busco puede implementarse con recursos existentes en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Presentar el tablero de trueque de forma que no parezca una tarea obligatoria es clave para su adopción"
+    },
+    {
+      "ref": "n3",
+      "text": "Un tablero vacío al inicio puede desalentar la participación de jóvenes"
+    },
+    {
+      "ref": "n4",
+      "text": "El tablero de trueque necesita un mecanismo de despegue inicial para generar momentum"
+    }
+  ],
+  "repeats": [
+    "s34",
+    "s35",
+    "s37"
+  ],
+  "edges": [
+    {
+      "source": "s34",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s35",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "con"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

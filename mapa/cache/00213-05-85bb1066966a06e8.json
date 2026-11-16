@@ -1,0 +1,52 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Implementar economía de reputación localizada en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Los jóvenes ganan prestigio cuando otros testifican públicamente sobre su ayuda"
+    },
+    {
+      "ref": "n3",
+      "text": "No usar puntos ni badges automáticos en el sistema de reputación"
+    },
+    {
+      "ref": "n4",
+      "text": "El reconocimiento viene exclusivamente de testimonios de otros jóvenes"
+    },
+    {
+      "ref": "n5",
+      "text": "Usar mural físico para testimonios de jóvenes sobre ayuda recibida"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s196",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s197",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n4",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

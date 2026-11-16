@@ -1,0 +1,62 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Un joven diferente cada semana es curador y transforma la sala"
+    },
+    {
+      "ref": "n2",
+      "text": "El curador tiene control total de decoración y música de fondo"
+    },
+    {
+      "ref": "n3",
+      "text": "El curador debe organizar una mini-actividad"
+    },
+    {
+      "ref": "n4",
+      "text": "Regla: no romper nada en la biblioteca"
+    },
+    {
+      "ref": "n5",
+      "text": "El curador debe invitar mínimo 3 personas"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s22",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "con"
+    },
+    {
+      "source": "n1",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s21",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

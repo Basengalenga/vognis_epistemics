@@ -1,0 +1,57 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "No permitir ofertas de servicios sexuales o románticos en el tablero de trueque"
+    },
+    {
+      "ref": "n2",
+      "text": "No permitir ofertas de drogas, alcohol u otras sustancias controladas en el tablero de trueque"
+    },
+    {
+      "ref": "n3",
+      "text": "No permitir ofertas de venta de objetos robados o ilegales en el tablero de trueque"
+    },
+    {
+      "ref": "n4",
+      "text": "Comunicar límites a jóvenes como protección del espacio compartido, no como reglas escolares"
+    },
+    {
+      "ref": "n5",
+      "text": "Los límites del tablero deben presentarse como cuidado colectivo del espacio joven, no como imposición adulta"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s114",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s114",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s114",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s115",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s116",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s20",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

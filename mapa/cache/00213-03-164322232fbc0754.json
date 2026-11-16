@@ -1,0 +1,76 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Implementar proyectos incompletos heredados que se pasan entre jóvenes"
+    },
+    {
+      "ref": "n2",
+      "text": "Los proyectos cambian de manos cada semana entre jóvenes"
+    },
+    {
+      "ref": "n3",
+      "text": "Nadie es dueño individual de los proyectos heredados"
+    },
+    {
+      "ref": "n4",
+      "text": "Todos los jóvenes contribuyen a los proyectos heredados"
+    },
+    {
+      "ref": "n5",
+      "text": "Nadie puede finalizar un proyecto heredado solo"
+    },
+    {
+      "ref": "n6",
+      "text": "Los proyectos pueden ser dibujos, historias o proyectos musicales"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s195",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s196",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n6",
+      "type": "pro"
+    },
+    {
+      "source": "s199",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s200",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

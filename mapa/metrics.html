@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Procedencia humana</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.30.2/cytoscape.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dagre@0.8.5/dist/dagre.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
+<style>
+  :root {
+    --green: #3fa66b; --red: #d9534f; --null: #b5b5b5;
+    --user: #f39c12; --ai: #8e44ad;
+    --disc: #d6007a; --tie: #f0a500; --conc: #e6e6e6;
+    --bg: #fafafa; --panel: #fff; --text: #222; --muted: #666; --line: #ddd;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; font: 14px/1.4 system-ui, sans-serif; background: var(--bg); color: var(--text);
+         display: flex; flex-direction: column; }
+  header { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; padding: 8px 16px;
+           border-bottom: 1px solid var(--line); background: var(--panel); }
+  header h1 { font-size: 16px; margin: 0; }
+  header a { color: #2166ac; }
+  header label { display: flex; gap: 6px; align-items: center; color: var(--muted); font-size: 13px; }
+  .authors { display: flex; gap: 12px; font-size: 12px; color: var(--muted); }
+  .ring { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 3px solid;
+          vertical-align: -2px; margin-right: 4px; }
+  #info { padding: 8px 16px; background: var(--panel); border-bottom: 1px solid var(--line);
+          min-height: 58px; font-size: 13px; }
+  #info .text { font-size: 14px; }
+  #info .meta { color: var(--muted); }
+  #info b.v { font-variant-numeric: tabular-nums; color: var(--text); }
+  main { flex: 1; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+         gap: 8px; padding: 8px; min-height: 0; }
+  .card { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+          overflow: hidden; display: flex; flex-direction: column; min-height: 0; }
+  .card h2 { font-size: 13px; margin: 0; padding: 6px 10px 2px; }
+  .card .sub { font-size: 11px; color: var(--muted); padding: 0 10px; }
+  .legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 4px 10px 6px;
+            font-size: 11px; color: var(--muted); border-bottom: 1px solid var(--line); }
+  .ramp { width: 140px; height: 10px; border: 1px solid #999; border-radius: 2px; }
+  .sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; border: 1px solid #888;
+        vertical-align: -2px; margin-right: 3px; }
+  .cy { flex: 1; min-height: 0; }
+  .lane { position: absolute; left: 6px; display: none; transform: translateY(-50%); pointer-events: none;
+          font-size: 12px; font-weight: 600; background: rgba(255,255,255,.85); padding: 1px 6px;
+          border-left: 4px solid; border-radius: 3px; z-index: 5; }
+  body.tl .lane { display: block; }
+  @media (max-width: 900px) {
+    main { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-rows: 70vh; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Procedencia humana</h1>
+  <a href="index.html">← Grafo de statements</a>
+  <span class="authors"><span><span class="ring" style="border-color:var(--user)"></span>User</span>
+    <span><span class="ring" style="border-color:var(--ai)"></span>AI</span>
+    <span><span class="sw" style="background:var(--green)"></span>pro</span>
+    <span><span class="sw" style="background:var(--red)"></span>con</span></span>
+  <label><input type="checkbox" id="sec"> Mostrar aristas secundarias</label>
+  <label><input type="checkbox" id="sync" checked> Sincronizar zoom</label>
+  <label><input type="checkbox" id="tl"> Ordenar por tiempo</label>
+</header>
+<div id="info"><span class="meta">Pasa el mouse o da clic sobre un nodo (en cualquier panel) para verlo en los cuatro.</span></div>
+<main>
+  <section class="card"><h2>1 · Tiempo</h2>
+    <div class="sub">orden de aparición de cada statement</div>
+    <div class="legend" id="leg1"></div><div class="cy" id="cy1"></div></section>
+  <section class="card"><h2>2 · 50% asegurado (propagada)</h2>
+    <div class="sub">0.5·propio + 0.5·prom. padres</div>
+    <div class="legend" data-scale></div><div class="cy" id="cy2"></div></section>
+  <section class="card"><h2>3 · Promedio directo de los padres</h2>
+    <div class="sub">prom. de etiquetas crudas (User=1, AI=0) de los padres</div>
+    <div class="legend" data-scale data-null></div><div class="cy" id="cy3"></div></section>
+  <section class="card"><h2>4 · Discordancia m2 vs m3</h2>
+    <div class="sub">discordante: uno &lt; 0.5 y el otro &gt; 0.5 · empate: alguno = 0.5</div>
+    <div class="legend" id="leg4"></div><div class="cy" id="cy4"></div></section>
+</main>
+
+<script>
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const short = (s, n = 60) => s.length > n ? s.slice(0, n - 1) + '…' : s;
+const fmt = v => v === null ? 'sin entradas' : v.toFixed(3);
+
+// ColorBrewer RdBu (11 clases), 0 = rojo, 0.5 = casi blanco, 1 = azul.
+const RDBU = ['#67001f','#b2182b','#d6604d','#f4a582','#fddbc7','#f7f7f7','#d1e5f0','#92c5de','#4393c3','#2166ac','#053061'];
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const rdbu = t => {
+  t = Math.max(0, Math.min(1, t)) * (RDBU.length - 1);
+  const i = Math.min(Math.floor(t), RDBU.length - 2), f = t - i;
+  const a = hex(RDBU[i]), b = hex(RDBU[i + 1]);
+  return `rgb(${a.map((x, k) => Math.round(x + (b[k] - x) * f)).join(',')})`;
+};
+// ColorBrewer Greens (9 clases), 0 = casi blanco (primer statement), 1 = verde oscuro (más reciente).
+const GREENS = ['#f7fcf5','#e5f5e0','#c7e9c0','#a1d99b','#74c476','#41ab5d','#238b45','#006d2c','#00441b'];
+const ramp = stops => t => {
+  t = Math.max(0, Math.min(1, t)) * (stops.length - 1);
+  const i = Math.min(Math.floor(t), stops.length - 2), f = t - i;
+  const a = hex(stops[i]), b = hex(stops[i + 1]);
+  return `rgb(${a.map((x, k) => Math.round(x + (b[k] - x) * f)).join(',')})`;
+};
+const greens = ramp(GREENS);
+document.getElementById('leg1').innerHTML =
+  `<span>antiguo</span><span class="ramp" style="background:linear-gradient(90deg,${GREENS.join(',')})"></span><span>reciente</span>`;
+document.querySelectorAll('[data-scale]').forEach(el => {
+  el.innerHTML = `<span>0 (AI)</span><span class="ramp" style="background:linear-gradient(90deg,${RDBU.join(',')})"></span><span>1 (User)</span>` +
+    (el.hasAttribute('data-null') ? `<span><span class="sw" style="background:var(--null)"></span>sin entradas</span>` : '');
+});
+
+Promise.all([fetch('graph.json').then(r => r.json()), fetch('metrics.json').then(r => r.json())]).then(([g, M]) => {
+  const met = {};
+  M.nodes.forEach(r => met[r.id] = r);
+
+  // Misma lógica que index.html: el padre principal es la fuente más reciente; el layout usa sólo esas aristas.
+  const order = {};
+  g.nodes.forEach((n, i) => order[n.id] = i);
+  const primary = {};
+  g.edges.forEach((e, i) => {
+    const cur = primary[e.target];
+    if (cur === undefined || order[e.source] > order[g.edges[cur].source]) primary[e.target] = i;
+  });
+  const isPrimary = new Set(Object.values(primary));
+
+  // Línea de tiempo: x = rango temporal con paso uniforme; y = carril por autor (User arriba, AI abajo).
+  // Si el nodo anterior del mismo carril se encimaría (nodo de 170 px de ancho), alterna una fila abajo.
+  const N = g.nodes.length, DX = 95, ROW = 80, LANES = { User: 0, AI: 360 };
+  const laneOf = n => n.author === 'User' ? 'User' : 'AI';
+  const tlPos = {}, last = {};
+  g.nodes.map(n => ({ n, k: Math.round(met[n.id].time_rank * (N - 1)) }))
+    .sort((a, b) => a.k - b.k)
+    .forEach(({ n, k }) => {
+      const lane = laneOf(n), x = k * DX, prev = last[lane];
+      const alt = prev && x - prev.x < 185 ? 1 - prev.alt : 0;
+      last[lane] = { x, alt };
+      tlPos[n.id] = { x, y: LANES[lane] + alt * ROW };
+    });
+  // Curvatura de cada arista en la línea de tiempo (todas van de izquierda a derecha;
+  // en cytoscape una distancia positiva curva hacia abajo en ese sentido).
+  // Mismo carril: arco hacia afuera (User arriba, AI abajo), más alto cuanto más larga.
+  const cpd = g.edges.map(e => {
+    const a = tlPos[e.source], b = tlPos[e.target], dx = Math.abs(b.x - a.x);
+    const la = laneOf(g.nodes[order[e.source]]), lb = laneOf(g.nodes[order[e.target]]);
+    if (la !== lb) return Math.min(0.08 * dx, 300);
+    const d = Math.min(40 + 0.15 * dx, 700);
+    return la === 'User' ? -d : d;
+  });
+
+  const STATE = { discordante: css('--disc'), empate: css('--tie'), concordante: css('--conc'),
+                  'sin entradas': css('--null') };
+  const panels = [
+    { id: 'cy1', fill: r => greens(r.time_rank), cls: () => 'time' },
+    { id: 'cy2', fill: r => rdbu(r.m2) },
+    { id: 'cy3', fill: r => r.m3 === null ? css('--null') : rdbu(r.m3), tag: r => r.m3 === null ? '\nsin entradas' : '' },
+    { id: 'cy4', fill: r => STATE[r.estado], cls: r => r.estado.replace(' ', '-'),
+      tag: r => r.estado === 'sin entradas' ? '\nsin entradas' : '' },
+  ];
+
+  const baseStyle = [
+    { selector: 'node', style: {
+        'shape': 'round-rectangle', 'width': 170, 'height': 70,
+        'background-color': 'data(fill)', 'border-width': 5, 'border-color': 'data(border)',
+        'label': 'data(label)', 'text-wrap': 'wrap', 'text-max-width': 155,
+        'text-valign': 'center', 'text-halign': 'center',
+        'font-size': 10, 'color': '#fff', 'text-outline-width': 1.5, 'text-outline-color': '#333' } },
+    { selector: 'edge', style: {
+        'curve-style': 'bezier', 'width': 2, 'target-arrow-shape': 'triangle', 'arrow-scale': 1.1,
+        'label': 'data(type)', 'font-size': 9, 'text-background-color': '#fff',
+        'text-background-opacity': 0.85, 'text-background-padding': 2 } },
+    { selector: 'edge[type = "pro"]', style: { 'line-color': css('--green'), 'target-arrow-color': css('--green'), 'color': css('--green') } },
+    { selector: 'edge[type = "con"]', style: { 'line-color': css('--red'), 'target-arrow-color': css('--red'), 'color': css('--red') } },
+    { selector: 'edge.secondary', style: { 'line-style': 'dashed', 'opacity': 0.55, 'curve-style': 'unbundled-bezier', 'label': '' } },
+    { selector: 'edge.tl', style: { 'curve-style': 'unbundled-bezier', 'control-point-distances': 'data(cpd)',
+                                    'control-point-weights': 0.5 } },
+    { selector: '.hidden', style: { 'display': 'none' } },
+    { selector: 'node.concordante, node.sin-entradas', style: { 'opacity': 0.45 } },
+    // Panel de tiempo: contorno gris exterior además del borde de autor, para que los primeros
+    // (casi blancos) no se pierdan contra el fondo.
+    { selector: 'node.time', style: { 'outline-width': 2, 'outline-color': '#777', 'outline-offset': 1 } },
+    { selector: 'node.sel', style: { 'opacity': 1, 'underlay-color': '#000', 'underlay-opacity': 0.35,
+                                     'underlay-padding': 10, 'underlay-shape': 'round-rectangle', 'z-index': 99 } },
+  ];
+
+  const cys = panels.map(p => cytoscape({
+    container: document.getElementById(p.id),
+    wheelSensitivity: 0.2,
+    style: baseStyle,
+    elements: [
+      ...g.nodes.map(n => {
+        const r = met[n.id];
+        return { data: { ...n, fill: p.fill(r),
+          border: n.author === 'User' ? css('--user') : css('--ai'),
+          label: `${n.author}${p.tag ? p.tag(r) : ''}\n${short(n.text)}` },
+          classes: p.cls ? p.cls(r) : '' };
+      }),
+      ...g.edges.map((e, i) => ({ data: { id: 'e' + i, ...e, cpd: cpd[i] },
+        classes: isPrimary.has(i) ? 'primary' : 'secondary hidden' })),
+    ],
+  }));
+
+  // Layout dagre una sola vez (en el primer panel) y mismas posiciones en los demás.
+  cys[0].elements().not('edge.secondary').layout({ name: 'dagre', rankDir: 'TB', nodeSep: 25, rankSep: 50, edgeSep: 10 }).run();
+  const pos = {};
+  cys[0].nodes().forEach(n => pos[n.id()] = { ...n.position() });
+  cys.slice(1).forEach(cy => cy.layout({ name: 'preset', positions: n => pos[n.id()], fit: false }).run());
+  cys.forEach(cy => cy.fit(undefined, 20));
+
+  // Zoom/pan sincronizado (se suspende mientras corre la animación de cambio de layout;
+  // cada panel hace su propio fit, igual que al cargar).
+  let syncing = false, animating = false;
+  cys.forEach(src => src.on('viewport', () => {
+    if (animating || syncing || !document.getElementById('sync').checked) return;
+    syncing = true;
+    cys.forEach(cy => { if (cy !== src) cy.viewport({ zoom: src.zoom(), pan: src.pan() }); });
+    syncing = false;
+  }));
+
+  // Etiquetas de carril ("User" / "AI") fijas a la izquierda de cada panel, siguiendo el zoom/pan vertical.
+  const laneMid = { User: LANES.User + ROW / 2, AI: LANES.AI + ROW / 2 };
+  const laneTags = cys.map((cy, i) => {
+    const box = document.getElementById(panels[i].id), card = box.parentElement;
+    const tags = ['User', 'AI'].map(name => {
+      const el = document.createElement('div');
+      el.className = 'lane';
+      el.textContent = name;
+      el.style.borderColor = css(name === 'User' ? '--user' : '--ai');
+      card.appendChild(el);
+      return { name, el };
+    });
+    const place = () => tags.forEach(t =>
+      t.el.style.top = (box.offsetTop + cy.pan().y + laneMid[t.name] * cy.zoom()) + 'px');
+    cy.on('viewport resize', place);
+    return place;
+  });
+  window.addEventListener('resize', () => laneTags.forEach(f => f()));
+
+  document.getElementById('tl').onchange = ev => {
+    const tl = ev.target.checked;
+    document.body.classList.toggle('tl', tl);
+    animating = true;
+    let pending = cys.length;
+    cys.forEach(cy => {
+      cy.edges().toggleClass('tl', tl);
+      const lay = cy.layout({ name: 'preset', positions: n => (tl ? tlPos : pos)[n.id()],
+        fit: true, padding: 20, animate: true, animationDuration: 500, animationEasing: 'ease-in-out-cubic' });
+      lay.one('layoutstop', () => { if (--pending === 0) animating = false; });
+      lay.run();
+    });
+    laneTags.forEach(f => f());
+  };
+
+  document.getElementById('sec').onchange = ev =>
+    cys.forEach(cy => cy.edges('.secondary').toggleClass('hidden', !ev.target.checked));
+
+  const select = id => {
+    cys.forEach(cy => { cy.nodes('.sel').removeClass('sel'); cy.getElementById(id).addClass('sel'); });
+    const n = g.nodes[order[id]], r = met[id], N = g.nodes.length;
+    const k = Math.round(r.time_rank * (N - 1)) + 1;
+    const t = new Date(n.timestamp);
+    document.getElementById('info').innerHTML =
+      `<div class="text">${esc(n.text)}</div>
+       <div class="meta">${esc(n.author)} · ${esc(n.id)} · <b class="v">${t.toLocaleTimeString()}</b>
+       (${t.toLocaleDateString()}; ${esc(n.timestamp)}) · statement <b class="v">${k}</b> de ${N}
+       · m2 <b class="v">${fmt(r.m2)}</b> · m3 <b class="v">${fmt(r.m3)}</b>
+       · <b class="v">${r.estado}</b></div>`;
+  };
+  cys.forEach(cy => cy.on('mouseover tap', 'node', ev => select(ev.target.id())));
+
+  const s = M.summary;
+  document.getElementById('leg4').innerHTML =
+    `<span><span class="sw" style="background:var(--disc)"></span>discordantes: <b>${s.discordante}</b></span>
+     <span><span class="sw" style="background:var(--tie)"></span>empate: <b>${s.empate}</b></span>
+     <span><span class="sw" style="background:var(--conc)"></span>concordantes: <b>${s.concordante}</b></span>
+     <span><span class="sw" style="background:var(--null)"></span>sin entradas (m3 null): <b>${s.sin_entradas}</b></span>`;
+}).catch(err => {
+  document.getElementById('info').textContent = 'No se pudo cargar graph.json / metrics.json: ' + err;
+});
+</script>
+</body>
+</html>

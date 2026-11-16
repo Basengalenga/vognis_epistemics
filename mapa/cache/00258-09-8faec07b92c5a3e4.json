@@ -1,0 +1,57 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Implementar Protocolo de Traducción Imposible en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Solo puedes pedir ayuda si traduces tu necesidad al lenguaje de quien puede ayudarte"
+    },
+    {
+      "ref": "n3",
+      "text": "Antes de pedir ayuda debes mostrar que entendiste el mundo del otro"
+    },
+    {
+      "ref": "n4",
+      "text": "Si pides ayuda con matemáticas a alguien que dibuja, explicas tu problema usando conceptos visuales"
+    },
+    {
+      "ref": "n5",
+      "text": "La traducción es el precio de pedir ayuda"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s255",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s195",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

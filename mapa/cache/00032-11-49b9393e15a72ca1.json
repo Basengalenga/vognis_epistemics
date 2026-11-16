@@ -1,0 +1,58 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "La biblioteca funciona como especie keystone que permite emergencia de actividades"
+    },
+    {
+      "ref": "n2",
+      "text": "La biblioteca solo provee infraestructura mínima: wifi, mesas y materiales"
+    },
+    {
+      "ref": "n3",
+      "text": "La biblioteca provee capacidad de convocar como recurso básico"
+    },
+    {
+      "ref": "n4",
+      "text": "Los jóvenes diseñan todo según necesidades que emergen"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s41",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s59",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

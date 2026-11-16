@@ -1,0 +1,37 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Jóvenes traen amigos cuando descubren que pueden aprender cosas útiles de sus pares en la biblioteca"
+    }
+  ],
+  "repeats": [
+    "s34",
+    "s37",
+    "s66",
+    "s67",
+    "s19"
+  ],
+  "edges": [
+    {
+      "source": "s34",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s66",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s67",
+      "target": "n1",
+      "type": "pro"
+    }
+  ]
+}

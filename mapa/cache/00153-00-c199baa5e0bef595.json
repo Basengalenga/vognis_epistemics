@@ -1,0 +1,18 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "El facilitador debe definir criterios claros para intervenir sin que jóvenes sientan vigilancia constante"
+    }
+  ],
+  "repeats": [
+    "s140"
+  ],
+  "edges": [
+    {
+      "source": "s140",
+      "target": "n1",
+      "type": "pro"
+    }
+  ]
+}

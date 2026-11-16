@@ -1,0 +1,53 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Jóvenes pueden bifurcar cualquier programa existente y crear versión paralela"
+    },
+    {
+      "ref": "n2",
+      "text": "Si no les gusta el club de cómic oficial, pueden hacer versión alternativa con reglas distintas"
+    },
+    {
+      "ref": "n3",
+      "text": "Ambas versiones de un programa coexisten simultáneamente"
+    },
+    {
+      "ref": "n4",
+      "text": "La biblioteca provee recursos a ambas versiones de un programa bifurcado"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s23",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s22",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s10",
+      "target": "n2",
+      "type": "con"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

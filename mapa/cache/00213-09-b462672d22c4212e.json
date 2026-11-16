@@ -1,0 +1,39 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Prohibir que jóvenes trabajen con los mismos compañeros en actividades consecutivas"
+    },
+    {
+      "ref": "n2",
+      "text": "Cada nueva actividad requiere formar equipo con personas con quienes nunca has colaborado"
+    },
+    {
+      "ref": "n3",
+      "text": "Forzar la expansión de la red social de jóvenes en lugar de su consolidación en grupos cerrados"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s219",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s223",
+      "target": "n1",
+      "type": "pro"
+    }
+  ]
+}

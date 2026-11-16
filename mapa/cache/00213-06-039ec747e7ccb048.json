@@ -1,0 +1,72 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Los jóvenes son nodos de una red mycelial que comparten recursos de forma discreta bajo tierra"
+    },
+    {
+      "ref": "n2",
+      "text": "Los intercambios de habilidades deben ocurrir sin exhibición pública ni performatividad"
+    },
+    {
+      "ref": "n3",
+      "text": "Crear canales invisibles de intercambio mediante notas escondidas en libros"
+    },
+    {
+      "ref": "n4",
+      "text": "Usar mensajes en lugares secretos como mecanismo de conexión orgánica entre jóvenes"
+    },
+    {
+      "ref": "n5",
+      "text": "La biblioteca facilita conexiones discretas y orgánicas, no visibles ni performativas"
+    }
+  ],
+  "repeats": [
+    "s34",
+    "s35",
+    "s36",
+    "s37"
+  ],
+  "edges": [
+    {
+      "source": "s34",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s36",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s106",
+      "target": "n2",
+      "type": "con"
+    },
+    {
+      "source": "s103",
+      "target": "n2",
+      "type": "con"
+    },
+    {
+      "source": "s37",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Un cupón físico de papel circula cuando alguien recibe ayuda y debe usarlo para ayudar a otra persona diferente"
+    },
+    {
+      "ref": "n2",
+      "text": "Los cupones llevan un registro visible de todas las personas por quienes han pasado"
+    },
+    {
+      "ref": "n3",
+      "text": "Un cupón solo funciona para pedir ayuda si previamente ayudaste a alguien y recibiste el cupón"
+    },
+    {
+      "ref": "n4",
+      "text": "El registro de circulación del cupón visualiza la cadena de favores encadenados entre jóvenes"
+    }
+  ],
+  "repeats": [
+    "s204",
+    "s205",
+    "s206"
+  ],
+  "edges": [
+    {
+      "source": "s204",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s205",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s206",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

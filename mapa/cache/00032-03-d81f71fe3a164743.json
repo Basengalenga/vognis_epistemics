@@ -1,0 +1,57 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Crear sistema de trueque de habilidades entre jóvenes"
+    },
+    {
+      "ref": "n2",
+      "text": "Jóvenes enseñan lo que saben a cambio de aprender de otros"
+    },
+    {
+      "ref": "n3",
+      "text": "Tablero donde jóvenes publican qué ofrecen y qué buscan aprender"
+    },
+    {
+      "ref": "n4",
+      "text": "Jóvenes pueden enseñar dibujo digital, Excel o slang en inglés"
+    },
+    {
+      "ref": "n5",
+      "text": "La biblioteca solo facilita el espacio, los jóvenes organizan los intercambios"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s22",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

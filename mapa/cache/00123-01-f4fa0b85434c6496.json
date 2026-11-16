@@ -1,0 +1,43 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Dos jóvenes que hacen un trueque dejan rastros naturales sin que se les pida"
+    },
+    {
+      "ref": "n2",
+      "text": "Los jóvenes pueden tomar fotos del trueque por iniciativa propia"
+    },
+    {
+      "ref": "n3",
+      "text": "Los jóvenes pueden producir algo juntos durante el trueque"
+    },
+    {
+      "ref": "n4",
+      "text": "Otros jóvenes ven el trueque ocurrir y preguntan qué está pasando"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s100",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

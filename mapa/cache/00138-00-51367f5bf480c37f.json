@@ -1,0 +1,60 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "El bibliotecario va a empezar con prueba pequeña del trueque sin pedir reportes"
+    },
+    {
+      "ref": "n2",
+      "text": "El hashtag opcional se implementará después de la prueba inicial"
+    },
+    {
+      "ref": "n3",
+      "text": "Se necesita explicar a la jefa cómo manejar situaciones sketchy en el trueque"
+    },
+    {
+      "ref": "n4",
+      "text": "Se necesita explicar a la jefa cómo manejar conflictos entre jóvenes durante truques"
+    }
+  ],
+  "repeats": [
+    "s108",
+    "s110",
+    "s112",
+    "s113",
+    "s114",
+    "s115"
+  ],
+  "edges": [
+    {
+      "source": "s108",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s110",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s112",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s113",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s114",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s115",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "El bibliotecario necesita ver la primera señal de que el trueque prendió en un plazo máximo de días"
+    },
+    {
+      "ref": "n2",
+      "text": "Una señal válida de que el trueque prendió es que alguien pregunte qué onda con el tablero"
+    },
+    {
+      "ref": "n3",
+      "text": "Si no hay señales en el plazo máximo, el bibliotecario puede desanimarse"
+    },
+    {
+      "ref": "n4",
+      "text": "Si no hay señales en el plazo máximo, la jefa puede preguntar qué está haciendo con el pizarrón"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s145",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s157",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s155",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s157",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Proyectos incompletos heredados donde jóvenes continúan obras sin terminarlas nunca"
+    },
+    {
+      "ref": "n2",
+      "text": "Un proyecto cambia de manos entre jóvenes cada semana sin dueño único"
+    },
+    {
+      "ref": "n3",
+      "text": "Todos los jóvenes contribuyen al proyecto heredado pero nadie puede finalizarlo solo"
+    },
+    {
+      "ref": "n4",
+      "text": "Los proyectos heredados pueden ser dibujos, historias o composiciones musicales"
+    },
+    {
+      "ref": "n5",
+      "text": "La rotación semanal de proyectos entre jóvenes genera interdependencia y colaboración continua"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s33",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s10",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s67",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s204",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s205",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

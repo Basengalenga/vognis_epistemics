@@ -1,0 +1,52 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Implementar Banco de Tiempo Asíncrono en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Acumular créditos por enseñar algo que se gastan en aprender otra cosa sin coincidir en tiempo"
+    },
+    {
+      "ref": "n3",
+      "text": "Jóvenes graban tutoriales cortos en las computadoras sobre lo que saben"
+    },
+    {
+      "ref": "n4",
+      "text": "Cada video tutorial vale créditos canjeables"
+    },
+    {
+      "ref": "n5",
+      "text": "Los créditos se canjean por acceso a otros videos o sesiones presenciales"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s37",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s14",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n4",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

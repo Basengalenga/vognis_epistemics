@@ -1,0 +1,52 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Implementar red de favores encadenados en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Cada favor recibido genera obligación de ayudar a otra persona diferente"
+    },
+    {
+      "ref": "n3",
+      "text": "Quien recibe ayuda no paga de vuelta al mismo joven sino a un tercero"
+    },
+    {
+      "ref": "n4",
+      "text": "Los favores encadenados crean cadenas de interdependencia entre jóvenes"
+    },
+    {
+      "ref": "n5",
+      "text": "Los favores encadenados evitan transacciones bilaterales cerradas"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s37",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s38",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s38",
+      "target": "n3",
+      "type": "con"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

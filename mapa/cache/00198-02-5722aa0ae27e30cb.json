@@ -1,0 +1,34 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Fer puede no poder o no querer cumplir el primer trueque después de comprometerse"
+    },
+    {
+      "ref": "n2",
+      "text": "El bibliotecario debe decidir si intervenir para salvar el primer trueque o dejarlo fallar"
+    },
+    {
+      "ref": "n3",
+      "text": "Dejar que el primer trueque falle permite que los jóvenes aprendan de la experiencia"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s161",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

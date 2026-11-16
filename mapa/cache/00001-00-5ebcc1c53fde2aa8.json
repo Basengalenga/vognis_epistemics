@@ -1,0 +1,29 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Los jóvenes asisten a la biblioteca principalmente por obligaciones escolares"
+    },
+    {
+      "ref": "n2",
+      "text": "Es necesario crear actividades atractivas para que los jóvenes visiten la biblioteca por interés propio"
+    },
+    {
+      "ref": "n3",
+      "text": "Las actividades deben generar engagement para fidelizar a los jóvenes como usuarios regulares"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

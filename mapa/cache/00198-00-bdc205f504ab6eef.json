@@ -1,0 +1,79 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Puede tronar si los tres jóvenes iniciales no están el miércoles cuando se lanza el tablero"
+    },
+    {
+      "ref": "n2",
+      "text": "Puede tronar si las tarjetas sembradas no reflejan cosas que otros jóvenes realmente quieren aprender"
+    },
+    {
+      "ref": "n3",
+      "text": "Puede tronar si el tablero está en un lugar donde los jóvenes no pasan naturalmente"
+    },
+    {
+      "ref": "n4",
+      "text": "Puede tronar si las reglas escritas suenan muy formales o adultas"
+    },
+    {
+      "ref": "n5",
+      "text": "Puede tronar si otro adulto de la biblioteca pregunta en voz alta qué es el tablero frente a los jóvenes"
+    },
+    {
+      "ref": "n6",
+      "text": "Puede tronar si el primer joven que pregunta recibe una explicación muy larga o complicada"
+    },
+    {
+      "ref": "n7",
+      "text": "Puede tronar si las habilidades sembradas son demasiado académicas o aburridas"
+    },
+    {
+      "ref": "n8",
+      "text": "Puede tronar si no hay suficiente variedad en las tarjetas iniciales"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s175",
+      "target": "n1",
+      "type": "con"
+    },
+    {
+      "source": "s152",
+      "target": "n2",
+      "type": "con"
+    },
+    {
+      "source": "s155",
+      "target": "n3",
+      "type": "con"
+    },
+    {
+      "source": "s159",
+      "target": "n4",
+      "type": "con"
+    },
+    {
+      "source": "s155",
+      "target": "n5",
+      "type": "con"
+    },
+    {
+      "source": "s155",
+      "target": "n6",
+      "type": "con"
+    },
+    {
+      "source": "s152",
+      "target": "n7",
+      "type": "con"
+    },
+    {
+      "source": "s152",
+      "target": "n8",
+      "type": "con"
+    }
+  ]
+}

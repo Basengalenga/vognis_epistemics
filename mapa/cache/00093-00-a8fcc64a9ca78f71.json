@@ -1,0 +1,39 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "El tablero de trueque vacío al inicio puede desalentar la participación inicial de jóvenes"
+    },
+    {
+      "ref": "n2",
+      "text": "Es necesario un mecanismo de despegue inicial para generar momentum en el tablero de trueque"
+    },
+    {
+      "ref": "n3",
+      "text": "La presentación del tablero debe evitar sonar como una tarea obligatoria para lograr adopción"
+    }
+  ],
+  "repeats": [
+    "s69",
+    "s70",
+    "s71",
+    "s72"
+  ],
+  "edges": [
+    {
+      "source": "s69",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s70",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

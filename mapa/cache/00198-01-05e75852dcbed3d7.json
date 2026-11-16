@@ -1,0 +1,34 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Es necesario un espacio físico en la biblioteca donde dos jóvenes puedan hacer un trueque sin sentir que todos los observan"
+    },
+    {
+      "ref": "n2",
+      "text": "La privacidad relativa en el espacio de trueque aumenta la comodidad de jóvenes para participar"
+    },
+    {
+      "ref": "n3",
+      "text": "Designar un rincón o mesa específica para truques debe hacerse antes del lanzamiento del tablero"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s129",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

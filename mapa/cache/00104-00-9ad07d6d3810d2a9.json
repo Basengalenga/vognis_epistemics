@@ -1,0 +1,48 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Agregar sección de 'matches' o 'ya se hizo' en el tablero de trueque"
+    },
+    {
+      "ref": "n2",
+      "text": "Mostrar intercambios completados para demostrar que el sistema funciona"
+    },
+    {
+      "ref": "n3",
+      "text": "Ver que alguien respondió a una oferta motiva a participar"
+    },
+    {
+      "ref": "n4",
+      "text": "El sistema funciona cuando jóvenes coordinan intercambios sin intervención del bibliotecario"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s78",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s83",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s41",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

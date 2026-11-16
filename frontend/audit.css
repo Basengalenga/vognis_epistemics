@@ -1,0 +1,201 @@
+/* Audit: whistle button and floating panel.
+   The data colors (--au-*) are the ones in mapa/metrics.html and carry meaning: do not restyle them.
+   Only the container and the controls follow Vognis. */
+
+.audit-open {
+  position: fixed;
+  top: 10.5rem;
+  right: 1.25rem;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.55rem 0.55rem 0.45rem;
+  background: rgba(250, 250, 250, 0.82);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(17, 17, 17, 0.16);
+  border-radius: 14px;
+  color: var(--void);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.audit-open:hover, .audit-open:focus-visible {
+  border-color: var(--gold);
+  color: #8d7040;
+  box-shadow: 0 6px 22px rgba(31, 38, 135, 0.08);
+  outline: none;
+}
+.audit-open-label {
+  font-family: var(--sans);
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.audit-overlay {
+  --au-green: #3fa66b; --au-red: #d9534f; --au-null: #b5b5b5;
+  --au-user: #f39c12; --au-ai: #8e44ad;
+  --au-disc: #d6007a; --au-tie: #f0a500; --au-conc: #e6e6e6;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(17, 17, 17, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.audit-modal {
+  width: 90vw;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--marble);
+  border: 1px solid rgba(197, 160, 89, 0.45);
+  border-radius: 18px;
+  box-shadow: 0 24px 64px rgba(17, 17, 17, 0.28);
+  overflow: hidden;
+  font-family: var(--sans);
+  font-weight: 300;
+  color: var(--void);
+}
+
+.audit-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.4rem;
+  padding: 0.9rem 1.2rem 0.75rem;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+}
+.audit-titles { display: flex; flex-direction: column; gap: 0.1rem; }
+.audit-kicker {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8d7040;
+}
+.audit-head h2 { font-family: var(--serif); font-weight: 500; font-size: 1.15rem; letter-spacing: 0.04em; }
+.audit-snap { font-size: 0.72rem; color: var(--ink-dim); }
+.audit-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.1rem;
+  flex: 1;
+}
+.audit-tools label {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  font-size: 0.78rem;
+  color: var(--ink-dim);
+  cursor: pointer;
+}
+.audit-tools input[type=checkbox] { accent-color: var(--gold); }
+.audit-authors { display: flex; gap: 0.8rem; font-size: 0.72rem; color: var(--ink-dim); }
+.audit-close { margin-left: auto; }
+
+.audit-ring {
+  display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 3px solid;
+  vertical-align: -2px; margin-right: 4px;
+}
+.audit-sw {
+  display: inline-block; width: 12px; height: 12px; border-radius: 3px; border: 1px solid #888;
+  vertical-align: -2px; margin-right: 3px;
+}
+.audit-ramp { width: 140px; height: 10px; border: 1px solid #999; border-radius: 2px; }
+
+.audit-info {
+  padding: 0.55rem 1.2rem;
+  min-height: 58px;
+  font-size: 0.8rem;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+  background: rgba(255, 255, 255, 0.6);
+}
+.audit-info .text { font-family: var(--idea); font-size: 1.05rem; font-weight: 500; color: var(--idea-ink); }
+.audit-info .meta { color: var(--ink-dim); }
+.audit-info b.v { font-variant-numeric: tabular-nums; color: var(--void); font-weight: 500; }
+
+.audit-status {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+#audit-status-text {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-dim);
+  max-width: 560px;
+}
+.audit-error {
+  max-width: 640px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--crimson);
+  word-break: break-word;
+}
+
+.audit-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.6rem;
+  padding: 0.6rem;
+  min-height: 0;
+}
+.audit-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  border-radius: 12px;
+}
+.audit-card h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  padding: 0.5rem 0.75rem 0.1rem;
+}
+.audit-sub { font-size: 0.7rem; color: var(--ink-dim); padding: 0 0.75rem; }
+.audit-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  padding: 0.3rem 0.75rem 0.45rem;
+  font-size: 0.68rem;
+  color: var(--ink-dim);
+  border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+}
+.audit-legend b { font-weight: 600; color: var(--void); }
+.audit-cy { flex: 1; min-height: 0; }
+
+.audit-lane {
+  position: absolute; left: 6px; display: none; transform: translateY(-50%); pointer-events: none;
+  font-size: 12px; font-weight: 600; background: rgba(255, 255, 255, .85); padding: 1px 6px;
+  border-left: 4px solid; border-radius: 3px; z-index: 5;
+}
+.audit-modal.tl .audit-lane { display: block; }
+
+@media (max-width: 900px) {
+  .audit-modal { width: calc(100vw - 1rem); height: calc(100vh - 1rem); }
+  .audit-grid { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-rows: 70vh; overflow-y: auto; }
+  .audit-close { margin-left: 0; }
+}

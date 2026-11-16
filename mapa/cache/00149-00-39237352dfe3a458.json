@@ -1,0 +1,107 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "No permitir intercambios por dinero en el trueque de habilidades"
+    },
+    {
+      "ref": "n2",
+      "text": "No permitir hacer tareas ajenas en el trueque de habilidades"
+    },
+    {
+      "ref": "n3",
+      "text": "No permitir truques que requieran salir de la biblioteca sin avisar"
+    },
+    {
+      "ref": "n4",
+      "text": "Poner reglas del trueque en el tablero como 'cómo funciona esto'"
+    },
+    {
+      "ref": "n5",
+      "text": "Mostrar a la jefa fotos del tablero con tarjetas como evidencia"
+    },
+    {
+      "ref": "n6",
+      "text": "Mostrar a la jefa video corto de joven explicando qué aprendió"
+    },
+    {
+      "ref": "n7",
+      "text": "A la jefa le gusta mostrar impacto de las actividades"
+    },
+    {
+      "ref": "n8",
+      "text": "Revisar el tablero periódicamente puede sentirse como vigilancia"
+    },
+    {
+      "ref": "n9",
+      "text": "No está claro cuándo el bibliotecario debe intervenir y cuándo no"
+    }
+  ],
+  "repeats": [
+    "s118",
+    "s119",
+    "s124"
+  ],
+  "edges": [
+    {
+      "source": "s118",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s118",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s118",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s113",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s120",
+      "target": "n6",
+      "type": "pro"
+    },
+    {
+      "source": "s113",
+      "target": "n6",
+      "type": "pro"
+    },
+    {
+      "source": "s124",
+      "target": "n8",
+      "type": "con"
+    },
+    {
+      "source": "s124",
+      "target": "n9",
+      "type": "pro"
+    },
+    {
+      "source": "s125",
+      "target": "n9",
+      "type": "pro"
+    }
+  ]
+}

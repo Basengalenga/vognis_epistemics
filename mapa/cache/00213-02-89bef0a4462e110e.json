@@ -1,0 +1,57 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Implementar sistema de mentorías rotativas en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Cada dos semanas todos cambian de rol en las mentorías"
+    },
+    {
+      "ref": "n3",
+      "text": "El mentor se vuelve aprendiz de otro joven en cada rotación"
+    },
+    {
+      "ref": "n4",
+      "text": "Nadie permanece en un solo rol de mentor o aprendiz"
+    },
+    {
+      "ref": "n5",
+      "text": "Los jóvenes experimentan ser expertos e ignorantes en ciclos cortos"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s37",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s197",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n4",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

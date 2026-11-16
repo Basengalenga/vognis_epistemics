@@ -1,0 +1,49 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Mostrar testimonios de jóvenes después del primer trueque exitoso como evidencia de valor"
+    },
+    {
+      "ref": "n2",
+      "text": "Mostrar nuevos jóvenes que llegaron después del primer trueque exitoso como evidencia de valor"
+    },
+    {
+      "ref": "n3",
+      "text": "Mostrar algo que los jóvenes produjeron durante el trueque como evidencia de valor"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s116",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s116",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s116",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s113",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s113",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s113",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

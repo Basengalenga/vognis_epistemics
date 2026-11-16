@@ -1,0 +1,42 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Las decisiones sobre la biblioteca deben tomarse al nivel más joven posible, no al más alto"
+    },
+    {
+      "ref": "n2",
+      "text": "Si una decisión afecta principalmente a menores de 20 años, los adultos solo asesoran y los jóvenes aprueban"
+    },
+    {
+      "ref": "n3",
+      "text": "Los jóvenes deben aprobar horarios, compras y alianzas de la biblioteca"
+    }
+  ],
+  "repeats": [
+    "s21",
+    "s23"
+  ],
+  "edges": [
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s20",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s21",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Lanzar el trueque en tres días: lunes preparar, martes sembrar, miércoles abrir"
+    },
+    {
+      "ref": "n2",
+      "text": "Antes del primer joven viendo el tablero debe estar listo lo indispensable"
+    },
+    {
+      "ref": "n3",
+      "text": "Tener las tres reglas escritas antes de que el primer joven vea el tablero"
+    },
+    {
+      "ref": "n4",
+      "text": "Tener las tarjetas sembradas antes de que el primer joven vea el tablero"
+    },
+    {
+      "ref": "n5",
+      "text": "Haber hablado con Fer y los otros dos antes de que el primer joven vea el tablero"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s145",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s146",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s147",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s148",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s130",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s82",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s81",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

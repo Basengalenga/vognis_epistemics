@@ -1,0 +1,52 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Un joven diferente cada semana puede ser curador de la sala de la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "El curador controla decoración, música de fondo y diseña una mini-actividad semanal"
+    },
+    {
+      "ref": "n3",
+      "text": "El curador debe invitar mínimo 3 personas para participar en su residencia creativa"
+    },
+    {
+      "ref": "n4",
+      "text": "Las residencias creativas cortas transforman la sala según la visión de cada joven curador"
+    }
+  ],
+  "repeats": [
+    "s20",
+    "s21",
+    "s14"
+  ],
+  "edges": [
+    {
+      "source": "s20",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s21",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s14",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

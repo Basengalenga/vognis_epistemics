@@ -1,0 +1,34 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "La biblioteca funciona como hash social que convierte habilidades diversas en formato común"
+    },
+    {
+      "ref": "n2",
+      "text": "Toda ayuda en la biblioteca tiene igual peso algorítmico sin importar complejidad"
+    },
+    {
+      "ref": "n3",
+      "text": "Cambiar un foco tiene el mismo valor que explicar filosofía en la biblioteca"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s287",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s288",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s289",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

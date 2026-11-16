@@ -1,0 +1,52 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Diseñar actividades que requieren exactamente 3 personas diferentes para completarlas"
+    },
+    {
+      "ref": "n2",
+      "text": "Cada proyecto tiene roles interdependientes irreductibles"
+    },
+    {
+      "ref": "n3",
+      "text": "Los roles son: uno graba, otro edita, otro distribuye"
+    },
+    {
+      "ref": "n4",
+      "text": "Nadie puede completar el proyecto solo"
+    },
+    {
+      "ref": "n5",
+      "text": "Nadie puede completar el proyecto con cualquier persona"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s195",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s195",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

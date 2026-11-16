@@ -1,0 +1,30 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Jóvenes deben poder elegir si ponen su nombre o permanecen anónimos en las tarjetas del tablero de trueque"
+    },
+    {
+      "ref": "n2",
+      "text": "Permitir que cada joven decida su nivel de exposición en el tablero aumenta la adopción inicial"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s172",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s173",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

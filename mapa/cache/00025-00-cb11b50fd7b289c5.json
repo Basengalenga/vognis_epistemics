@@ -1,0 +1,60 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Las computadoras y espacios cómodos existentes son recursos aprovechables para atraer jóvenes"
+    },
+    {
+      "ref": "n2",
+      "text": "La co-creación de contenido digital con jóvenes puede aumentar su engagement"
+    },
+    {
+      "ref": "n3",
+      "text": "Estrategias de bajo costo pueden transformar la biblioteca en punto de encuentro de jóvenes"
+    },
+    {
+      "ref": "n4",
+      "text": "Los jóvenes traerán amigos naturalmente si la biblioteca se convierte en su lugar elegido"
+    }
+  ],
+  "repeats": [
+    "s2",
+    "s3",
+    "s4",
+    "s10",
+    "s13",
+    "s14"
+  ],
+  "edges": [
+    {
+      "source": "s13",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s14",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

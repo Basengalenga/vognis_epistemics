@@ -1,0 +1,57 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Implementar Protocolo de Micro-Encargos en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Micro-encargos son tareas de 10 minutos que cualquiera puede tomar sin compromiso largo"
+    },
+    {
+      "ref": "n3",
+      "text": "Lista actualizada de mini-tareas incluye organizar repisa, probar juego o revisar enlace roto"
+    },
+    {
+      "ref": "n4",
+      "text": "Jóvenes toman micro-encargos cuando tienen tiempo disponible"
+    },
+    {
+      "ref": "n5",
+      "text": "Completar micro-encargos genera puntos canjeables para pedir ayuda"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s195",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s262",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

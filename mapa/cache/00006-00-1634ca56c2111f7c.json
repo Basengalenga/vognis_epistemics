@@ -1,0 +1,98 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "La gamificación puede aumentar el engagement de jóvenes en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Los talleres musicales atraen a jóvenes a la biblioteca"
+    },
+    {
+      "ref": "n3",
+      "text": "Un club de videojuegos es una actividad atractiva para jóvenes"
+    },
+    {
+      "ref": "n4",
+      "text": "El contenido digital es importante para atraer jóvenes"
+    },
+    {
+      "ref": "n5",
+      "text": "Las redes sociales de la biblioteca facilitan la comunicación con jóvenes"
+    },
+    {
+      "ref": "n6",
+      "text": "Los espacios maker generan interés en jóvenes usuarios"
+    },
+    {
+      "ref": "n7",
+      "text": "Construir comunidad joven es clave para la fidelización en bibliotecas"
+    }
+  ],
+  "repeats": [
+    "s2",
+    "s3"
+  ],
+  "edges": [
+    {
+      "source": "s2",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s2",
+      "target": "n6",
+      "type": "pro"
+    },
+    {
+      "source": "s3",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s3",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s3",
+      "target": "n7",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n7",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n7",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n7",
+      "type": "pro"
+    },
+    {
+      "source": "n5",
+      "target": "n7",
+      "type": "pro"
+    }
+  ]
+}

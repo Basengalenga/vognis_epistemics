@@ -1,0 +1,58 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "El rol del bibliotecario es facilitador que pone el espacio para el trueque"
+    },
+    {
+      "ref": "n2",
+      "text": "El rol del bibliotecario es curador que revisa el tablero cada ciertos días"
+    },
+    {
+      "ref": "n3",
+      "text": "El rol del bibliotecario es mediador solo si los jóvenes lo buscan"
+    },
+    {
+      "ref": "n4",
+      "text": "El rol del bibliotecario debe mantenerlo presente sin microgestionar el trueque"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s37",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s41",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s78",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s91",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s115",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s89",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s98",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

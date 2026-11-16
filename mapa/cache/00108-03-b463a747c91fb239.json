@@ -1,0 +1,33 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Es necesario un mecanismo de registro visible para documentar intercambios de habilidades que ocurren sin supervisión adulta"
+    },
+    {
+      "ref": "n2",
+      "text": "Los jóvenes deben poder reportar intercambios completados al tablero de trueque de forma simple y accesible"
+    }
+  ],
+  "repeats": [
+    "s92",
+    "s87"
+  ],
+  "edges": [
+    {
+      "source": "s88",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s83",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

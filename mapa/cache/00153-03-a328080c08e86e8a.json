@@ -1,0 +1,48 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "El balance correcto entre presencia y no microgestionar se evidencia por lo que los jóvenes dicen sobre el facilitador"
+    },
+    {
+      "ref": "n2",
+      "text": "El balance correcto se evidencia por la cantidad de trueques que ocurren sin intervención del facilitador"
+    },
+    {
+      "ref": "n3",
+      "text": "El balance correcto se evidencia cuando jóvenes nuevos entienden cómo funciona el tablero sin explicación adulta"
+    },
+    {
+      "ref": "n4",
+      "text": "Un mes es el plazo para evaluar si se logró el balance entre presencia y no microgestión en el tablero de trueque"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s140",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s140",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s140",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s132",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

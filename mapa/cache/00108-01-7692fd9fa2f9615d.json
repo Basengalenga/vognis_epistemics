@@ -1,0 +1,30 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Lograr un primer match visible en menos de una semana en el tablero de trueque"
+    },
+    {
+      "ref": "n2",
+      "text": "El bibliotecario puede ayudar a conectar jóvenes sin que se note que lo armó"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s81",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s86",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

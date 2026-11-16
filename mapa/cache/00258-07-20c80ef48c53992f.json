@@ -1,0 +1,57 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Cada persona debe ser un puente necesario entre dos grupos que no se conocen en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Mapear habilidades de jóvenes para identificar brechas donde solo una persona conecta dos grupos"
+    },
+    {
+      "ref": "n3",
+      "text": "Crear intencionalmente brechas de conocimiento donde un solo joven es el único puente entre grupos"
+    },
+    {
+      "ref": "n4",
+      "text": "Si una persona puente no participa, ciertos intercambios de habilidades no pueden ocurrir en la biblioteca"
+    },
+    {
+      "ref": "n5",
+      "text": "Asignar roles únicos a jóvenes basados en su posición como nodo obligado en la red de intercambios"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s34",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s228",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s241",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s205",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s219",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

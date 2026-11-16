@@ -1,0 +1,53 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Diseñar actividades que requieren exactamente 3 personas diferentes para completarlas"
+    },
+    {
+      "ref": "n2",
+      "text": "Los proyectos deben tener roles interdependientes irreductibles donde nadie puede actuar solo"
+    },
+    {
+      "ref": "n3",
+      "text": "En un proyecto de video: uno graba, otro edita, otro distribuye"
+    },
+    {
+      "ref": "n4",
+      "text": "La estructura de roles irreductibles fuerza colaboración genuina entre jóvenes"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s10",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s10",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s205",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

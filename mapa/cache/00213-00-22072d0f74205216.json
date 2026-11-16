@@ -1,0 +1,44 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Un sistema de favores encadenados crea obligación de ayudar a otra persona diferente a quien te ayudó"
+    },
+    {
+      "ref": "n2",
+      "text": "Los favores encadenados generan cadenas de interdependencia en lugar de transacciones bilaterales cerradas"
+    },
+    {
+      "ref": "n3",
+      "text": "Quien recibe ayuda en el sistema de favores debe ayudar a un tercero, no devolver el favor al mismo joven"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s34",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s34",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s37",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

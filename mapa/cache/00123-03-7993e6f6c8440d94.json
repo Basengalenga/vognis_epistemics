@@ -1,0 +1,40 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Una primera prueba del tablero de trueque puede validarse sin registro formal, solo observando si dos jóvenes se buscaron y se juntaron"
+    },
+    {
+      "ref": "n2",
+      "text": "Observar un encuentro real entre jóvenes es suficiente evidencia de que el tablero de trueque funciona para iterar"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s88",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s89",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s99",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s83",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

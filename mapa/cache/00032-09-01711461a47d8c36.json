@@ -1,0 +1,71 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Implementar Teatro del Oprimido Silencioso en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Jóvenes actúan escenas problemáticas reales de la biblioteca"
+    },
+    {
+      "ref": "n3",
+      "text": "La audiencia interviene cambiando el resultado de las escenas"
+    },
+    {
+      "ref": "n4",
+      "text": "Representar situaciones incómodas como ser ignorados o reglas absurdas"
+    },
+    {
+      "ref": "n5",
+      "text": "Otros jóvenes proponen soluciones actuándolas en escena"
+    },
+    {
+      "ref": "n6",
+      "text": "Las soluciones que funcionan en el teatro se implementan en la biblioteca"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s23",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s22",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "n5",
+      "target": "n6",
+      "type": "pro"
+    },
+    {
+      "source": "s59",
+      "target": "n6",
+      "type": "pro"
+    }
+  ]
+}

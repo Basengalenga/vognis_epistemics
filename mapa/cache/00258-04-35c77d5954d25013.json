@@ -1,0 +1,57 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Todos en la biblioteca, incluida la bibliotecaria, publican públicamente tres cosas que no saben hacer"
+    },
+    {
+      "ref": "n2",
+      "text": "Una cartelera visible muestra las lagunas de conocimiento de todos los participantes"
+    },
+    {
+      "ref": "n3",
+      "text": "La vulnerabilidad compartida de no saber algo se convierte en punto de conexión social entre jóvenes"
+    },
+    {
+      "ref": "n4",
+      "text": "Normalizar públicamente no saber algo reduce la vergüenza de pedir ayuda en la biblioteca"
+    },
+    {
+      "ref": "n5",
+      "text": "La bibliotecaria publica sus propias lagunas de conocimiento junto con los jóvenes"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s20",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s20",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s253",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n4",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

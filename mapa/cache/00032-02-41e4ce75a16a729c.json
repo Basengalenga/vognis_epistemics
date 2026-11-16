@@ -1,0 +1,80 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Jóvenes pueden formar gremios con nombres y emblemas propios en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Los gremios completan desafíos para desbloquear privilegios como acceso prioritario a computadoras"
+    },
+    {
+      "ref": "n3",
+      "text": "Desafíos de gremios incluyen leer libros, traer amigos nuevos y proponer talleres"
+    },
+    {
+      "ref": "n4",
+      "text": "Gremios pueden ganar derecho a elegir próximas compras de cómics de la biblioteca"
+    },
+    {
+      "ref": "n5",
+      "text": "La estructura de gremios con misiones gamifica la experiencia de la biblioteca"
+    }
+  ],
+  "repeats": [
+    "s4",
+    "s6",
+    "s10",
+    "s14",
+    "s19",
+    "s20",
+    "s21"
+  ],
+  "edges": [
+    {
+      "source": "s4",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s16",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s20",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s21",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n5",
+      "target": "s3",
+      "type": "pro"
+    }
+  ]
+}

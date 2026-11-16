@@ -1,0 +1,57 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Jóvenes pueden documentar historias orales de vecinos del barrio usando equipos de la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Los jóvenes tienen autonomía para decidir qué preguntar y a quién entrevistar en el archivo de historias"
+    },
+    {
+      "ref": "n3",
+      "text": "Jóvenes pueden editar y publicar contenido de historias orales usando celulares y computadoras existentes"
+    },
+    {
+      "ref": "n4",
+      "text": "El archivo de historias orales conecta a jóvenes con la comunidad local del barrio"
+    }
+  ],
+  "repeats": [
+    "s17",
+    "s36",
+    "s37"
+  ],
+  "edges": [
+    {
+      "source": "s20",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s21",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s16",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s18",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s27",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

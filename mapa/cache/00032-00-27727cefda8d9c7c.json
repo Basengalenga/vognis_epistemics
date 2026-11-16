@@ -1,0 +1,72 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Crear un Consejo Juvenil Rotativo en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Jóvenes electos mensualmente diseñan la programación de la biblioteca"
+    },
+    {
+      "ref": "n3",
+      "text": "Cada mes se elige un comité de 3-5 jóvenes para decidir actividades"
+    },
+    {
+      "ref": "n4",
+      "text": "El consejo juvenil tiene presupuesto simbólico"
+    },
+    {
+      "ref": "n5",
+      "text": "El consejo juvenil tiene poder de veto sobre actividades adultas"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s23",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s22",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s18",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s23",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Marcar cada ayuda recibida en una pared física para que otros vean qué se necesita y qué se ofrece"
+    },
+    {
+      "ref": "n2",
+      "text": "Usar mural o pizarra con tarjetas de colores para necesidades y ofertas"
+    },
+    {
+      "ref": "n3",
+      "text": "Tarjetas rojas representan lo que necesito"
+    },
+    {
+      "ref": "n4",
+      "text": "Tarjetas verdes representan lo que ofrezco"
+    },
+    {
+      "ref": "n5",
+      "text": "Conectar tarjetas con hilos cuando alguien resuelve algo"
+    },
+    {
+      "ref": "n6",
+      "text": "Crear mapa visual de intercambios con hilos entre tarjetas"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s201",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s78",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "n5",
+      "target": "n6",
+      "type": "pro"
+    }
+  ]
+}

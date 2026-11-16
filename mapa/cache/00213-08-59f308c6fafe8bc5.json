@@ -1,0 +1,72 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "La biblioteca debe ofrecer solo experiencias que requieren algo que ella no tiene"
+    },
+    {
+      "ref": "n2",
+      "text": "Cada actividad de la biblioteca necesita un elemento externo que solo los jóvenes pueden traer"
+    },
+    {
+      "ref": "n3",
+      "text": "Los elementos externos que jóvenes aportan pueden ser lugares, contactos u objetos"
+    },
+    {
+      "ref": "n4",
+      "text": "La biblioteca debe volverse intencionalmente dependiente de lo que jóvenes traen"
+    },
+    {
+      "ref": "n5",
+      "text": "La dependencia institucional de jóvenes genera que ellos sean indispensables para las actividades"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s65",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s66",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s67",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n4",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s10",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s20",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

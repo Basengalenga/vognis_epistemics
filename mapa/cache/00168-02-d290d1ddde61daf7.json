@@ -1,0 +1,44 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Infiltrar el tablero sin presentación formal se siente menos como tarea obligatoria"
+    },
+    {
+      "ref": "n2",
+      "text": "Poner el tablero y esperar a que alguien pregunte para explicar uno por uno"
+    },
+    {
+      "ref": "n3",
+      "text": "Presentar el tablero formalmente tipo 'vengan les explico esto nuevo'"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s149",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s149",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s149",
+      "target": "n3",
+      "type": "con"
+    },
+    {
+      "source": "n2",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n1",
+      "type": "con"
+    }
+  ]
+}

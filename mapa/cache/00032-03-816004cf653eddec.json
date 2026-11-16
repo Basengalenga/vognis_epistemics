@@ -1,0 +1,78 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Un sistema de trueque de habilidades permite que jóvenes enseñen y aprendan entre ellos"
+    },
+    {
+      "ref": "n2",
+      "text": "Un tablero de ofertas y demandas facilita que jóvenes intercambien conocimientos sin intermediarios"
+    },
+    {
+      "ref": "n3",
+      "text": "La biblioteca actúa como facilitadora del trueque de habilidades entre jóvenes, no como proveedora"
+    },
+    {
+      "ref": "n4",
+      "text": "El trueque de habilidades aprovecha el conocimiento existente de los jóvenes sin requerir presupuesto adicional"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s2",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s3",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s10",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s13",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s16",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s18",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s20",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s21",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Se necesita un espacio físico donde dos jóvenes puedan hacer truques sin sentir que todos los están viendo"
+    },
+    {
+      "ref": "n2",
+      "text": "Puede ser necesario designar un rincón o mesa específica para truques antes del miércoles"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s37",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

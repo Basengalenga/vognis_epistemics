@@ -1,0 +1,57 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Lunes hablar con Fer y dos jóvenes más para iniciar el tablero de trueque"
+    },
+    {
+      "ref": "n2",
+      "text": "Martes armar el tablero físico con las tarjetas sembradas"
+    },
+    {
+      "ref": "n3",
+      "text": "Miércoles dejar el tablero visible sin presentación formal a los jóvenes"
+    }
+  ],
+  "repeats": [
+    "s172",
+    "s173"
+  ],
+  "edges": [
+    {
+      "source": "s157",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s158",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s157",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s159",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s161",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s165",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s166",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

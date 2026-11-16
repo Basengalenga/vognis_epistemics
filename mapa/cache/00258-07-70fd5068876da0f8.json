@@ -1,0 +1,71 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Implementar Topología de Nodos Obligados en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Cada joven funciona como puente necesario entre dos grupos que no se conocen"
+    },
+    {
+      "ref": "n3",
+      "text": "Mapear las habilidades de los jóvenes para identificar brechas de conexión"
+    },
+    {
+      "ref": "n4",
+      "text": "Crear intencionalmente brechas donde solo una persona conecta dos grupos"
+    },
+    {
+      "ref": "n5",
+      "text": "Si el joven puente no participa, ciertos intercambios no pueden ocurrir"
+    },
+    {
+      "ref": "n6",
+      "text": "Dar a cada joven un rol único e insustituible en la red"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s195",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s227",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n4",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "n5",
+      "target": "n6",
+      "type": "pro"
+    },
+    {
+      "source": "s242",
+      "target": "n6",
+      "type": "pro"
+    }
+  ]
+}

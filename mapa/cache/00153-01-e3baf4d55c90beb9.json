@@ -1,0 +1,59 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "El facilitador debe pasar por el tablero de trueque varias veces en la primera semana para monitorear actividad"
+    },
+    {
+      "ref": "n2",
+      "text": "En cada visita al tablero, el facilitador debe observar sin intervenir a menos que sea necesario"
+    },
+    {
+      "ref": "n3",
+      "text": "El facilitador debe hablar con jóvenes solo si observa algo relevante que requiera aclaración o apoyo"
+    },
+    {
+      "ref": "n4",
+      "text": "El facilitador debe permitir que jóvenes lo busquen en lugar de aproximarse proactivamente durante la primera semana"
+    }
+  ],
+  "repeats": [
+    "s130",
+    "s131",
+    "s132",
+    "s140",
+    "s141"
+  ],
+  "edges": [
+    {
+      "source": "s78",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s89",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s130",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s131",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s131",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s132",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

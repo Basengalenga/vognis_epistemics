@@ -1,0 +1,47 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Iniciar prueba del tablero de trueque sin solicitar reportes formales a jóvenes"
+    },
+    {
+      "ref": "n2",
+      "text": "Necesario explicar a directivos que supervisión mínima no significa ausencia de límites o protocolos"
+    },
+    {
+      "ref": "n3",
+      "text": "Directivos pueden cuestionar cómo se manejarán situaciones problemáticas o conflictos entre jóvenes en trueques"
+    }
+  ],
+  "repeats": [
+    "s111",
+    "s112"
+  ],
+  "edges": [
+    {
+      "source": "s109",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s115",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s116",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Implementar Sistema de Cupones Heredables en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Cuando alguien te ayuda te da un cupón que solo funciona si ayudas a otra persona diferente"
+    },
+    {
+      "ref": "n3",
+      "text": "Los cupones son físicos de papel y circulan entre jóvenes"
+    },
+    {
+      "ref": "n4",
+      "text": "Cada vez que usas un cupón para pedir ayuda debes dárselo a alguien más después de ayudarle"
+    },
+    {
+      "ref": "n5",
+      "text": "El cupón lleva un registro de por quién ha pasado"
+    }
+  ],
+  "repeats": [
+    "s197",
+    "s198"
+  ],
+  "edges": [
+    {
+      "source": "s196",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s197",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

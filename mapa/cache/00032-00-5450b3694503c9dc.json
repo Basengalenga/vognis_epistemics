@@ -1,0 +1,47 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Un consejo juvenil rotativo mensual puede diseñar la programación de la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Jóvenes electos deben tener poder de decisión sobre talleres y eventos de la biblioteca"
+    },
+    {
+      "ref": "n3",
+      "text": "Los jóvenes pueden ejercer veto sobre actividades adultas en la biblioteca"
+    }
+  ],
+  "repeats": [
+    "s20",
+    "s21"
+  ],
+  "edges": [
+    {
+      "source": "s21",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s20",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s10",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s21",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s20",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

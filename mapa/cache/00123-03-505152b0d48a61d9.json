@@ -1,0 +1,30 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Para la primera prueba no se necesita registro formal de truques"
+    },
+    {
+      "ref": "n2",
+      "text": "Ver que dos jóvenes se buscaron y juntaron una vez indica que el sistema funciona suficiente para iterar"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s100",
+      "target": "n1",
+      "type": "con"
+    },
+    {
+      "source": "s97",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

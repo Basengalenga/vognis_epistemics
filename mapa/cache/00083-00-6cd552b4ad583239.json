@@ -1,0 +1,39 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Cuando los jóvenes enseñan entre ellos, vienen porque crearon algo propio que les sirve"
+    },
+    {
+      "ref": "n2",
+      "text": "Los jóvenes traen amigos que también tienen habilidades para compartir"
+    }
+  ],
+  "repeats": [
+    "s37",
+    "s38",
+    "s41"
+  ],
+  "edges": [
+    {
+      "source": "s37",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s41",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s21",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

@@ -23,6 +23,7 @@ function isBusy() {
   if (loading && !loading.classList.contains("hidden")) return true;
   if (spiral && !spiral.classList.contains("hidden")) return true;
   if (zoom && !zoom.classList.contains("hidden")) return true;
+  if (typeof auditOpen !== "undefined" && auditOpen) return true;
   return false;
 }
 

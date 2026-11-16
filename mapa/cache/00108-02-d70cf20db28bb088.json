@@ -1,0 +1,48 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Usar lenguaje coloquial de jóvenes para nombrar la sección de intercambios completados en el tablero"
+    },
+    {
+      "ref": "n2",
+      "text": "Publicar fotos o evidencia visual rápida del primer intercambio completado en el tablero de trueque"
+    },
+    {
+      "ref": "n3",
+      "text": "Comenzar con una sola evidencia de intercambio completado es suficiente para generar prueba social inicial"
+    }
+  ],
+  "repeats": [
+    "s85",
+    "s86",
+    "s87"
+  ],
+  "edges": [
+    {
+      "source": "s85",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s86",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s87",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

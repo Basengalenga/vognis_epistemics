@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grafo de statements</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.30.2/cytoscape.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dagre@0.8.5/dist/dagre.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
+<style>
+  :root {
+    --blue: #4a90d9; --green: #3fa66b; --red: #d9534f; --gray: #9aa0a6;
+    --user: #f39c12; --ai: #8e44ad;
+    --bg: #fafafa; --panel: #fff; --text: #222; --muted: #666; --line: #ddd;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 14px/1.4 system-ui, sans-serif; background: var(--bg); color: var(--text); }
+  #cy { position: absolute; inset: 0; }
+  .panel { position: absolute; background: var(--panel); border: 1px solid var(--line);
+           border-radius: 8px; padding: 12px 14px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+  #legend { top: 12px; left: 12px; width: 250px; }
+  #legend h3, #info h3 { margin: 0 0 8px; font-size: 14px; }
+  .row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .sw { width: 16px; height: 16px; border-radius: 50%; flex: none; }
+  .ring { width: 16px; height: 16px; border-radius: 50%; border: 4px solid; background: #fff; flex: none; }
+  .ln { width: 22px; height: 3px; flex: none; }
+  #legend small { color: var(--muted); }
+  #info { top: 12px; right: 12px; width: 340px; max-height: calc(100% - 24px); overflow: auto; }
+  #info .meta { color: var(--muted); font-size: 12px; margin-top: 8px; }
+  #info .text { font-size: 15px; }
+  #stats { color: var(--muted); font-size: 12px; margin-top: 8px; }
+  @media (max-width: 700px) {
+    #legend { width: auto; right: 12px; font-size: 12px; }
+    #info { top: auto; bottom: 12px; left: 12px; right: 12px; width: auto; max-height: 40%; }
+  }
+</style>
+</head>
+<body>
+<div id="cy"></div>
+
+<div id="legend" class="panel">
+  <div style="margin-bottom:8px"><a href="metrics.html">Métricas de procedencia humana →</a></div>
+  <h3>Relleno: links de salida</h3>
+  <div class="row"><span class="sw" style="background:var(--blue)"></span> 0 salidas</div>
+  <div class="row"><span class="sw" style="background:var(--green)"></span> exactamente 1 salida pro</div>
+  <div class="row"><span class="sw" style="background:var(--red)"></span> exactamente 1 salida con</div>
+  <div class="row"><span class="sw" style="background:var(--gray)"></span> 2 o más salidas</div>
+  <h3 style="margin-top:10px">Borde: autor</h3>
+  <div class="row"><span class="ring" style="border-color:var(--user)"></span> User</div>
+  <div class="row"><span class="ring" style="border-color:var(--ai)"></span> AI</div>
+  <h3 style="margin-top:10px">Aristas</h3>
+  <div class="row"><span class="ln" style="background:var(--green)"></span> pro (apoya / desarrolla)</div>
+  <div class="row"><span class="ln" style="background:var(--red)"></span> con (refuta / limita)</div>
+  <div class="row"><span class="ln" style="background:repeating-linear-gradient(90deg,#888 0 4px,transparent 4px 7px)"></span> secundaria (otro padre)</div>
+  <div id="stats"></div>
+  <h3 style="margin-top:10px">Vista</h3>
+  <input id="q" type="search" placeholder="Buscar texto o id…" style="width:100%;padding:4px 6px">
+  <label class="row"><input type="checkbox" id="sec"> Mostrar todas las aristas secundarias</label>
+  <label class="row"><input type="checkbox" id="horiz"> Horizontal (izq → der)</label>
+  <small>Clic en un nodo: aísla su cadena (ancestros + descendientes). Clic en el fondo o Esc: limpiar.</small>
+</div>
+
+<div id="info" class="panel">
+  <h3>Detalle</h3>
+  <div id="info-body"><small>Pasa el mouse o da clic sobre un nodo.</small></div>
+</div>
+
+<script>
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const short = (s, n = 60) => s.length > n ? s.slice(0, n - 1) + '…' : s;
+
+fetch('graph.json').then(r => r.json()).then(g => {
+  const out = {};
+  g.nodes.forEach(n => out[n.id] = []);
+  g.edges.forEach(e => out[e.source].push(e.type));
+  const fill = id => {
+    const o = out[id];
+    if (o.length === 0) return css('--blue');
+    if (o.length >= 2) return css('--gray');
+    return o[0] === 'pro' ? css('--green') : css('--red');
+  };
+
+  // Padre principal de cada nodo = la fuente más reciente (arista más corta en el tiempo).
+  // El layout sólo usa esas aristas -> árbol limpio; las demás quedan como "secundarias".
+  const order = {};
+  g.nodes.forEach((n, i) => order[n.id] = i);
+  const primary = {};
+  g.edges.forEach((e, i) => {
+    const cur = primary[e.target];
+    if (cur === undefined || order[e.source] > order[g.edges[cur].source]) primary[e.target] = i;
+  });
+  const isPrimary = new Set(Object.values(primary));
+
+  const elements = [
+    ...g.nodes.map(n => ({ data: { ...n, fill: fill(n.id),
+      border: n.author === 'User' ? css('--user') : css('--ai'),
+      label: `${n.author}\n${short(n.text)}` } })),
+    ...g.edges.map((e, i) => ({ data: { id: 'e' + i, ...e },
+      classes: isPrimary.has(i) ? 'primary' : 'secondary hidden' })),
+  ];
+
+  const cy = cytoscape({
+    container: document.getElementById('cy'),
+    elements,
+    wheelSensitivity: 0.2,
+    style: [
+      { selector: 'node', style: {
+          'shape': 'round-rectangle', 'width': 170, 'height': 70,
+          'background-color': 'data(fill)', 'border-width': 5, 'border-color': 'data(border)',
+          'label': 'data(label)', 'text-wrap': 'wrap', 'text-max-width': 155,
+          'text-valign': 'center', 'text-halign': 'center',
+          'font-size': 10, 'color': '#fff', 'text-outline-width': 1.5, 'text-outline-color': '#333' } },
+      { selector: 'node:selected', style: { 'overlay-opacity': 0.15, 'overlay-color': '#000' } },
+      { selector: 'edge', style: {
+          'curve-style': 'bezier', 'width': 2, 'target-arrow-shape': 'triangle', 'arrow-scale': 1.1,
+          'label': 'data(type)', 'font-size': 9, 'text-background-color': '#fff',
+          'text-background-opacity': 0.85, 'text-background-padding': 2 } },
+      { selector: 'edge[type = "pro"]', style: { 'line-color': css('--green'), 'target-arrow-color': css('--green'), 'color': css('--green') } },
+      { selector: 'edge[type = "con"]', style: { 'line-color': css('--red'), 'target-arrow-color': css('--red'), 'color': css('--red') } },
+      { selector: 'edge.secondary', style: { 'line-style': 'dashed', 'opacity': 0.55, 'curve-style': 'unbundled-bezier', 'label': '' } },
+      { selector: '.hidden', style: { 'display': 'none' } },
+      { selector: '.faded', style: { 'opacity': 0.08, 'text-opacity': 0 } },
+      { selector: 'node.hit', style: { 'border-color': '#000', 'border-width': 8 } },
+      { selector: 'node.focus', style: { 'border-color': '#000', 'border-width': 9 } },
+    ],
+  });
+
+  const runLayout = () => {
+    const horiz = document.getElementById('horiz').checked;
+    cy.elements().not('edge.secondary').layout({
+      name: 'dagre', rankDir: horiz ? 'LR' : 'TB',
+      nodeSep: horiz ? 12 : 25, rankSep: horiz ? 60 : 50, edgeSep: 10,
+      // nodos aislados quedan donde dagre los ponga
+    }).run();
+    cy.fit(undefined, 30);
+  };
+  runLayout();
+  document.getElementById('horiz').onchange = runLayout;
+
+  const secBox = document.getElementById('sec');
+  let focused = null;
+  const applySecondary = () => {
+    cy.edges('.secondary').toggleClass('hidden', !secBox.checked);
+  };
+  secBox.onchange = () => { applySecondary(); if (focused) focus(focused); };
+
+  const clear = () => {
+    focused = null;
+    cy.elements().removeClass('faded focus hit');
+    applySecondary();
+  };
+  const focus = n => {
+    focused = n;
+    cy.elements().removeClass('focus hit');
+    const chain = n.union(n.predecessors()).union(n.successors());
+    cy.elements().addClass('faded');
+    chain.removeClass('faded hidden');   // dentro de la cadena se ven también las secundarias
+    n.addClass('focus');
+    cy.animate({ fit: { eles: chain, padding: 40 }, duration: 300 });
+  };
+  cy.on('tap', 'node', ev => focus(ev.target));
+  cy.on('tap', ev => { if (ev.target === cy) clear(); });
+  document.addEventListener('keydown', ev => { if (ev.key === 'Escape') { clear(); cy.fit(undefined, 30); } });
+
+  document.getElementById('q').oninput = ev => {
+    const q = ev.target.value.trim().toLowerCase();
+    cy.nodes().removeClass('hit');
+    if (!q) return;
+    const hits = cy.nodes().filter(n => n.id().toLowerCase() === q || n.data('text').toLowerCase().includes(q));
+    hits.addClass('hit');
+    if (hits.length) cy.animate({ fit: { eles: hits, padding: 60 }, duration: 300 });
+  };
+
+  const show = n => {
+    const d = n.data();
+    const ts = new Date(d.timestamp);
+    document.getElementById('info-body').innerHTML =
+      `<div class="text">${esc(d.text)}</div>
+       <div class="meta"><b>Autor:</b> ${d.author} · <b>id:</b> ${d.id}<br>
+       <b>Timestamp:</b> ${esc(d.timestamp)}<br>(${ts.toLocaleString()})<br>
+       <b>Salidas:</b> ${out[d.id].join(', ') || 'ninguna'}</div>`;
+  };
+  cy.on('mouseover tap', 'node', ev => show(ev.target));
+
+  const c = (arr, k, v) => arr.filter(x => x[k] === v).length;
+  document.getElementById('stats').textContent =
+    `${g.nodes.length} nodos (User ${c(g.nodes,'author','User')}, AI ${c(g.nodes,'author','AI')}) · ` +
+    `${g.edges.length} aristas (pro ${c(g.edges,'type','pro')}, con ${c(g.edges,'type','con')}; ${g.edges.length - isPrimary.size} secundarias ocultas)`;
+}).catch(err => {
+  document.getElementById('info-body').textContent = 'No se pudo cargar graph.json: ' + err;
+});
+</script>
+</body>
+</html>

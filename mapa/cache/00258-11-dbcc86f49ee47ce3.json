@@ -1,0 +1,54 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Ningún sistema de habilidades individuales puede ser completo sin apelar a elementos externos"
+    },
+    {
+      "ref": "n2",
+      "text": "La incompletitud de cada persona es propiedad fundamental que hace necesaria la comunidad"
+    },
+    {
+      "ref": "n3",
+      "text": "Las brechas de habilidades individuales solo pueden llenarse desde fuera del sistema personal"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s237",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s238",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s240",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s241",
+      "target": "n2",
+      "type": "pro"
+    }
+  ]
+}

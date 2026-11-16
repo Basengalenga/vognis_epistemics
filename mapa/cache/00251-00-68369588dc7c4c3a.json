@@ -1,0 +1,16 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Pedir ayuda debe ser tan fácil como ofrecerla en el sistema de trueque"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s37",
+      "target": "n1",
+      "type": "pro"
+    }
+  ]
+}

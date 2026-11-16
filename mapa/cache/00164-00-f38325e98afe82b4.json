@@ -1,0 +1,65 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "El facilitador debe visitar el tablero de trueque solo 3 veces en la primera semana: lunes, miércoles y viernes"
+    },
+    {
+      "ref": "n2",
+      "text": "El facilitador debe intervenir sin ser buscado solo si una tarjeta rompe los límites establecidos, no por falta de respuesta"
+    },
+    {
+      "ref": "n3",
+      "text": "La señal de balance correcto es cuando un joven nuevo entiende cómo funciona el tablero porque otro joven se lo explica sin presencia adulta"
+    },
+    {
+      "ref": "n4",
+      "text": "Es necesario crear un plan día por día para lanzar el tablero de trueque en la primera semana"
+    }
+  ],
+  "repeats": [
+    "s142",
+    "s143",
+    "s144",
+    "s145",
+    "s146",
+    "s151"
+  ],
+  "edges": [
+    {
+      "source": "s142",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s145",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s146",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s147",
+      "target": "n2",
+      "type": "con"
+    },
+    {
+      "source": "s151",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s74",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s76",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "La biblioteca tiene talleres de lectura mensuales"
+    },
+    {
+      "ref": "n2",
+      "text": "La biblioteca tiene un club de cómic"
+    },
+    {
+      "ref": "n3",
+      "text": "La biblioteca organiza eventos con autores locales"
+    },
+    {
+      "ref": "n4",
+      "text": "Solo vienen 15 jóvenes máximo a las actividades"
+    },
+    {
+      "ref": "n5",
+      "text": "Los jóvenes no traen a sus amigos a la biblioteca"
+    },
+    {
+      "ref": "n6",
+      "text": "La biblioteca tiene tres computadoras viejas"
+    },
+    {
+      "ref": "n7",
+      "text": "La biblioteca tiene una sala con sillones en mal estado"
+    },
+    {
+      "ref": "n8",
+      "text": "La biblioteca tiene presupuesto casi cero"
+    },
+    {
+      "ref": "n9",
+      "text": "Se necesitan ideas implementables inmediatamente con recursos actuales"
+    }
+  ],
+  "repeats": [
+    "s1"
+  ],
+  "edges": [
+    {
+      "source": "s2",
+      "target": "n5",
+      "type": "con"
+    },
+    {
+      "source": "n4",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "n8",
+      "target": "n9",
+      "type": "pro"
+    },
+    {
+      "source": "s3",
+      "target": "n9",
+      "type": "con"
+    },
+    {
+      "source": "s8",
+      "target": "n9",
+      "type": "con"
+    }
+  ]
+}

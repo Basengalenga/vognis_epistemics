@@ -1,0 +1,16 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Preguntar a cada joven si quiere su nombre en la tarjeta o prefiere anonimato"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s164",
+      "target": "n1",
+      "type": "con"
+    }
+  ]
+}

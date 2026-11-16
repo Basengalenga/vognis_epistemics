@@ -1,0 +1,40 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "El bibliotecario puede sugerir conexiones específicas entre jóvenes sin revelar que lo planeó"
+    },
+    {
+      "ref": "n2",
+      "text": "Nombrar la sección de matches como 'truques que rolaron' puede sonar forzado"
+    },
+    {
+      "ref": "n3",
+      "text": "Pedir a los jóvenes que reporten cada trueque convierte el sistema en tarea"
+    },
+    {
+      "ref": "n4",
+      "text": "El bibliotecario necesita saber qué truques ocurren sin que se sienta como control"
+    }
+  ],
+  "repeats": [
+    "s91"
+  ],
+  "edges": [
+    {
+      "source": "s91",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s92",
+      "target": "n2",
+      "type": "con"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

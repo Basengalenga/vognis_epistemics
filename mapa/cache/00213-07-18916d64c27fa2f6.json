@@ -1,0 +1,67 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Implementar Cadenas de Custodia Creativa en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Cada objeto creado pertenece a quien lo usa siguiente"
+    },
+    {
+      "ref": "n3",
+      "text": "Los objetos creativos pasan de mano en mano entre jóvenes"
+    },
+    {
+      "ref": "n4",
+      "text": "Solo puedes usar un objeto si lo transformas y lo pasas"
+    },
+    {
+      "ref": "n5",
+      "text": "La biblioteca rastrea las genealogías de objetos en un mapa visible"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s211",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s211",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s212",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s213",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s214",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s215",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

@@ -34,8 +34,13 @@ def invoke_model(
     messages: list[dict],
     max_tokens: int = 1024,
     system: str | None = None,
+    temperature: float | None = None,
+    extra: dict | None = None,
 ) -> dict:
-    """Call Bedrock invoke-model endpoint with ABSK token auth and retry."""
+    """Call Bedrock invoke-model endpoint with ABSK token auth and retry.
+
+    temperature and extra (more body fields, such as output_config) are only sent when given.
+    """
     token, region = _get_config()
 
     url = (
@@ -50,6 +55,10 @@ def invoke_model(
     }
     if system:
         body["system"] = system
+    if temperature is not None:
+        body["temperature"] = temperature
+    if extra:
+        body.update(extra)
 
     headers = {
         "Content-Type": "application/json",

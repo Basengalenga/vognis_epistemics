@@ -1,0 +1,59 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Facilitar matches discretamente sugiriendo a jóvenes conocidos sin revelar la orquestación adulta"
+    },
+    {
+      "ref": "n2",
+      "text": "Usar lenguaje coloquial como 'truques que rolaron' para nombrar intercambios completados en el tablero"
+    },
+    {
+      "ref": "n3",
+      "text": "El registro de intercambios debe ser voluntario y no sentirse como tarea obligatoria para jóvenes"
+    },
+    {
+      "ref": "n4",
+      "text": "Documentar intercambios sin supervisión adulta requiere mecanismo que no parezca control"
+    }
+  ],
+  "repeats": [
+    "s88",
+    "s90",
+    "s91",
+    "s94",
+    "s95"
+  ],
+  "edges": [
+    {
+      "source": "s88",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s90",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s91",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s94",
+      "target": "n3",
+      "type": "con"
+    },
+    {
+      "source": "s95",
+      "target": "n3",
+      "type": "con"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

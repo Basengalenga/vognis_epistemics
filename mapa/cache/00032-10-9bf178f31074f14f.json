@@ -1,0 +1,39 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Jóvenes pueden bifurcar programas existentes y crear versiones paralelas con reglas distintas"
+    },
+    {
+      "ref": "n2",
+      "text": "Versiones bifurcadas de programas coexisten simultáneamente en la biblioteca"
+    },
+    {
+      "ref": "n3",
+      "text": "La biblioteca provee recursos a ambas versiones de un programa bifurcado"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s21",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s20",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

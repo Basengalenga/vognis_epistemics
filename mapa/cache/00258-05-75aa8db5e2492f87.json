@@ -1,0 +1,44 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Diseñar que todos comiencen debiendo favores en lugar de con cuenta en cero"
+    },
+    {
+      "ref": "n2",
+      "text": "Cada persona nueva empieza con tres favores pendientes que debe resolver en el primer mes"
+    },
+    {
+      "ref": "n3",
+      "text": "Invertir la lógica: empiezas pidiendo para luego devolver, no acumulando para pedir"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s196",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s197",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s272",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

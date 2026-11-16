@@ -1,0 +1,62 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Comunicar al directivo antes del lanzamiento del tablero de trueque"
+    },
+    {
+      "ref": "n2",
+      "text": "Comunicar al directivo justo cuando se lanza el tablero de trueque"
+    },
+    {
+      "ref": "n3",
+      "text": "Comunicar al directivo después del primer intercambio exitoso en el tablero"
+    },
+    {
+      "ref": "n4",
+      "text": "El directivo necesita evidencia de valor antes de percibir el tablero como viable, no como riesgo"
+    },
+    {
+      "ref": "n5",
+      "text": "El timing de comunicación al directivo afecta su percepción del tablero de trueque como oportunidad o riesgo"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s133",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s133",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s133",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s128",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "n2",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n5",
+      "type": "pro"
+    }
+  ]
+}

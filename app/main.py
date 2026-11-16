@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.agents.bedrock_client import BedrockError
+from app.routers.audit import router as audit_router
 from app.routers.workflow import router as workflow_router
 
 app = FastAPI(
@@ -23,6 +24,7 @@ app.add_middleware(
 )
 
 app.include_router(workflow_router)
+app.include_router(audit_router)
 
 
 @app.exception_handler(BedrockError)

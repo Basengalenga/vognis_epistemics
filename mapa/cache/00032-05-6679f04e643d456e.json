@@ -1,0 +1,53 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Jóvenes arman playlists de libros y cómics con temáticas específicas"
+    },
+    {
+      "ref": "n2",
+      "text": "Las playlists incluyen temas como 'Para cuando truenas con alguien' o 'Vibra cyberpunk'"
+    },
+    {
+      "ref": "n3",
+      "text": "Jóvenes diseñan portadas para sus playlists de libros"
+    },
+    {
+      "ref": "n4",
+      "text": "Las playlists con portadas se publican en redes sociales de la biblioteca"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s20",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s42",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    },
+    {
+      "source": "s31",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

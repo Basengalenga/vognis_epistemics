@@ -1,0 +1,45 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Los jóvenes ganan prestigio solo cuando otros testifican públicamente sobre su ayuda"
+    },
+    {
+      "ref": "n2",
+      "text": "Un mural físico recibe testimonios de jóvenes sobre la ayuda que recibieron de sus pares"
+    },
+    {
+      "ref": "n3",
+      "text": "El reconocimiento en el mural debe venir de testimonios reales de otros jóvenes, no de puntos automáticos"
+    },
+    {
+      "ref": "n4",
+      "text": "La reputación basada en testimonios públicos es más valiosa que badges o puntos digitales para jóvenes"
+    }
+  ],
+  "repeats": [
+    "s107"
+  ],
+  "edges": [
+    {
+      "source": "s106",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s107",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n3",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}

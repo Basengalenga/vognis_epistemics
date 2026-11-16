@@ -1,0 +1,47 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Implementar Ritual de Desprendimiento Cíclico mensual en la biblioteca"
+    },
+    {
+      "ref": "n2",
+      "text": "Cada mes un joven debe regalar públicamente su habilidad más valiosa sin esperar retorno"
+    },
+    {
+      "ref": "n3",
+      "text": "Ceremonia donde alguien enseña su mejor secreto o técnica a todos"
+    },
+    {
+      "ref": "n4",
+      "text": "El ritual destruye la ventaja comparativa del joven que comparte"
+    },
+    {
+      "ref": "n5",
+      "text": "El ritual genera prestigio por generosidad, no por acumulación"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s223",
+      "target": "n5",
+      "type": "pro"
+    },
+    {
+      "source": "s225",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "s197",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s38",
+      "target": "n3",
+      "type": "pro"
+    }
+  ]
+}

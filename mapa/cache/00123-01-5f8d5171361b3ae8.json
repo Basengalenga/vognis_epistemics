@@ -1,0 +1,68 @@
+{
+  "new_statements": [
+    {
+      "ref": "n1",
+      "text": "Jóvenes dejan rastros naturales de intercambios: fotos que quieren tomar, productos conjuntos o visibilidad social"
+    },
+    {
+      "ref": "n2",
+      "text": "La visibilidad social de un intercambio (otros ven y preguntan) es un rastro natural sin intervención adulta"
+    },
+    {
+      "ref": "n3",
+      "text": "Los productos o artefactos creados conjuntamente en un trueque son evidencia natural del intercambio"
+    },
+    {
+      "ref": "n4",
+      "text": "Las fotos que jóvenes voluntariamente toman durante un trueque documentan naturalmente el intercambio"
+    }
+  ],
+  "repeats": [],
+  "edges": [
+    {
+      "source": "s34",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s35",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s88",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s90",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "s94",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "s99",
+      "target": "n1",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n2",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n3",
+      "type": "pro"
+    },
+    {
+      "source": "n1",
+      "target": "n4",
+      "type": "pro"
+    }
+  ]
+}
